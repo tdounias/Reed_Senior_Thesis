@@ -7,9 +7,19 @@ The {#rmd-basics} text after the chapter declaration will allow us to link throu
 
 # The State of the Literature {#rmd-basics}
 
-In this chapter I will go through current 
+In this chapter I will go through the exsting literature on Vote-By-Mail (VBM). I will define what Vote-By-Mail, or VBM, is; I will then summarize the expectations that researchers have of the effects of VBM on turnout, based on existing theories of electoral participation. I will continue with a summary of previous quantitative research on the effects that VBM and similar policies have had on turnout. I will conclude with some more general comments on the available data, and literature concerning the most commonly used quantitative methods.
 
-## What is VBM?
+## What is VBM?  
+
+Gronke (2007, 2008), RMStein (1998)
+
+Vote-By-Mail is a process by which voters receive a ballot delivered by mail to their homes. Voters then have a variety of options on how to return these ballots, ranging from dropping them off at pre-designated locations, to mailing them in, to bringing them to a polling place and voting conventionally. This varies across states that have implemented VBM. Some common forms of the VBM policy are:  
+
+* *Postal Voting*: All voters receive a ballot by mail, which can then be returned to a pre-designated location or mailed in to be counted. This is the current system in Oregon, is an option in Colorado, and is implimented by a number of counties in California, Utah, and Montana.
+  
+* *No-Excuse Absentee*: Voters can choose to register as absentee voters without giving any reason related to disability, health, distance to polling place etc. This is the case in 27 states and the District of Columbia.   
+* *Hybrid or Transitionary Systems*: In hybrid systems, voters receive a mail ballot but can choose to disregard it and vote conventionaly. This is the case in Colorado. Transitionary systems exist in states that have chosen to eventually conduct all elections by postal voting, but have given counties an adjustment period during which this shift is not mandatory, or mandatory only for certain elections. This is the case in California, Utah, and Montana.
+
 
 ## The Calculus of Voting
 
