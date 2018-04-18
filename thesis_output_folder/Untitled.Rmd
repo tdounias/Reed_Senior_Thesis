@@ -5,7 +5,7 @@ division: 'Mathematics and Natural Sciences and History and Social Sciences'
 advisor: 'Andrew Bray'
 altadvisor: 'Paul Gronke'
 department: 'Mathematics'
-title: 'Colorado Electapalooza'
+title: 'How I learned to stop worrying and Love Voter Registration Files'
 abstract: >
   `r paste(readLines('abstract.Rmd'), collapse = ' ')`
 # If you'd rather include the preliminary content in files instead of inline
