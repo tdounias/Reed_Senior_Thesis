@@ -31,7 +31,17 @@ _Grimmer (2011), Burden (2013)_
 
 _Geys (2006), Smets (2013) ++ book sources_  
   
-Turnout is the most commonly used measure for electoral participation. It is important because it signifies the level of engagement of the population with the state, th elevel of incorporation of different subgroups of the population into democratic processes, and the legitimacy of elected officials. It is widely accepted that turnout shuld be maximized so that the democratic franchise represents the majority of citizens.  
+Turnout is the most commonly used measure for electoral participation. It is important because it signifies the level of engagement of the population with the state, the elevel of incorporation of different subgroups of the population into democratic processes, and the legitimacy of elected officials. It is widely accepted that turnout should be maximized so that the democratic franchise represents the majority of citizens. Turnout for an election can be calculated or predicted, the difference being that in the former case we use data post-election to measure its absolute value, while in the latter we use a series of individual and community covariates to infer the levels of turnout for a future or past election.  
+Calculating turnout, at its core, involves the following equation:  
+$$ \% ~Turnout = \frac{Total~Ballots~Cast}{Measure~of~Total~Voting~Population}\times100\%~~~(1)$$  
+
+The choice of numerator is fairly obvious and universal; the denominator, however, is a different story.  The two main statistics used are the total voting age population, and the raw number of registered voters in the geographical location we are examining. The total voting age population is used as a measure to incorporate the total amount of possible voters in a geographical area, and can be measured using data from the US Census. This causes some issues with voters that cross over to different districts; if someone lives in district A, it is still likelly that they are registered to vote in district B. If this is not considered, the calculation of voting age population might be misrepresentative.   
+Using registered voters also brings with it two problems. First, the calculation necessarily occurs using voter registration files, which many times can include discrepancies, like deceased voters, voters included in multiple counties, or individual voters included multiple times. Furthermore, the total amount of actual voters among registered voters can be misrepresentative of democratic participation; consider that if a certain minority community has historically low registration rates, their lack of engagement will not be included in turnout rates, thus misrepresenting the level of inclusion in the district they reside in.   
+The punch line here is that how the turnout statistic is calculated is not a clear choice, and will have an impact on how studies are set up. To give one example, consider Oregon's Motor Voter program, that automatically registers voters when they interact with government services, like the DMV. It is conceivable that this reform will _decrease_ turnout when measured as a percentage of the total registered voter count, but _increase_ turnout when measured against total population. I will specify how I calculate turnout in the next chapter.    
+Statistical models of turnout can be constructed at either the individual or community level. At the individual level, a model is built to predict the probability of voting for every member of a group, and then sum over the members to create an estimate for turnout. Probit or Logit models are prefered. At the community level, researchers first choose a geographical level at which to calculate, which then constitutes the individual observation in the data that is used to create the model.  
+Both these models include a standard set of societal variables--at the individual and aggregate level--, policy variables--whether the district does Postal Voting, whether Voter ID requirements are particularly strict--, and sometmes time-series data--previous levels of turnout--to make predictions on turnout levels. This type of analysis is not exclusivelly used to predict turnout but also to, as will be later shown, draw inferences on the effects that certain explanatory variables have on electoral participation.  
+
+
 
 
 ###Theories of Voting  
@@ -73,8 +83,7 @@ _Books, mentioned later_
 * *E.I.*: King (2013), Burden (1998), Calvo (2003), Chao (2004), RMStein (2002)
 * *Mixed-Effects*: Gelman and Hill (2007)
 * *General EDA and Models*: James et al. (2013), Chapman and Hall (2017)
-
-
+   
 ### Issues  
 
 _Grimmer (2015) {Not always best to do inferential models}, Ansolabehere and Hersch (2010) {Problems with Voter Reg Files}, other sources from the previous section_

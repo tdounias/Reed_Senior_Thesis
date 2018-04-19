@@ -4,7 +4,7 @@ date: 'December 2018'
 division: 'Mathematics and Natural Sciences and History and Social Sciences'
 advisor: 'Andrew Bray'
 altadvisor: 'Paul Gronke'
-department: 'Mathematics'
+department: 'Mathematics and Political Science'
 title: 'How I learned to stop worrying and Love Voter Registration Files'
 abstract: >
   `r paste(readLines('abstract.Rmd'), collapse = ' ')`
