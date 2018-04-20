@@ -1,0 +1,520 @@
+% This is the Reed College LaTeX thesis template. Most of the work
+% for the document class was done by Sam Noble (SN), as well as this
+% template. Later comments etc. by Ben Salzberg (BTS). Additional
+% restructuring and APA support by Jess Youngberg (JY).
+% Your comments and suggestions are more than welcome; please email
+% them to cus@reed.edu
+%
+% See http://web.reed.edu/cis/help/latex.html for help. There are a
+% great bunch of help pages there, with notes on
+% getting started, bibtex, etc. Go there and read it if you're not
+% already familiar with LaTeX.
+%
+% Any line that starts with a percent symbol is a comment.
+% They won't show up in the document, and are useful for notes
+% to yourself and explaining commands.
+% Commenting also removes a line from the document;
+% very handy for troubleshooting problems. -BTS
+
+% As far as I know, this follows the requirements laid out in
+% the 2002-2003 Senior Handbook. Ask a librarian to check the
+% document before binding. -SN
+
+%%
+%% Preamble
+%%
+% \documentclass{<something>} must begin each LaTeX document
+\documentclass[12pt,twoside]{reedthesis}
+% Packages are extensions to the basic LaTeX functions. Whatever you
+% want to typeset, there is probably a package out there for it.
+% Chemistry (chemtex), screenplays, you name it.
+% Check out CTAN to see: http://www.ctan.org/
+%%
+\usepackage{graphicx,latexsym}
+\usepackage{amsmath}
+\usepackage{amssymb,amsthm}
+\usepackage{longtable,booktabs,setspace}
+\usepackage{chemarr} %% Useful for one reaction arrow, useless if you're not a chem major
+\usepackage[hyphens]{url}
+% Added by CII
+\usepackage{hyperref}
+\usepackage{lmodern}
+% End of CII addition
+\usepackage{rotating}
+
+% Next line commented out by CII
+%%% \usepackage{natbib}
+% Comment out the natbib line above and uncomment the following two lines to use the new 
+% biblatex-chicago style, for Chicago A. Also make some changes at the end where the 
+% bibliography is included. 
+%\usepackage{biblatex-chicago}
+%\bibliography{thesis}
+
+
+% Added by CII (Thanks, Hadley!)
+% Use ref for internal links
+\renewcommand{\hyperref}[2][???]{\autoref{#1}}
+\def\chapterautorefname{Chapter}
+\def\sectionautorefname{Section}
+\def\subsectionautorefname{Subsection}
+% End of CII addition
+
+% Added by CII 
+\usepackage{caption}
+\captionsetup{width=5in}
+% End of CII addition
+
+% \usepackage{times} % other fonts are available like times, bookman, charter, palatino
+
+
+% To pass between YAML and LaTeX the dollar signs are added by CII
+\title{How I learned to stop worrying and Love Voter Registration Files}
+\author{Theodore Dounias}
+% The month and year that you submit your FINAL draft TO THE LIBRARY (May or December)
+\date{December 2018}
+\division{Mathematics and Natural Sciences and History and Social Sciences}
+\advisor{Andrew Bray}
+%If you have two advisors for some reason, you can use the following
+% Uncommented out by CII
+\altadvisor{Paul Gronke} 
+% End of CII addition
+
+%%% Remember to use the correct department!
+\department{Mathematics and Political Science}
+% if you're writing a thesis in an interdisciplinary major,
+% uncomment the line below and change the text as appropriate.
+% check the Senior Handbook if unsure.
+%\thedivisionof{The Established Interdisciplinary Committee for}
+% if you want the approval page to say "Approved for the Committee",
+% uncomment the next line
+%\approvedforthe{Committee}
+
+% Added by CII
+%%% Copied from knitr
+%% maxwidth is the original width if it's less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\renewcommand{\contentsname}{Table of Contents}
+% End of CII addition
+
+\setlength{\parskip}{0pt}
+
+% Added by CII
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\Acknowledgements{
+
+}
+
+\Dedication{
+
+}
+
+\Preface{
+This is an example of a thesis setup to use the reed thesis document
+class.
+}
+
+\Abstract{
+
+}
+
+% End of CII addition
+%%
+%% End Preamble
+%%
+%
+
+\begin{document}
+
+% Everything below added by CII
+      \maketitle
+  
+  \frontmatter % this stuff will be roman-numbered
+  \pagestyle{empty} % this removes page numbers from the frontmatter
+
+  
+      \begin{preface}
+      This is an example of a thesis setup to use the reed thesis document
+      class.
+    \end{preface}
+  
+      \hypersetup{linkcolor=black}
+    \setcounter{tocdepth}{3}
+    \tableofcontents
+  
+      \listoftables
+  
+      \listoffigures
+  
+  
+  
+  \mainmatter % here the regular arabic numbering starts
+  \pagestyle{fancyplain} % turns page numbering back on
+
+  \chapter*{Introduction}\label{introduction}
+  \addcontentsline{toc}{chapter}{Introduction}
+  
+  The democratic system is based on procedures as much as principles. The
+  way that democracies chose to tally the will of the people is always a
+  messy, controversial process. Thus the design and implementation of
+  voting systems is far from being neutral; the decisions made on who
+  votes, and how, when, and where they do so is inherently coupled with
+  the outcome. Underlying those decisions is a nebulous, inconclusively
+  answered question: are elections fair, and how can we make them more so.
+  
+  The passage of the Help America Vote Act---or HAVA--(Robert Nay, 2002),
+  which mandated states to update and consolidate public voter
+  registration files, and created the US Elections Assistance Commission
+  that makes available county level data, innovated the way we use data
+  based approaches to answer this question. HAVA offered political
+  scientists and statisticians direct access to the voting population's
+  voting patterns, political registration, age, geolocation and much more;
+  information that up to then was only accessible by sampling through
+  surveys. The immense leap here happens because true population data does
+  away with the need for sampling techniques that are often biased and
+  inaccurate. We can now not only get a complete picture of the data, but
+  also link and merge with other sources of information such as US Census
+  data on religion, race, education, or income---work that has been
+  lucrative for firms such as Catalist or Target Smart. By posing
+  Political Scientific questions, and trying to respond with rigorous
+  statistics, both disciplines tackle these data to face joint problems
+  such as quantifying the quality of voter registration files
+  (Ansolabehere \& Hersh, 2010), or linking disparate voter records
+  (Ansolabehere \& Hersh, 2017).
+  
+  \chapter{The State of the Literature}\label{rmd-basics}
+  
+  In this chapter I will go through the exsting literature on Vote-By-Mail
+  (VBM). I will define what Vote-By-Mail is; I will then summarize the
+  expectations that researchers have of the effects of VBM on turnout,
+  based on existing theories of electoral participation. I will continue
+  with a summary of previous quantitative research on the effects that VBM
+  and similar policies have had on turnout. I will conclude with some more
+  general comments on the available data, and literature concerning the
+  most commonly used quantitative methods.
+  
+  \section{What is VBM?}\label{what-is-vbm}
+  
+  Gronke (2007, 2008), RMStein (1998)
+  
+  Vote-By-Mail is a process by which voters receive a ballot delivered by
+  mail to their homes. Voters then have a variety of options on how to
+  return these ballots, ranging from dropping them off at pre-designated
+  locations, to mailing them in, to bringing them to a polling place and
+  voting conventionally. This varies across states that have implemented
+  VBM. Some common forms of the VBM policy are:
+  
+  \begin{itemize}
+  \tightlist
+  \item
+    \emph{Postal Voting}: All voters receive a ballot by mail, which can
+    then be returned to a pre-designated location or mailed in to be
+    counted. This is the current system in Oregon, is an option in
+    Colorado, and is implimented by a number of counties in California,
+    Utah, and Montana.\\
+  \item
+    \emph{No-Excuse Absentee}: Voters can choose to register as absentee
+    voters without giving any reason related to disability, health,
+    distance to polling place etc. This is the case in 27 states and the
+    District of Columbia.\\
+  \item
+    \emph{Permanent No-Excuse Absentee}: This is similar to the previous
+    system, but allows voters to register as absentees indefinitely,
+    without having to renew their registration each year; they become de
+    facto all-mail voters. This is in place in Washington, Kansas, and New
+    Jersey.\\
+  \item
+    \emph{Hybrid or Transitionary Systems}: In hybrid systems, voters
+    receive a mail ballot but can choose to disregard it and vote
+    conventionaly. This is the case in Colorado. Transitionary systems
+    exist in states that have chosen to eventually conduct all elections
+    by postal voting, but have given counties an adjustment period during
+    which this shift is not mandatory, or mandatory only for certain
+    elections. This is the case in California, Utah, and Montana.
+  \end{itemize}
+  
+  Vote-By-Mail is also commonly considered a type of early voting, since
+  voters receive their ballots around two weeks in advance of election
+  day; they are also able to return that ballot whenever they wish within
+  that timeframe. This means that Vote-By-Mail can be counted as a
+  ``convenience voting'' reform. These are usually impliented by state and
+  local governments with the argument that they either expand the
+  democratic franchise by bringing in new voters, or by making it more
+  likely that current registered voters participate in the electoral
+  process.
+  
+  \section{The Calculus of Voting}\label{the-calculus-of-voting}
+  
+  \emph{Grimmer (2011), Burden (2013)}
+  
+  \subsection{Why Turnout Matters}\label{why-turnout-matters}
+  
+  \emph{Geys (2006, 2016), Smets (2013) ++ book sources}
+  
+  Turnout is the most commonly used measure for electoral participation.
+  It is important because it signifies the level of engagement of the
+  population with the state, the elevel of incorporation of different
+  subgroups of the population into democratic processes, and the
+  legitimacy of elected officials. It is widely accepted that turnout
+  should be maximized so that the democratic franchise represents the
+  majority of citizens. Turnout for an election can be calculated or
+  predicted, the difference being that in the former case we use data
+  post-election to measure its absolute value, while in the latter we use
+  a series of individual and community covariates to infer the levels of
+  turnout for a future or past election.\\
+  Calculating turnout, at its core, involves the following equation:\\
+  \[ \% ~Turnout = \frac{Total~Ballots~Cast}{Measure~of~Total~Voting~Population}\times100\%~~~(1)\]
+  
+  The choice of numerator is fairly obvious and universal; the
+  denominator, however, is a different story. The two main statistics used
+  are the total voting age population, and the raw number of registered
+  voters in the geographical location we are examining. The total voting
+  age population is used as a measure to incorporate the total amount of
+  possible voters in a geographical area, and can be measured using data
+  from the US Census. This causes some issues with voters that cross over
+  to different districts; if someone lives in district A, it is still
+  likelly that they are registered to vote in district B. If this is not
+  considered, the calculation of voting age population might be
+  misrepresentative.\\
+  Using registered voters also brings with it two problems. First, the
+  calculation necessarily occurs using voter registration files, which
+  many times can include discrepancies, like deceased voters, voters
+  included in multiple counties, or individual voters included multiple
+  times. Furthermore, the total amount of actual voters among registered
+  voters can be misrepresentative of democratic participation; consider
+  that if a certain minority community has historically low registration
+  rates, their lack of engagement will not be included in turnout rates,
+  thus misrepresenting the level of inclusion in the district they reside
+  in.\\
+  The punch line here is that how the turnout statistic is calculated is
+  not a clear choice, and will have an impact on how studies are set up.
+  To give one example, consider Oregon's Motor Voter program, that
+  automatically registers voters when they interact with government
+  services, like the DMV. It is conceivable that this reform will
+  \emph{decrease} turnout when measured as a percentage of the total
+  registered voter count, but \emph{increase} turnout when measured
+  against total population. I will specify how I calculate turnout in the
+  next chapter.\textbf{Need sourcing for this}\\
+  Statistical models of turnout can be constructed at either the
+  individual or community level. At the individual level, a model is built
+  to predict the probability of voting for every member of a group, and
+  then sum over the members to create an estimate for turnout. Probit or
+  Logit models are prefered. At the community level, researchers first
+  choose a geographical level at which to calculate, which then
+  constitutes the individual observation in the data that is used to
+  create the model.\\
+  Both these models include a standard set of societal variables--at the
+  individual and aggregate level--, policy variables--whether the district
+  does Postal Voting, whether Voter ID requirements are particularly
+  strict--, election-specific variables--closeness of election or campaign
+  expenditure--and sometmes time-series data--previous levels of
+  turnout--to make predictions on turnout levels. This type of analysis is
+  not exclusivelly used to predict turnout but also to, as will be later
+  shown, draw inferences on the effects that certain explanatory variables
+  have on electoral participation.\\
+  Through meta-analyses on studies of turnout, it is possible to get a
+  clear picture on what variables effect individual and collective choices
+  to turn out. Three such studies are conducted by Geys (2006), Geys and
+  Cancela (2016), and Smets (2013). Geys includes 83 studies of national
+  US elections in his initial meta-analysis (2006), later increasing that
+  number to 185 (Geys and Cancela, 2016) and adding local elections. On
+  aggregate-level models for national elections they conclude that
+  competitiveness, campaign financing, and registration policy have the
+  most pronounced effects, while on the sub-national level there are more
+  pronounced effects for societal variables and characterstics of election
+  administration (spending, voting policy, etc.). Smets and Van Ham (2013)
+  examine individual-level predictors for turnout in a similar
+  meta-analysis, and conclude that ``age and age squared, education,
+  residential mobility, region, media exposure, mobilization (partisan and
+  nonpartisan), vote in previous election, party identification, political
+  interest, and political knowledge'' (Smets and Van Ham, 2013, p.31) are
+  the most significant explanatory variables for turnout, along with
+  income and race. \textbf{\emph{I will add sources from books here}}. I
+  will specify the model I will use for turnout in the second chapter.
+  
+  \subsection{Theories of Voting}\label{theories-of-voting}
+  
+  \emph{Aldrich (1993), Berinsky (2001, 2005), Edin (2007), Bendor (2003),
+  Gerber and Green (2015), Matsusaka (1997), Fowler (2006)}
+  
+  Here I take one step back from turnout, and examine the theories
+  surrounding individual choices to vote or abstain. There are three main
+  theories outlined in the literature on why individuals chose to vote.
+  While there is some overlap, the following are mostly distinct:
+  
+  \begin{itemize}
+  \item
+    \emph{Decision ``at the margins''}: In his 1993 study, Aldrich posits
+    that voting is a low cost-low benefit behaviour. Therefore, he
+    continues, voting is a decision that individuals make ``at the
+    margins''; in most people, the urge to vote is not overwhelmingly
+    strong, and therefore individuals will vote when it is convenient to
+    them, when they are motivated by a competitive race, when policies are
+    put in place to help them, and when they are subjected to GOTV (Get
+    Out the Vote) efforts. For Aldrich, this is corroborated by the fact
+    that most turnout models present consistent, yet weak, relational
+    variables; if decisions are made ``at the margins'', then no single
+    predictor would have an overwhelming result. This is also supported by
+    Matsusaka (1997), and Burden (2013). Matsusaka expresses support for a
+    more ``random'' process of voting, where turnout models are ambiguous
+    because of the difficulty that predicting ``at the margins'' entails
+    (Matsusaka 1997). Burden (2013) also demonstrates support for
+    Aldrich's thesis by using data from Wisconsin to calculate a net
+    negative effect of 2\% on turnout due to a similar slight shift in
+    turnout.
+  \item
+    \emph{Habitual Voting}: While Aldrich supports that there is no single
+    ovewhelming predictor of turnout, Fowler (2006) posits that future
+    voting behaviour can be strongly predicted using individual voting
+    history. This leads to the conclusion that individuals are set to
+    either be habitual voters, or habitual non-voters (Plutzer, 2002) by
+    their upbringing and social circumstances, locking them into distinct
+    groups.
+  \item
+    \emph{Social/Structural Voting}: Close to habitual voting are those
+    that support a model of social and structural voting; these
+    researchers claim that the decision to vote or not is deeply rooted in
+    socioeconomic factors, which means that the divide between
+    traditionally voting and non-voting groups can only be bridged by
+    directly dealing with the socioeconomic divide between them (Edin,
+    2007; Berinsky 2005). Their reasoning is that ``at the margins''
+    voting only adresses groups that do not face significant burdens
+    against voting--like the working poor, or marginalized racial
+    groups--, and are usually already registered. Similarly, they address
+    habitual voting claims by arguing that they are too short-sighted;
+    individuals themselves might be habitually voting, but their decision
+    to do so is rooted in strong societal and policy factors.
+  \end{itemize}
+  
+  \textbf{Need more sources, will use books}
+  
+  \subsection{How they Apply to VBM}\label{how-they-apply-to-vbm}
+  
+  \emph{Berisnky (2005), Banducci (2000), Gronke and Toffey (2008), and
+  several applications of sources in above sections.}
+  
+  \section{Previous Study Results}\label{previous-study-results}
+  
+  \subsection{General Results}\label{general-results}
+  
+  \emph{Arcenaux (2012), Bergman (2011), Burden (2014), Edelman + Pantheon
+  Analytics (2018), Gerber (2013), Rhine (1995), Neihelsen (2012), Keele
+  (2018), Richey (2008), RMStein (1997, 2007), Gronke (2007, 2008, 2012,
+  2017)}
+  
+  \subsection{The Gerber Piece}\label{the-gerber-piece}
+  
+  \emph{Gerber(2017)}
+  
+  \section{Voter Registration Files}\label{voter-registration-files}
+  
+  \subsection{Inaccuracy of Survey Data}\label{inaccuracy-of-survey-data}
+  
+  \emph{Ansolabehere and Hersch (2012), Burden (2000), Deufel (2010)}
+  
+  \subsection{The Importance of VRF}\label{the-importance-of-vrf}
+  
+  \emph{Books, mentioned later}
+  
+  \section{Common Methods Used and Problems
+  Encountered}\label{common-methods-used-and-problems-encountered}
+  
+  \subsection{Methods}\label{methods}
+  
+  \begin{itemize}
+  \tightlist
+  \item
+    \emph{Synthetic Control Group}: Abadie (2010), McClleland (2017),
+    Gronke (2017)
+  \item
+    \emph{Record Linkage}: Ansolabehere and Hersch (2017), Harvey (1994,
+    97), Koudas (2013)
+  \item
+    \emph{GLM (Probit/Logit/Poisson)}: Barreto (2004), Dow (2004)
+  \item
+    \emph{DID}: Bertrand et al. (2002)
+  \item
+    \emph{E.I.}: King (2013), Burden (1998), Calvo (2003), Chao (2004),
+    RMStein (2002)
+  \item
+    \emph{Mixed-Effects}: Gelman and Hill (2007)
+  \item
+    \emph{General EDA and Models}: James et al. (2013), Chapman and Hall
+    (2017)
+  \end{itemize}
+  
+  \subsection{Issues}\label{issues}
+  
+  \emph{Grimmer (2015) \{Not always best to do inferential models\},
+  Ansolabehere and Hersch (2010) \{Problems with Voter Reg Files\}, other
+  sources from the previous section}
+  
+  \chapter{Hypothesis, Data, and
+  Methods}\label{hypothesis-data-and-methods}
+  
+  \section{The Data}\label{the-data}
+  
+  \subsection{Source}\label{source}
+  
+  \subsection{Structure}\label{structure}
+  
+  \subsection{Wrangling}\label{wrangling}
+  
+  \section{Hypotheses}\label{hypotheses}
+  
+  \subsection{Description of Hypotheses}\label{description-of-hypotheses}
+  
+  \subsection{Criteria}\label{criteria}
+  
+  \subsection{Expected Results}\label{expected-results}
+  
+  \section{Methodology}\label{methodology}
+  
+  \subsection{EDA}\label{eda}
+  
+  \subsection{Description and Parametrization of
+  Models}\label{description-and-parametrization-of-models}
+  
+  \section{Gerber Replication}\label{gerber-replication}
+  
+  \chapter{Results}\label{results}
+  
+  \section{EDA}\label{eda-1}
+  
+  \section{Model Output}\label{model-output}
+  
+  \section{Gerber Expansion Results}\label{gerber-expansion-results}
+  
+  \chapter*{Conclusion}\label{conclusion}
+  \addcontentsline{toc}{chapter}{Conclusion}
+  
+  \setcounter{chapter}{4} \setcounter{section}{0}
+  
+  \appendix
+  
+  \backmatter
+  
+  \chapter{References}\label{references}
+  
+  \noindent
+  
+  \setlength{\parindent}{-0.20in} \setlength{\leftskip}{0.20in}
+  \setlength{\parskip}{8pt}
+
+
+  % Index?
+
+\end{document}
+
