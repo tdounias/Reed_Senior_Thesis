@@ -1,6 +1,14 @@
 ##Notes on the data
 
+###Manson CO Data 2013
+
 ###Choate CO Data 2017
+
+####Voter Registration Files
+
+I used file 26 as a sample.
+
+The first issue that is apparent is that variable names towards the tail of the columns are full sentences in ``. Should pay attention when trying to call. 
 
 ####Voter History Files
 
