@@ -1,0 +1,187 @@
+---
+title: "Choate Data First Look"
+author: "Theodore Dounias"
+date: "5/4/2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(readr)
+library(tidyverse)
+library(lubridate)
+
+CO_2017_VRF_full <- read_csv("VRF_2017/CO_2017_VRF_full.csv")
+CO_2017_VHist_full <- read_csv("VHist_2017/CO_2017_VHist_full.csv")
+```
+
+##Merge
+
+I have already completed this step, and the files are consolidated in a full document. For the sake of replicability, I might need to repeat this exercise.
+
+I will also create a second dataset here that is significantly smaller, as for the diagnostic operations I do not need all the data.
+
+```{r}
+diagnostic_vrf <- CO_2017_VRF_full %>%
+  select(1:40)
+
+rm(CO_2017_VRF_full)
+```
+
+##Diagnostics
+
+###The total amount of records
+
+```{r}
+length(unique(diagnostic_vrf$VOTER_ID))
+```
+
+Note that every voter ID listed in this record is unique; no-one has their ID registered twice. There appear to be 43.387 files missing from the Colorado reported numbers. This is unlikelly to be due to an entry error, since each individual file is between 120k and 140k observations.  
+
+There are also 463,902 less unique voter ID's present in the Voting History file than there are in the voter information file. 
+
+###The total amount of records in specific counties
+
+Divided into counties, the counts for each county are:
+```{r}
+summary(as.factor(diagnostic_vrf$COUNTY))
+```
+
+
+####Boulder
+
+```{r}
+boulder_vrf_diag <- diagnostic_vrf %>%
+  filter(COUNTY == "Boulder")
+  
+nrow(boulder_vrf_diag)
+```
+
+####El Paso
+
+```{r}
+elpaso_vrf_diag <- diagnostic_vrf %>%
+  filter(COUNTY == "El Paso")
+  
+nrow(elpaso_vrf_diag)
+```
+
+
+####Denver
+
+```{r}
+denver_vrf_diag <- diagnostic_vrf %>%
+  filter(COUNTY == "Denver")
+  
+nrow(denver_vrf_diag)
+```
+
+###Total Active/Inactive
+
+```{r}
+summary(as.factor(diagnostic_vrf$VOTER_STATUS))
+```
+
+###Totals for Categorical Vars
+
+##Merge
+
+Since this is an initial analysis, I will conduct a merge exclusively for the latest presidential election, and make calculations from there.
+
+```{r}
+CO_2017_VHist_full$ELECTION_DATE <- mdy(CO_2017_VHist_full$ELECTION_DATE)
+
+pres_votes <- CO_2017_VHist_full %>%
+  filter(year(ELECTION_DATE) == 2016) %>%
+  filter(ELECTION_TYPE == "General")
+
+
+pres_votes <- pres_votes %>% 
+  filter(month(ELECTION_DATE) == 11) %>%
+  select(2, 3, 8)
+```
+
+```{r}
+election_data_16 <- left_join(diagnostic_vrf, pres_votes, by = "VOTER_ID")
+```
+
+Interestingly enough, there is an amount of voters in the 2016 election that are not registered, since the left join returns more observations than were initially present in the diagnostic VRF dataset. However, the number of unique voter IDs is still the same:
+
+```{r}
+length(unique(election_data_16$VOTER_ID)) - length(unique(diagnostic_vrf$VOTER_ID)) 
+```
+
+
+##Diagnostics on Election Year 2016
+
+a) Turnout   
+
+The total amount of votes cast in the 2016 presidential election in Colorado are `r nrow(pres_votes)` according to my data, which is less than the reported 2,855,960. 
+
+For turnout, the voter history file should count the total number of individuals who voted in the 2016 presidential general. Therefore turnout should be that number over the total amount of registrants, or the total voting age population.
+
+Something interesting that happens is that, if I use the effective date of registration to filter out all those effectivelly registered after the 2016 presidential election, the number I am left with is larger than the total votes.
+
+```{r}
+#Turnout on effective date
+diagnostic_vrf$EFFECTIVE_DATE <- mdy(diagnostic_vrf$EFFECTIVE_DATE) 
+
+turnout_calc_eff_date <- diagnostic_vrf %>%
+  select(2, 9, 34) %>%
+  filter(EFFECTIVE_DATE < as.Date("2016-11-08"))
+
+nrow(turnout_calc_eff_date)
+
+nrow(pres_votes)
+```
+   
+If, instead, I use date of registration, I get the following results:
+
+```{r}
+#Turnout by registration
+diagnostic_vrf$REGISTRATION_DATE <- mdy(diagnostic_vrf$REGISTRATION_DATE) 
+
+turnout_calc_reg_date <- diagnostic_vrf %>%
+  select(2, 9, 33) %>%
+  filter(EFFECTIVE_DATE < as.Date("2016-11-08"))
+
+nrow(turnout_calc_reg_date)
+``` 
+   
+Note that this, again, is a smaller number than the total votes cast. This for me implies that there have been individuals purged off of the voter rolls, who voted in 2016 but are not registared anymore. 
+   
+This also means that I cannot accuratelly calculate turnout over gross total of registrants on election day. I can approximate this with the amount of registered active voters in 2017, when the snapshot of the VRF data was taken:
+   
+```{r}
+#Very approximate turnout over active voters
+nrow(pres_votes)/sum(diagnostic_vrf$VOTER_STATUS == "Active", na.rm = TRUE)
+
+
+#Approximate Turnout over registered voters
+nrow(pres_votes)/length(diagnostic_vrf$VOTER_STATUS)
+```
+   
+The reported values are 85% and 74.9% respectivelly. 
+
+I take the figure for voting age population from the Census Bureau, in order to calculate one last turnout statistic:
+```{r}
+#Turnout over voting age population
+
+vpop <- 3896986
+
+nrow(pres_votes)/vpop
+```
+   
+This number is higher than the reported turnout calculated in this way, which is 71.3%.
+
+b) Turnout in Counties
+
+Since I have already seen some discrepancy between the data and the official reports, calculating the turnout here to see if it aligns is probably an unnecessary exercise--it obviously will not. However, if I wished to do so, the steps would be the following:
+
+```{r}
+el_paso_pres_votes <- pres_votes %>%
+  filter(COUNTY_NAME == "El Paso")
+```
+
+And then I would use the number of entries here, and a similar filtering on the VRF to obtain a turnout statistic.
