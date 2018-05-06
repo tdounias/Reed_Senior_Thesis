@@ -40,3 +40,19 @@ The methods are split into DRE (I assume Direct Recording Electroni machines?) a
 
 Is in person, vote center, polling place, and absentee carry similar?
 
+
+CO_2017_VHist_full <- rbind(CO_2017_VHist_p1, CO_2017_VHist_p2, CO_2017_VHist_p3, CO_2017_VHist_p4,
+                          CO_2017_VHist_p5, CO_2017_VHist_p6, CO_2017_VHist_p7, CO_2017_VHist_p8,
+                          CO_2017_VHist_p9, CO_2017_VHist_p10, CO_2017_VHist_p11, CO_2017_VHist_p12,
+                          CO_2017_VHist_p13, CO_2017_VHist_p14, CO_2017_VHist_p15, CO_2017_VHist_p16,
+                          CO_2017_VHist_p17, CO_2017_VHist_p18, CO_2017_VHist_p19, CO_2017_VHist_p20,
+                          CO_2017_VHist_p21, CO_2017_VHist_p22, CO_2017_VHist_p23, CO_2017_VHist_p24,
+                          CO_2017_VHist_p25, CO_2017_VHist_p26, CO_2017_VHist_p27, CO_2017_VHist_p28, 
+                          CO_2017_VHist_p29, CO_2017_VHist_p30, CO_2017_VHist_p31, CO_2017_VHist_p32,
+                          CO_2017_VHist_p33, CO_2017_VHist_p34)
+
+
+
+
+write.csv(CO_2017_VHist_full, file = "CO_2017_VHist_full")
+
