@@ -1,5 +1,5 @@
 ---
-title: "Choate Data First Look"
+title: "CO 2017 Data First Look"
 author: "Theodore Dounias"
 date: "5/4/2018"
 output: pdf_document
@@ -12,8 +12,8 @@ library(readr)
 library(tidyverse)
 library(lubridate)
 
-CO_2017_VRF_full <- read_csv("VRF_2017/CO_2017_VRF_full.csv")
-CO_2017_VHist_full <- read_csv("VHist_2017/CO_2017_VHist_full.csv")
+CO_2017_VRF_full <- read_csv("data/2017_CO/VRF_2017/CO_2017_VRF_full.csv")
+CO_2017_VHist_full <- read_csv("data/2017_CO/VHist_2017/CO_2017_VHist_full.csv")
 ```
 
 ##Merge
@@ -26,6 +26,10 @@ I will also create a second dataset here that is significantly smaller, as for t
 diagnostic_vrf <- CO_2017_VRF_full %>%
   select(1:40)
 
+dim(CO_2017_VRF_full)
+
+dim(CO_2017_VHist_full)
+
 rm(CO_2017_VRF_full)
 ```
 
@@ -37,9 +41,9 @@ rm(CO_2017_VRF_full)
 length(unique(diagnostic_vrf$VOTER_ID))
 ```
 
-Note that every voter ID listed in this record is unique; no-one has their ID registered twice. There appear to be 43.387 files missing from the Colorado reported numbers. This is unlikelly to be due to an entry error, since each individual file is between 120k and 140k observations.  
+Note that every voter ID listed in this record is unique; no-one has their ID registered twice. There appear to be 43.387 fewer registrants than what is officially reported for Colorado in November 2017 (http://www.sos.state.co.us/pubs/elections/VoterRegNumbers/2017/November/VoterCountsByStatus.pdf). This is unlikelly to be due to my error, since each individual file is between 120k and 140k observations; I also repeated the step of creating the file amalgam several times, with no different effects.  
 
-There are also 463,902 less unique voter ID's present in the Voting History file than there are in the voter information file. 
+There are also 463,902 fewer unique voter ID's present in the Voting History records than there are in the voter information file. 
 
 ###The total amount of records in specific counties
 
@@ -96,7 +100,7 @@ pres_votes <- CO_2017_VHist_full %>%
   filter(year(ELECTION_DATE) == 2016) %>%
   filter(ELECTION_TYPE == "General")
 
-
+#Selects ELECTION_TYPE, ELECTION_DATE
 pres_votes <- pres_votes %>% 
   filter(month(ELECTION_DATE) == 11) %>%
   select(2, 3, 8)
@@ -117,7 +121,7 @@ length(unique(election_data_16$VOTER_ID)) - length(unique(diagnostic_vrf$VOTER_I
 
 a) Turnout   
 
-The total amount of votes cast in the 2016 presidential election in Colorado are `r nrow(pres_votes)` according to my data, which is less than the reported 2,855,960. 
+The total amount of votes cast in the 2016 presidential election in Colorado are `r nrow(pres_votes)` according to my data, which is fewer than the reported 2,855,960. 
 
 For turnout, the voter history file should count the total number of individuals who voted in the 2016 presidential general. Therefore turnout should be that number over the total amount of registrants, or the total voting age population.
 
@@ -149,7 +153,7 @@ turnout_calc_reg_date <- diagnostic_vrf %>%
 nrow(turnout_calc_reg_date)
 ``` 
    
-Note that this, again, is a smaller number than the total votes cast. This for me implies that there have been individuals purged off of the voter rolls, who voted in 2016 but are not registared anymore. 
+Note that this, again, is a smaller number than the total votes cast. This for me implies that there have been individuals removed from the voter rolls, who voted in 2016 but are not registared anymore; this could occur due to them moving, or dying, or otherwise becoming unable to vote in CO.
    
 This also means that I cannot accuratelly calculate turnout over gross total of registrants on election day. I can approximate this with the amount of registered active voters in 2017, when the snapshot of the VRF data was taken:
    
@@ -185,3 +189,23 @@ el_paso_pres_votes <- pres_votes %>%
 ```
 
 And then I would use the number of entries here, and a similar filtering on the VRF to obtain a turnout statistic.
+
+
+##Counts of Individual Registrants
+    
+Here is some info on the voter history files
+```{r}
+vh_info <- CO_2017_VHist_full %>%
+  mutate("Count" = 1) %>%
+  group_by(VOTER_ID) %>%
+  summarise("TIMES_VOTING" <- sum(Count))
+
+names(vh_info)[2] <- "TIMES"
+
+#Histogram of times people voted
+hist(vh_info$TIMES)
+
+#Count of how many individuals voted an X amount of times
+summary(as.factor(vh_info$TIMES))
+```
+
