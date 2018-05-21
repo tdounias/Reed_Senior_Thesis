@@ -185,6 +185,61 @@ sum(is.na(CO_2017_VRF_full$VOTER_ID))
 #Unique Values
 length(unique(CO_2017_VRF_full$VOTER_ID))
 ```
+The number of unique voter IDs is the same as the number of observations in the file; this means that every observation has a unique voter ID.
 
+###County
+```{r}
+#County NA's
+sum(is.na(CO_2017_VRF_full$COUNTY))
+
+#Counties and voter distribution
+summary(as.factor(CO_2017_VRF_full$COUNTY))
+```
+   
+###Names
+
+```{r}
+#NA's in name variables
+sum(is.na(CO_2017_VRF_full$FIRST_NAME))
+
+sum(is.na(CO_2017_VRF_full$MIDDLE_NAME))
+
+sum(is.na(CO_2017_VRF_full$LAST_NAME))
+
+sum(is.na(CO_2017_VRF_full$NAME_SUFFIX))
+```
+  
+###Registration Date
+```{r}
+#Sum of NA values
+sum(is.na(CO_2017_VRF_full$REGISTRATION_DATE))
+
+#Sum of values per year
+reg_dates <- mdy(CO_2017_VRF_full$REGISTRATION_DATE)
+
+summary(as.factor(year(reg_dates)))
+```
+   
+###Effective Date
+```{r}
+#Sum of NA values
+sum(is.na(CO_2017_VRF_full$EFFECTIVE_DATE))
+
+#Sum of values per year
+eff_dates <- mdy(CO_2017_VRF_full$EFFECTIVE_DATE)
+
+summary(as.factor(year(eff_dates)))
+```
+   
+#Last update of file date
+```{r}
+#Sum of NA values
+sum(is.na(CO_2017_VRF_full$LAST_UPDATED_DATE))
+
+#Sum of values per year
+upd_dates <- mdy(CO_2017_VRF_full$LAST_UPDATED_DATE)
+
+summary(as.factor(year(upd_dates)))
+```
 
 
