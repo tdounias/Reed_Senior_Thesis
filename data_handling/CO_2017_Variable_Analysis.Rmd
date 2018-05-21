@@ -14,8 +14,10 @@ library(lubridate)
 library(knitr)
 
 CO_2017_VHist_full <- read_csv("data/2017_CO/VHist_2017/CO_2017_VHist_full.csv")
-#CO_2017_VRF_full <- read_csv("data/2017_CO/VRF_2017/CO_2017_VRF_full.csv")
+CO_2017_VRF_full <- read_csv("data/2017_CO/VRF_2017/CO_2017_VRF_full.csv")
 ```
+
+#Voter History
 
 ##Dimensions
 
@@ -24,7 +26,7 @@ CO_2017_VHist_full <- read_csv("data/2017_CO/VHist_2017/CO_2017_VHist_full.csv")
 dim(CO_2017_VHist_full)
 
 #Voter Registration Records Dimensions
-#dim(CO_2017_VRF_full)
+dim(CO_2017_VRF_full)
 ```
     
 ##Voter History Variables
@@ -172,4 +174,17 @@ for(i in 1:15100){
 }
 
 ```
+   
+##Voter Registration Variable Analysis
+
+###Voter ID
+```{r}
+#Voter ID NA's
+sum(is.na(CO_2017_VRF_full$VOTER_ID))
+
+#Unique Values
+length(unique(CO_2017_VRF_full$VOTER_ID))
+```
+
+
 
