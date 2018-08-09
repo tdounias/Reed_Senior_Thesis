@@ -14,7 +14,7 @@ library(lubridate)
 library(knitr)
 
 CO_2017_VHist_full <- read_csv("data/2017_CO/VHist_2017/CO_2017_VHist_full.csv")
-CO_2017_VRF_full <- read_csv("data/2017_CO/VRF_2017/CO_2017_VRF_full.csv")
+#CO_2017_VRF_full <- read_csv("data/2017_CO/VRF_2017/CO_2017_VRF_full.csv")
 ```
 
 #Voter History
@@ -154,23 +154,29 @@ summary(as.factor(CO_2017_VHist_full$COUNTY_NAME))
 
 ###Switching Voters? A fun result if it works (IN PROGRESS)
 ```{r, eval = FALSE}
+vote_data <- CO_2017_VHist_full
+vote_data <- vote_data %>%
+  arrange(VOTER_ID, mdy(ELECTION_DATE)) %>%
+  select(2, 8)
+
+per_voter <- data.frame(unique(vote_data$VOTER_ID), 0)
+
+for(i in 1:nrow(vote_data)){
+  if(vote_data$COUNTY_NAME[i] == vote_data$COUNTY_NAME[i+1])
+}
+
 #Counting voters that voted in more than one county
 switches <- 0
 per_voter <- data.frame(unique(CO_2017_VHist_full$VOTER_ID), 0)
 names(per_voter) <- c("ID", "Switches")
 
-vote_data <- CO_2017_VHist_full
-vote_data <- vote_data %>%
-  arrange(VOTER_ID, mdy(ELECTION_DATE)) %>%
-  select(2, 8)
+
 ##FIX INDEXING!
 a <- 1
-for(i in 1:15100){
+for(i in 1:nrow(vote_data)){
   if(vote_data[i, 1] == vote_data[i+1, 1] && vote_data[i, 2] != vote_data[i+1, 2]) {
     switches <- switches + 1
-    per_voter$Switches[a] <- per_voter$Switches[a] + 1 
   }
-  if(vote_data[i, 1] != vote_data[i+1, 1]) a <- a+1
 }
 
 ```
