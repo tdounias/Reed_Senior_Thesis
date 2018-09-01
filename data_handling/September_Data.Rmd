@@ -1,0 +1,37 @@
+---
+title: "September_Data"
+author: "Theodore Dounias"
+date: "September 1, 2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(ggplot2)
+```
+
+```{r}
+#Playing with El Paso
+
+el_paso_votes <- CO_2017_VHist_full %>%
+  filter(COUNTY_NAME == "El Paso")
+
+
+ep_primaries <- el_paso_votes %>%
+  filter(ELECTION_TYPE == "Primary")
+  
+summary(as.factor(ep_primaries$ELECTION_DESCRIPTION))
+
+ep_coordinated <- el_paso_votes %>%
+  filter(ELECTION_TYPE == "Coordinated")
+
+summary(as.factor(ep_coordinated$ELECTION_DESCRIPTION))
+
+summary(as.factor(ep_coordinated$VOTING_METHOD))
+```
+   
+```{r}
+
+```
+
