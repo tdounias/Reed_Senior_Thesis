@@ -1,5 +1,5 @@
 ---
-title: "September_Data"
+title: "September El Paso Tests"
 author: "Theodore Dounias"
 date: "September 1, 2018"
 output: pdf_document
@@ -9,29 +9,74 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(ggplot2)
+library(readr)
+library(lubridate)
+el_paso_vhist <- read_csv("data/2017_CO/VHist_2017/el_paso_vhist.csv")
+el_paso_vrf <- read_csv("data/2017_CO/VRF_2017/el_paso_vrf.csv")
 ```
 
+##Just some random results
 ```{r}
 #Playing with El Paso
-
-el_paso_votes <- CO_2017_VHist_full %>%
-  filter(COUNTY_NAME == "El Paso")
-
-
-ep_primaries <- el_paso_votes %>%
+ep_primaries <- el_paso_vhist %>%
   filter(ELECTION_TYPE == "Primary")
   
 summary(as.factor(ep_primaries$ELECTION_DESCRIPTION))
 
-ep_coordinated <- el_paso_votes %>%
+ep_coordinated <- el_paso_vhist %>%
   filter(ELECTION_TYPE == "Coordinated")
 
 summary(as.factor(ep_coordinated$ELECTION_DESCRIPTION))
 
 summary(as.factor(ep_coordinated$VOTING_METHOD))
 ```
-   
+    
+    
+##Example of First Model Turnout Calculation
 ```{r}
+#So I don't have to read them in again if this fails...
+ep_vhist <- el_paso_vhist
+```
+    
+*Raw vote count file*
+```{r}
+summary(as.factor(ep_vhist$VOTING_METHOD))
 
+#Sorting out voting methods
+ep_vhist$VOTING_METHOD[ep_vhist$VOTING_METHOD == "Early Voting - DRE"] <- "Early Voting" 
+ep_vhist$VOTING_METHOD[ep_vhist$VOTING_METHOD == "In Person - DRE"] <- "In Person"
+ep_vhist$VOTING_METHOD[ep_vhist$VOTING_METHOD == "Mail Ballot - DRE"] <- "Mail Ballot" 
+ep_vhist$ELECTION_DATE <- mdy(ep_vhist$ELECTION_DATE)
+    #More needed, don't know what ones to cut, will do the following##
+
+#Create turnouts file with raw vote counts
+ep_turnouts <- ep_vhist %>%
+  mutate(count = 1) %>%
+  group_by(ELECTION_DESCRIPTION, ELECTION_TYPE, ELECTION_DATE, VOTING_METHOD) %>%
+  summarize(total_votes = sum(count)) %>%
+  spread(key = VOTING_METHOD, value = total_votes)
+
+glimpse(ep_turnouts)
+
+```
+     
+*Number of registered voters, under some assumptions*
+```{r}
+#Use VReg files for total amount of registrants
+ep_reg_counts <- el_paso_vrf %>%
+  filter(BIRTH_YEAR > 1900) %>%
+  select(2, 4, 5, 8, 9)
+
+
+```
+
+
+##El Paso Long Form Voting History for Indivoduals   
+```{r, eval= FALSE}
+summary(as.factor(el_paso_votes$ELECTION_DESCRIPTION))
+
+ep_wide <- el_paso_votes %>%
+  slice(1:13) %>%
+  spread(key = ELECTION_DESCRIPTION, value = 1)
 ```
 
