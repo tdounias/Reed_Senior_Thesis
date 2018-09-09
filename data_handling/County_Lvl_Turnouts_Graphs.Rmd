@@ -1,0 +1,106 @@
+---
+title: "County Level Turnouts and Graphs"
+author: "Theodore Dounias"
+date: "September 1, 2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(lubridate)
+library(knitr)
+library(plotly)
+library(maps)
+opts_knit$set(root.dir = 'C:/Users/tdounias/Desktop/Reed College/2017 Fall/MATH 243/Repos/Reed_Senior_Thesis/Data_and_results/')
+```
+
+##Graphs of Turnout
+```{r}
+#Read in voter hstory data
+vhist <- read_csv("data/2017_CO/VHist_2017/CO_2017_VHist_full.csv")
+
+vhist <- vhist %>%
+  select(3:6, 8)
+
+#Sorting out voting methods
+vhist$VOTING_METHOD[vhist$VOTING_METHOD == "Early Voting - DRE"] <- "Early Voting" 
+vhist$VOTING_METHOD[vhist$VOTING_METHOD == "In Person - DRE"] <- "In Person"
+vhist$VOTING_METHOD[vhist$VOTING_METHOD == "Mail Ballot - DRE"] <- "Mail Ballot" 
+vhist$ELECTION_DATE <- mdy(vhist$ELECTION_DATE)
+    #More needed, don't know what ones to cut, will do the following##
+
+#Create turnouts file with raw vote counts
+turnouts <- vhist %>%
+  mutate(count = 1) %>%
+  group_by(COUNTY_NAME, ELECTION_DESCRIPTION, ELECTION_TYPE, ELECTION_DATE, VOTING_METHOD) %>%
+  summarize(total_votes = sum(count)) %>%
+  spread(key = VOTING_METHOD, value = total_votes) %>%
+  filter(year(ELECTION_DATE) >= 1992)
+
+remove(vhist)
+```
+     
+*Number of registered voters, under some assumptions*
+```{r}
+vrf <- read_csv("data/2017_CO/VRF_2017/CO_2017_VRF_full.csv", 
+    col_types = cols_only(VOTER_ID = col_guess(), COUNTY = col_guess(), REGISTRATION_DATE = col_guess(), EFFECTIVE_DATE = col_guess()))
+
+vrf$REGISTRATION_DATE <- mdy(vrf$REGISTRATION_DATE)
+vrf$EFFECTIVE_DATE <- mdy(vrf$EFFECTIVE_DATE)
+
+vrf <- vrf %>%
+  filter(year(REGISTRATION_DATE) > 1910 && year(EFFECTIVE_DATE) > 1910)
+
+col_county_registrants <- vrf %>%
+  mutate(count = 1, YEAR_REGISTERED = year(REGISTRATION_DATE)) %>%
+  group_by(COUNTY, YEAR_REGISTERED) %>%
+  summarize(REGISTERED_IN_YEAR = sum(count))
+
+remove(vrf)
+
+col_county_registrants <- col_county_registrants %>%
+  group_by(COUNTY) %>%
+  mutate(REGISTRANTS = cumsum(REGISTERED_IN_YEAR)) %>%
+  filter(YEAR_REGISTERED >= 1992)
+```
+
+
+#Maps 
+```{r, eval= = FALSE}
+col <- map_data("county") %>%
+  filter(region == 'colorado')
+
+county_registrants <- vrf %>%
+  mutate(count = 1) %>%
+  group_by(COUNTY) %>%
+  summarise(TOTAL_REGISTERED = sum(count))
+
+county_registrants$COUNTY <- tolower(county_registrants$COUNTY) # matching string
+
+col_reg <- merge(col, county_registrants, by.x = "subregion", by.y = "COUNTY")
+
+col_reg$pop_cat <- cut(col_reg$TOTAL_REGISTERED, breaks = c(seq(0, 500000, by = 100000)), labels=1:5)
+
+p <- col_reg %>%
+  group_by(group) %>%
+  plot_ly(x = ~long, y = ~lat, color = ~pop_cat, colors = c('pink', 'dark red'),
+          text = ~subregion, hoverinfo = 'text') %>%
+  add_polygons(line = list(width = 0.4)) %>%
+  add_polygons(
+    fillcolor = 'transparent',
+    line = list(color = 'black', width = 0.5),
+    showlegend = FALSE, hoverinfo = 'none'
+  ) %>%
+  layout(
+    title = "Colorado Total Registrants by County",
+    titlefont = list(size = 10),
+    xaxis = list(title = "", showgrid = FALSE,
+                 zeroline = FALSE, showticklabels = FALSE),
+    yaxis = list(title = "", showgrid = FALSE,
+                 zeroline = FALSE, showticklabels = FALSE)
+  )
+
+p
+```
+
