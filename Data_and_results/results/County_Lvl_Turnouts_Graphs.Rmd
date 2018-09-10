@@ -20,10 +20,36 @@ opts_knit$set(root.dir = 'C:/Users/tdounias/Desktop/Reed College/2017 Fall/MATH 
 #Read in voter hstory data
 vhist <- read_csv("data/2017_CO/VHist_2017/CO_2017_VHist_full.csv")
 
+```
+   
+###Problems in VHist I did not initially find
+```{r}
+summary(as.factor(vhist$VOTING_METHOD))
+
+vhist_na <- vhist %>%
+  filter(is.na(VOTING_METHOD))
+
+summary(as.factor(vhist_na$COUNTY_NAME))
+
+summary(as.factor(vhist$COUNTY_NAME))
+
+summary(as.factor(year(mdy(vhist_na$ELECTION_DATE))))
+
+summary(as.factor(vhist_na$ELECTION_TYPE))
+```
+There appear to be *several* different counties here that have NA's in the Voting Method column. Most NAs are in Jefferson. Admittedly, that is the most populous of counties, but it is still about 1 in 40 voters! At first glance, the number of NAs rises exponentially with the totals of voters per county.
+
+Every single NA is concentrated before 2013, when it could be reasonaby supposed that at least local elections were conducted through VBM. The vast, VAST majority are before 2002. 
+
+The distribution of NAs across election types seems fairly consistent with the total amount of votes cast in each contest type. This is reasonable, since it suggests that nt counting method is independent of election type. 
+
+###Returning to the Graphs
+```{r}
+#Moving on with code as if problems were not there
+#Sorting out voting methods
 vhist <- vhist %>%
   select(3:6, 8)
 
-#Sorting out voting methods
 vhist$VOTING_METHOD[vhist$VOTING_METHOD == "Early Voting - DRE"] <- "Early Voting" 
 vhist$VOTING_METHOD[vhist$VOTING_METHOD == "In Person - DRE"] <- "In Person"
 vhist$VOTING_METHOD[vhist$VOTING_METHOD == "Mail Ballot - DRE"] <- "Mail Ballot" 
@@ -38,35 +64,48 @@ turnouts <- vhist %>%
   spread(key = VOTING_METHOD, value = total_votes) %>%
   filter(year(ELECTION_DATE) >= 1992)
 
-remove(vhist)
 ```
      
-*Number of registered voters, under some assumptions*
+###Number of registered voters, under some assumptions
 ```{r}
 vrf <- read_csv("data/2017_CO/VRF_2017/CO_2017_VRF_full.csv", 
-    col_types = cols_only(VOTER_ID = col_guess(), COUNTY = col_guess(), REGISTRATION_DATE = col_guess(), EFFECTIVE_DATE = col_guess()))
+    col_types = cols_only(VOTER_ID = col_guess(), COUNTY = col_guess(), REGISTRATION_DATE = col_guess(), EFFECTIVE_DATE = col_guess(), VOTER_STATUS = col_guess()))
 
 vrf$REGISTRATION_DATE <- mdy(vrf$REGISTRATION_DATE)
 vrf$EFFECTIVE_DATE <- mdy(vrf$EFFECTIVE_DATE)
 
 vrf <- vrf %>%
-  filter(year(REGISTRATION_DATE) > 1910 && year(EFFECTIVE_DATE) > 1910)
+  filter(year(REGISTRATION_DATE) > 1910 && year(EFFECTIVE_DATE) > 1910) %>%
+  filter(VOTER_STATUS == "Active")
 
 col_county_registrants <- vrf %>%
   mutate(count = 1, YEAR_REGISTERED = year(REGISTRATION_DATE)) %>%
   group_by(COUNTY, YEAR_REGISTERED) %>%
   summarize(REGISTERED_IN_YEAR = sum(count))
 
-remove(vrf)
-
 col_county_registrants <- col_county_registrants %>%
   group_by(COUNTY) %>%
   mutate(REGISTRANTS = cumsum(REGISTERED_IN_YEAR)) %>%
   filter(YEAR_REGISTERED >= 1992)
 ```
+   
+###Actual Graph Creation Step
+```{r}
+#Graphwith test data
+years <- data.frame(as.integer(seq(1990, 2017, 1)), runif(28, 1, 30))
+
+names(years) <- c("year", "dat")
+
+ggplot(years, aes(x = year, y = dat)) +
+  geom_vline(xintercept = 1992, col = "red") +
+  geom_vline(xintercept = 2008, col = "red") +
+  geom_vline(xintercept = 2013, col = "red") +
+  geom_smooth() +
+  geom_point()
+```
 
 
-#Maps 
+##Maps 
 ```{r, eval= = FALSE}
 col <- map_data("county") %>%
   filter(region == 'colorado')
