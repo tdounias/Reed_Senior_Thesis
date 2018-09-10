@@ -2,7 +2,7 @@
 title: "County Level Turnouts and Graphs"
 author: "Theodore Dounias"
 date: "September 1, 2018"
-output: pdf_document
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -41,7 +41,7 @@ There appear to be *several* different counties here that have NA's in the Votin
 
 Every single NA is concentrated before 2013, when it could be reasonaby supposed that at least local elections were conducted through VBM. The vast, VAST majority are before 2002. 
 
-The distribution of NAs across election types seems fairly consistent with the total amount of votes cast in each contest type. This is reasonable, since it suggests that nt counting method is independent of election type. 
+The distribution of NAs across election types seems fairly consistent with the total amount of votes cast in each contest type. This is reasonable, since it suggests that counting method is independent of election type. 
 
 ###Returning to the Graphs
 ```{r}
@@ -67,7 +67,7 @@ turnouts <- vhist %>%
 ```
      
 ###Number of registered voters, under some assumptions
-```{r}
+```{r, warning=FALSE, error=FALSE}
 vrf <- read_csv("data/2017_CO/VRF_2017/CO_2017_VRF_full.csv", 
     col_types = cols_only(VOTER_ID = col_guess(), COUNTY = col_guess(), REGISTRATION_DATE = col_guess(), EFFECTIVE_DATE = col_guess(), VOTER_STATUS = col_guess()))
 
@@ -106,7 +106,7 @@ ggplot(years, aes(x = year, y = dat)) +
 
 
 ##Maps 
-```{r, eval= = FALSE}
+```{r}
 col <- map_data("county") %>%
   filter(region == 'colorado')
 
