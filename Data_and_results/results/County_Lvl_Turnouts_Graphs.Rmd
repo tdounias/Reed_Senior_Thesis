@@ -17,13 +17,15 @@ opts_knit$set(root.dir = 'C:/Users/tdounias/Desktop/Reed College/2017 Fall/MATH 
 
 ##Graphs of Turnout
 ```{r}
-#Read in voter hstory data
-vhist <- read_csv("data/2017_CO/VHist_2017/CO_2017_VHist_full.csv")
+#Read in voter history data
+vhist <- read_csv("data/2017_CO/VHist_2017/CO_2017_VHist_full.csv", 
+    col_types = cols(PARTY = col_skip(), 
+        VOTER_ID = col_skip(), X1 = col_skip()))
 
 ```
    
 ###Problems in VHist I did not initially find
-```{r}
+```{r, eval = FALSE}
 summary(as.factor(vhist$VOTING_METHOD))
 
 vhist_na <- vhist %>%
@@ -46,13 +48,13 @@ The distribution of NAs across election types seems fairly consistent with the t
 ###Returning to the Graphs
 ```{r}
 #Moving on with code as if problems were not there
-#Sorting out voting methods
-vhist <- vhist %>%
-  select(3:6, 8)
+#Sorting out voting metthods
 
-vhist$VOTING_METHOD[vhist$VOTING_METHOD == "Early Voting - DRE"] <- "Early Voting" 
-vhist$VOTING_METHOD[vhist$VOTING_METHOD == "In Person - DRE"] <- "In Person"
-vhist$VOTING_METHOD[vhist$VOTING_METHOD == "Mail Ballot - DRE"] <- "Mail Ballot" 
+vhist$VOTING_METHOD[vhist$VOTING_METHOD == "Early Voting - DRE" | vhist$VOTING_METHOD == "Early Voting" | 
+                      vhist$VOTING_METHOD == "Vote Center" | vhist$VOTING_METHOD == "In Person - DRE" |
+                      vhist$VOTING_METHOD == "Polling Place" | vhist$VOTING_METHOD == "Vote Center - DRE"] <- "In Person" 
+vhist$VOTING_METHOD[vhist$VOTING_METHOD == "Mail Ballot - DRE"| vhist$VOTING_METHOD == "Absentee Carry" |
+                      vhist$VOTING_METHOD == "Absentee Mail"] <- "Mail Ballot" 
 vhist$ELECTION_DATE <- mdy(vhist$ELECTION_DATE)
     #More needed, don't know what ones to cut, will do the following##
 
@@ -62,14 +64,14 @@ turnouts <- vhist %>%
   group_by(COUNTY_NAME, ELECTION_DESCRIPTION, ELECTION_TYPE, ELECTION_DATE, VOTING_METHOD) %>%
   summarize(total_votes = sum(count)) %>%
   spread(key = VOTING_METHOD, value = total_votes) %>%
-  filter(year(ELECTION_DATE) >= 1992)
-
+  filter(year(ELECTION_DATE) >= 1996)
 ```
      
 ###Number of registered voters, under some assumptions
 ```{r, warning=FALSE, error=FALSE}
 vrf <- read_csv("data/2017_CO/VRF_2017/CO_2017_VRF_full.csv", 
-    col_types = cols_only(VOTER_ID = col_guess(), COUNTY = col_guess(), REGISTRATION_DATE = col_guess(), EFFECTIVE_DATE = col_guess(), VOTER_STATUS = col_guess()))
+    col_types = cols_only(VOTER_ID = col_guess(), COUNTY = col_guess(), REGISTRATION_DATE = col_guess(), 
+                          EFFECTIVE_DATE = col_guess(), VOTER_STATUS = col_guess(), PARTY = col_guess()))
 
 vrf$REGISTRATION_DATE <- mdy(vrf$REGISTRATION_DATE)
 vrf$EFFECTIVE_DATE <- mdy(vrf$EFFECTIVE_DATE)
@@ -91,7 +93,7 @@ col_county_registrants <- col_county_registrants %>%
    
 ###Actual Graph Creation Step
 ```{r}
-#Graphwith test data
+#Graph of Colorado in general
 years <- data.frame(as.integer(seq(1990, 2017, 1)), runif(28, 1, 30))
 
 names(years) <- c("year", "dat")
