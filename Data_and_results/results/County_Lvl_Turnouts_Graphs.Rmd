@@ -16,7 +16,7 @@ opts_knit$set(root.dir = 'C:/Users/tdounias/Desktop/Reed College/2017 Fall/MATH 
 ```
 
 ##Graphs of Turnout
-```{r}
+```{r, warning=FALSE, error = FALSE}
 #Read in voter history data
 vhist <- read_csv("data/2017_CO/VHist_2017/CO_2017_VHist_full.csv", 
     col_types = cols(PARTY = col_skip(), 
@@ -25,7 +25,7 @@ vhist <- read_csv("data/2017_CO/VHist_2017/CO_2017_VHist_full.csv",
 ```
    
 ###Problems in VHist I did not initially find
-```{r, eval = FALSE}
+```{r}
 summary(as.factor(vhist$VOTING_METHOD))
 
 vhist_na <- vhist %>%
@@ -73,6 +73,8 @@ names(turnouts)[5:6] <- c("IN_PERSON", "VBM")
 #Replace NA values with 0
 turnouts$IN_PERSON[is.na(turnouts$IN_PERSON)] = 0
 turnouts$VBM[is.na(turnouts$VBM)] = 0
+
+head(turnouts)
 ```
      
 ###Number of registered voters, under some assumptions
@@ -101,12 +103,14 @@ col_county_registrants <- col_county_registrants %>%
   group_by(COUNTY) %>%
   mutate(REGISTRANTS = cumsum(REGISTERED_IN_YEAR)) %>%
   filter(YEAR_REGISTERED >= 1992) 
+
+head(col_county_registrants)
 ```
    
 ###Actual Graph Creation Step
     
 ####COLORADO STATEWIDE
-```{r}
+```{r, fig.align= 'center'}
 ##Graph of Colorado in general##
 
 #!!!! What are the off year general elections about?? !!!!#
@@ -126,14 +130,17 @@ turnouts_statewide <- turnouts %>%
   group_by(ELECTION_TYPE, ELECTION_DATE) %>%
   summarise(IN_PERSON = sum(IN_PERSON), VBM = sum(VBM), TOTAL_VOTES = sum(IN_PERSON, VBM)) 
 
-#Ham-fisted way of removing weird elections I don't know about.
-for(i in 1:length(turnouts_statewide$ELECTION_TYPE)){
-  if(turnouts_statewide$ELECTION_TYPE[i] == "Coordinated" && as.integer(turnouts_statewide$ELECTION_DATE[i]) %% 2 == 0) turnouts_statewide <- turnouts_statewide[-i,]
-  
-  if(turnouts_statewide$ELECTION_TYPE[i] == "Primary" && as.integer(turnouts_statewide$ELECTION_DATE[i]) %% 2 != 0) turnouts_statewide <- turnouts_statewide[-i,]
-  
-  if(turnouts_statewide$ELECTION_TYPE[i] == "General" && as.integer(turnouts_statewide$ELECTION_DATE[i]) %% 2 != 0) turnouts_statewide <- turnouts_statewide[-i,]
-}
+
+#Remove even year coordinated
+turnouts_statewide <- turnouts_statewide[!(turnouts_statewide$ELECTION_TYPE == "Coordinated" & as.integer(turnouts_statewide$ELECTION_DATE) %% 2 == 0), ]
+
+#Remove odd year Primaries
+turnouts_statewide <- turnouts_statewide[!(turnouts_statewide$ELECTION_TYPE == "Primary" & as.integer(turnouts_statewide$ELECTION_DATE) %% 2 != 0), ]
+
+#Remove odd year Generals
+turnouts_statewide <- turnouts_statewide[!(turnouts_statewide$ELECTION_TYPE == "General" & as.integer(turnouts_statewide$ELECTION_DATE) %% 2 != 0), ]
+
+
  
 #Join the data
 names(turnouts_statewide)[2] <- "ELECTION_YEAR"
@@ -147,54 +154,108 @@ turnouts_statewide <- turnouts_statewide %>%
 
 turnouts_statewide$ELECTION_TYPE <- as.factor(turnouts_statewide$ELECTION_TYPE)  
 
-#GRAPHS!!
+#GRAPH!!
 ggplot(turnouts_statewide, aes(x = ELECTION_YEAR, y = TURNOUT, col = ELECTION_TYPE)) +
+  scale_color_manual(values = c("#2F9395", "Dark Orange", "dark blue")) +
   geom_vline(xintercept = 1992, col = "red") +
   geom_vline(xintercept = 2008, col = "red") +
   geom_vline(xintercept = 2013, col = "red") +
+  geom_hline(yintercept = 1) +
   geom_line() +
-  geom_point()
+  geom_point(size = .9) +
+  labs(title = "Turnout in Colorado Elections, 1992-2017", x = "Election Year", y = "Turnout as % of Registared Voters", col = "Election Type") +
+  theme_minimal()
 ```
    
 Possible explanations for this disaster:
 
 Maybe the about one and a half million NAs? Will also try *not* filtering for active voters, since the current inactive voters might have been active in the past!
 
-##Maps 
-```{r}
-col <- map_data("county") %>%
-  filter(region == 'colorado')
+I did this. Still kindof a disaster.
+   
+   
+####By County Cluster-disaster graph
+```{r, fig.align= 'center'}
+#Create County-level turnout file
+turnouts_by_county <- turnouts %>%
+  ungroup() %>%
+  select(1, 3:6) %>%
+  filter(ELECTION_TYPE %in% c("General", "Coordinated", "Primary")) %>%
+  mutate(ELECTION_DATE = year(ELECTION_DATE))
 
-county_registrants <- vrf %>%
-  mutate(count = 1) %>%
-  group_by(COUNTY) %>%
-  summarise(TOTAL_REGISTERED = sum(count))
+#Rename in preparation for merger
+names(turnouts_by_county)[1:3] <- c("COUNTY","ELECTION_TYPE", "ELECTION_YEAR")
+names(col_county_registrants)[2] <- "ELECTION_YEAR"
 
-county_registrants$COUNTY <- tolower(county_registrants$COUNTY) # matching string
+#Merge
+turnouts_by_county <- merge(turnouts_by_county, col_county_registrants, by = c("COUNTY", "ELECTION_YEAR"))
 
-col_reg <- merge(col, county_registrants, by.x = "subregion", by.y = "COUNTY")
+#Tidy data for graphing
+turnouts_by_county <- turnouts_by_county %>%
+  ungroup() %>%
+  mutate(TURNOUT = (VBM + IN_PERSON)/REGISTRANTS) %>%
+  select(-6)
+  
 
-col_reg$pop_cat <- cut(col_reg$TOTAL_REGISTERED, breaks = c(seq(0, 500000, by = 100000)), labels=1:5)
+#Remove even year coordinated
+turnouts_by_county <- turnouts_by_county[!(turnouts_by_county$ELECTION_TYPE == "Coordinated" & as.integer(turnouts_by_county$ELECTION_YEAR) %% 2 == 0), ]
 
-p <- col_reg %>%
-  group_by(group) %>%
-  plot_ly(x = ~long, y = ~lat, color = ~pop_cat, colors = c('pink', 'dark red'),
-          text = ~subregion, hoverinfo = 'text') %>%
-  add_polygons(line = list(width = 0.4)) %>%
-  add_polygons(
-    fillcolor = 'transparent',
-    line = list(color = 'black', width = 0.5),
-    showlegend = FALSE, hoverinfo = 'none'
-  ) %>%
-  layout(
-    title = "Colorado Total Registrants by County",
-    titlefont = list(size = 10),
-    xaxis = list(title = "", showgrid = FALSE,
-                 zeroline = FALSE, showticklabels = FALSE),
-    yaxis = list(title = "", showgrid = FALSE,
-                 zeroline = FALSE, showticklabels = FALSE)
-  )
+#Remove odd year Primaries
+turnouts_by_county <- turnouts_by_county[!(turnouts_by_county$ELECTION_TYPE == "Primary" & as.integer(turnouts_by_county$ELECTION_YEAR) %% 2 != 0), ]
 
-p
+#Remove odd year Generals
+turnouts_by_county <- turnouts_by_county[!(turnouts_by_county$ELECTION_TYPE == "General" & as.integer(turnouts_by_county$ELECTION_YEAR) %% 2 != 0), ]
+
+#Make County a Factor
+turnouts_by_county$COUNTY <- as.factor(turnouts_by_county$COUNTY)
+
+#GRAPH
+
+##Just the first I could pump out
+ggplot(turnouts_by_county, aes(x = ELECTION_YEAR, y = TURNOUT, col = COUNTY)) +
+  facet_wrap(facets = "ELECTION_TYPE") +
+  geom_vline(xintercept = 1992, col = "red") +
+  geom_vline(xintercept = 2008, col = "red") +
+  geom_vline(xintercept = 2013, col = "red") +
+  geom_hline(yintercept = 1) +
+  geom_point(size = .2) +
+  geom_line(alpha = .3) +
+  labs(title = "Turnout in Colorado Elections by County, 1992-2017", x = "Election Year", y = "Turnout as % of Registared Voters") +
+  guides(col=FALSE)
+
+
+##A graph with only the largest 7 counties colorized
+big_seven_turnouts <- turnouts_by_county %>%
+  filter(COUNTY %in% c("Jefferson", "El Paso", "Denver", "Arapahoe", "Adams", "Larimer", "Boulder"))
+
+ggplot(big_seven_turnouts, aes(x = ELECTION_YEAR, y = TURNOUT, col = COUNTY)) +
+  facet_wrap(facets = "ELECTION_TYPE") +
+  geom_vline(xintercept = 1992, col = "red") +
+  geom_vline(xintercept = 2008, col = "red") +
+  geom_vline(xintercept = 2013, col = "red") +
+  geom_hline(yintercept = 1) +
+  geom_point(size = .2) +
+  geom_line(alpha = .8) +
+  labs(title = "Turnout in Colorado Elections for the Largest 7 Counties, 1992-2017", x = "Election Year", y = "Turnout as % of Registared Voters")
+  
+#Note what happens to Jefferson!
+
+#  ##Now the same graph, but with the rest of the counties included in grayscale
+#  grayscale_turnouts <- turnouts_by_county %>%
+#    mutate(BIG_SEVEN <- ifelse(COUNTY %in% c("Jefferson", "El Paso", "Denver", "Arapahoe", "Adams", "Larimer", "Boulder"), "Big Seven", "Other"))
+#  
+#  names(grayscale_turnouts)[8] <- "BIG_SEVEN"
+#  
+#  ggplot(grayscale_turnouts, aes(x = ELECTION_YEAR, y = TURNOUT, col = BIG_SEVEN)) +
+#    scale_color_manual(values = c("dark orange", "grey")) +
+#    facet_wrap(facets = "ELECTION_TYPE") +
+#    geom_vline(xintercept = 1992, col = "red") +
+#    geom_vline(xintercept = 2008, col = "red") +
+#    geom_vline(xintercept = 2013, col = "red") +
+#    geom_hline(yintercept = 1) +
+#    geom_point(size = .2)
+#    labs(title = "Turnout in Colorado Elections for the Largest 7 Counties, 1992-2017", x = "Election Year", y = "Turnout as % of Registared Voters")
 ```
+
+
 
