@@ -48,15 +48,16 @@ The distribution of NAs across election types seems fairly consistent with the t
 ###Returning to the Graphs
 ```{r}
 #Moving on with code as if problems were not there
-#Sorting out voting metthods
 
+#Sorting out voting metthods
 vhist$VOTING_METHOD[vhist$VOTING_METHOD == "Early Voting - DRE" | vhist$VOTING_METHOD == "Early Voting" | 
                       vhist$VOTING_METHOD == "Vote Center" | vhist$VOTING_METHOD == "In Person - DRE" |
                       vhist$VOTING_METHOD == "Polling Place" | vhist$VOTING_METHOD == "Vote Center - DRE"] <- "In Person" 
 vhist$VOTING_METHOD[vhist$VOTING_METHOD == "Mail Ballot - DRE"| vhist$VOTING_METHOD == "Absentee Carry" |
                       vhist$VOTING_METHOD == "Absentee Mail"] <- "Mail Ballot" 
+
+#Make date variable
 vhist$ELECTION_DATE <- mdy(vhist$ELECTION_DATE)
-    #More needed, don't know what ones to cut, will do the following##
 
 #Create turnouts file with raw vote counts
 turnouts <- vhist %>%
@@ -64,48 +65,100 @@ turnouts <- vhist %>%
   group_by(COUNTY_NAME, ELECTION_DESCRIPTION, ELECTION_TYPE, ELECTION_DATE, VOTING_METHOD) %>%
   summarize(total_votes = sum(count)) %>%
   spread(key = VOTING_METHOD, value = total_votes) %>%
-  filter(year(ELECTION_DATE) >= 1996)
+  filter(year(ELECTION_DATE) >= 1992)
+
+#Rename so that no spaces exist
+names(turnouts)[5:6] <- c("IN_PERSON", "VBM")
+
+#Replace NA values with 0
+turnouts$IN_PERSON[is.na(turnouts$IN_PERSON)] = 0
+turnouts$VBM[is.na(turnouts$VBM)] = 0
 ```
      
 ###Number of registered voters, under some assumptions
 ```{r, warning=FALSE, error=FALSE}
+#Read in data
 vrf <- read_csv("data/2017_CO/VRF_2017/CO_2017_VRF_full.csv", 
     col_types = cols_only(VOTER_ID = col_guess(), COUNTY = col_guess(), REGISTRATION_DATE = col_guess(), 
                           EFFECTIVE_DATE = col_guess(), VOTER_STATUS = col_guess(), PARTY = col_guess()))
 
+#Set DATE variables
 vrf$REGISTRATION_DATE <- mdy(vrf$REGISTRATION_DATE)
 vrf$EFFECTIVE_DATE <- mdy(vrf$EFFECTIVE_DATE)
 
+#Filter inactive or corrupt voters
 vrf <- vrf %>%
-  filter(year(REGISTRATION_DATE) > 1910 && year(EFFECTIVE_DATE) > 1910) %>%
-  filter(VOTER_STATUS == "Active")
+  filter(year(REGISTRATION_DATE) > 1910 && year(EFFECTIVE_DATE) > 1910)
 
+#Create sums of registrants per year
 col_county_registrants <- vrf %>%
   mutate(count = 1, YEAR_REGISTERED = year(REGISTRATION_DATE)) %>%
   group_by(COUNTY, YEAR_REGISTERED) %>%
   summarize(REGISTERED_IN_YEAR = sum(count))
 
+#Create total registrants per year
 col_county_registrants <- col_county_registrants %>%
   group_by(COUNTY) %>%
   mutate(REGISTRANTS = cumsum(REGISTERED_IN_YEAR)) %>%
-  filter(YEAR_REGISTERED >= 1992)
+  filter(YEAR_REGISTERED >= 1992) 
 ```
    
 ###Actual Graph Creation Step
+    
+####COLORADO STATEWIDE
 ```{r}
-#Graph of Colorado in general
-years <- data.frame(as.integer(seq(1990, 2017, 1)), runif(28, 1, 30))
+##Graph of Colorado in general##
 
-names(years) <- c("year", "dat")
+#!!!! What are the off year general elections about?? !!!!#
 
-ggplot(years, aes(x = year, y = dat)) +
+#Total Registered Colorado VOtesr by year
+total_registrants <- col_county_registrants %>%
+  ungroup() %>%
+  group_by(YEAR_REGISTERED) %>%
+  summarise(TOTAL_REGISTRANTS = sum(REGISTRANTS))
+
+#Create statewide turnout dataset
+turnouts_statewide <- turnouts %>%
+  ungroup() %>%
+  select(1, 3:6) %>%
+  filter(ELECTION_TYPE %in% c("General", "Coordinated", "Primary")) %>%
+  mutate(ELECTION_DATE = year(ELECTION_DATE)) %>%
+  group_by(ELECTION_TYPE, ELECTION_DATE) %>%
+  summarise(IN_PERSON = sum(IN_PERSON), VBM = sum(VBM), TOTAL_VOTES = sum(IN_PERSON, VBM)) 
+
+#Ham-fisted way of removing weird elections I don't know about.
+for(i in 1:length(turnouts_statewide$ELECTION_TYPE)){
+  if(turnouts_statewide$ELECTION_TYPE[i] == "Coordinated" && as.integer(turnouts_statewide$ELECTION_DATE[i]) %% 2 == 0) turnouts_statewide <- turnouts_statewide[-i,]
+  
+  if(turnouts_statewide$ELECTION_TYPE[i] == "Primary" && as.integer(turnouts_statewide$ELECTION_DATE[i]) %% 2 != 0) turnouts_statewide <- turnouts_statewide[-i,]
+  
+  if(turnouts_statewide$ELECTION_TYPE[i] == "General" && as.integer(turnouts_statewide$ELECTION_DATE[i]) %% 2 != 0) turnouts_statewide <- turnouts_statewide[-i,]
+}
+ 
+#Join the data
+names(turnouts_statewide)[2] <- "ELECTION_YEAR"
+names(total_registrants)[1] <- "ELECTION_YEAR"
+
+turnouts_statewide <- merge(turnouts_statewide, total_registrants, by = "ELECTION_YEAR")
+
+#Make some tweeks 
+turnouts_statewide <- turnouts_statewide %>%
+  mutate(TURNOUT = TOTAL_VOTES/TOTAL_REGISTRANTS)
+
+turnouts_statewide$ELECTION_TYPE <- as.factor(turnouts_statewide$ELECTION_TYPE)  
+
+#GRAPHS!!
+ggplot(turnouts_statewide, aes(x = ELECTION_YEAR, y = TURNOUT, col = ELECTION_TYPE)) +
   geom_vline(xintercept = 1992, col = "red") +
   geom_vline(xintercept = 2008, col = "red") +
   geom_vline(xintercept = 2013, col = "red") +
-  geom_smooth() +
+  geom_line() +
   geom_point()
 ```
+   
+Possible explanations for this disaster:
 
+Maybe the about one and a half million NAs? Will also try *not* filtering for active voters, since the current inactive voters might have been active in the past!
 
 ##Maps 
 ```{r}
