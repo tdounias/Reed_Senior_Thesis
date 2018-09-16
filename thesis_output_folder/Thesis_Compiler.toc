@@ -1,0 +1,41 @@
+\contentsline {chapter}{Introduction}{1}{chapter*.5}
+\contentsline {chapter}{Chapter 1: The State of the Literature}{3}{chapter.1}
+\contentsline {section}{\numberline {1.1}Deciding to Vote}{3}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}Why Turnout Matters}{3}{subsection.1.1.1}
+\contentsline {subsection}{\numberline {1.1.2}Theories of Voting}{5}{subsection.1.1.2}
+\contentsline {section}{\numberline {1.2}From Theory to Policy}{6}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Voting Styles}{6}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}What is VBM?}{6}{subsection.1.2.2}
+\contentsline {subsection}{\numberline {1.2.3}How Theories Apply to VBM}{7}{subsection.1.2.3}
+\contentsline {section}{\numberline {1.3}Previous Study Results}{8}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}General Results on VBM}{8}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.2}The Gerber Piece}{9}{subsection.1.3.2}
+\contentsline {section}{\numberline {1.4}Voter Registration Files}{9}{section.1.4}
+\contentsline {subsection}{\numberline {1.4.1}Inaccuracy of Survey Data}{9}{subsection.1.4.1}
+\contentsline {subsection}{\numberline {1.4.2}The Importance of VRF}{10}{subsection.1.4.2}
+\contentsline {section}{\numberline {1.5}Common Methods Used and Problems Encountered}{10}{section.1.5}
+\contentsline {subsection}{\numberline {1.5.1}Methods}{10}{subsection.1.5.1}
+\contentsline {subsection}{\numberline {1.5.2}Issues}{11}{subsection.1.5.2}
+\contentsline {chapter}{Chapter 2: Data Collection and Description}{13}{chapter.2}
+\contentsline {section}{\numberline {2.1}Colorado}{13}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Demographics and Characteristics}{13}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Voting in Colorado}{13}{subsection.2.1.2}
+\contentsline {section}{\numberline {2.2}The Data}{13}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Source}{13}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}First-Glance Description}{13}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Wrangling Difficulties and Solutions}{13}{subsection.2.2.3}
+\contentsline {chapter}{Chapter 3: Hypothesis and Methods}{15}{chapter.3}
+\contentsline {section}{\numberline {3.1}Hypotheses}{15}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Description of Hypotheses}{15}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Criteria}{15}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}Expected Results}{15}{subsection.3.1.3}
+\contentsline {section}{\numberline {3.2}Methodology}{15}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}EDA}{15}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Description and Parametrization of Models}{15}{subsection.3.2.2}
+\contentsline {section}{\numberline {3.3}Gerber Replication}{15}{section.3.3}
+\contentsline {chapter}{Chapter 4: Results}{17}{chapter.4}
+\contentsline {section}{\numberline {4.1}EDA}{17}{section.4.1}
+\contentsline {section}{\numberline {4.2}Model Output}{17}{section.4.2}
+\contentsline {section}{\numberline {4.3}Gerber Expansion Results}{17}{section.4.3}
+\contentsline {chapter}{Conclusion}{19}{chapter*.6}
+\contentsline {chapter}{References}{21}{appendix*.7}
