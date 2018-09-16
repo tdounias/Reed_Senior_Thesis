@@ -2,7 +2,9 @@
 title: "Maps and CO Demographics"
 author: "Theodore Dounias"
 date: "September 15, 2018"
-output: html_document
+output: pdf_document
+header-includes:
+   - \usepackage{booktabs}
 ---
 
 ```{r setup, include=FALSE}
@@ -12,11 +14,15 @@ library(lubridate)
 library(knitr)
 library(plotly)
 library(maps)
+library(knitr)
+library(xtable)
 opts_knit$set(root.dir = 'C:/Users/tdounias/Desktop/Reed College/2017 Fall/MATH 243/Repos/Reed_Senior_Thesis/Data_and_results/')
 ```
 
 #My First Map
-```{r}
+   
+Map created using maps package, does not knit to pdf, using ggplot now. Saved here in case it's needed later.
+```{r, eval = FALSE}
 col <- map_data("county") %>%
   filter(region == 'colorado')
 
@@ -29,7 +35,8 @@ county_registrants$COUNTY <- tolower(county_registrants$COUNTY) # matching strin
 
 col_reg <- merge(col, county_registrants, by.x = "subregion", by.y = "COUNTY")
 
-col_reg$pop_cat <- cut(col_reg$TOTAL_REGISTERED, breaks = c(seq(0, 500000, by = 100000)), labels=1:5)
+col_reg$pop_cat <- cut(col_reg$TOTAL_REGISTERED, 
+                       breaks = c(seq(0, 500000, by = 100000)), labels=1:5)
 
 p <- col_reg %>%
   group_by(group) %>%
@@ -52,4 +59,126 @@ p <- col_reg %>%
 
 p
 ```
+     
+#Data Wrangling Step
+```{r, warning = FALSE}
+#Read in the data
+vrf <- read_csv("data/2017_CO/VRF_2017/CO_2017_VRF_full.csv", 
+    col_types = cols_only(VOTER_ID = col_guess(), COUNTY = col_guess(), 
+                          VOTER_STATUS = col_guess(), 
+                          PARTY = col_guess(), 
+                          REGISTRATION_DATE = col_guess()))
+
+#Create dataframe for total registrants, party
+registrants_analysis <- vrf %>%
+  mutate(PARTY = ifelse(!(PARTY %in% c("DEM", "REP", "UAF")), "OTHER", PARTY), count = 1) %>%
+  group_by(COUNTY) %>%
+  summarize(TOTAL_REGISTERED = sum(count), REP = sum(PARTY == "REP"), DEM = sum(PARTY =="DEM"), 
+            OTHER = sum(PARTY == "OTHER"), UAF = sum(PARTY == "UAF"))
+
+#Read in stats for white population
+pct_white <- read_csv("data/2017_CO/Census_Data/Pct_White.csv")
+
+pct_white <- pct_white %>%
+  mutate(PCT_WHITE = WHITE/TOTAL_POP) %>%
+  slice(-1)
+
+#Read in stats for uurban population
+pct_urban <- read_csv("data/2017_CO/Census_Data/Pop_Rurban.csv")
+
+pct_urban <- pct_urban %>%
+  mutate(PCT_URBAN = URBAN/TOTAL) %>%
+  slice(-1)
+
+#Create single dataset for use in the following tables and maps
+
+colorado_pop_stats <- merge(pct_urban, pct_white, by = "COUNTY")
+colorado_pop_stats <- merge(colorado_pop_stats, registrants_analysis, by = "COUNTY")
+
+colorado_pop_stats <- colorado_pop_stats %>%
+  select(-2) %>%
+  mutate(PCT_REGISTERED = TOTAL_REGISTERED/TOTAL_POP, 
+         PCT_OF_STATE_POP = TOTAL_POP/sum(TOTAL_POP), 
+         PCT_OF_STATE_REG = TOTAL_REGISTERED/sum(TOTAL_REGISTERED))
+```
+    
+#Tables
+   
+Here I will create four tables: one to do with county population and voter registration, one for Colorado-wide demographic characteristics as oposed to national averages, one with the three key electoral reforms that have occured since 1990, and one with the codings and explanations for the different voting methods encountered in the file.    
+
+*Population and Voter Registration Table*
+```{r, results = 'asis', warning= FALSE}
+#Create dataset for table
+pop_table <- colorado_pop_stats %>%
+  select(1, 5, 8, 13:15) 
+
+#Create vector with largest counties
+big_eight <- c("Jefferson", "El Paso", "Denver", "Arapahoe", "Adams", 
+               "Larimer", "Boulder", "Douglas")
+
+#Create vector of all other counties together and merge
+other <- data.frame("Other", sum(pop_table$TOTAL_POP[!(pop_table$COUNTY %in% big_eight)]), 
+                    sum(pop_table$TOTAL_REGISTERED[!(pop_table$COUNTY %in% big_eight)]), 
+                    "---", 
+                    sum(pop_table$PCT_OF_STATE_POP[!(pop_table$COUNTY %in% big_eight)]),
+                    sum(pop_table$PCT_OF_STATE_REG[!(pop_table$COUNTY %in% big_eight)]))
+
+names(other) <- names(pop_table)
+
+pop_table <- rbind(pop_table, other) %>%
+  filter(COUNTY %in% c(big_eight, "Other"))
+
+#Create statewide row
+Colorado <- data.frame("Colorado", sum(pop_table$TOTAL_POP), 
+                       sum(pop_table$TOTAL_REGISTERED), mean(pop_table$PCT_REGISTERED), 100, 100)
+
+names(Colorado) <- names(pop_table)
+
+pop_table <- rbind(pop_table, Colorado)
+
+#Largest Metro Areas
+pop_table <- data.frame(pop_table, c("Denver-Aurora-Lakewood Metro Area", 
+                                     "Denver-Aurora-Lakewood Metro Area", 
+                                     "Boulder", "Denver", 
+                                     "Denver-Aurora-Lakewood Metro Area", 
+                                     "Colorado Springs", 
+                                     "Denver-Aurora-Lakewood Metro Area", 
+                                     "Fort COllins", "", ""))
+
+#Set final readable names
+names(pop_table) <- c("County", "Total Population", "Total Registered Voters", 
+                      "County Voter Registration Rate", 
+                      "CO Population %", "% of Statewide Registrants", 
+                      "Largest Metro Area")
+
+#First table, of statewide population
+print(xtable(select(pop_table, 1, 2, 5, 7), type = "latex", booktabs = TRUE))
+
+#Second Table, of Voter registration
+print(xtable(select(pop_table, 1, 3, 4, 6), type = "latex", booktabs = TRUE))
+```
+        
+*National Averages*
+_Pending_
+       
+*Key Electoral Reforms*
+```{r, include = TRUE, results = 'asis'}
+reform_summary <- data.frame(c("1992", "2008", "2013"), 
+                             c("No Excuse Absentee Statewide Implementation", 
+                               "Permanent No-Excuse VBM Lists,
+                               Option of Full-VBM Elections for Coordinated County Elections", 
+                               "Automatic Mail Ballot System Implemented Statewide, 
+                               Established Vote Centers"))
+
+names(reform_summary) <- c("Year", "Key Changes")
+
+print(xtable(reform_summary, type = "latex", booktabs = TRUE))
+```
+   
+*
+#Maps
+   
+Here I will create four maps. One for racial demographics, one for party affiliation, one for rural/urban population, and one for percentage of registered voters by population.   
+
+wot
 

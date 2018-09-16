@@ -14,17 +14,23 @@ library(plotly)
 library(maps)
 opts_knit$set(root.dir = 'C:/Users/tdounias/Desktop/Reed College/2017 Fall/MATH 243/Repos/Reed_Senior_Thesis/Data_and_results/')
 ```
-
-##Graphs of Turnout
+   
+#Reading in the Data
 ```{r, warning=FALSE, error = FALSE}
 #Read in voter history data
 vhist <- read_csv("data/2017_CO/VHist_2017/CO_2017_VHist_full.csv", 
     col_types = cols(PARTY = col_skip(), 
         VOTER_ID = col_skip(), X1 = col_skip()))
 
+#Read in vrf data
+vrf <- read_csv("data/2017_CO/VRF_2017/CO_2017_VRF_full.csv", 
+    col_types = cols_only(VOTER_ID = col_guess(), COUNTY = col_guess(), REGISTRATION_DATE = col_guess(), 
+                          EFFECTIVE_DATE = col_guess(), VOTER_STATUS = col_guess(), PARTY = col_guess()))
 ```
    
-###Problems in VHist I did not initially find
+#Sidenote: Problems in VHist I did not initially find
+   
+I include this here as a reminder and description of the problem.
 ```{r}
 summary(as.factor(vhist$VOTING_METHOD))
 
@@ -44,8 +50,11 @@ There appear to be *several* different counties here that have NA's in the Votin
 Every single NA is concentrated before 2013, when it could be reasonaby supposed that at least local elections were conducted through VBM. The vast, VAST majority are before 2002. 
 
 The distribution of NAs across election types seems fairly consistent with the total amount of votes cast in each contest type. This is reasonable, since it suggests that counting method is independent of election type. 
+   
 
-###Returning to the Graphs
+#Data Wrangling for Graphs
+   
+First create a turnouts table with just raw number of votes per voting method. See file with tables for table on how each voting method was coded.
 ```{r}
 #Moving on with code as if problems were not there
 
@@ -76,14 +85,9 @@ turnouts$VBM[is.na(turnouts$VBM)] = 0
 
 head(turnouts)
 ```
-     
-###Number of registered voters, under some assumptions
+    
+I then calculate the total amount of registered voters per county. I include active and non-active voters.
 ```{r, warning=FALSE, error=FALSE}
-#Read in data
-vrf <- read_csv("data/2017_CO/VRF_2017/CO_2017_VRF_full.csv", 
-    col_types = cols_only(VOTER_ID = col_guess(), COUNTY = col_guess(), REGISTRATION_DATE = col_guess(), 
-                          EFFECTIVE_DATE = col_guess(), VOTER_STATUS = col_guess(), PARTY = col_guess()))
-
 #Set DATE variables
 vrf$REGISTRATION_DATE <- mdy(vrf$REGISTRATION_DATE)
 vrf$EFFECTIVE_DATE <- mdy(vrf$EFFECTIVE_DATE)
@@ -107,9 +111,15 @@ col_county_registrants <- col_county_registrants %>%
 head(col_county_registrants)
 ```
    
-###Actual Graph Creation Step
+#Graph Creation Step
+   
+I will include four graphs:
+*A cumulative graph for the whole of Colorado
+*A county level graph including all counties
+*A county level graph with only the largest CO counties
+*A county level graph, with the largest counties coded a different color than the rest
     
-####COLORADO STATEWIDE
+*Statewide Graph*
 ```{r, fig.align= 'center'}
 ##Graph of Colorado in general##
 
@@ -167,14 +177,8 @@ ggplot(turnouts_statewide, aes(x = ELECTION_YEAR, y = TURNOUT, col = ELECTION_TY
   theme_minimal()
 ```
    
-Possible explanations for this disaster:
-
-Maybe the about one and a half million NAs? Will also try *not* filtering for active voters, since the current inactive voters might have been active in the past!
-
-I did this. Still kindof a disaster.
    
-   
-####By County Cluster-disaster graph
+*County Level Graphs*
 ```{r, fig.align= 'center'}
 #Create County-level turnout file
 turnouts_by_county <- turnouts %>%
@@ -220,13 +224,13 @@ ggplot(turnouts_by_county, aes(x = ELECTION_YEAR, y = TURNOUT, col = COUNTY)) +
   geom_hline(yintercept = 1) +
   geom_point(size = .2) +
   geom_line(alpha = .3) +
-  labs(title = "Turnout in Colorado Elections by County, 1992-2017", x = "Election Year", y = "Turnout as % of Registared Voters") +
+  labs(title = "Turnout in Colorado Elections by County, 1992-2017", x = "Election Year", y = "Turnout as % of Registered Voters") +
   guides(col=FALSE)
 
 
-##A graph with only the largest 7 counties colorized
+##A graph with only the largest 8 counties
 big_seven_turnouts <- turnouts_by_county %>%
-  filter(COUNTY %in% c("Jefferson", "El Paso", "Denver", "Arapahoe", "Adams", "Larimer", "Boulder"))
+  filter(COUNTY %in% c("Jefferson", "El Paso", "Denver", "Arapahoe", "Adams", "Larimer", "Boulder", "Douglas"))
 
 ggplot(big_seven_turnouts, aes(x = ELECTION_YEAR, y = TURNOUT, col = COUNTY)) +
   facet_wrap(facets = "ELECTION_TYPE") +
@@ -236,25 +240,25 @@ ggplot(big_seven_turnouts, aes(x = ELECTION_YEAR, y = TURNOUT, col = COUNTY)) +
   geom_hline(yintercept = 1) +
   geom_point(size = .2) +
   geom_line(alpha = .8) +
-  labs(title = "Turnout in Colorado Elections for the Largest 7 Counties, 1992-2017", x = "Election Year", y = "Turnout as % of Registared Voters")
+  labs(title = "Turnout in Colorado Elections for the Largest 8 Counties, 1992-2017", x = "Election Year", y = "Turnout as % of Registered Voters")
   
 #Note what happens to Jefferson!
 
-#  ##Now the same graph, but with the rest of the counties included in grayscale
-#  grayscale_turnouts <- turnouts_by_county %>%
-#    mutate(BIG_SEVEN <- ifelse(COUNTY %in% c("Jefferson", "El Paso", "Denver", "Arapahoe", "Adams", "Larimer", "Boulder"), "Big Seven", "Other"))
-#  
-#  names(grayscale_turnouts)[8] <- "BIG_SEVEN"
-#  
-#  ggplot(grayscale_turnouts, aes(x = ELECTION_YEAR, y = TURNOUT, col = BIG_SEVEN)) +
-#    scale_color_manual(values = c("dark orange", "grey")) +
-#    facet_wrap(facets = "ELECTION_TYPE") +
-#    geom_vline(xintercept = 1992, col = "red") +
-#    geom_vline(xintercept = 2008, col = "red") +
-#    geom_vline(xintercept = 2013, col = "red") +
-#    geom_hline(yintercept = 1) +
-#    geom_point(size = .2)
-#    labs(title = "Turnout in Colorado Elections for the Largest 7 Counties, 1992-2017", x = "Election Year", y = "Turnout as % of Registared Voters")
+ ##Now the same graph, but with the rest of the counties included in grayscale
+  grayscale_turnouts <- turnouts_by_county %>%
+    mutate(BIG_SEVEN <- ifelse(COUNTY %in% c("Jefferson", "El Paso", "Denver", "Arapahoe", "Adams", "Larimer", "Boulder", "Douglas"), "Big Eight", "Other"))
+  
+  names(grayscale_turnouts)[8] <- "BIG_EIGHT"
+  
+  ggplot(grayscale_turnouts, aes(x = ELECTION_YEAR, y = TURNOUT, col = BIG_EIGHT)) +
+    scale_color_manual(values = c("dark orange", "grey")) +
+    facet_wrap(facets = "ELECTION_TYPE") +
+    geom_vline(xi
+    geom_vline(xintercept = 200ntercept = 1992, col = "red") +8, col = "red") +
+    geom_vline(xintercept = 2013, col = "red") +
+    geom_hline(yintercept = 1) +
+    geom_point(aes(shape = BIG_EIGHT)) +
+    labs(title = "Turnout in Colorado Elections on a County Level, 1992-2017", x = "Election Year", y = "Turnout as % of Registared Voters")
 ```
 
 
