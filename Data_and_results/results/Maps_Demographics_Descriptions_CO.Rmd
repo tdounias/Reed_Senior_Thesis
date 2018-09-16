@@ -16,6 +16,8 @@ library(plotly)
 library(maps)
 library(knitr)
 library(xtable)
+library(mapproj)
+library(RColorBrewer)
 opts_knit$set(root.dir = 'C:/Users/tdounias/Desktop/Reed College/2017 Fall/MATH 243/Repos/Reed_Senior_Thesis/Data_and_results/')
 ```
 
@@ -181,24 +183,68 @@ voting_methods <- data.frame(c("Absentee Carry", "Absentee Mail",
                                "Early Voting", "In Person", 
                                "Mail Ballot", "Polling Place", 
                                "Vote Center"), 
-                             c("Voters who carried an absentee ballot with them 
+                             as.character(c("Voters who carried an absentee ballot with them 
                                from an early voting location or county office", 
                                "Voters who were sent an absentee ballot, and mailed it in", 
                                "Voters who physically went to an Early Voting location and voted",
                                "Voters who physically went to a polling place and voted on paper", 
                                "Vote By Mail", "'Traditional' polling place voting, discontinued in 2013", 
-                               "Voters who cast their ballots at Vote Centers"), 
+                               "Voters who cast their ballots at Vote Centers")), 
                              c("VBM", "VBM", "In Person", "In Person", "VBM", "In Person", 
                                "In Person"))
 
 names(voting_methods) <- c("Voting Method", "Description of Method", "Final Designation")
 
-print(xtable(voting_methods, type = "latex", booktabs = TRUE))
+print(xtable(voting_methods, type = "latex", booktabs = TRUE, auto = TRUE))
 ```
 
 #Maps
    
 Here I will create four maps. One for racial demographics, one for party affiliation, one for rural/urban population, and one for percentage of registered voters by population.   
 
-wot
+*Racial Demographics*
+```{r}
+col <- map_data("county") %>%
+  filter(region == 'colorado')
+
+pct_white$COUNTY <- tolower(pct_white$COUNTY)
+
+col_pct_white <- merge(col, pct_white, by.x = "subregion", by.y = "COUNTY")
+
+ggplot(col_pct_white, mapping = aes(long, lat, group = group, fill = PCT_WHITE)) +
+  scale_fill_gradient(low = "dark green", high = "white") +
+  geom_polygon(color = "black") +
+  theme(legend.title = element_text(),
+        legend.key.width = unit(.5, "in")) +
+  labs(fill = "Percentage White") + 
+  theme(panel.grid = element_blank(),
+        axis.title = element_blank(),
+        axis.text = element_blank(),
+        axis.ticks.y = element_blank())
+```
+   
+*Rural/Urban Population*
+
+```{r}
+pct_urban$COUNTY <- tolower(pct_urban$COUNTY)
+
+col_pct_urban <- merge(col, pct_urban, by.x = "subregion", by.y = "COUNTY")
+
+ggplot(col_pct_urban, mapping = aes(long, lat, group = group, fill = PCT_URBAN)) +
+  scale_fill_gradient(low = "white", high = "purple") +
+  geom_polygon(color = "black") +
+  theme(legend.title = element_text(),
+        legend.key.width = unit(.5, "in")) +
+  labs(fill = "Percentage Urban") + 
+  theme(panel.grid = element_blank(),
+        axis.title = element_blank(),
+        axis.text = element_blank(),
+        axis.ticks.y = element_blank())
+```
+
+
+*Party Affiliation*
+```{r}
+
+```
 
