@@ -2,19 +2,57 @@
 output: pdf_document
 ---
 
-# Data Collection and Description
- 
-## Colorado
+
+# Hypotheses, Data and Methods
+   
+    
+In this chapter, I introduce a series of questions resulting from the literature review of Chapter 1, which I will use to formulate hypotheses. I will then operationalize those hypotheses, and attempt to predict analytical outcomes based on the theories of Chapter 1. Following is a brief introduction to the State of Colorado--on which I apply my hypotheses--and an outline of the data used for this thesis, including sourcing, a brief description, and wrangling. After that I shall discuss the methodological approaches used to test my hypotheses, starting with Exploratory Data Analysis and continuing with a series of statistical models, whose choice and parametrization I will discuss in depth.
+   
+## Questions and Hypotheses
+
+### Description of Hypotheses
+
+### Criteria
+
+### Expected Results
+
+## The Centennial State and Its Voters  
 
 ### Demographics and Characteristics
+   
+Colorado--named the Centennial State due to assuming statehood on the centennial of the Union--lies in the Southwestern United States, with its Western half squarely atop the Rocky Mountains. Based on its estimated population of just over 5.5 million, Colorado is the 21st most populous state, and ranks 37th in population density. The vast majority of that population is gathered in a series of urban areas that comprise a North-to-South strip in the middle of the state, containing the Denver-Aurora-Lakewood Metro Area, Colorado Springs, Pueblo, and Fort Collins. Apart from the Western town of Grand Junction, the rest of the population resides in vast rural areas.  
+   
+_Insert population map with towns, geography superimposed_  
+  
+Continuing with demographic characteristics, Colorado has a median age of _find_, median household income of _find_, and poverty rate of _find_. Colorado's population is mostly white (_find_), with a higher minority group population density in its Southern regions, as shown on Map ( _insert racial demographics map_). These statistics, along with national averages, are also presented in table _make and insert a table_.  
+   
+The State Capital is Denver. Colorado is split into 64 Counties, of which the most populous are, in alphabetical order, the following eight:  El Paso, Denver, Arapahoe, Jefferson, Adams, Larimer, Boulder, and Douglas. These counties comprise 73% of the total population of Colorado.
+   
+_Insert county table here, insert map with only counties colorized here_
+   
 
-### Voting in Colorado
+### Voting in Colorado  
+    
+Each County individually administrates local, coordinated, primary, and general elections, under the supervision of the Colorado Secretary of State. This means that each county individually handles the voters registered in that county. Unsurprisingly, the same eight most populous counties are also the counties with the majority of registered voters, as their registrants comprise 73% of total Colorado registered voters (as of November 2017). As Table  ( _insert table_) shows, these eight counties have a registration rate between 60-80%, compared to a Colorado-wide rate of about 67%. Registration rates for all counties are also graphically depicted in map ( _insert map here_ ). In terms of Party registration, Colorado as a whole leans democratic by a very narrow margin. This is also reflected in the state's Cook Partisan Voting Index of D +1, making it a solidly purple battleground state ( _also insert map_).    
+   
+In the past 25 years, there have been a series of key changes in the way Colorado administers elections, in relation to Vote By Mail and other reforms targeted and expanding the democratic franchise. In 1992, Colorado introduced no-excuse absentee voting, allowing voters to either physically pick up a mail ballot at a Vote Center or County Office, or have a ballot mailed to them prior to election day. In 2008, this reform was expanded to a permanent Vote-By-Mail system, which gave voters the option to be permanently put on a list of addresses that received mail ballots prior to the election. The State also entered a transitional status to full mail elections, giving counties the option to make all coordinated local elections, general elections, and primary elections exclusively VBM. In 2013, the Colorado State Legislature passed HB13-1303: The Voter Access and Modernized Elections Act, which mandated that every voter currently registered receive a mail ballot for all future elections. The Act also expanded the use of Vote Centers instead of traditional polling places, instituted same-day voter registration, and revamped the way active and inactive voter status was designated on voter rolls--more on this in future sections. These changes are summarised in Table ( _insert table_).   
+    
+Colorado presents such an interesting case for research on Vote By Mail exactly because it has gone through such a long transitional process to reach its current elections system. It has steadily developed voting policy through a mixture of state mandates, county action, and outside policy motivations. It gives researchers access to approximatelly 22 years during which at least part of the state conducted elections partially by mail, making comparative, county-level case studies particularly alluring, if...
+  
+## The Data  
+  
+...there is access to significant amounts of data that give a complete overview of voting during that time period. 
 
-## The Data
-
-### Source
+### Sources
 
 ### First-Glance Description
 
 ### Wrangling Difficulties and Solutions
 
+## Methodology
+
+### EDA
+
+### Description and Parametrization of Models
+
+## Gerber Replication

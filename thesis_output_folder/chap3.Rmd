@@ -1,22 +1,38 @@
 ---
-output: pdf_document
+header-includes:
+- \usepackage{graphicx,latexsym}
+- \usepackage{amssymb,amsthm,amsmath}
+- \usepackage{longtable,booktabs,setspace}
 ---
 
+<!--
+You can delete the header-includes (lines 3-6 above) if you like and also the chunk below since it is loaded in the skeleton.Rmd file.  They are included so that chap3.Rmd will compile by itself when you hit Knit PDF.
+-->
 
-# Hypothesis and Methods
+```{r, include = FALSE}
+# This chunk ensures that the reedtemplates package is
+# installed and loaded. This reedtemplates package includes
+# the template files for the thesis and also two functions
+# used for labeling and referencing
+if(!require(devtools))
+  install.packages("devtools", repos = "http://cran.rstudio.com")
+if(!require(dplyr))
+    install.packages("dplyr", repos = "http://cran.rstudio.com")
+if(!require(ggplot2))
+    install.packages("ggplot2", repos = "http://cran.rstudio.com")
+if(!require(reedtemplates)){
+  library(devtools)
+  devtools::install_github("ismayc/reedtemplates")
+  }
+library(reedtemplates)
+flights <- read.csv("data/flights.csv")
+```
 
-## Hypotheses
 
-### Description of Hypotheses
+# Results
 
-### Criteria
+## EDA
 
-### Expected Results
+## Model Output
 
-## Methodology
-
-### EDA
-
-### Description and Parametrization of Models
-
-## Gerber Replication
+## Gerber Expansion Results

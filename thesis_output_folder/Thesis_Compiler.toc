@@ -16,26 +16,25 @@
 \contentsline {section}{\numberline {1.5}Common Methods Used and Problems Encountered}{10}{section.1.5}
 \contentsline {subsection}{\numberline {1.5.1}Methods}{10}{subsection.1.5.1}
 \contentsline {subsection}{\numberline {1.5.2}Issues}{11}{subsection.1.5.2}
-\contentsline {chapter}{Chapter 2: Data Collection and Description}{13}{chapter.2}
-\contentsline {section}{\numberline {2.1}Colorado}{13}{section.2.1}
-\contentsline {subsection}{\numberline {2.1.1}Demographics and Characteristics}{13}{subsection.2.1.1}
-\contentsline {subsection}{\numberline {2.1.2}Voting in Colorado}{13}{subsection.2.1.2}
-\contentsline {section}{\numberline {2.2}The Data}{13}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Source}{13}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}First-Glance Description}{13}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}Wrangling Difficulties and Solutions}{13}{subsection.2.2.3}
-\contentsline {chapter}{Chapter 3: Hypothesis and Methods}{15}{chapter.3}
-\contentsline {section}{\numberline {3.1}Hypotheses}{15}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Description of Hypotheses}{15}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Criteria}{15}{subsection.3.1.2}
-\contentsline {subsection}{\numberline {3.1.3}Expected Results}{15}{subsection.3.1.3}
-\contentsline {section}{\numberline {3.2}Methodology}{15}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}EDA}{15}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Description and Parametrization of Models}{15}{subsection.3.2.2}
-\contentsline {section}{\numberline {3.3}Gerber Replication}{15}{section.3.3}
-\contentsline {chapter}{Chapter 4: Results}{17}{chapter.4}
-\contentsline {section}{\numberline {4.1}EDA}{17}{section.4.1}
-\contentsline {section}{\numberline {4.2}Model Output}{17}{section.4.2}
-\contentsline {section}{\numberline {4.3}Gerber Expansion Results}{17}{section.4.3}
+\contentsline {chapter}{Chapter 2: Hypotheses, Data and Methods}{13}{chapter.2}
+\contentsline {section}{\numberline {2.1}Questions and Hypotheses}{13}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Description of Hypotheses}{13}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Criteria}{13}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}Expected Results}{13}{subsection.2.1.3}
+\contentsline {section}{\numberline {2.2}The Centennial State and Its Voters}{13}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Demographics and Characteristics}{13}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Voting in Colorado}{14}{subsection.2.2.2}
+\contentsline {section}{\numberline {2.3}The Data}{15}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Sources}{15}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}First-Glance Description}{15}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}Wrangling Difficulties and Solutions}{15}{subsection.2.3.3}
+\contentsline {section}{\numberline {2.4}Methodology}{15}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}EDA}{15}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}Description and Parametrization of Models}{15}{subsection.2.4.2}
+\contentsline {section}{\numberline {2.5}Gerber Replication}{15}{section.2.5}
+\contentsline {chapter}{Chapter 3: Results}{17}{chapter.3}
+\contentsline {section}{\numberline {3.1}EDA}{17}{section.3.1}
+\contentsline {section}{\numberline {3.2}Model Output}{17}{section.3.2}
+\contentsline {section}{\numberline {3.3}Gerber Expansion Results}{17}{section.3.3}
 \contentsline {chapter}{Conclusion}{19}{chapter*.6}
 \contentsline {chapter}{References}{21}{appendix*.7}
