@@ -216,7 +216,7 @@ ggplot(col_pct_white, mapping = aes(long, lat, group = group, fill = PCT_WHITE))
   geom_polygon(color = "black") +
   theme(legend.title = element_text(),
         legend.key.width = unit(.5, "in")) +
-  labs(fill = "Percentage White") + 
+  labs(fill = "Percentage White", title = "Percentage of White Residents") + 
   theme(panel.grid = element_blank(),
         axis.title = element_blank(),
         axis.text = element_blank(),
@@ -231,11 +231,11 @@ pct_urban$COUNTY <- tolower(pct_urban$COUNTY)
 col_pct_urban <- merge(col, pct_urban, by.x = "subregion", by.y = "COUNTY")
 
 ggplot(col_pct_urban, mapping = aes(long, lat, group = group, fill = PCT_URBAN)) +
-  scale_fill_gradient(low = "white", high = "purple") +
+  scale_fill_gradient(low = "#FF78FF", high = "#820482") +
   geom_polygon(color = "black") +
   theme(legend.title = element_text(),
         legend.key.width = unit(.5, "in")) +
-  labs(fill = "Percentage Urban") + 
+  labs(fill = "Percentage Urban", "Percentage of Urban Population") + 
   theme(panel.grid = element_blank(),
         axis.title = element_blank(),
         axis.text = element_blank(),
@@ -245,6 +245,75 @@ ggplot(col_pct_urban, mapping = aes(long, lat, group = group, fill = PCT_URBAN))
 
 *Party Affiliation*
 ```{r}
+party_map <- registrants_analysis %>%
+  mutate(PARTY_LEAN <- (REP - DEM)/TOTAL_REGISTERED, PARTY_MAJ <- (REP - DEM),
+         PCT_UAF_OTHER <- (OTHER + UAF)/TOTAL_REGISTERED)
 
+names(party_map)[7:9] <- c("PARTY_LEAN", "PARTY_MAJ", "PCT_UAF_OTHER")
+
+party_map$COUNTY <- tolower(party_map$COUNTY)
+
+party_map <- merge(col, party_map, by.x = "subregion", by.y = "COUNTY")
+
+#Plot of party lean normalized over registered voters
+ggplot(party_map, mapping = aes(long, lat, group = group, fill = PARTY_LEAN)) +
+  scale_fill_gradient(low = "blue", high = "red") +
+  geom_polygon(color = "black") +
+  theme(legend.title = element_text(),
+        legend.key.width = unit(.5, "in")) +
+  labs(fill = "Party Lean (DEM to REP)", "Party Affiliation Lean") + 
+  theme(panel.grid = element_blank(),
+        axis.title = element_blank(),
+        axis.text = element_blank(),
+        axis.ticks.y = element_blank())
+
+#Plot of party affiliation by population size
+#This map is, unsurprisingly, basically a population map, with 
+#rural counties swinging slightly republican. I keep it in just to show.
+
+ggplot(party_map, mapping = aes(long, lat, group = group, fill = PARTY_MAJ)) +
+  scale_fill_gradient(low = "blue", high = "red") +
+  geom_polygon(color = "black") +
+  theme(legend.title = element_text(),
+        legend.key.width = unit(.5, "in")) +
+  labs(fill = "Party Lean (DEM to REP)", "Party Affiliation Lean-Raw Number of Voters") + 
+  theme(panel.grid = element_blank(),
+        axis.title = element_blank(),
+        axis.text = element_blank(),
+        axis.ticks.y = element_blank())
+
+#Percent unaffiliated or third party
+ggplot(party_map, mapping = aes(long, lat, group = group, fill = PCT_UAF_OTHER)) +
+  scale_fill_gradient(low = "#FDFFA5", high = "#7A8100") +
+  geom_polygon(color = "black") +
+  theme(legend.title = element_text(),
+        legend.key.width = unit(.5, "in")) +
+  labs(fill = "% UAF or Third Party", title = "Percentage of Unaffiliated or Third Part Voters") + 
+  theme(panel.grid = element_blank(),
+        axis.title = element_blank(),
+        axis.text = element_blank(),
+        axis.ticks.y = element_blank())
+```
+   
+*Registered Voters per Pop*
+```{r}
+colorado_pop_stats$COUNTY <- tolower(colorado_pop_stats$COUNTY)
+
+colorado_pop_stats$PCT_REGISTERED[colorado_pop_stats$PCT_REGISTERED >= 1] <- 1
+
+pct_reg_map <- merge(col, colorado_pop_stats, by.x = "subregion", by.y = "COUNTY")
+
+ggplot(pct_reg_map, mapping = aes(long, lat, group = group, fill = PCT_REGISTERED)) +
+  scale_fill_gradient(low = "light blue", high = "navy blue") +
+  geom_polygon(color = "black") +
+  theme(legend.title = element_text(),
+        legend.key.width = unit(.5, "in")) +
+  labs(fill = "% Registered", title = "Percentage of Registered Voters") + 
+  theme(panel.grid = element_blank(),
+        axis.title = element_blank(),
+        axis.text = element_blank(),
+        axis.ticks.y = element_blank())
+
+#Issue is population statistics from 2010
 ```
 
