@@ -2,7 +2,7 @@
 title: "County Level Turnouts and Graphs"
 author: "Theodore Dounias"
 date: "September 1, 2018"
-output: html_document
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
@@ -253,8 +253,8 @@ ggplot(big_seven_turnouts, aes(x = ELECTION_YEAR, y = TURNOUT, col = COUNTY)) +
   ggplot(grayscale_turnouts, aes(x = ELECTION_YEAR, y = TURNOUT, col = BIG_EIGHT)) +
     scale_color_manual(values = c("dark orange", "grey")) +
     facet_wrap(facets = "ELECTION_TYPE") +
-    geom_vline(xi
-    geom_vline(xintercept = 200ntercept = 1992, col = "red") +8, col = "red") +
+    geom_vline(xintercept = 1992, col = "red") +
+    geom_vline(xintercept = 2008, col = "red") +
     geom_vline(xintercept = 2013, col = "red") +
     geom_hline(yintercept = 1) +
     geom_point(aes(shape = BIG_EIGHT)) +
