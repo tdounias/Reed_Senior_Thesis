@@ -1,0 +1,39 @@
+---
+title: "Gelman and Hill Exercise 12.2"
+author: "Theodore Dounias"
+date: "September 17, 2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(lme4)
+library(Matrix)
+library(lubridate)
+
+allvar <- read_csv("allvar.csv")
+```
+
+*This exercise can be found in Chapter 14 of the Gelman+Hill Hierarchical Model Book*  
+
+##12.2.1
+   
+```{r}
+allvar$newpid <- as.factor(allvar$newpid)
+
+allvar$VDATE <- mdy(allvar$VDATE)
+
+allvar <- allvar %>%
+  filter(!is.na(CD4PCT)) %>%
+  group_by(newpid) %>%
+  mutate(elapsed_months = (as.numeric(VDATE - mdy("1/1/1988")))/30)
+  
+
+M1 <- lmer(data = allvar, CD4PCT ~ elapsed_months + (1|newpid))
+
+summary(M1)
+```
+   
+The Coefficient for time is `r as.numeric(fixef(M1)[2])`, with the average intercept across children (a fixed effects model) being `r as.numeric(fixef(M1)[1])`.  
