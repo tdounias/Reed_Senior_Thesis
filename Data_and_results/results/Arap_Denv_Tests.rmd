@@ -1,0 +1,70 @@
+---
+title: "Arapahoe and Denver County Diagnostic"
+author: "Theodore Dounias"
+date: "September 18, 2018"
+output: pdf_document
+indent: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(lubridate)
+library(knitr)
+library(plotly)
+library(maps)
+opts_knit$set(root.dir = 'C:/Users/tdounias/Desktop/Reed College/
+              2017 Fall/MATH 243/Repos/Reed_Senior_Thesis/Data_and_results/')
+```
+   
+
+##Reading in the Data
+```{r reading data, warning= FALSE, error= FALSE}
+#Read in voter history data
+vhist <- read_csv("data/2017_CO/VHist_2017/CO_2017_VHist_full.csv", 
+    col_types = cols(PARTY = col_skip(), X1 = col_skip()))
+
+#Read in vrf data
+vrf <- read_csv("data/2017_CO/VRF_2017/CO_2017_VRF_full.csv", 
+    col_types = cols_only(VOTER_ID = col_guess(), COUNTY = col_guess(), 
+                          REGISTRATION_DATE = col_guess(), 
+                          EFFECTIVE_DATE = col_guess(), 
+                          VOTER_STATUS = col_guess(), 
+                          PARTY = col_guess()))
+
+#Are all voter ids from the history data in the registration data?
+sum(!(unique(vhist$VOTER_ID) %in% unique(vrf$VOTER_ID)))
+
+#Yes
+```
+    
+    
+##Data Wrangling, using mostly or only filter
+```{r}
+vhist_den_arap <- vhist %>%
+  filter(COUNTY_NAME %in% c("Denver", "Arapahoe"))
+
+vrf_den_arap <- vrf %>%
+  filter(COUNTY %in% c("Denver", "Arapahoe"))
+
+#Are all voter ids in both of them? This outputs the NUMBER of IDs missing
+sum(!(unique(vhist_den_arap$VOTER_ID) %in% vrf_den_arap$VOTER_ID))
+
+#...no. So let's check out the problems
+not_common_voter_ids <- vhist_den_arap[!(vhist_den_arap$VOTER_ID %in% vrf_den_arap$VOTER_ID), ]
+
+#Let's merge with the general voter registration file.
+#I will do a left merge, to preserve observations only from the 
+#dataset of "not common" voters
+
+not_common_voter_ids <- left_join(not_common_voter_ids, vrf, by = "VOTER_ID")
+
+names(not_common_voter_ids)[6:7] <- c("VOTED_IN", "CURRENTLY_REGISTERED_IN")
+
+#See if you can spot the problem...
+head(not_common_voter_ids)[, 1:7]
+```
+   
+Plainly stated, the problem is that voters who moved from one county to the next are not counted in the denominator of the turnout statistic (Registrants in a given county), but *are* counted in the enumerator (total votes cast in an election). I'm not sure what the patterns of people moving between counties actually is, but it seems plausible that their doing so is causing this calculation to be a bit out of whack.  
+   
+
