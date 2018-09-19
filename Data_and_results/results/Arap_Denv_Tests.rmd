@@ -13,8 +13,7 @@ library(lubridate)
 library(knitr)
 library(plotly)
 library(maps)
-opts_knit$set(root.dir = 'C:/Users/tdounias/Desktop/Reed College/
-              2017 Fall/MATH 243/Repos/Reed_Senior_Thesis/Data_and_results/')
+opts_knit$set(root.dir = 'C:/Users/tdounias/Desktop/Reed College/2017 Fall/MATH 243/Repos/Reed_Senior_Thesis/Data_and_results/')
 ```
    
 
@@ -62,7 +61,7 @@ not_common_voter_ids <- left_join(not_common_voter_ids, vrf, by = "VOTER_ID")
 names(not_common_voter_ids)[6:7] <- c("VOTED_IN", "CURRENTLY_REGISTERED_IN")
 
 #See if you can spot the problem...
-head(not_common_voter_ids)[, 1:7]
+head(not_common_voter_ids[, c(1, 2, 6, 7)])
 ```
    
 Plainly stated, the problem is that voters who moved from one county to the next are not counted in the denominator of the turnout statistic (Registrants in a given county), but *are* counted in the enumerator (total votes cast in an election). I'm not sure what the patterns of people moving between counties actually is, but it seems plausible that their doing so is causing this calculation to be a bit out of whack.  
