@@ -1,0 +1,57 @@
+---
+title: "Turnout Calculations"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(lubridate)
+library(knitr)
+opts_knit$set(root.dir = '/Users/tdounias/Desktop/Reed_Senior_Thesis/Data_and_results/data/CO_12_to_16')
+```
+   
+```{r data read in, include=FALSE}
+reg16 <- read_csv("2016reg2.csv", 
+                  col_types = cols_only(VOTER_ID = col_guess(), COUNTY = col_guess(), 
+                                   REGISTRATION_DATE = col_guess(), 
+                                   VOTER_STATUS = col_guess()))
+
+reg16$REGISTRATION_DATE <- mdy(reg16$REGISTRATION_DATE)
+
+hist16 <- read_csv("2016hist.csv")
+
+hist16$ELECTION_DATE <- mdy(hist16$ELECTION_DATE)
+```
+
+```{r wrangle files for el paso}
+reg16_elpaso <- reg16 %>%
+  filter(COUNTY == "El Paso")
+
+hist16_elpaso <- hist16 %>%
+  filter(COUNTY_NAME == "El Paso")
+  
+#Number of voters that are not in the registration file in general
+sum(!(unique(hist16_elpaso$VOTER_ID) %in% reg16_elpaso$VOTER_ID))
+
+#Remove them from the history file
+hist16_elpaso <- hist16_elpaso[(hist16_elpaso$VOTER_ID %in% reg16_elpaso$VOTER_ID),]
+
+#Filter for one specific election
+hist16_elpaso_general <- hist16_elpaso %>%
+  filter(ELECTION_DATE == as.Date("2016-11-08"))
+
+reg16_elpaso_general <- reg16_elpaso %>%
+  filter(REGISTRATION_DATE <= as.Date("2016-11-08") - 22)
+
+t16gen <- signif(nrow(hist16_elpaso_general)/nrow(reg16_elpaso_general), 3)
+```
+    
+Based on Colorado SoS reports, there were 457,329 registered voters for the general of 2016 in El Paso. My results show `r nrow(reg16_elpaso_general)`. These two numbers are approximately equal.  
+  
+The total number of voters is reported as 327,649. Based on my data, I have `r nrow(hist16_elpaso_general)`. 
+
+My calculation is the following `r t16gen`, which is close to the reported 71.64%.
+   
+
+
