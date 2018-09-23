@@ -11,6 +11,7 @@ library(knitr)
 opts_knit$set(root.dir = '/Users/tdounias/Desktop/Reed_Senior_Thesis/Data_and_results/data/CO_12_to_16')
 ```
    
+##TEST FOR EL PASO
 ```{r data read in, include=FALSE}
 reg16 <- read_csv("2016reg2.csv", 
                   col_types = cols_only(VOTER_ID = col_guess(), COUNTY = col_guess(), 
@@ -24,6 +25,7 @@ hist16 <- read_csv("2016hist.csv")
 hist16$ELECTION_DATE <- mdy(hist16$ELECTION_DATE)
 ```
 
+I move on to the actual calculations.
 ```{r wrangle files for el paso}
 reg16_elpaso <- reg16 %>%
   filter(COUNTY == "El Paso")
@@ -53,5 +55,371 @@ The total number of voters is reported as 327,649. Based on my data, I have `r n
 
 My calculation is the following `r t16gen`, which is close to the reported 71.64%.
    
+I will now move on to try to create the ID file Paul suggested.
 
+##ID FILE FOR VRF
+
+I will first extract county and voter ID values from the voter registration file. 
+```{r counties from 2016}
+county_reg_ref <- data.frame(reg16$VOTER_ID, reg16$COUNTY)
+
+#Test for duplicate IDs
+nrow(county_reg_ref) - length(unique(county_reg_ref$reg16.VOTER_ID))
+
+#Rename
+names(county_reg_ref) <- c("VOTER_ID", "COUNTY16")
+```
+   
+Moving on to 2015 files, while removing 2016 files for memory conservation.
+
+```{r counties from 2015}
+
+
+reg15 <- read_csv("2015reg2.csv", 
+                  col_types = cols_only(VOTER_ID = col_guess(), COUNTY = col_guess()))
+
+#How many IDs exist in the 2015 file that are not in the 2016 file?
+sum(!(reg15$VOTER_ID %in% county_reg_ref$VOTER_ID))
+
+#This means that after adding all necessary data from 2016, the length
+#of the final df should be:
+nrow(county_reg_ref) + 72400
+
+#We add these, and also update counties
+county_reg_ref <- left_join(county_reg_ref, reg15, by = "VOTER_ID")
+
+names(county_reg_ref)[3] <- "COUNTY15"
+
+#Now for those that dropped off after 2015
+dropped15 <- data.frame(reg15[!(reg15$VOTER_ID %in% county_reg_ref$VOTER_ID),], NA)
+dropped15 <- dropped15[,c(1, 3, 2)]
+names(dropped15) <- c("VOTER_ID", "COUNTY16", "COUNTY15")
+
+county_reg_ref <- rbind(county_reg_ref, dropped15)
+
+#Note that the number of rows is actually correct!
+nrow(county_reg_ref)
+```
+   
+I now repeat this process for all other years.
+   
+```{r counties from 2014}
+
+reg14 <- read_csv("2014reg2.csv", 
+                  col_types = cols_only(VOTER_ID = col_guess(), COUNTY = col_guess()))
+
+#How many IDs exist in the 2015 file that are not in the 2016 OR 2015 file?
+sum(!(reg14$VOTER_ID %in% county_reg_ref$VOTER_ID))
+
+#This means that after adding all necessary data from 2014, the length
+#of the final df should be:
+nrow(county_reg_ref) + 265085
+
+#We add these, and also update counties
+county_reg_ref <- left_join(county_reg_ref, reg14, by = "VOTER_ID")
+
+names(county_reg_ref)[4] <- "COUNTY14"
+
+#Now for those that dropped off after 2014
+dropped14 <- data.frame(reg14[!(reg14$VOTER_ID %in% county_reg_ref$VOTER_ID),], NA, NA)
+dropped14 <- dropped14[,c(1, 3, 4, 2)]
+names(dropped14) <- c("VOTER_ID", "COUNTY16", "COUNTY15", "COUNTY14")
+
+county_reg_ref <- rbind(county_reg_ref, dropped14)
+
+#Note that the number of rows is actually correct again!
+nrow(county_reg_ref)
+```
+   
+Next year
+```{r counties from 2013}
+
+reg13 <- read_csv("2013reg2.csv", 
+                  col_types = cols_only(VOTER_ID = col_guess(), COUNTY = col_guess()))
+
+#How many IDs exist in the 2015 file that are not in the 2016 OR 2015 file?
+sum(!(reg13$VOTER_ID %in% county_reg_ref$VOTER_ID))
+
+#This means that after adding all necessary data from 2014, the length
+#of the final df should be:
+nrow(county_reg_ref) + 96779
+
+#We add these, and also update counties
+county_reg_ref <- left_join(county_reg_ref, reg13, by = "VOTER_ID")
+
+names(county_reg_ref)[5] <- "COUNTY13"
+
+#Now for those that dropped off after 2013
+dropped13 <- data.frame(reg13[!(reg13$VOTER_ID %in% county_reg_ref$VOTER_ID),], NA, NA, NA)
+dropped13 <- dropped13[,c(1, 3, 4, 5, 2)]
+names(dropped13) <- c("VOTER_ID", "COUNTY16", "COUNTY15", "COUNTY14", "COUNTY13")
+
+county_reg_ref <- rbind(county_reg_ref, dropped13)
+
+#Note that the number of rows is actually correct again!
+nrow(county_reg_ref)
+```
+  
+Last year!
+```{r counties from 2012}
+
+reg12 <- read_csv("2012reg2.csv", 
+                  col_types = cols_only(VOTER_ID = col_guess(), COUNTY = col_guess()))
+
+#How many IDs exist in the 2015 file that are not in the 2016 OR 2015 file?
+sum(!(reg12$VOTER_ID %in% county_reg_ref$VOTER_ID))
+
+#This means that after adding all necessary data from 2014, the length
+#of the final df should be:
+nrow(county_reg_ref) + 176260
+
+#We add these, and also update counties
+county_reg_ref <- left_join(county_reg_ref, reg12, by = "VOTER_ID")
+
+names(county_reg_ref)[6] <- "COUNTY12"
+
+#Now for those that dropped off after 2012
+dropped12 <- data.frame(reg12[!(reg12$VOTER_ID %in% county_reg_ref$VOTER_ID),], NA, NA, NA, NA)
+dropped12 <- dropped12[,c(1, 3, 4, 5, 6, 2)]
+names(dropped12) <- c("VOTER_ID", "COUNTY16", "COUNTY15", "COUNTY14", "COUNTY13", "COUNTY12")
+
+county_reg_ref <- rbind(county_reg_ref, dropped12)
+
+#Note that the number of rows is actually correct again!
+nrow(county_reg_ref)
+
+#This may be confusing, but note the following:
+length(unique(reg12$VOTER_ID)) - length(reg12$VOTER_ID)
+
+length(unique(county_reg_ref$VOTER_ID)) - length(county_reg_ref$VOTER_ID)
+
+#This means that the 2012 registration file contains 11 duplicates of voter IDs!
+```
+    
+Apart from everything I just ran, the following should also be noted:
+```{r}
+#2012-13 files have some NAs in County
+sum(is.na(reg16$COUNTY))
+
+sum(is.na(reg15$COUNTY))
+
+sum(is.na(reg14$COUNTY))
+
+sum(is.na(reg13$COUNTY))
+
+sum(is.na(reg12$COUNTY))
+
+#There is one NA in ID in 2013, 
+#four NAs in ID in 2012. These are automatically not included by 
+#the left join in my code
+
+sum(is.na(reg16$VOTER_ID))
+
+sum(is.na(reg15$VOTER_ID))
+
+sum(is.na(reg14$VOTER_ID))
+
+sum(is.na(reg13$VOTER_ID))
+
+sum(is.na(reg12$VOTER_ID))
+```
+    
+For future reference, this file will be written as a csv and stored in the Google drive under "interim results"
+   
+    
+##LONG VHIST FILE   
+   
+For all IDs included in the long voter registration file, I will extract voting histories.
+```{r base file creation}
+#Make sure I have the reference file for VR
+county_reg_ref <- read_csv("County_Reg_Per_Year.csv")
+
+#Load 2016 history file
+vhist16 <- read_csv("2016hist.csv")
+
+#Create first image of full voter history file
+vhist_full <- vhist16[vhist16$VOTER_ID %in% county_reg_ref$VOTER_ID,]
+
+#Note that all voters from the 2016 history file
+#have a corresponding registration. This makes sense, given how
+#the registration file was constructed
+sum(!(vhist16$VOTER_ID %in% county_reg_ref$VOTER_ID))
+```
+   
+Now I move on to sequentially adding the rest of the histories.
+```{r add 2015 history}
+#Read in the data
+vhist15 <- read_csv("2015hist.csv")
+
+#How many from this file are missing from the registration file?
+sum(!(vhist15$VOTER_ID %in% county_reg_ref$VOTER_ID))
+#NONE! YAY!
+
+#Now on to adding the extra values to the large dataset
+missing15 <- vhist15[!(vhist15$VOTER_ID %in% vhist_full$VOTER_ID), ]
+
+vhist_full <- rbind(vhist_full, missing15)
+```
+   
+```{r add 2014 history}
+#Read in the data
+vhist14 <- read_csv("2014hist.csv")
+
+#How many from this file are missing from the registration file?
+sum(!(vhist14$VOTER_ID %in% county_reg_ref$VOTER_ID))
+#NONE! YAY!
+
+#Now on to adding the extra values to the large dataset
+missing14 <- vhist14[!(vhist14$VOTER_ID %in% vhist_full$VOTER_ID), ]
+
+vhist_full <- rbind(vhist_full, missing14)
+```
+  
+```{r add 2013 history}
+#Read in the data
+vhist13 <- read_csv("2013hist.csv")
+
+#How many from this file are missing from the registration file?
+sum(!(vhist13$VOTER_ID %in% county_reg_ref$VOTER_ID))
+#NONE! YAY!
+
+#Now on to adding the extra values to the large dataset
+missing13 <- vhist13[!(vhist13$VOTER_ID %in% vhist_full$VOTER_ID), ]
+
+vhist_full <- rbind(vhist_full, missing13)
+```
+
+```{r add 2012 history}
+#Read in the data
+vhist12 <- read_csv("2012hist.csv")
+
+#How many from this file are missing from the registration file?
+sum(!(vhist12$VOTER_ID %in% county_reg_ref$VOTER_ID))
+#NONE! YAY!
+
+#Now on to adding the extra values to the large dataset
+missing12 <- vhist12[!(vhist12$VOTER_ID %in% vhist_full$VOTER_ID), ]
+
+vhist_full <- rbind(vhist_full, missing12)
+```
+   
+```{r date troubleshoot}
+#I noticed that some date observations are weird... 
+#So I'm fixing them by cutting to max 10 characters!
+vhist_full$ELECTION_DATE <- substr(vhist_full$ELECTION_DATE, 1, 10)
+```
+
+...and this is the final voter history file! Similarly, I will write this file as a csv and upload it.
+
+##TEST METHOD FOR TURNOUTS
+
+```{r make sure data is read in}
+if(!(exists("county_reg_ref"))) county_reg_ref <- 
+  read_csv("County_Reg_Per_Year.csv") 
+
+if(!(exists("vhist_full"))) {
+  vhist_full <- read_csv("full_voter_history.csv")
+  vhist_full$ELECTION_DATE <- mdy(vhist_full$ELECTION_DATE)
+} 
+```
+
+   
+Returning now to El Paso, I will outline the method I will use to find turnout. I will then calculate turnout statistics for the 2014 midterms and check against reported figures. Let's check out this method on Monday and find ways to automate it for all counties.
+   
+I will do the following:
+
+*DENOMINATOR*
+*Find all IDs that were registered to vote in 2014. I will do this through the county/id file I just created.
+*Match these IDs with those from the 2014 VRF. Filter out any with a registration date prior to 22 days before election day. 
+*If calculating turnout over active voters, filter out inactive voters.
+*The length of the remaining dataset should be the denominator of turnout.
+    
+*NUMERATOR*
+*Use the full history file and filter for election day and county.
+*Match the resulting IDs with the registration file created above (inactive+active). They should all have a match. If any don't, investigate before disregarding.
+*The number of rows should be the numerator, and should be equal to ballots cast.
+
+   
+I will now apply this step by step to El Paso.
+```{r el paso denominator}
+#Make base denominator
+denom_ep_14 <- county_reg_ref %>%
+  filter(COUNTY14 == "El Paso") %>%
+  select(2, 5)
+
+#Read in and wrangle registration file
+reg14 <- read_csv("2014reg2.csv", 
+         col_types = cols_only(VOTER_ID = col_guess(), COUNTY = col_guess(), 
+                               VOTER_STATUS = col_guess(), 
+                               REGISTRATION_DATE = col_guess()))
+
+reg14$REGISTRATION_DATE <- mdy(reg14$REGISTRATION_DATE)
+
+#Check if all IDs are present in the reg file
+sum(!(denom_ep_14$VOTER_ID %in% reg14$VOTER_ID))
+
+#Matching IDs
+denom_ep_14 <- left_join(denom_ep_14, reg14, by = "VOTER_ID")
+
+#Filtering invalid dates
+denom_ep_14 <- denom_ep_14 %>%
+  filter(REGISTRATION_DATE <= as.Date("2014-11-04") - 22)
+
+#I have turnout statistics from the SoS as percentage of
+#Registered Voters, so no need for further filtering!
+
+denominator <- nrow(denom_ep_14)
+```
+    
+```{r el paso numerator}
+#Make file with votes
+num_ep_14 <- vhist_full %>%
+  filter(ELECTION_DATE == as.Date("2014-11-04") &
+           COUNTY_NAME == "El Paso")
+
+#Is any of them not in the reg file?
+sum(!(num_ep_14$VOTER_ID %in% denom_ep_14$VOTER_ID))
+
+#Investigate!
+missing_voters <- num_ep_14[!(num_ep_14$VOTER_ID %in% denom_ep_14$VOTER_ID),]
+
+#Similarities in PARTY registration...
+summary(as.factor(missing_voters$PARTY))
+#None appear to have data on their party registration!
+
+#Do they exist in the 2014 reg file?
+sum(!(missing_voters$VOTER_ID %in% reg14$VOTER_ID))
+#Most of them do!
+
+#Do they exist in the cumulative county reg file?
+sum(!(missing_voters$VOTER_ID %in% county_reg_ref$VOTER_ID))
+#All of them do!
+
+#Voting methods are different...
+summary(as.factor(missing_voters$VOTING_METHOD))
+
+#Check to see active/inactive status
+missing_voters <- left_join(missing_voters, reg14, by = "VOTER_ID")
+
+#Almost all active or NA (or weird stuff I will deal with)
+summary(as.factor(missing_voters$VOTER_STATUS))
+
+###HOWEVER!###
+#Proceeding for now without their inclusion...
+numerator <- sum(num_ep_14$VOTER_ID %in% denom_ep_14$VOTER_ID)
+
+turnout <- numerator/denominator
+```
+   
+It is therefore obvious that these numbers are quite close by the following table:
+
+```{r table creation}
+table_df <- data.frame(c("Calculated", "Reported"), 
+                       c(numerator, 231635), c(denominator, 424553), 
+                       c(signif(turnout, 3)*100, 54.56))
+
+names(table_df) <- c("", "Ballots Cast", "Total Registered", "Turnout")
+
+kable(table_df)
+```
 
