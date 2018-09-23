@@ -29,6 +29,8 @@ This is interesting for my thesis because I have missing data of various "flavor
 My other missing data problem comes from missing voters who dropped off the rolls, and I do not think that this algorithm can take care of it, since I quite literally have not data for them.  
      
 The thesis contains code for the missing data EM algorythm in Appendix A. I can use that!  
+   
+In addition, the chapter on model description is extremelly useful as an example of how to write a similar chapter. The application of smoothing splines is informative, but doesn't exactly tell me how to fit them to my model. I red through the references provided there and still have questions, which is why I proceeded to the Intro to Stat Learning Book.
   
 $~$   
   

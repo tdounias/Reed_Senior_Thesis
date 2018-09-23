@@ -12,6 +12,7 @@ library(tidyverse)
 library(lme4)
 library(Matrix)
 library(lubridate)
+library(arm)
 
 allvar <- read_csv("allvar.csv")
 ```
@@ -33,7 +34,37 @@ allvar <- allvar %>%
 
 M1 <- lmer(data = allvar, CD4PCT ~ elapsed_months + (1|newpid))
 
-summary(M1)
+display(M1)
 ```
    
 The Coefficient for time is `r as.numeric(fixef(M1)[2])`, with the average intercept across children (a fixed effects model) being `r as.numeric(fixef(M1)[1])`.  
+    
+##12.2.2
+   
+```{r}
+allvar$treatmnt <- as.factor(allvar$treatmnt)
+
+M2 <- lmer(data = allvar, CD4PCT ~ elapsed_months + treatmnt 
+           + baseage  + (1|newpid))
+
+display(M2)
+```
+   
+Across children, CD4 percentage decreases by .178 per month, is approximatelly 1.26 points higher for the group receiving the second treatment, and by each year increase in the age the treatment began decreases by around 1 percentage point.
+   
+##12.2.3
+   
+As expected, there is a visible decrease in the child-level standard deviation of the model (approximatelly .25, which is high considering the effects that the predictors have). This is because the child-level parameters of the intercept are shrunk towards their coefficient estimates more in the presence of group-level predictors (base age and treatment). Essentially there is more pooling.
+
+I am unsure why the standard deviation of the residuals has increased. Based on the explanations in the book, they should stay the same. Maybe there is some fault in the data? Maybe some of the treatment or base age variables are missing/don't stay the same across children.   
+
+I am also unsure how to present this graphically.
+
+##12.2.4
+   
+I assume compare the results from (a) to (b)? I don't see a way to compare (b) to (c) directly. 
+
+As mentioned previously, the standard error for child-level intercepts drops when adding more child-level predictors. The second model is probably to be prefered because of this fact, and including the possibility of interpreting coefficients like treatment or base age, which might be the purpose of this study. 
+
+
+
