@@ -309,3 +309,4 @@ vhist_full$ELECTION_DATE <- substr(vhist_full$ELECTION_DATE, 1, 10)
 ```
 
 ...and this is the final voter history file! Similarly, I will write this file as a csv and upload it.
+    

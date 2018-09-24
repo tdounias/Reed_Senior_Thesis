@@ -1,0 +1,300 @@
+---
+title: "Data Diagnostics"
+author: "Theodore Dounias"
+date: "9/23/2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
+library(tidyverse)
+library(lubridate)
+library(knitr)
+opts_knit$set(root.dir = '/Users/tdounias/Desktop/Reed_Senior_Thesis/Data_and_results/data/CO_12_to_16')
+```
+
+##FULL VOTER HISTORY DIAGNOSTIC
+
+```{r read in and format dates}
+vhist_full <- read_csv("full_voter_history.csv")
+
+vhist_full$ELECTION_DATE <- mdy(vhist_full$ELECTION_DATE)
+```
+
+First I will go through all the variables. I will count unique values, count NAs, see if there is any pattern to the NAs, and clean up when necessary. 
+   
+```{r voter ID}
+#Number of NAs?
+sum(is.na(vhist_full$VOTER_ID))
+
+#These can probably be deleted
+vhist_full <- vhist_full[!(is.na(vhist_full$VOTER_ID)), ]
+#The new vhist is smaller by 8 observations!
+```
+   
+```{r election type}
+#Number of NAs?
+sum(is.na(vhist_full$ELECTION_TYPE))
+#No NAs!
+
+#Checking for "weird" values
+summary(as.factor(vhist_full$ELECTION_TYPE))
+
+#All these types are straightforward, nothing to deal with!
+```
+   
+```{r election description}
+#Number of NAs?
+sum(is.na(vhist_full$ELECTION_DESCRIPTION))
+#No NAs!
+```
+   
+```{r election dates}
+#Number of NAs?
+sum(is.na(vhist_full$ELECTION_DATE))
+#No NAs!
+
+#Checking for "weird" values
+unique(vhist_full$ELECTION_DATE)
+
+#Nothing too weird, a few elections miscoded in the 1900s
+```
+   
+```{r voting method}
+#Number of NAs?
+sum(is.na(vhist_full$VOTING_METHOD))
+#A BUNCH of NAs! Let's check them out
+missing_method <- vhist_full[(is.na(vhist_full$VOTING_METHOD)), ]
+
+#Guess what county?
+summary(as.factor(missing_method$COUNTY_NAME))
+#Jefferson County!
+
+#Date distribution
+ggplot(missing_method, aes(x = ELECTION_DATE)) +
+  geom_density()
+#Note most if not all of the dates are before 2005. Therefore, 
+#if I only study elections after 2012, this should not be an issue. 
+
+#Checking for "weird" values
+summary(as.factor(vhist_full$VOTING_METHOD))
+#This is very familiar...so should be fine!
+```
+   
+```{r party vhist}
+#Number of NAs?
+sum(is.na(vhist_full$PARTY))
+#A lot of NAs! 
+missing_party <- vhist_full[(is.na(vhist_full$PARTY)), ]
+
+#Guess what county?
+summary(as.factor(missing_party$COUNTY_NAME))
+#Actually not Jefferson...seems evenly distributed
+
+#Date distribution
+unique(missing_party$ELECTION_DATE)
+#All elections are between 2008-2009! 
+#I wonder what happened...
+
+#Checking for "weird" values generally
+summary(as.factor(vhist_full$PARTY))
+#Apart from double-coding (DEM/DEMOCRAT)
+#Everything else seems fine
+```
+    
+Conclusion here is that the only potentially worrying issue is some missing method values post 2012. Else the data look pretty solid.
+
+##VOTER REG FILE DIAGNOSTICS
+   
+This has the potential to become...repetitive. I will read in all variables, describe what each one is, and then exclusivelly keep the useful ones.
+   
+```{r read in full data}
+reg12 <- read_csv("2012reg2.csv")
+reg13 <- read_csv("2013reg2.csv")
+reg14 <- read_csv("2014reg2.csv")
+reg15 <- read_csv("2015reg2.csv")
+reg16 <- read_csv("2016reg2.csv")
+```
+
+Currently, I think I conceivably only need the following variables:
+
+*Voter ID
+*County
+*Registration Date
+*Voter Status
+*Party
+*Gender
+*Birth Year
+*Precinct Code
+    
+The section that follow analyze these variables across the five datasets.
+   
+```{r Voter ID Values}
+#Check for NAs
+sum(is.na(reg16$VOTER_ID))
+
+sum(is.na(reg15$VOTER_ID))
+
+sum(is.na(reg14$VOTER_ID))
+
+sum(is.na(reg13$VOTER_ID))
+
+sum(is.na(reg12$VOTER_ID))
+
+#There are 5 total, 1 in 2013 and 4 in 2012. 
+#All in all nothing to write home about
+```
+
+```{r County}
+sum(is.na(reg16$COUNTY))
+
+sum(is.na(reg15$COUNTY))
+
+sum(is.na(reg14$COUNTY))
+
+sum(is.na(reg13$COUNTY))
+
+sum(is.na(reg12$COUNTY))
+
+#A bit more concerning, some voters are missing county values! However,
+#given the sheer number of total votes that I have at my disposal, 
+#8k is not a large number. I think I can disregard.
+```
+
+```{r reg date}
+sum(is.na(reg16$REGISTRATION_DATE))
+
+sum(is.na(reg15$REGISTRATION_DATE))
+
+sum(is.na(reg14$REGISTRATION_DATE))
+
+sum(is.na(reg13$REGISTRATION_DATE))
+
+sum(is.na(reg12$REGISTRATION_DATE))
+
+#The numbers for 2012-13 are oddly familiar...
+#Let's try pulling them out!
+missing2013 <- reg13[(is.na(reg13$REGISTRATION_DATE)), ]
+missing2012 <- reg12[(is.na(reg12$REGISTRATION_DATE)), ]
+
+#NOTE THE FOLLOWING!
+head(missing2012)[, 1:7]
+head(missing2013)[, 1:7]
+
+#They have NAs for almost all exept ID! 
+#I think this may be due to privacy concerns.
+
+#Let's run some more diagnostics here.
+#This command should count how many date entries per year
+#contain more characters than necessary
+sum(na.omit(!(nchar(reg12$REGISTRATION_DATE) == 10)))
+
+sum(na.omit(!(nchar(reg13$REGISTRATION_DATE) == 10)))
+
+sum(na.omit(!(nchar(reg14$REGISTRATION_DATE) == 10)))
+
+sum(na.omit(!(nchar(reg15$REGISTRATION_DATE) == 10)))
+
+sum(na.omit(!(nchar(reg16$REGISTRATION_DATE) == 10)))
+#All are exactly as they should be
+```
+ 
+```{r voter status}
+sum(is.na(reg16$VOTER_STATUS))
+
+sum(is.na(reg15$VOTER_STATUS))
+
+sum(is.na(reg14$VOTER_STATUS))
+
+sum(is.na(reg13$VOTER_STATUS))
+
+sum(is.na(reg12$VOTER_STATUS))
+
+#Similarly as before, and including those hidden for privacy,
+#There is a managable amount of NAs in these statuses. 
+
+#Moving on to counts
+#2012
+summary(as.factor(reg12$VOTER_STATUS))
+
+#2013
+summary(as.factor(reg13$VOTER_STATUS))
+
+#2014
+summary(as.factor(reg14$VOTER_STATUS))
+
+#2015
+summary(as.factor(reg15$VOTER_STATUS))
+
+#2016
+summary(as.factor(reg16$VOTER_STATUS))
+
+#Voter status here clearly includes absentee voters 
+#and the country they live in. In fact, filtering
+#one of the years we get:
+country_status <- reg12[!(reg12$VOTER_STATUS %in% c("Active", "Inactive")), ]
+
+#See the problem!
+head(country_status)[,20:25]
+
+#These voters' records have been a bit mishandled.
+#The variables seem "shifted" to one side
+#However, they again are very few per year, 
+#So I think I can ignore them.
+```
+
+```{r party}
+sum(is.na(reg16$PARTY))
+
+sum(is.na(reg15$PARTY))
+
+sum(is.na(reg14$PARTY))
+
+sum(is.na(reg13$PARTY))
+
+sum(is.na(reg12$PARTY))
+
+#Similarly as before, and including those hidden for privacy,
+#There is a managable amount of NAs in these statuses. 
+
+#Moving on to counts
+#2012
+summary(as.factor(reg12$PARTY))
+
+#2013
+summary(as.factor(reg13$PARTY))
+
+#2014
+summary(as.factor(reg14$PARTY))
+
+#2015
+summary(as.factor(reg15$PARTY))
+#THERE IS NO PARTY VARIABLE IN 2015!
+
+#2016
+summary(as.factor(reg16$PARTY))
+
+#Same issue as before; some files are mismatched,
+#so values have "bled" into eachother.
+#Need to be careful when doing any analysis that includes Party
+
+```
+   
+```{r gender}
+sum(is.na(reg16$GENDER))
+
+sum(is.na(reg15$GENDER))
+
+sum(is.na(reg14$GENDER))
+
+sum(is.na(reg13$GENDER))
+
+sum(is.na(reg12$GENDER))
+
+#Similarly as before, and including those hidden for privacy,
+#There is a managable amount of NAs in these statuses. 
+
+#I am not going to do counts. The results will be the same.
+```
+    
+The issue that arises is taht nothing seems completelly clean past the first few variables, due to the issue of variable "displacement". I will need to be very careful when using any of them for any purpose, and make sure to tidy first.
