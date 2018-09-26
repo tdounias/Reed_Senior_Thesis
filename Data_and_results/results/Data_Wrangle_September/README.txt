@@ -1,6 +1,10 @@
-turnout_calc: file with calculations that output turnout.
+*turnout_calc*: 
+      
+      file with calculations that output turnout.
 
-wrangling_data: outputs two files, based on the following Paul directions:
+*vhist_full_and_county_reg_creation*: 
+      
+      outputs two files, based on the following Paul directions:
 
       Getting the files tidied needs to be done carefully because you are juggling a lot of 3 gb files.
   
@@ -19,3 +23,11 @@ wrangling_data: outputs two files, based on the following Paul directions:
       For records with county2015 but not county2016, grab histories from the 2015 history file.
 
       … and so on. Each step should get faster because the vast majority of records will have been in the same         county and have a registration record from 2012 - 2016, but as you go backwards, you’ll grab the vote            histories of those who moved out of state or fell off the rolls.
+      
+*Diagnostics*:
+
+      Diagnostics for vhist and vrf for 2012-2016
+      
+*County movement graph*:
+
+      Graph that shows movement of population between counties/differences between files
