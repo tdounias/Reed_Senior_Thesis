@@ -21,11 +21,20 @@ reg_per_year_sos$REGISTRATION_DATE <- year(mdy(reg_per_year_sos$REGISTRATION_DAT
 create_sos_reg <- function(regdate) {
   out <- reg_per_year_sos %>%
     filter(REGISTRATION_DATE <= regdate) %>%
+    mutate(count = 1) %>%
     group_by(COUNTY) %>%
     mutate(count = 1) %>%
     summarize(sum(count))
   
   out
+}
+
+create_sept_reg <- function(num) {
+  out <- reg_per_year_sept %>%
+    select(2, num) %>%
+    mutate(count = 1) %>%
+    group_by(2) %>%
+    summarize(sum(count))
 }
 
 
@@ -38,8 +47,14 @@ sos12 <- create_sos_reg("2012")
 sos11 <- create_sos_reg("2011")
 sos10 <- create_sos_reg("2010")
 
+
+
 sos_full <- merge(sos16, sos15, sos14, sos13, sos12, sos11, sos10, by = COUNTY)
 
 
 ##Need to make ~BIG FILE~ with all of these in it for ggplot to work. 
 ##Read up on purrr and then do so!
+
+out[, 1:5] <- as.factor(out[,1:5])
+
+
