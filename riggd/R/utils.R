@@ -135,3 +135,20 @@ yearXcounty_reg_SoS <- function(){
   
   sos_full
 }
+
+#' From a registration file, get registrant totals for a given date
+#'
+#' 
+#' @return A dataframe of registrants per year and county, 2010-2016 for the MAY DATA
+#' @examples
+#' yearXcounty_reg_SoS()
+#' 
+create_reg <- function(regdate, regfile) {
+  out <- regfile %>%
+    filter(REGISTRATION_DATE <= regdate) %>%
+    group_by(COUNTY) %>%
+    summarize(reg = n()) %>%
+    rename(county = COUNTY)
+  
+  out
+}
