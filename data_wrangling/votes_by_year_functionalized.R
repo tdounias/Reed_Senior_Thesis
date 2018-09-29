@@ -43,3 +43,4 @@ turnout_calc <- function(regfile, histfile, el_date, county){
   turnouts <- merge(nums, denoms, by = "county") %>%
     mutate(turnout = votes/reg)
 }
+

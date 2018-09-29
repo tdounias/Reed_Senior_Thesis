@@ -152,3 +152,55 @@ create_reg <- function(regdate, regfile) {
   
   out
 }
+
+
+#' Get turnout, registered voters, and total votes per vounty
+#'
+#' @param regfile total registration file, with extra variable for year collected named FILE_YEAR
+#' @param histfile complete history file across all reg file years
+#' @param el_dat the election date, in the Date format
+#' @param county a vector of all counties in the state
+#' @return A dataframe with turnout, registered voters, and turnout per county
+#' @examples
+#' turnout_calc(MAINE_12_to_17_REG_FILE, VHIST_MAINE, as.Date("2016-11-08), MAINE_COUNTIES)
+#' 
+turnout_calc <- function(regfile, histfile, el_date, county){
+  
+  ##First the denominator
+  
+  if(typeof(regfile$REGISTRATION_DATE) != "double") regfile$REGISTRATION_DATE <- mdy(regfile$REGISTRATION_DATE)
+  
+  if(typeof(histfile$ELECTION_DATE) != "double") histfile$ELECTION_DATE <- mdy(histfile$ELECTION_DATE)
+  
+  #Filter for relevant year, registrants
+  regfile_current <- regfile %>%
+    filter(FILE_YEAR == year(el_date)) %>%
+    filter(REGISTRATION_DATE <= el_date - 22)
+  
+  denoms <- create_reg(el_date, regfile_current)
+  
+  #Make sure no weird county values exist
+  names(county) <- "county"
+  
+  denoms <- left_join(county, denoms, by = "county")
+  
+  ##Then the numerator
+  
+  #Take relevant votes
+  nums <- histfile %>%
+    filter(ELECTION_DATE == el_date)
+  
+  #Filter out those with no voter registration
+  nums <- nums[(nums$VOTER_ID %in% regfile$VOTER_ID), ]
+  
+  nums <- nums %>%
+    group_by(COUNTY_NAME) %>%
+    summarise(votes = sum(n()))
+  
+  names(nums)[1] <- "county"
+  
+  #Now for a final step, to calculate turnout
+  turnouts <- merge(nums, denoms, by = "county") %>%
+    mutate(turnout = votes/reg)
+}
+
