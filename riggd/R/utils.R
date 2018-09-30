@@ -6,7 +6,7 @@
 #' counties(reg_colorado_16)
 
 counties <- function(filesource){
-  out <- read_csv(file_source, col_types = cols_only(COUNTY = col_guess()))
+  out <- read_csv(filesource, col_types = cols_only(COUNTY = col_guess()))
   unique(out)
 }
 

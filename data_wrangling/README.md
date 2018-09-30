@@ -19,3 +19,7 @@ Example of turnout calculation for 2014 midterm election.
 #### turnouts_functionalized
 
 Turnout calculation, functionalized
+
+#### colorado_demographics_dataset
+
+Dataset with county demographics. Includes race, urban/rural, voter and party registration stats. Uses the latest (2017) dataset and data from the 2010 census.
