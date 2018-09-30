@@ -1,10 +1,11 @@
 #' Get Counties for a State out of Clean Reg Files
 #'
-#' @param reg Registration File location
+#' @param filesource Registration File location
 #' @return A character vector of counties
 #' @examples
 #' counties(reg_colorado_16)
-counties <- function(file_source){
+
+counties <- function(filesource){
   out <- read_csv(file_source, col_types = cols_only(COUNTY = col_guess()))
   unique(out)
 }
@@ -97,7 +98,7 @@ yearXcounty_reg <- function(filesource){
 #' @examples
 #' yearXcounty_reg_SoS()
 
-yearXcounty_reg_SoS <- function(){
+yearXcounty_reg_2017 <- function(){
   #Read in the data
   reg_per_year_sos <- read_csv("2017_CO/VRF_2017/CO_2017_VRF_full.csv", 
                                col_types = cols_only(VOTER_ID = col_guess(), 
@@ -143,6 +144,7 @@ yearXcounty_reg_SoS <- function(){
 #' @examples
 #' yearXcounty_reg_SoS()
 #' 
+
 create_reg <- function(regdate, regfile) {
   out <- regfile %>%
     filter(REGISTRATION_DATE <= regdate) %>%
