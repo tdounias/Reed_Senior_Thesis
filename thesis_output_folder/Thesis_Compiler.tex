@@ -68,7 +68,7 @@
 
 
 % To pass between YAML and LaTeX the dollar signs are added by CII
-\title{How I learned to stop worrying and Love Voter Registration Files}
+\title{Turnout and Mail Voting in Colorado}
 \author{Theodore Dounias}
 % The month and year that you submit your FINAL draft TO THE LIBRARY (May or December)
 \date{December 2018}
@@ -694,12 +694,21 @@ class.
   \emph{Insert population map with towns, geography superimposed}
   
   Continuing with demographic characteristics, Colorado has a median age
-  of \emph{find}, median household income of \emph{find}, and poverty rate
-  of \emph{find}. Colorado's population is mostly white (\emph{find}),
-  with a higher minority group population density in its Southern regions,
-  as shown on Map (\emph{insert racial demographics map}). These
-  statistics, along with national averages, are also presented in table
-  \emph{make and insert a table}.
+  of 34.3, median household income of \$65,685, and poverty rate of
+  \emph{find}. Colorado's population is mostly white (\emph{find}), with a
+  higher minority group population density in its Southern regions, as
+  shown on Map ( \emph{insert racial demographics map}). These statistics,
+  along with national averages, are also presented in table \emph{make and
+  insert a table}.
+  
+  \begin{figure}
+  
+  {\centering \includegraphics[width=0.5\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_white_county_map} 
+  
+  }
+  
+  \caption[Map of Percentage of White Residents Per County]{Map of Percentage of White Residents Per County}\label{fig:white pct map}
+  \end{figure}
   
   The State Capital is Denver. Colorado is split into 64 Counties, of
   which the most populous are, in alphabetical order, the following eight:
@@ -718,14 +727,33 @@ class.
   registered in that county. Unsurprisingly, the same eight most populous
   counties are also the counties with the majority of registered voters,
   as their registrants comprise 73\% of total Colorado registered voters
-  (as of November 2017). As Table (\emph{insert table}) shows, these eight
-  counties have a registration rate between 60-80\%, compared to a
+  (as of November 2017). As Table ( \emph{insert table}) shows, these
+  eight counties have a registration rate between 60-80\%, compared to a
   Colorado-wide rate of about 67\%. Registration rates for all counties
-  are also graphically depicted in map (\emph{insert map here}). In terms
-  of Party registration, Colorado as a whole leans democratic by a very
-  narrow margin. This is also reflected in the state's Cook Partisan
-  Voting Index of D +1, making it a solidly purple battleground state
-  (\emph{also insert map}).
+  are also graphically depicted in Figure 2.
+  
+  \begin{figure}
+  
+  {\centering \includegraphics[width=0.5\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_registered_county_map} 
+  
+  }
+  
+  \caption[Map of Registration Rates Per County]{Map of Registration Rates Per County}\label{fig:reg per county map}
+  \end{figure}
+  
+  In terms of Party registration, Colorado as a whole leans democratic by
+  a very narrow margin. This is also reflected in the state's Cook
+  Partisan Voting Index of D +1, making it a solidly purple battleground
+  state (Figure 3).
+  
+  \begin{figure}
+  
+  {\centering \includegraphics[width=0.5\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/party_affiliation_county_map} 
+  
+  }
+  
+  \caption[Map of Party Affiliation Per County]{Map of Party Affiliation Per County}\label{fig:party reg per county map}
+  \end{figure}
   
   In the past 25 years, there have been a series of key changes in the way
   Colorado administers elections, in relation to Vote By Mail and other
@@ -745,7 +773,7 @@ class.
   of traditional polling places, instituted same-day voter registration,
   and revamped the way active and inactive voter status was designated on
   voter rolls--more on this in future sections. These changes are
-  summarised in Table (\emph{insert table}).
+  summarised in Table ( \emph{insert table}).
   
   Colorado presents such an interesting case for research on Vote By Mail
   exactly because it has gone through such a long transitional process to
@@ -753,17 +781,104 @@ class.
   policy through a mixture of state mandates, county action, and outside
   policy motivations. It gives researchers access to approximatelly 22
   years during which at least part of the state conducted elections
-  partially by mail, making comparative, county-level case studies
-  particularly alluring, if\ldots{}
+  partially by mail, making comparative, county- or individual- level case
+  studies particularly alluring.
   
   \section{The Data}\label{the-data}
   
-  \ldots{}there is access to significant amounts of data that give a
-  complete overview of voting during that time period.
+  This thesis relies on county and individual level models to draw
+  conclusions on voting behaviours, and how they are affected by voting
+  method. As such, the data I need will optimally contain the following:
+  
+  \begin{itemize}
+  \item
+    \textbf{County and individual level demographic characteristics}:
+    race, gender, urban population
+  \item
+    \textbf{County and individual level voting data}: turnout, party
+    registration, total registrants
+  \item
+    \textbf{Information on individual elections}: date, ballots cast,
+    voting methods, county, election descriptions
+  \end{itemize}
+  
+  In the process of my research, I have acquired sufficient data to cover
+  the second and third of these areas. I was unable to procure individual
+  level data on demographic characteristics apart from gender, age, and
+  party registration. However, reasonable conclusions can still be drawn
+  from county or precinct aggregates.
   
   \subsection{Sources}\label{sources}
   
+  I used two sources of data: Colorado voter records procured from the
+  Colorado Secretary of State's office, and demographic data from the 2010
+  US Census. In the process of procuring these data I was aided by a
+  series of other researchers and professionals with experience in the
+  field of elections administration; they are mentioned in my
+  acknowledgements.
+  
+  \subsubsection{2010 US Census}\label{us-census}
+  
+  The US Census is conducted country-wode every ten years, with the goal
+  of procuring accurate data on the demographic characteristics of the
+  population. The Census uses a combination of federal field workers
+  conducting door-to-door canvassing and statistical methods for data
+  aggregation. From the 2010 Census--which is publically available
+  online--I get total population counts, characteristics on race, and
+  rural/urban population counts for Colorado.
+  
+  \subsubsection{Colorado Voter Files}\label{colorado-voter-files}
+  
+  As any state, Colorado maintains a statewide registry of all currently
+  registered voters. This registry is typically under the purview of the
+  Secretary of State--in this case, Wayne W. Williams. Voter Registration
+  Files are constantly updated with new information on existing voters,
+  new voters, or with the removal of inactive or otherwise ineligible
+  voters. Therefore, this file will be different every time it is accessed
+  or shared. Based on when this file is accessed, only a ``snapshot'' of
+  the file can be obtained. I have managed to procure ``snapshots'' for
+  each year between 2012 and 2017.
+  
+  Similarly with VRFs, a Voter History File is maintained and constantly
+  updated by the state. This file is uniquelly connected to its VRF: only
+  voters showing up as registrants will have their histories included. I
+  have similarly procured ``snapshots'' of the Voter History File for the
+  years between 2012 and 2017.
+  
   \subsection{First-Glance Description}\label{first-glance-description}
+  
+  \subsubsection{2010 US Census}\label{us-census-1}
+  
+  I use two datasets from the Census. For both, the unit of observation is
+  one of the 64 counties of Colorado, and both include the same total
+  population counts. One contains racial demographic characteristics and
+  the other contain percentages of rural and urban populations in each
+  county. The racial demographic dataset needed some wrangling work to
+  extract a percentage of white residents in each county. Individuals were
+  coded as ``white'', that identified as exclusivelly white--this doesn't
+  include mixed-race individuals reporting white ancestry.
+  
+  \subsubsection{Colorado Voter Files}\label{colorado-voter-files-1}
+  
+  In the Voter Registration files, the unit of observation is the
+  individual voter, and all variables are initially coded as character
+  strings. Each voter is assigned a unique voter ID, which serves as a
+  point of refference between the two files. Broadly speaking, data in
+  this file can be divided between three categories: first, personal
+  identification information like address, ZIP code, or phone number;
+  second, demographic information like age and gender; third, information
+  pertinent to elections administration like congressional district, local
+  elections for which the individual should receive a ballot, voter ID,
+  and party registration. I will further elaborate on relevant variables
+  in the wrangling section.
+  
+  In the Voter History files, the unit of observation here is a single
+  ballot cast, and all variables are initially coded as character strings.
+  This means that for each voter registered--and so included in the
+  VRF--the history file should contain an observation for each time they
+  voted. This file includes two types of data: first, identifiers for the
+  election like county, date, description, and type; second, identifiers
+  for the individual vote including voter ID and voting method.
   
   \subsection{Wrangling Difficulties and
   Solutions}\label{wrangling-difficulties-and-solutions}
