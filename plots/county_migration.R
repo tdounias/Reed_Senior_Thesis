@@ -24,4 +24,5 @@ ggplot(full_reg, aes(x = regsept, y = regSoS, col = year)) +
   stat_function(fun = function(x) x, col = "black") +
   labs(x = "Registration from 2012-2016 Files", y = "Registration Only from 2017 File", 
        title = "Comparative Voter Registration Counts", 
-       col = "Election Year")
+       col = "Election Year") +
+  geom_smooth(method="lm")
