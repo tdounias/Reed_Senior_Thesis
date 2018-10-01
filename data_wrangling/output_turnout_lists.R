@@ -10,19 +10,14 @@ vrf_packed <- read_csv("packed_12_16_registration_file.csv")
 county <- counties("2016reg2.csv")
 
 #Add 2011, 2010 files for refference
-d1 <- read_csv("2012reg2.csv", 
-               col_types = cols_only(VOTER_ID = col_guess(), COUNTY = col_guess(), 
-                                     REGISTRATION_DATE = col_guess()))
-d1 <- mutate(d1, FILE_YEAR = 2011)
+add <- vrf_packed %>%
+  filter(FILE_YEAR == "2012")
 
-d1 <- data.frame(1, d1)
+d1 <- add
+d1$FILE_YEAR <- "2011"
 
-d2 <- read_csv("2012reg2.csv", 
-               col_types = cols_only(VOTER_ID = col_guess(), COUNTY = col_guess(), 
-                                     REGISTRATION_DATE = col_guess()))
-d2 <- mutate(d2, FILE_YEAR = 2010)
-
-d2 <- data.frame(1, d2)
+d2 <- add
+d1$FILE_YEAR <- "2010"
 
 vrf_packed <- rbind(d1, d2, vrf_packed)
 
