@@ -4,10 +4,6 @@ library(lubridate)
 source("~/Desktop/Reed_Senior_Thesis/riggd/R/utils.R")
 setwd("~/Desktop/Reed_Senior_Thesis/Data_and_results/data")
 
-tst <- sample_n(vrf_packed, 100000)
-regfile <- tst
-var_location <- c(3)
-
 var_table <- function(regfile, var_location, var_name) {
   
   #Select relevant information from voter reg files

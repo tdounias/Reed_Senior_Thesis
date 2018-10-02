@@ -25,6 +25,14 @@ dates <- as.Date(c("2010-08-10", "2010-11-02", "2011-11-01", "2012-06-26",
                    "2012-11-06", "2013-11-05", "2014-06-24", "2014-11-04", 
                    "2015-11-03", "2016-06-28", "2016-11-08"))
 
+types <- c("Primary", "Midterm", "Coordinated", "Primary", "General", "Coordinated", 
+               "Primary", "Midterm", "Coordinated", "Primary", "General")
+
 turnout_list <- purrr::map(dates, ~ turnout_calc(vrf_packed, vhist_full, .x, county))
+
+for(i in 1:11){
+  turnout_list[[i]][5] <- dates[i]
+  turnout_list[[i]][6] <- types[i]
+}
 
 save(turnout_list, file ="all_turnouts.RData")
