@@ -8,14 +8,61 @@ output: pdf_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+##Notation for predictors
+   
+There are four distinct types of predictors for use in these models.
+
+### County and County-per-Election Level
+   
+First, I define the following indicator variables:
+
+$\bullet ~x_c,~for~c\in [1, 64]$, dummy variables for each county in Colorado.
+   
+Furthermore, I have two county-level predictors:
+  
+$\bullet~x^{white~\%}$, a vector of length 64, percentage of county population that identifies as only white.  
+   
+$\bullet~x^{urban~\%}$, a vector of length 64, percentage of county population living in an urban area.  
+   
+There are two other predictors, varying by county and election. These are of particular interest, as one is the response variable for my county-level models, and the other is the variable of interest for this study. Specifically:  
+   
+$\bullet~y^{mail~vote~\%}$, a vector of percentage of votes that was cast using mail ballots, per county and election.   
+   
+$\bullet~y^{turnout~\%}$, a vector with turnout counts per county and election.  
+   
+Since the unit of observation for the county level models I will apply are all counties per election, I define an aggregate matrix of length equal to the number of elections times 64--the number of counties---, and width equal to 3. This matrix includes all county level predictors: $X =(x^{white~\%},x^{urban~\%},x^{mail~vote~\%})$. Note that this matrix includes percentage of mail ballots cast, which is the variable whose coefficient I am interested in testing.
+
+### Election Level
+   
+There are two exclusivelly election-level dicrete variables: year, and type of election. For both I define a series of indicator variables:
+   
+$\bullet ~y_i^{election~type},~for~i\in [1, 4]$, for each election type (Midterm, Primary , Coordinated, General).  
+    
+$\bullet ~y_i^{election~year},~for~i\in [1, 7]$, for each election year, between 2010 and 2016.
+   
+I will also use $year$ as a variable for models using smoothing splines. All election level predictors will be summarized for the purposes of modelling in the 9 by 2 matrix $Y = (y_i^{election~type}, y_i^{election~year})$.
+   
+### Individual and Individual-per-Election Level
+   
+The two aforementioned predictors--urban population and race--could be defined as aggregates of individual level observations. I also have four other distinct individual level variables:  
+     
+$\bullet~z^{gender}$, a vector of discrete gender identifications for each voter, varying only by voter.  
+     
+$\bullet~z^{age}$, a vector of age for each voter, varying by voter and election.  
+  
+$\bullet~z^{party}$, a vector of party registration for each voter, varying by voter and election. Coded as Republican, Democratic, Other, or Unaffiliated.  
+   
+$\bullet~z^{voted}$, with $z^{voted}_{i,j} = 1$ if person i voted in election j, and $z^{voted}_{i,j} = 0$ if they did not.  
+   
+Since the unit of observation for the individual level models I will apply are all individuals in a particular election, I define an aggregate matrix of length equal to the product of elections and voters, a.nd width equal to 3. This matrix includes all individual level predictors: $Z =(z^{gender}, z^{age}, z^{party})$. The fourth variable defined in this section is the response variable in the individual level model, and as such is not included in the predictors.
 
 ##County Level Models
   
-**Model 1** is a fixed-effects, bare-bones model that exclusivelly includes percentage of VBM votes, and dummy variables for year, election type, and county,. Its call would look a bit like:
+**Model 1** is a fixed-effects, bare-bones model that exclusivelly includes percentage of VBM votes, and dummy variables for year, election type, and county. Its call would look a bit like:
 
 $$turnout_{c, tp, y} \sim (mail \%)_{c, tp, y} + (C\times B_c) + (T \times B_{tp}) + (Y \times B_y)$$ 
    
-Where C, T, Y are vectors of dummy variables and c, tp, y are indicators of county, election type, and year. mail% is the percentage of the vote conducted through VBM. This model serves as a baseline for comparing others.
+Where C, T, Y are vectors of dummy variables and c, tp, y are indices of county, election type, and year. mail% is the percentage of the vote conducted through VBM. This model serves as a baseline for comparing others.
 
 **Model 2** A more informed baseline, model 1 plus variables of urban and white population:
 
