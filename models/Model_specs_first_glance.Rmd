@@ -60,13 +60,13 @@ Since the unit of observation for the individual level models I will apply are a
   
 **Model 1** is a fixed-effects, bare-bones model that exclusivelly includes percentage of VBM votes, and dummy variables for year, election type, and county. Its call would look a bit like:
 
-$$turnout_{c, tp, y} \sim (mail \%)_{c, tp, y} + (C\times B_c) + (T \times B_{tp}) + (Y \times B_y)$$ 
+$$y^{turnout~\%} \sim y^{mail~vote~\%}\beta_1 + \sum_{i = 1}^{4}y_i^{election~type}\beta_{i+1} + \sum_{j = 1}^{7}y_j^{election~year}\beta_{j+5} + \sum_{c = 1}^{64} x_c\beta_{c+13} $$ 
    
 Where C, T, Y are vectors of dummy variables and c, tp, y are indices of county, election type, and year. mail% is the percentage of the vote conducted through VBM. This model serves as a baseline for comparing others.
 
 **Model 2** A more informed baseline, model 1 plus variables of urban and white population:
 
-$$turnout_{c, tp, y} \sim (mail \%)_{c, tp, y} + (C\times B_c) + (T \times B_{tp}) + (Y \times B_y) + (urban\%)_c + (white\%)_c$$ 
+$$y^{turnout~\%} \sim y^{mail~vote~\%}\beta_1 + \sum_{i = 1}^{4}y_i^{election~type}\beta_{i+1} + \sum_{j = 1}^{7}y_j^{election~year}\beta_{j+5} + \sum_{c = 1}^{64} x_c\beta_{c+13} + x^{white~\%}\beta_{78} + x^{urban~\%}\beta_{79}$$ 
 This would be the "individual" level model from Gelman and Hill. I'm unsure what the "group" level for county would be. Maybe that part of the book would be more helpful for discerning effects on people's individual p-vote?
    
 Maybe more informative is what I did with exercise 12.2. The model tries to predict the concentration of a particular chemical based on treatment of children across time. Therefore the two levels are a visit by one individual child (here an election! so type, vbm_pct, year) and predictors for that individual child that are stable across time, like treatment type, or demographics (here race and urban pop per county). 
@@ -75,23 +75,23 @@ This means I can fit a model only based on election facts, with a variable for c
     
 **Model 3** A mixed-effects version of model 1, just adds mixed effects for county:
 
-$$turnout_{c, tp, y} \sim (mail \%)_{c, tp, y} + (T \times B_{tp}) + (Y \times B_y) + \alpha_{[c]}$$ 
+$$y^{turnout~\%} \sim y^{mail~vote~\%}\beta_1 + \sum_{i = 1}^{4}y_i^{election~type}\beta_{i+1} + \sum_{j = 1}^{7}y_j^{election~year}\beta_{j+5} + \alpha_{[c]}$$ 
     
 $$\alpha_{c} \sim N(0, \sigma_{\alpha}^2)$$
     
 **Model 4** A mixed-effects version of model 2:
    
-$$turnout_{c, tp, y} \sim (mail \%)_{c, tp, y} + (T \times B_{tp}) + (Y \times B_y) +  \alpha_{[c]}$$ 
+$$y^{turnout~\%} \sim y^{mail~vote~\%}\beta_1 + \sum_{i = 1}^{4}y_i^{election~type}\beta_{i+1} + \sum_{j = 1}^{7}y_j^{election~year}\beta_{j+5} + \alpha_{[c]}$$ 
    
-$$\alpha_{c} \sim N(D_c \gamma, \sigma_{\alpha}^2),~for~c = 1,...,64$$
+$$\alpha_{c} \sim N(x^{white~\%}\gamma_{1} + x^{urban~\%}\gamma_{2}, \sigma_{\alpha}^2),~for~c = 1,...,64$$
    
 Where D is a 2 x 64 matrix of the county level predictors and $\gamma$ a vector of coefficients for the county-level regression.    
 
 **Model 5** During one of my discussions with Andrew, we discussed the possibility of making a model that answers the question: "Does VBM affect counties with some particular characteristic *for which I don't have data* more than others?" As such, this model would substitute county-level effects with a set of 3-4 dummy variables created through my intuitive understanding of Colorado politics and counties. For example, maybe a distinciton between central Colorado urban counties, East Colorado plains counties, and West Colorado mountain counties. The model would look a bit like:
    
-$$turnout_{c, tp, y} \sim (mail \%)_{c, tp, y} + (T \times B_{tp}) + (Y \times B_y) +  (my~county~type)_i\times(\beta_{i})$$ 
-Where i is an indicator between the types of county.
+$$y^{turnout~\%} \sim y^{mail~vote~\%}\beta_1 + \sum_{i = 1}^{4}y_i^{election~type}\beta_{i+1} + \sum_{j = 1}^{7}y_j^{election~year}\beta_{j+5} + \sum_{c = 1}^{n} x^{county~classification}_c\beta_{c+13}$$ 
+Where $x^{county~classification}_c$ are $n$ dummy variables, one for each county classification group.
     
 **Model 6 ** As a check on the previous model, run a Principle Components Analysis on full demographic data from the 2010 census, to classify counties in the same number of groups. This model would be expected to *massively overfit*. Learning experience for all!
 
-**Note** All models can work as General Additive Models with some sort of non-linear smoothing function for year. Just replace $Y \times B_y$ with ns(year).
+**Note** All models can work as General Additive Models with some sort of non-linear smoothing function for year. Just replace $\sum_{j = 1}^{7}y_j^{election~year}\beta_{j+5}$ with $ns(year)$.
