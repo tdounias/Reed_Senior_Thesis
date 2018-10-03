@@ -47,3 +47,4 @@ Where i is an indicator between the types of county.
     
 **Model 6 ** As a check on the previous model, run a Principle Components Analysis on full demographic data from the 2010 census, to classify counties in the same number of groups. This model would be expected to *massively overfit*. Learning experience for all!
 
+**Note** All models can work as General Additive Models with some sort of non-linear smoothing function for year. Just replace $Y \times B_y$ with ns(year).
