@@ -113,6 +113,7 @@ Where matrices Z, Y are as described above, i is an indice for each voter, and l
    
 $$P(z^{voted}_{i, l} = 1) = logit^{-1}(Z_{i, l}\alpha + Y_l\beta + \alpha_{[c]})$$
    
-$$\alpha_{c} \sim N(x^{white~\%}\gamma_{1} + x^{urban~\%}\gamma_{2}, \sigma_{\alpha}^2),~for~c = 1,...,64$$
-   
+$$\alpha_{c} \sim N(X_c \gamma, \sigma_{\alpha}^2),~for~c = 1,...,64$$
+
+Where $X_c$ as defined above, and $\gamma$ a vector of coefficients.
 **Model 9** Include extra model with EM algorithm applied to 2015 data maybe?
