@@ -4,10 +4,10 @@
 \alias{counties}
 \title{Get Counties for a State out of Clean Reg Files}
 \usage{
-counties(file_source)
+counties(filesource)
 }
 \arguments{
-\item{reg}{Registration File location}
+\item{filesource}{Registration File location}
 }
 \value{
 A character vector of counties

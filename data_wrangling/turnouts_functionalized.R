@@ -33,14 +33,21 @@ turnout_calc <- function(regfile, histfile, el_date, county){
   #Filter out those with no voter registration
   nums <- nums[(nums$VOTER_ID %in% regfile$VOTER_ID), ]
   
+  mail_vote <- c("Absentee Carry", "Absentee Mail", "Mail Ballot", 
+                 "Mail Ballot - DRE")
+  
   nums <- nums %>%
     group_by(COUNTY_NAME) %>%
-    summarise(votes = sum(n()))
+    summarise(votes = sum(n()), 
+              mail_votes = sum(VOTING_METHOD %in% mail_vote))
   
   names(nums)[1] <- "county"
   
   #Now for a final step, to calculate turnout
   turnouts <- merge(nums, denoms, by = "county") %>%
-    mutate(turnout = votes/reg)
+    mutate(turnout = votes/reg, 
+           pct_vbm = mail_votes/votes)
+  
+  turnouts
 }
 

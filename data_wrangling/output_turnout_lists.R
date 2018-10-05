@@ -17,7 +17,7 @@ d1 <- add
 d1$FILE_YEAR <- "2011"
 
 d2 <- add
-d1$FILE_YEAR <- "2010"
+d2$FILE_YEAR <- "2010"
 
 vrf_packed <- rbind(d1, d2, vrf_packed)
 
@@ -31,8 +31,9 @@ types <- c("Primary", "Midterm", "Coordinated", "Primary", "General", "Coordinat
 turnout_list <- purrr::map(dates, ~ turnout_calc(vrf_packed, vhist_full, .x, county))
 
 for(i in 1:11){
-  turnout_list[[i]][5] <- dates[i]
-  turnout_list[[i]][6] <- types[i]
+  turnout_list[[i]][7] <- dates[i]
+  turnout_list[[i]][8] <- types[i]
+  names(turnout_list[[i]])[7:8] <- c("dates", "types")
 }
 
 save(turnout_list, file ="all_turnouts.RData")

@@ -195,15 +195,22 @@ turnout_calc <- function(regfile, histfile, el_date, county){
   #Filter out those with no voter registration
   nums <- nums[(nums$VOTER_ID %in% regfile$VOTER_ID), ]
   
+  mail_vote <- c("Absentee Carry", "Absentee Mail", "Mail Ballot", 
+                 "Mail Ballot - DRE")
+  
   nums <- nums %>%
     group_by(COUNTY_NAME) %>%
-    summarise(votes = sum(n()))
+    summarise(votes = sum(n()), 
+              mail_votes = sum(VOTING_METHOD %in% mail_vote))
   
   names(nums)[1] <- "county"
   
   #Now for a final step, to calculate turnout
   turnouts <- merge(nums, denoms, by = "county") %>%
-    mutate(turnout = votes/reg)
+    mutate(turnout = votes/reg, 
+           pct_vbm = mail_votes/votes)
+  
+  turnouts
 }
 
 #' Get turnout, registered voters, and total votes per vounty
@@ -292,7 +299,7 @@ var_table <- function(regfile, var_location, var_name) {
   var_table_out
 }
 
-#' From the list output of multiple turnout_calc()s, get county level data for graphind
+#' From the list output of multiple turnout_calc()s, get county level data for graphing/modeling
 #'
 #' @param regfile total registration file, with extra variable for year collected named FILE_YEAR
 #' @param turnouts_list a list created using the turnout_calc() function described previously
@@ -300,17 +307,15 @@ var_table <- function(regfile, var_location, var_name) {
 #' turnouts_county_graph(list_of_Maine_turnouts)
 #' 
 
-turnouts_county_graph <- function(turnout_list){
+turnouts_county_data <- function(turnout_list){
   turnouts_graph <- turnout_list[[1]] %>%
-    select(1, 4:6) %>%
-    mutate(V5 = year(V5)) %>%
-    rename(ELECTION_YEAR = V5, ELECTION_TYPE = V6)
+    select(1, 4:8) %>%
+    mutate(dates = year(dates)) 
   
   for(i in 2:11){
     temp <- turnout_list[[i]] %>%
-      select(1, 4:6) %>%
-      mutate(V5 = year(V5)) %>%
-      rename(ELECTION_YEAR = V5, ELECTION_TYPE = V6)
+      select(1, 4:8) %>%
+      mutate(dates = year(dates)) 
     
     turnouts_graph <- rbind(temp, turnouts_graph)
   }
