@@ -13,8 +13,6 @@ model1_dt$county <- as.factor(model1_dt$county)
 model1_dt$dates <- as.factor(model1_dt$dates)
 model1_dt$types <- as.factor(model1_dt$types)
 
-model1_dt <- filter(model1_dt, !is.na(model1_dt$reg))
-
 model1_lm <- lm(data = model1_dt, turnout ~ dates + types + pct_vbm + county)
 
 summary(model1_lm)

@@ -36,11 +36,11 @@ Since the unit of observation for the county level models I will apply are all c
    
 There are two exclusivelly election-level dicrete variables: year, and type of election. For both I define a series of indicator variables:
    
-$\bullet ~y_i^{election~type},~for~i\in [1, 4]$, for each election type (Midterm, Primary , Coordinated, General).  
+$\bullet ~y^{election~type}$, for each election type (Midterm, Primary , Coordinated, General).  
     
-$\bullet ~y_i^{election~year},~for~i\in [1, 7]$, for each election year, between 2010 and 2016.
+$\bullet ~y^{election~year}$, for each election year, between 2010 and 2016.
    
-I will also use $year$ as a variable for models using smoothing splines. All election level predictors will be summarized for the purposes of modelling in the 9 by 2 matrix $Y = (y_i^{election~type}, y_i^{election~year})$.
+I will also use $year$ as a variable for models using smoothing splines. All election level predictors will be summarized for the purposes of modelling in the 9 by 2 matrix $Y = (y^{election~type}, y^{election~year})$.
    
 ### Individual and Individual-per-Election Level
    

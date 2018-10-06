@@ -213,7 +213,7 @@ turnout_calc <- function(regfile, histfile, el_date, county){
   turnouts
 }
 
-#' Get turnout, registered voters, and total votes per vounty
+#' Get variable location data
 #'
 #' @param regfile total registration file, with extra variable for year collected named FILE_YEAR
 #' @param var_location Numerical location of the variable of interest
@@ -309,16 +309,88 @@ var_table <- function(regfile, var_location, var_name) {
 
 turnouts_county_data <- function(turnout_list){
   turnouts_graph <- turnout_list[[1]] %>%
-    select(1, 4:8) %>%
+    dplyr::select(1, 4:8) %>%
     mutate(dates = year(dates)) 
   
   for(i in 2:11){
     temp <- turnout_list[[i]] %>%
-      select(1, 4:8) %>%
+      dplyr::select(1, 4:8) %>%
       mutate(dates = year(dates)) 
     
     turnouts_graph <- rbind(temp, turnouts_graph)
   }
   
   turnouts_graph
+}
+
+#' Get data for individuals per election
+#'
+#' @param regfile total registration file, with extra variable for year collected named FILE_YEAR
+#' @param histfile complete history file across all reg file years
+#' @param el_dat the election date, in the Date format
+#' @param el_type the type of election
+#' @return A dataframe with individual data per election
+#' @examples
+#' turnout_calc(MAINE_12_to_17_REG_FILE, VHIST_MAINE, as.Date("2016-11-08), "General")
+#' 
+
+indiv_model_data <- function(regfile, histfile, el_date, el_type){
+  #Correct Date formating
+  if(typeof(regfile$REGISTRATION_DATE) != "double") regfile$REGISTRATION_DATE <- mdy(regfile$REGISTRATION_DATE)
+  
+  if(typeof(histfile$ELECTION_DATE) != "double") histfile$ELECTION_DATE <- mdy(histfile$ELECTION_DATE)
+  
+  regfile_current <- regfile %>%
+    filter(FILE_YEAR == year(el_date)) %>%
+    filter(REGISTRATION_DATE <= el_date - 22)
+  
+  ballots <- histfile %>%
+    filter(ELECTION_DATE == el_date) %>%
+    mutate(voted = 1)
+  
+  indiv_file <- left_join(regfile_current, ballots, by = "VOTER_ID") %>%
+    select(2:3, 5:8, 10, 11, 13, 16)
+  
+  #Fix NAs in type/date
+  indiv_file$ELECTION_TYPE <- el_type
+  indiv_file$ELECTION_DATE <- el_date
+  
+  #Find Age
+  indiv_file$BIRTH_YEAR <- as.numeric(year(el_date)) - indiv_file$BIRTH_YEAR
+  
+  #Rename
+  names(indiv_file)[3] <- "ACTIVE"
+  names(indiv_file)[4] <- "PARTY"
+  names(indiv_file)[5] <- "GENDER"
+  names(indiv_file)[6] <- "AGE"
+  
+  #Make VBM variable
+  mail_vote <- c("Absentee Carry", "Absentee Mail", "Mail Ballot", 
+                 "Mail Ballot - DRE")
+  
+  indiv_file$VOTING_METHOD <- ifelse(indiv_file$VOTING_METHOD %in% mail_vote, 1, 0)
+  
+  names(indiv_file)[9] <- "MAIL_VOTE"
+  
+  #Make Voted variable
+  indiv_file$voted <- ifelse(is.na(indiv_file$voted), 0, 1)
+  
+  indiv_file
+}
+
+#' From the list output of multiple indiv_model_data()s, get individual level data for graphing/modeling
+#'
+#' @param indiv_voter_list a list created using the indiv_model_data() function described previously
+#' @examples
+#' extract_indiv_model_data(list_of_Maine_individual_registrants_and_voters)
+#' 
+
+extract_indiv_model_data <- function(indiv_voter_list){
+  indiv_data <- indiv_voter_list[[1]]
+  
+  for(i in 2:11){
+    indiv_data <- rbind(indiv_data, indiv_voter_list[[i]])
+  }
+  
+  indiv_data
 }
