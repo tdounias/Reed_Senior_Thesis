@@ -3,6 +3,8 @@ output: pdf_document
 ---
 
 # Case Selection, Data, Model Parametrization
+   
+This thesis 
 
 ## The Centennial State and Its Voters  
 
@@ -107,4 +109,3 @@ I use two datasets from the Census. For both, the unit of observation is one of 
    
 In the Voter History files, the unit of observation here is a single ballot cast, and all variables are initially coded as character strings. This means that for each voter registered--and so included in the VRF--the history file should contain an observation for each time they voted. This file includes two types of data: first, identifiers for the election like county, date, description, and type; second, identifiers for the individual vote including voter ID and voting method.
    
-### Wrangling Difficulties and Solutions
