@@ -174,7 +174,7 @@ class.
   the outcome. Underlying those decisions is a nebulous, inconclusively
   answered question: are elections fair, and how can we make them more so.
   
-  The passage of the Help America Vote Act---or HAVA--(\emph{HAVA}, 2002),
+  The passage of the Help America Vote Act---or HAVA--(Robert Nay, 2002),
   which mandated states to update and consolidate public voter
   registration files, and created the US Elections Assistance Commission
   that makes available county level data, innovated the way we use data
@@ -256,7 +256,7 @@ class.
   \emph{decrease} turnout when measured as a percentage of the total
   registered voter count, but \emph{increase} turnout when measured
   against total population. I will specify how I calculate turnout in the
-  next chapter.\textbf{Need sourcing for this}
+  next chapter.
   
   Statistical models of turnout can be constructed at either the
   individual or community level. At the individual level, a model is built
@@ -294,8 +294,8 @@ class.
   nonpartisan), vote in previous election, party identification, political
   interest, and political knowledge'' (Smets \& Ham, 2013) are the most
   significant explanatory variables for turnout, along with income and
-  race. \textbf{\emph{I will add sources from books here}}. I will specify
-  the model I will use for turnout in the second chapter.
+  race. I will specify the model I will use for turnout in the second
+  chapter.
   
   \subsection{Theories of Voting}\label{theories-of-voting}
   
@@ -330,7 +330,7 @@ class.
     overwhelming predictor of turnout, Fowler (2006) posits that future
     voting behavior can be strongly predicted using individual voting
     history. This leads to the conclusion that individuals are set to
-    either be habitual voters, or habitual non-voters (Plutzer, 2002) by
+    either be habitual voters, or habitual non-voters ({\textbf{???}}) by
     their upbringing and social circumstances, locking them into distinct
     groups. (Fowler, 2006)
   \item
@@ -521,9 +521,9 @@ class.
   that are under transitionary systems (Gerber, Huber, \& Hill, 2013).
   R.M. Stein also reaches a similar conclusion when examining Colorado's
   practice of ``vote centers'', which are non-precinct attached polling
-  places, which can service multiple counties (Stein \& Vonnahme, 2008). I
-  include this paper here due to the link that voting centers have with
-  VBM, as they serve as drop-off points for mail-in ballots. Richey (2008)
+  places, which can service multiple counties ({\textbf{???}}). I include
+  this paper here due to the link that voting centers have with VBM, as
+  they serve as drop-off points for mail-in ballots. Richey (2008)
   examines the effects that Oregon's VBM program has on turnout by using
   past elections data, concluding a 10\% positive trend associated with
   the policy (Richey Sean, 2008). This effect is studied again by Gronke
@@ -534,8 +534,8 @@ class.
   but focusing on Oregon's Motor Voter program, find evidence of positive
   association to turnout {[}@{]}. I include these effects due to Oregon
   being an exclusively VBM state, and because this paper uses a
-  ``synthetic control group'' model, which \textbf{might} be discussed in
-  a following section. Lastly, I include a study conducted by Pantheon
+  ``synthetic control group'' model, a particularly interesting
+  statistical technique. Lastly, I include a study conducted by Pantheon
   Analytics on Colorado, which compares actual turnout to predicted levels
   for VBM counties in Colorado. The results show a positive effect of
   approximately 3.3\% due to VBM (Edelman \& Glastris, 2018).
@@ -546,10 +546,6 @@ class.
   of being careful when constructing models and hypotheses to test VBM's
   effects on turnout, as assumptions made in the process can critically
   impact the results.
-  
-  \subsection{The Gerber Piece}\label{the-gerber-piece}
-  
-  This is conditional on if I do a replication of Gerber.
   
   \section{Voter Registration Files}\label{voter-registration-files}
   
@@ -646,17 +642,11 @@ class.
     (2017)
   \end{itemize}
   
-  \subsection{Issues}\label{issues}
-  
-  \emph{Grimmer (2015) \{Not always best to do inferential models\},
-  Ansolabehere and Hersch (2010) \{Problems with Voter Reg Files\}}
-  
-  \chapter{Hypotheses, Data and
-  Methods}\label{hypotheses-data-and-methods}
+  \chapter{Hypotheses and Methods}\label{hypotheses-and-methods}
   
   In this chapter, I introduce a series of questions resulting from the
   literature review of Chapter 1, which I will use to formulate
-  hypotheses. I will then operationalize those hypotheses, and attempt to
+  hypotheses. I will then operationalize these hypotheses, and attempt to
   predict analytical outcomes based on the theories of Chapter 1.
   Following is a brief introduction to the State of Colorado--on which I
   apply my hypotheses--and an outline of the data used for this thesis,
@@ -673,6 +663,16 @@ class.
   \subsection{Criteria}\label{criteria}
   
   \subsection{Expected Results}\label{expected-results}
+  
+  \section{Methodology}\label{methodology}
+  
+  \subsection{EDA}\label{eda}
+  
+  \subsection{Description and Parametrization of
+  Models}\label{description-and-parametrization-of-models}
+  
+  \chapter{Case Selection, Data, Model
+  Parametrization}\label{case-selection-data-model-parametrization}
   
   \section{The Centennial State and Its
   Voters}\label{the-centennial-state-and-its-voters}
@@ -691,19 +691,14 @@ class.
   Collins. Apart from the Western town of Grand Junction, the rest of the
   population resides in vast rural areas.
   
-  \emph{Insert population map with towns, geography superimposed}
-  
   Continuing with demographic characteristics, Colorado has a median age
-  of 34.3, median household income of \$65,685, and poverty rate of
-  \emph{find}. Colorado's population is mostly white (\emph{find}), with a
-  higher minority group population density in its Southern regions, as
-  shown on Map ( \emph{insert racial demographics map}). These statistics,
-  along with national averages, are also presented in table \emph{make and
-  insert a table}.
+  of 34.3, and median household income of \$65,685. Colorado's population
+  is mostly white, with a higher minority group population density in its
+  Southern regions, as shown on the following map. (Bureau, n.d.)
   
   \begin{figure}
   
-  {\centering \includegraphics[width=0.5\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_white_county_map} 
+  {\centering \includegraphics[width=0.4\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_white_county_map} 
   
   }
   
@@ -711,13 +706,33 @@ class.
   \end{figure}
   
   The State Capital is Denver. Colorado is split into 64 Counties, of
-  which the most populous are, in alphabetical order, the following eight:
-  El Paso, Denver, Arapahoe, Jefferson, Adams, Larimer, Boulder, and
-  Douglas. These counties comprise 73\% of the total population of
+  which the most populous are, in no particular order, the following
+  eight: El Paso, Denver, Arapahoe, Jefferson, Adams, Larimer, Boulder,
+  and Douglas. These counties comprise 73\% of the total population of
   Colorado.
   
-  \emph{Insert county table here, insert map with only counties colorized
-  here}
+  \begin{longtable}[]{@{}lrrl@{}}
+  \toprule
+  County & Total Population & CO Population \% & Largest Metro
+  Area\tabularnewline
+  \midrule
+  \endhead
+  Adams & 441603 & 0.0878079 & Denver-Aurora-Lakewood Metro
+  Area\tabularnewline
+  Arapahoe & 572003 & 0.1137365 & Denver-Aurora-Lakewood Metro
+  Area\tabularnewline
+  Boulder & 294567 & 0.0585714 & Boulder\tabularnewline
+  Denver & 600158 & 0.1193348 & Denver\tabularnewline
+  Douglas & 285465 & 0.0567616 & Denver-Aurora-Lakewood Metro
+  Area\tabularnewline
+  El Paso & 622263 & 0.1237301 & Colorado Springs\tabularnewline
+  Jefferson & 534543 & 0.1062880 & Denver-Aurora-Lakewood Metro
+  Area\tabularnewline
+  Larimer & 299630 & 0.0595781 & Fort COllins\tabularnewline
+  Other & 1378964 & 0.2741917 &\tabularnewline
+  Colorado & 5029196 & 100.0000000 &\tabularnewline
+  \bottomrule
+  \end{longtable}
   
   \subsection{Voting in Colorado}\label{voting-in-colorado}
   
@@ -727,14 +742,120 @@ class.
   registered in that county. Unsurprisingly, the same eight most populous
   counties are also the counties with the majority of registered voters,
   as their registrants comprise 73\% of total Colorado registered voters
-  (as of November 2017). As Table ( \emph{insert table}) shows, these
-  eight counties have a registration rate between 60-80\%, compared to a
-  Colorado-wide rate of about 67\%. Registration rates for all counties
-  are also graphically depicted in Figure 2.
+  (as of November 2017). As Table shows, these eight counties have a
+  registration rate between 60-80\%, compared to a Colorado-wide rate of
+  about 67\%. Registration rates for all counties are also graphically
+  depicted in Figure 2.
+  
+  \begin{longtable}[]{@{}lrlr@{}}
+  \toprule
+  \begin{minipage}[b]{0.10\columnwidth}\raggedright\strut
+  County\strut
+  \end{minipage} & \begin{minipage}[b]{0.23\columnwidth}\raggedleft\strut
+  Total Registered Voters\strut
+  \end{minipage} & \begin{minipage}[b]{0.30\columnwidth}\raggedright\strut
+  County Voter Registration Rate\strut
+  \end{minipage} & \begin{minipage}[b]{0.26\columnwidth}\raggedleft\strut
+  \% of Statewide Registrants\strut
+  \end{minipage}\tabularnewline
+  \midrule
+  \endhead
+  \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+  Adams\strut
+  \end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedleft\strut
+  270303\strut
+  \end{minipage} & \begin{minipage}[t]{0.30\columnwidth}\raggedright\strut
+  0.612095026528352\strut
+  \end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\raggedleft\strut
+  0.0723838\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+  Arapahoe\strut
+  \end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedleft\strut
+  410546\strut
+  \end{minipage} & \begin{minipage}[t]{0.30\columnwidth}\raggedright\strut
+  0.717733997898612\strut
+  \end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\raggedleft\strut
+  0.1099391\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+  Boulder\strut
+  \end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedleft\strut
+  237091\strut
+  \end{minipage} & \begin{minipage}[t]{0.30\columnwidth}\raggedright\strut
+  0.804879704787026\strut
+  \end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\raggedleft\strut
+  0.0634900\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+  Denver\strut
+  \end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedleft\strut
+  450616\strut
+  \end{minipage} & \begin{minipage}[t]{0.30\columnwidth}\raggedright\strut
+  0.750828948376927\strut
+  \end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\raggedleft\strut
+  0.1206694\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+  Douglas\strut
+  \end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedleft\strut
+  237659\strut
+  \end{minipage} & \begin{minipage}[t]{0.30\columnwidth}\raggedright\strut
+  0.832532884942112\strut
+  \end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\raggedleft\strut
+  0.0636421\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+  El Paso\strut
+  \end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedleft\strut
+  445708\strut
+  \end{minipage} & \begin{minipage}[t]{0.30\columnwidth}\raggedright\strut
+  0.716269487338955\strut
+  \end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\raggedleft\strut
+  0.1193551\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+  Jefferson\strut
+  \end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedleft\strut
+  422362\strut
+  \end{minipage} & \begin{minipage}[t]{0.30\columnwidth}\raggedright\strut
+  0.790136621375642\strut
+  \end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\raggedleft\strut
+  0.1131033\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+  Larimer\strut
+  \end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedleft\strut
+  250626\strut
+  \end{minipage} & \begin{minipage}[t]{0.30\columnwidth}\raggedright\strut
+  0.836451623669192\strut
+  \end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\raggedleft\strut
+  0.0671145\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+  Other\strut
+  \end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedleft\strut
+  1009392\strut
+  \end{minipage} & \begin{minipage}[t]{0.30\columnwidth}\raggedright\strut
+  ---\strut
+  \end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\raggedleft\strut
+  0.2703027\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+  Colorado\strut
+  \end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedleft\strut
+  3734303\strut
+  \end{minipage} & \begin{minipage}[t]{0.30\columnwidth}\raggedright\strut
+  ---\strut
+  \end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\raggedleft\strut
+  100.0000000\strut
+  \end{minipage}\tabularnewline
+  \bottomrule
+  \end{longtable}
   
   \begin{figure}
   
-  {\centering \includegraphics[width=0.5\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_registered_county_map} 
+  {\centering \includegraphics[width=0.4\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_registered_county_map} 
   
   }
   
@@ -748,7 +869,7 @@ class.
   
   \begin{figure}
   
-  {\centering \includegraphics[width=0.5\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/party_affiliation_county_map} 
+  {\centering \includegraphics[width=0.4\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/party_affiliation_county_map} 
   
   }
   
@@ -773,7 +894,35 @@ class.
   of traditional polling places, instituted same-day voter registration,
   and revamped the way active and inactive voter status was designated on
   voter rolls--more on this in future sections. These changes are
-  summarised in Table ( \emph{insert table}).
+  summarised in Table.
+  
+  \begin{longtable}[]{@{}ll@{}}
+  \toprule
+  \begin{minipage}[b]{0.04\columnwidth}\raggedright\strut
+  Year\strut
+  \end{minipage} & \begin{minipage}[b]{0.90\columnwidth}\raggedright\strut
+  Key Changes\strut
+  \end{minipage}\tabularnewline
+  \midrule
+  \endhead
+  \begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+  1992\strut
+  \end{minipage} & \begin{minipage}[t]{0.90\columnwidth}\raggedright\strut
+  No Excuse Absentee Statewide Implementation\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+  2008\strut
+  \end{minipage} & \begin{minipage}[t]{0.90\columnwidth}\raggedright\strut
+  Permanent No-Excuse VBM Lists, Option of Full-VBM Elections\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.04\columnwidth}\raggedright\strut
+  2013\strut
+  \end{minipage} & \begin{minipage}[t]{0.90\columnwidth}\raggedright\strut
+  Automatic Mail Ballot System Implemented Statewide, Established Vote
+  Centers\strut
+  \end{minipage}\tabularnewline
+  \bottomrule
+  \end{longtable}
   
   Colorado presents such an interesting case for research on Vote By Mail
   exactly because it has gone through such a long transitional process to
@@ -883,22 +1032,18 @@ class.
   \subsection{Wrangling Difficulties and
   Solutions}\label{wrangling-difficulties-and-solutions}
   
-  \section{Methodology}\label{methodology}
-  
-  \subsection{EDA}\label{eda}
-  
-  \subsection{Description and Parametrization of
-  Models}\label{description-and-parametrization-of-models}
-  
-  \section{Gerber Replication}\label{gerber-replication}
-  
   \chapter{Results}\label{results}
   
   \section{EDA}\label{eda-1}
   
-  \section{Model Output}\label{model-output}
+  \section{Models}\label{models}
   
-  \section{Gerber Expansion Results}\label{gerber-expansion-results}
+  \subsection{County Level Models}\label{county-level-models}
+  
+  \subsection{Individual Level Models}\label{individual-level-models}
+  
+  \chapter{Expanding on the Previous
+  Models}\label{expanding-on-the-previous-models}
   
   \chapter*{Conclusion}\label{conclusion}
   \addcontentsline{toc}{chapter}{Conclusion}
@@ -918,82 +1063,86 @@ class.
   
   \hypertarget{refs}{}
   \hypertarget{ref-aldrich_rational_1993}{}
-  Aldrich, J. H. (1993). Rational choice and turnout. \emph{American
+  Aldrich, J. H. (1993). Rational Choice and Turnout. \emph{American
   Journal of Political Science}, \emph{37}(1), 246--278.
   \url{http://doi.org/10.2307/2111531}
   
   \hypertarget{ref-ansolabehere_quality_2010}{}
-  Ansolabehere, S., \& Hersh, E. (2010). The quality of voter registration
-  records: A state-by-state analysis. \emph{Institute for Quantitative
+  Ansolabehere, S., \& Hersh, E. (2010). The Quality of Voter Registration
+  Records: A State-by-State Analysis. \emph{Institute for Quantitative
   Social Science and Caltech/MIT Voting Technology Project Working Paper}.
   Retrieved from
   \url{https://dataverse.harvard.edu/dataset.xhtml?persistentId=hdl:1902.1/18550}
   
   \hypertarget{ref-ansolabehere_validation:_2012}{}
-  Ansolabehere, S., \& Hersh, E. (2012). Validation: What big data reveal
-  about survey misreporting and the real electorate. \emph{Political
-  Analysis}, \emph{20}(4), 437--459.
+  Ansolabehere, S., \& Hersh, E. (2012). Validation: What Big Data Reveal
+  About Survey Misreporting and the Real Electorate. \emph{Political
+  Analysis}, \emph{20}(04), 437--459.
   \url{http://doi.org/10.1093/pan/mps023}
   
   \hypertarget{ref-ansolabehere_adgn:_2017}{}
-  Ansolabehere, S., \& Hersh, E. D. (2017). ADGN: An algorithm for record
-  linkage using address, date of birth, gender, and name. \emph{Statistics
+  Ansolabehere, S., \& Hersh, E. D. (2017). ADGN: An Algorithm for Record
+  Linkage Using Address, Date of Birth, Gender, and Name. \emph{Statistics
   and Public Policy}, \emph{4}(1), 1--10.
   \url{http://doi.org/10.1080/2330443X.2017.1389620}
   
   \hypertarget{ref-bergman_changing_2011}{}
-  Bergman, E., \& Yates, P. A. (2011). Changing election methods: How does
-  mandated vote-by-mail affect individual registrants? \emph{Election Law
+  Bergman, E., \& Yates, P. A. (2011). Changing Election Methods: How Does
+  Mandated Vote-By-Mail Affect Individual Registrants? \emph{Election Law
   Journal: Rules, Politics, and Policy}, \emph{10}(2), 115--127.
   \url{http://doi.org/10.1089/elj.2010.0079}
   
   \hypertarget{ref-berinsky_perverse_2005}{}
-  Berinsky, A. J. (2005). The perverse consequences of electoral reform in
-  the united states. \emph{American Politics Research}, \emph{33}(4),
+  Berinsky, A. J. (2005). The Perverse Consequences of Electoral Reform in
+  the United States. \emph{American Politics Research}, \emph{33}(4),
   471--491. \url{http://doi.org/10.1177/1532673X04269419}
   
   \hypertarget{ref-burden_voter_2000}{}
-  Burden, B. C. (2000). Voter turnout and the national election studies.
+  Burden, B. C. (2000). Voter Turnout and the National Election Studies.
   \emph{Political Analysis}, \emph{8}(4), 389--398.
   \url{http://doi.org/10.1093/oxfordjournals.pan.a029823}
   
   \hypertarget{ref-burden_new_1998}{}
-  Burden, B. C., \& Kimball, D. C. (1998). A new approach to the study of
-  ticket splitting. \emph{American Political Science Review},
+  Burden, B. C., \& Kimball, D. C. (1998). A New Approach to the Study of
+  Ticket Splitting. \emph{The American Political Science Review},
   \emph{92}(3), 533--544. \url{http://doi.org/10.2307/2585479}
   
   \hypertarget{ref-burden_election_2014}{}
   Burden, B. C., Canon, D. T., Mayer, K. R., \& Moynihan, D. P. (2014).
-  Election laws, mobilization, and turnout: The unanticipated consequences
-  of election reform. \emph{American Journal of Political Science},
-  \emph{58}(1), 95--109.
+  Election Laws, Mobilization, and Turnout: The Unanticipated Consequences
+  of Election Reform. \emph{American Journal of Political Science},
+  \emph{58}(1), 95--109. \url{http://doi.org/10.1111/ajps.12063}
+  
+  \hypertarget{ref-census_data_2010}{}
+  Bureau, U. C. (n.d.). U.S. Census Bureau QuickFacts: Colorado. Retrieved
+  from \url{https://www.census.gov/quickfacts/co}
   
   \hypertarget{ref-deufel_race_2010}{}
-  Deufel, B. J., \& Kedar, O. (2010). Race and turnout in u.S. elections
-  exposing hidden effects. \emph{Public Opinion Quarterly}, \emph{74}(2),
+  Deufel, B. J., \& Kedar, O. (2010). Race And Turnout In U.S. Elections
+  Exposing Hidden Effects. \emph{Public Opinion Quarterly}, \emph{74}(2),
   286--318. \url{http://doi.org/10.1093/poq/nfq017}
   
   \hypertarget{ref-edelman_analysis_2018}{}
-  Edelman, G., \& Glastris, P. (2018). Analysis letting people vote at
-  home increases voter turnout. here's proof. \emph{Washington Post}.
+  Edelman, G., \& Glastris, P. (2018). Analysis Letting people vote at
+  home increases voter turnout. Here's proof. \emph{Washington Post}.
   Retrieved from
   \url{https://www.washingtonpost.com/outlook/letting-people-vote-at-home-increases-voter-turnout-heres-proof/2018/01/26/d637b9d2-017a-11e8-bb03-722769454f82_story.html}
   
   \hypertarget{ref-edlin_voting_2007}{}
-  Edlin, A., Gelman, A., \& Kaplan, N. (2007). Voting as a rational
-  choice: Why and how people vote to improve the well-being of others.
+  Edlin, A., Gelman, A., \& Kaplan, N. (2007). Voting as a Rational
+  Choice: Why and How People Vote To Improve the Well-Being of Others.
   \emph{Rationality and Society}, \emph{19}(3), 293--314.
   \url{http://doi.org/10.1177/1043463107077384}
   
   \hypertarget{ref-fowler_habitual_2006}{}
-  Fowler, J. H. (2006). Habitual voting and behavioral turnout.
+  Fowler, J. H. (2006). Habitual Voting and Behavioral Turnout.
   \emph{Journal of Politics}, \emph{68}(2), 335--344.
   \url{http://doi.org/10.1111/j.1468-2508.2006.00410.x}
   
   \hypertarget{ref-gerber_identifying_2013}{}
   Gerber, A. S., Huber, G. A., \& Hill, S. J. (2013). Identifying the
-  effect of all-mail elections on turnout: Staggered reform in the
-  evergreen state\textless{}a
+  Effect of All-Mail Elections on Turnout: Staggered Reform in the
+  Evergreen State\textless{}a
   href=``\#fn2606''\textgreater{}*\textless{}/a\textgreater{}.
   \emph{Political Science Research and Methods}, \emph{1}(1), 91--116.
   \url{http://doi.org/10.1017/psrm.2013.5}
@@ -1004,49 +1153,38 @@ class.
   \url{http://doi.org/10.1016/j.electstud.2005.09.002}
   
   \hypertarget{ref-gronke_voting_2012}{}
-  Gronke, P., \& Miller, P. (2012). Voting by mail and turnout in oregon:
-  Revisiting southwell and burchett. \emph{American Politics Research},
+  Gronke, P., \& Miller, P. (2012). Voting by Mail and Turnout in Oregon:
+  Revisiting Southwell and Burchett. \emph{American Politics Research},
   \emph{40}(6), 976--997. \url{http://doi.org/10.1177/1532673X12457809}
   
   \hypertarget{ref-keele_geographic_2017}{}
-  Keele, L., \& Titiunik, R. (2017). Geographic natural experiments with
-  interference: The effect of all-mail voting on turnout in colorado.
+  Keele, L., \& Titiunik, R. (2017). Geographic Natural Experiments with
+  Interference: The Effect of All-Mail Voting on Turnout in Colorado.
   
   \hypertarget{ref-matsusaka_voter_1999}{}
   Matsusaka, J. G., \& Palda, F. (1999). Voter turnout: How much can we
-  explain? \emph{Public Choice}, \emph{98}(3), 431--446.
+  explain? \emph{Public Choice}, \emph{98}(3-4), 431--446.
   \url{http://doi.org/10.1023/A:1018328621580}
   
   \hypertarget{ref-neiheisel_impact_2012}{}
-  Neiheisel, J. R., \& Burden, B. C. (2012). The impact of election day
-  registration on voter turnout and election outcomes. \emph{American
+  Neiheisel, J. R., \& Burden, B. C. (2012). The Impact of Election Day
+  Registration on Voter Turnout and Election Outcomes. \emph{American
   Politics Research}, \emph{40}(4), 636--664.
   \url{http://doi.org/10.1177/1532673X11432470}
   
-  \hypertarget{ref-plutzer_becoming_2002}{}
-  Plutzer, E. (2002). Becoming a habitual voter: Inertia, resources, and
-  growth in young adulthood. \emph{The American Political Science Review},
-  \emph{96}(1), 41--56. Retrieved from
-  \url{http://www.jstor.org/stable/3117809}
-  
   \hypertarget{ref-richey_sean_voting_2008}{}
-  Richey Sean. (2008). Voting by mail: Turnout and institutional reform in
-  oregon*. \emph{Social Science Quarterly}, \emph{89}(4), 902--915.
+  Richey Sean. (2008). Voting by Mail: Turnout and Institutional Reform in
+  Oregon*. \emph{Social Science Quarterly}, \emph{89}(4), 902--915.
   \url{http://doi.org/10.1111/j.1540-6237.2008.00590.x}
+  
+  \hypertarget{ref-robert_nay_help_2002}{}
+  Robert Nay. (2002). The Help America Vote Act of 2002.
   
   \hypertarget{ref-smets_embarrassment_2013}{}
   Smets, K., \& Ham, C. van. (2013). The embarrassment of riches? A
   meta-analysis of individual-level research on voter turnout.
   \emph{Electoral Studies}, \emph{32}(2), 344--359.
   \url{http://doi.org/10.1016/j.electstud.2012.12.006}
-  
-  \hypertarget{ref-stein_engaging_2008}{}
-  Stein, R. M., \& Vonnahme, G. (2008). Engaging the unengaged voter: Vote
-  centers and voter turnout. \emph{The Journal of Politics}, \emph{70}(2),
-  487--497. \url{http://doi.org/10.1017/S0022381608080456}
-  
-  \hypertarget{ref-robert_nay_help_2002}{}
-  The help america vote act of 2002, Pub. L. No. HR3529 (2002).
 
 
   % Index?

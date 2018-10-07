@@ -87,7 +87,11 @@ Immediately below is the chunk for Chapter 2.
 <!--
 Add other chunks here for other chapters in your thesis.  Note that if you use the `child =` parameter, you can't include anything else in your chunk.
 -->
+```{r chapter4, child = 'chap4.Rmd'}
+```
 
+```{r chapter5, child = 'chap5.Rmd'}
+```
 
 ```{r conclusion, child = 'conclusion.Rmd'}
 ```

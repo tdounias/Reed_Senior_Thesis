@@ -1,38 +1,110 @@
 ---
-header-includes:
-- \usepackage{graphicx,latexsym}
-- \usepackage{amssymb,amsthm,amsmath}
-- \usepackage{longtable,booktabs,setspace}
+output: pdf_document
 ---
 
-<!--
-You can delete the header-includes (lines 3-6 above) if you like and also the chunk below since it is loaded in the skeleton.Rmd file.  They are included so that chap3.Rmd will compile by itself when you hit Knit PDF.
--->
+# Case Selection, Data, Model Parametrization
 
-```{r, include = FALSE}
-# This chunk ensures that the reedtemplates package is
-# installed and loaded. This reedtemplates package includes
-# the template files for the thesis and also two functions
-# used for labeling and referencing
-if(!require(devtools))
-  install.packages("devtools", repos = "http://cran.rstudio.com")
-if(!require(dplyr))
-    install.packages("dplyr", repos = "http://cran.rstudio.com")
-if(!require(ggplot2))
-    install.packages("ggplot2", repos = "http://cran.rstudio.com")
-if(!require(reedtemplates)){
-  library(devtools)
-  devtools::install_github("ismayc/reedtemplates")
-  }
-library(reedtemplates)
-flights <- read.csv("data/flights.csv")
+## The Centennial State and Its Voters  
+
+### Demographics and Characteristics
+   
+Colorado--named the Centennial State due to assuming statehood on the centennial of the Union--lies in the Southwestern United States, with its Western half squarely atop the Rocky Mountains. Based on its estimated population of just over 5.5 million, Colorado is the 21st most populous state, and ranks 37th in population density. The vast majority of that population is gathered in a series of urban areas that comprise a North-to-South strip in the middle of the state, containing the Denver-Aurora-Lakewood Metro Area, Colorado Springs, Pueblo, and Fort Collins. Apart from the Western town of Grand Junction, the rest of the population resides in vast rural areas.  
+  
+Continuing with demographic characteristics, Colorado has a median age of 34.3, and median household income of $65,685. Colorado's population is mostly white, with a higher minority group population density in its Southern regions, as shown on the following map. [@census_data_2010]
+
+```{r white pct map, echo=FALSE, fig.cap="Map of Percentage of White Residents Per County", out.width = '40%', fig.align='center'}
+knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_white_county_map.png")
+```
+   
+The State Capital is Denver. Colorado is split into 64 Counties, of which the most populous are, in no particular order, the following eight:  El Paso, Denver, Arapahoe, Jefferson, Adams, Larimer, Boulder, and Douglas. These counties comprise 73% of the total population of Colorado.  
+
+|County    | Total Population| CO Population %|Largest Metro Area                |
+|:---------|----------------:|---------------:|:---------------------------------|
+|Adams     |           441603|       0.0878079|Denver-Aurora-Lakewood Metro Area |
+|Arapahoe  |           572003|       0.1137365|Denver-Aurora-Lakewood Metro Area |
+|Boulder   |           294567|       0.0585714|Boulder                           |
+|Denver    |           600158|       0.1193348|Denver                            |
+|Douglas   |           285465|       0.0567616|Denver-Aurora-Lakewood Metro Area |
+|El Paso   |           622263|       0.1237301|Colorado Springs                  |
+|Jefferson |           534543|       0.1062880|Denver-Aurora-Lakewood Metro Area |
+|Larimer   |           299630|       0.0595781|Fort COllins                      |
+|Other     |          1378964|       0.2741917|                                  |
+|Colorado  |          5029196|     100.0000000|                                  |
+
+
+### Voting in Colorado  
+    
+Each County individually administrates local, coordinated, primary, and general elections, under the supervision of the Colorado Secretary of State. This means that each county individually handles the voters registered in that county. Unsurprisingly, the same eight most populous counties are also the counties with the majority of registered voters, as their registrants comprise 73% of total Colorado registered voters (as of November 2017). As Table shows, these eight counties have a registration rate between 60-80%, compared to a Colorado-wide rate of about 67%. Registration rates for all counties are also graphically depicted in Figure 2.
+    
+County    | Total Registered Voters|County Voter Registration Rate | % of Statewide Registrants|
+|:---------|-----------------------:|:------------------------------|--------------------------:|
+|Adams     |                  270303|0.612095026528352              |                  0.0723838|
+|Arapahoe  |                  410546|0.717733997898612              |                  0.1099391|
+|Boulder   |                  237091|0.804879704787026              |                  0.0634900|
+|Denver    |                  450616|0.750828948376927              |                  0.1206694|
+|Douglas   |                  237659|0.832532884942112              |                  0.0636421|
+|El Paso   |                  445708|0.716269487338955              |                  0.1193551|
+|Jefferson |                  422362|0.790136621375642              |                  0.1131033|
+|Larimer   |                  250626|0.836451623669192              |                  0.0671145|
+|Other     |                 1009392|---                            |                  0.2703027|
+|Colorado  |                 3734303|---                            |                100.0000000|
+
+```{r reg per county map, echo=FALSE, fig.cap="Map of Registration Rates Per County", out.width = '40%', fig.align='center'}
+knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_registered_county_map.png")
 ```
 
+In terms of Party registration, Colorado as a whole leans democratic by a very narrow margin. This is also reflected in the state's Cook Partisan Voting Index of D +1, making it a solidly purple battleground state (Figure 3).
 
-# Results
+```{r party reg per county map, echo=FALSE, fig.cap="Map of Party Affiliation Per County", out.width = '40%', fig.align='center'}
+knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/party_affiliation_county_map.png")
+```
+   
+In the past 25 years, there have been a series of key changes in the way Colorado administers elections, in relation to Vote By Mail and other reforms targeted and expanding the democratic franchise. In 1992, Colorado introduced no-excuse absentee voting, allowing voters to either physically pick up a mail ballot at a Vote Center or County Office, or have a ballot mailed to them prior to election day. In 2008, this reform was expanded to a permanent Vote-By-Mail system, which gave voters the option to be permanently put on a list of addresses that received mail ballots prior to the election. The State also entered a transitional status to full mail elections, giving counties the option to make all coordinated local elections, general elections, and primary elections exclusively VBM. In 2013, the Colorado State Legislature passed HB13-1303: The Voter Access and Modernized Elections Act, which mandated that every voter currently registered receive a mail ballot for all future elections. The Act also expanded the use of Vote Centers instead of traditional polling places, instituted same-day voter registration, and revamped the way active and inactive voter status was designated on voter rolls--more on this in future sections. These changes are summarised in Table.
+  
+|Year |Key Changes                                                                                                                 |
+|:----|:---------------------------------------------------------------------------------------------------------------------------|
+|1992 |No Excuse Absentee Statewide Implementation                                                                                 |
+|2008 |Permanent No-Excuse VBM Lists, Option of Full-VBM Elections                                                                 |
+|2013 |Automatic Mail Ballot System Implemented Statewide, Established Vote Centers                                                |
+    
+Colorado presents such an interesting case for research on Vote By Mail exactly because it has gone through such a long transitional process to reach its current elections system. It has steadily developed voting policy through a mixture of state mandates, county action, and outside policy motivations. It gives researchers access to approximatelly 22 years during which at least part of the state conducted elections partially by mail, making comparative, county- or individual- level case studies particularly alluring.
+  
+## The Data  
 
-## EDA
+This thesis relies on county and individual level models to draw conclusions on voting behaviours, and how they are affected by voting method. As such, the data I need will optimally contain the following:
 
-## Model Output
+* **County and individual level demographic characteristics**: race, gender, urban population
+  
+* **County and individual level voting data**: turnout, party registration, total registrants
+  
+* **Information on individual elections**: date, ballots cast, voting methods, county, election descriptions
+  
+In the process of my research, I have acquired sufficient data to cover the second and third of these areas. I was unable to procure individual level data on demographic characteristics apart from gender, age, and party registration. However, reasonable conclusions can still be drawn from county or precinct aggregates.
+  
+### Sources
+  
+I used two sources of data: Colorado voter records procured from the Colorado Secretary of State's office, and demographic data from the 2010 US Census. In the process of procuring these data I was aided by a series of other researchers and professionals with experience in the field of elections administration; they are mentioned in my acknowledgements.
 
-## Gerber Expansion Results
+#### 2010 US Census
+   
+The US Census is conducted country-wode every ten years, with the goal of procuring accurate data on the demographic characteristics of the population. The Census uses a combination of federal field workers conducting door-to-door canvassing and statistical methods for data aggregation. From the 2010 Census--which is publically available online--I get total population counts, characteristics on race, and rural/urban population counts for Colorado.  
+   
+#### Colorado Voter Files
+
+As any state, Colorado maintains a statewide registry of all currently registered voters. This registry is typically under the purview of the Secretary of State--in this case, Wayne W. Williams. Voter Registration Files are constantly updated with new information on existing voters, new voters, or with the removal of inactive or otherwise ineligible voters. Therefore, this file will be different every time it is accessed or shared. Based on when this file is accessed, only a "snapshot" of the file can be obtained. I have managed to procure "snapshots" for each year between 2012 and 2017.  
+    
+Similarly with VRFs, a Voter History File is maintained and constantly updated by the state. This file is uniquelly connected to its VRF: only voters showing up as registrants will have their histories included. I have similarly procured "snapshots" of the Voter History File for the years between 2012 and 2017.
+
+### First-Glance Description   
+
+#### 2010 US Census
+   
+I use two datasets from the Census. For both, the unit of observation is one of the 64 counties of Colorado, and both include the same total population counts. One contains racial demographic characteristics and the other contain percentages of rural and urban populations in each county. The racial demographic dataset needed some wrangling work to extract a percentage of white residents in each county. Individuals were coded as "white", that identified as exclusivelly white--this doesn't include mixed-race individuals reporting white ancestry.
+   
+#### Colorado Voter Files
+
+  In the Voter Registration files, the unit of observation is the individual voter, and all variables are initially coded as character strings. Each voter is assigned a unique voter ID, which serves as a point of refference between the two files. Broadly speaking, data in this file can be divided between three categories: first, personal identification information like address, ZIP code, or phone number; second, demographic information like age and gender; third, information pertinent to elections administration like congressional district, local elections for which the individual should receive a ballot, voter ID, and party registration. I will further elaborate on relevant variables in the wrangling section.
+   
+In the Voter History files, the unit of observation here is a single ballot cast, and all variables are initially coded as character strings. This means that for each voter registered--and so included in the VRF--the history file should contain an observation for each time they voted. This file includes two types of data: first, identifiers for the election like county, date, description, and type; second, identifiers for the individual vote including voter ID and voting method.
+   
+### Wrangling Difficulties and Solutions

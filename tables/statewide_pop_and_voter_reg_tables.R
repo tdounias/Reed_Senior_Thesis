@@ -49,7 +49,7 @@ names(pop_table) <- c("County", "Total Population", "Total Registered Voters",
                       "Largest Metro Area")
 
 #First table, of statewide population
-print(xtable(select(pop_table, 1, 2, 5, 7), type = "latex", booktabs = TRUE))
+kable(select(pop_table, 1, 2, 5, 7))
 
 #Second Table, of Voter registration
-print(xtable(select(pop_table, 1, 3, 4, 6), type = "latex", booktabs = TRUE))
+kable(select(pop_table, 1, 3, 4, 6))
