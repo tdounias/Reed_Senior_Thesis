@@ -7,9 +7,23 @@ output: pdf_document
    
 In this chapter, I introduce a series of questions resulting from the literature review of Chapter 1, which I will use to formulate hypotheses. I will then operationalize these hypotheses, and attempt to predict analytical outcomes based on the theories of Chapter 1. Following these hypotheses, I will outline key methods I will use to test them.
    
-## Questions and Hypotheses
+## Hypotheses
+  
+### Questions
+  
+Before moving in to outlining hypotheses, the first step necessary is to frame a series of questions, which the hypotheses will flow from. Based on relevant research, the most obvious first question to ask would be:
 
-### Description of Hypotheses
+$$Q1: What~is~the~effect~of~mail~voting~on~turnout? $$
+  
+I went through this question substantially in the previous chapter; it should be clear that depending on which paradigm of participation choice is present, the answer here can be radically different.   
+   
+In order to best answer the previous question, it is necessary to establish some conditions on importance of effect. Therefore it is also necessary to ask the following two questions:   
+   
+$$Q2: Is ~this~ effect~ significant ~when~ compared~ to ~other~ metrics~ that~ affect~ turnout?$$
+$$Q3: Is ~this~ effect ~consistent~ over~ time?$$
+   
+The last question asked in this thesis is more specific to a particular formulation of Aldritch's hypothesis on voting "at the margins". I mentioned in the previous section that VBM could be theorized to have a more significant effect  
+### Hypotheses
 
 ### Criteria
 
