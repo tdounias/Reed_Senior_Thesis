@@ -29,7 +29,8 @@ $$Q3: Is ~the ~effect~ of~ VBM~ more ~pronounced ~as ~significant, ~national~ de
    
 Using the above questions I can now move on to formulate more clear hypotheses. I intend this thesis to be a test of Aldritch's voting decision paradigm, and will therefore word my hypotheses accordingly. In response to Q1, Q2, a first hypothesis is:  
   
-$$H1: Mail ~voting ~is ~another ~marginal~ effect~ on~ voting ~decisions, ~and ~therefore~ does ~not ~significantly~ affect ~turnout$$
+$$H1: Mail ~voting ~is ~another ~marginal~ effect~ on~ voting ~decisions,$$
+$$~and ~therefore~ does ~not ~significantly~ affect ~turnout$$
    
 The alternative hypothesis would be:
 $$H1': Mail ~voting ~significantly~ affects ~turnout, ~even ~compared~ to~ other~ metrics$$

@@ -99,12 +99,12 @@ As any state, Colorado maintains a statewide registry of all currently registere
     
 Similarly with VRFs, a Voter History File is maintained and constantly updated by the state. This file is uniquelly connected to its VRF: only voters showing up as registrants will have their histories included. I have similarly procured "snapshots" of the Voter History File for the years between 2012 and 2017.
 
-  In the Voter Registration files, the unit of observation is the individual voter, and all variables are initially coded as character strings. Each voter is assigned a unique voter ID, which serves as a point of refference between the two files. Broadly speaking, data in this file can be divided between three categories: first, personal identification information like address, ZIP code, or phone number; second, demographic information like age and gender; third, information pertinent to elections administration like congressional district, local elections for which the individual should receive a ballot, voter ID, and party registration. I will further elaborate on relevant variables in the wrangling section.
+In the Voter Registration files, the unit of observation is the individual voter, and all variables are initially coded as character strings. Each voter is assigned a unique voter ID, which serves as a point of refference between the two files. Broadly speaking, data in this file can be divided between three categories: first, personal identification information like address, ZIP code, or phone number; second, demographic information like age and gender; third, information pertinent to elections administration like congressional district, local elections for which the individual should receive a ballot, voter ID, and party registration. I will further elaborate on relevant variables in the wrangling section.
    
 In the Voter History files, the unit of observation here is a single ballot cast, and all variables are initially coded as character strings. This means that for each voter registered--and so included in the VRF--the history file should contain an observation for each time they voted. This file includes two types of data: first, identifiers for the election like county, date, description, and type; second, identifiers for the individual vote including voter ID and voting method.
   
 ## Wrangling the Data
-  
+
 ### Initial Problems with the 2017 Voter File and Solution
 
 ### Other Wrangling Issues Faced
@@ -173,7 +173,8 @@ Where k sums over the four types of election, j sums over years between 2010 and
 
 **Model 2** A more informed baseline, model 1 plus variables of urban and white population:
 
-$$y^{turnout~\%}_{c, l} \sim x^{mail~vote~\%}_{c, el}\beta_1 + \sum_{k = 1}^{4}w_{k, l}^{election~type}\beta_{k+1} + \sum_{j = 1}^{7}w_{j, l}^{election~year}\beta_{j+5} + \sum_{c = 1}^{64} x_c\beta_{c+13} + x^{white~\%}_{c}\beta_{78} + x^{urban~\%}_{c}\beta_{79}$$ 
+$$y^{turnout~\%}_{c, l} \sim x^{mail~vote~\%}_{c, el}\beta_1 + \sum_{k = 1}^{4}w_{k, l}^{election~type}\beta_{k+1} + \sum_{j = 1}^{7}w_{j, l}^{election~year}\beta_{j+5} + $$
+$$\sum_{c = 1}^{64} x_c\beta_{c+13} + x^{white~\%}_{c}\beta_{78} + x^{urban~\%}_{c}\beta_{79}$$ 
 This would be the "individual" level model from Gelman and Hill. I'm unsure what the "group" level for county would be. Maybe that part of the book would be more helpful for discerning effects on people's individual p-vote?
    
 Maybe more informative is what I did with exercise 12.2. The model tries to predict the concentration of a particular chemical based on treatment of children across time. Therefore the two levels are a visit by one individual child (here an election! so type, vbm_pct, year) and predictors for that individual child that are stable across time, like treatment type, or demographics (here race and urban pop per county). 
@@ -182,13 +183,13 @@ This means I can fit a model only based on election facts, with a variable for c
     
 **Model 3** A mixed-effects version of model 1, just adds mixed effects for county:
 
-$$y^{turnout~\%}_{c, l} \sim x^{mail~vote~\%}_{c, l}\beta_1 + \sum_{k = 1}^{4}w_{k, l}^{election~type}\beta_{k+1} + \sum_{j = 1}^{7}w_{j, l}^{election~year}\beta_{j+5} + \alpha_{[c]}$$ 
+$$y^{turnout~\%}_{c, l} \sim x^{mail~vote~\%}_{c, l}\beta_1 + \sum_{k = 1}^{4}w_{k, l}^{election~type}\beta_{k+1} + \sum_{j = 1}^{7}w_{j, l}^{election~year}\beta_{j+5} + \alpha_{[c],l}$$ 
     
-$$\alpha_{c} \sim N(0, \sigma_{\alpha}^2)$$
+$$\alpha_{[c],l} \sim N(0, \sigma_{\alpha}^2)$$
     
 **Model 4** A mixed-effects version of model 2:
    
-$$y^{turnout~\%}_{c, l} \sim x^{mail~vote~\%}_{c, l}\beta_1 + \sum_{k = 1}^{4}w_{k, l}^{election~type}\beta_{k+1} + \sum_{j = 1}^{7}w_{j, l}^{election~year}\beta_{j+5} + \alpha_{[c],'}$$ 
+$$y^{turnout~\%}_{c, l} \sim x^{mail~vote~\%}_{c, l}\beta_1 + \sum_{k = 1}^{4}w_{k, l}^{election~type}\beta_{k+1} + \sum_{j = 1}^{7}w_{j, l}^{election~year}\beta_{j+5} + \alpha_{[c],l}$$ 
    
 $$\alpha_{[c]l} \sim N(x^{white~\%}\gamma_{1} + x^{urban~\%}\gamma_{2}, \sigma_{\alpha}^2),~for~c = 1,...,64$$
    
@@ -196,7 +197,8 @@ Where D is a 2 x 64 matrix of the county level predictors and $\gamma$ a vector 
 
 **Model 5** During one of my discussions with Andrew, we discussed the possibility of making a model that answers the question: "Does VBM affect counties with some particular characteristic *for which I don't have data* more than others?" As such, this model would substitute county-level effects with a set of 3-4 dummy variables created through my intuitive understanding of Colorado politics and counties. For example, maybe a distinciton between central Colorado urban counties, East Colorado plains counties, and West Colorado mountain counties. The model would look a bit like:
    
-$$y^{turnout~\%}_{c, l} \sim x^{mail~vote~\%}_{c, l}\beta_1 + \sum_{k = 1}^{4}w_{k, l}^{election~type}\beta_{k+1} + \sum_{j = 1}^{7}w_{j, l}^{election~year}\beta_{j+5} + \sum_{c = 1}^{n} x^{county~classification}_c\beta_{c+13}$$ 
+$$y^{turnout~\%}_{c, l} \sim x^{mail~vote~\%}_{c, l}\beta_1 + \sum_{k = 1}^{4}w_{k, l}^{election~type}\beta_{k+1} + $$
+$$\sum_{j = 1}^{7}w_{j, l}^{election~year}\beta_{j+5} + \sum_{c = 1}^{n} x^{county~classification}_c\beta_{c+13}$$ 
 Where $x^{county~classification}_c$ are $n$ dummy variables, one for each county classification group.
     
 **Model 6** As a check on the previous model, run a Principle Components Analysis on full demographic data from the 2010 census, to classify counties in the same number of groups. This model would be expected to *massively overfit*. Learning experience for all!
@@ -226,6 +228,7 @@ $$P(z^{voted}_{i, l} = 1) = logit^{-1}(Z_{i, l}\alpha + W_l\beta + \alpha_{[c],l
    
 $$\alpha_{[c],l} \sim N(X_c \gamma, \sigma_{\alpha}^2),~for~c = 1,...,64$$
 
-Where $X_c$ as defined above, and $\gamma$ a vector of coefficients.
+Where $X_c$ as defined above, and $\gamma$ a vector of coefficients.  
+  
 **Model 10** Include extra model with EM algorithm applied to 2015 data maybe?
    
