@@ -21,10 +21,9 @@
 \contentsline {subsection}{\numberline {2.1.3}Criteria}{12}{subsection.2.1.3}
 \contentsline {subsection}{\numberline {2.1.4}Importance of Hypotheses}{13}{subsection.2.1.4}
 \contentsline {section}{\numberline {2.2}Methodology}{13}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Multiple Regression -- Ordinary Least Squares}{14}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}Logistic Regression}{14}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}Multilevel Models}{14}{subsection.2.2.3}
-\contentsline {subsection}{\numberline {2.2.4}General Additive Models}{15}{subsection.2.2.4}
+\contentsline {subsection}{\numberline {2.2.1}Logistic Regression}{14}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Generalized Additive Models}{14}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Multilevel Models}{15}{subsection.2.2.3}
 \contentsline {chapter}{Chapter 3: Case Selection, Data, Model Parametrization}{17}{chapter.3}
 \contentsline {section}{\numberline {3.1}The Centennial State and Its Voters}{17}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}Demographics and Characteristics}{17}{subsection.3.1.1}
@@ -35,20 +34,20 @@
 \contentsline {subsubsection}{Colorado Voter Files}{21}{section*.10}
 \contentsline {section}{\numberline {3.3}Wrangling the Data}{22}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Initial Problems with the 2017 Voter File and Solution}{22}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Other Wrangling Issues Faced}{22}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Final Variable Specifications}{22}{subsection.3.3.3}
-\contentsline {section}{\numberline {3.4}Model Parametrization}{22}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}Notation for predictors}{22}{subsection.3.4.1}
-\contentsline {subsubsection}{County and County-per-Election Level}{22}{section*.11}
-\contentsline {subsubsection}{Election Level}{23}{section*.12}
-\contentsline {subsubsection}{Individual and Individual-per-Election Level}{23}{section*.13}
-\contentsline {subsection}{\numberline {3.4.2}County Level Models}{23}{subsection.3.4.2}
-\contentsline {subsection}{\numberline {3.4.3}Individual Level Models}{25}{subsection.3.4.3}
-\contentsline {chapter}{Chapter 4: Results}{27}{chapter.4}
-\contentsline {section}{\numberline {4.1}EDA}{27}{section.4.1}
-\contentsline {section}{\numberline {4.2}Models}{27}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}County Level Models}{27}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Individual Level Models}{27}{subsection.4.2.2}
-\contentsline {chapter}{Chapter 5: Expanding on the Previous Models}{29}{chapter.5}
-\contentsline {chapter}{Conclusion}{31}{chapter*.14}
-\contentsline {chapter}{References}{33}{appendix*.15}
+\contentsline {subsection}{\numberline {3.3.2}Other Wrangling Issues Faced}{25}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Final Variable Specifications}{26}{subsection.3.3.3}
+\contentsline {section}{\numberline {3.4}Model Parametrization}{27}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Notation for predictors}{27}{subsection.3.4.1}
+\contentsline {subsubsection}{County and County-per-Election Level}{27}{section*.15}
+\contentsline {subsubsection}{Election Level}{27}{section*.16}
+\contentsline {subsubsection}{Individual and Individual-per-Election Level}{27}{section*.17}
+\contentsline {subsection}{\numberline {3.4.2}County Level Models}{28}{subsection.3.4.2}
+\contentsline {subsection}{\numberline {3.4.3}Individual Level Models}{30}{subsection.3.4.3}
+\contentsline {chapter}{Chapter 4: Results}{31}{chapter.4}
+\contentsline {section}{\numberline {4.1}EDA}{31}{section.4.1}
+\contentsline {section}{\numberline {4.2}Models}{31}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}County Level Models}{31}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Individual Level Models}{31}{subsection.4.2.2}
+\contentsline {chapter}{Chapter 5: Expanding on the Previous Models}{33}{chapter.5}
+\contentsline {chapter}{Conclusion}{35}{chapter*.18}
+\contentsline {chapter}{References}{37}{appendix*.19}

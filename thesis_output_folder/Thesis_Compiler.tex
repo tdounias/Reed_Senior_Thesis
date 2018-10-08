@@ -330,7 +330,7 @@ class.
     overwhelming predictor of turnout, Fowler (2006) posits that future
     voting behavior can be strongly predicted using individual voting
     history. This leads to the conclusion that individuals are set to
-    either be habitual voters, or habitual non-voters ({\textbf{???}}) by
+    either be habitual voters, or habitual non-voters (Plutzer, 2002) by
     their upbringing and social circumstances, locking them into distinct
     groups. (Fowler, 2006)
   \item
@@ -521,9 +521,9 @@ class.
   that are under transitionary systems (Gerber, Huber, \& Hill, 2013).
   R.M. Stein also reaches a similar conclusion when examining Colorado's
   practice of ``vote centers'', which are non-precinct attached polling
-  places, which can service multiple counties ({\textbf{???}}). I include
-  this paper here due to the link that voting centers have with VBM, as
-  they serve as drop-off points for mail-in ballots. Richey (2008)
+  places, which can service multiple counties (Stein \& Vonnahme, 2008). I
+  include this paper here due to the link that voting centers have with
+  VBM, as they serve as drop-off points for mail-in ballots. Richey (2008)
   examines the effects that Oregon's VBM program has on turnout by using
   past elections data, concluding a 10\% positive trend associated with
   the policy (Richey Sean, 2008). This effect is studied again by Gronke
@@ -782,10 +782,11 @@ class.
   in writing this thesis, I will go through each type of method to provide
   some background on the statistics behind the models. In the next
   chapter, I will introduce the data and fully outline my models. This
-  section should serve as a general introduction to the methods.
-  
-  \subsection{Multiple Regression -- Ordinary Least
-  Squares}\label{multiple-regression-ordinary-least-squares}
+  section should serve as a general introduction to the methods. I will
+  not extensivelly go through the statistics behind linear or multiple
+  regression, but will assume that it is common knowledge. For an
+  extensive introduction to such methods, James et al.(2017) or Chihara
+  and Hesterberg (2011) are particularly usefull.
   
   \subsection{Logistic Regression}\label{logistic-regression}
   
@@ -817,7 +818,45 @@ class.
   helpful, \(e^B\) can be used as a matrix of multiplicative, one-unit
   shifts in the value of the probability that \(Y_i = 1\). This means that
   a one unit increase in any predictor will cause an effect equal to
-  multiplying p by the exponent of the corresponding coefficient.
+  multiplying p by the exponent of the corresponding coefficient. (James,
+  Witten, Hastie, \& Tibshirani, 2017)
+  
+  \subsection{Generalized Additive
+  Models}\label{generalized-additive-models}
+  
+  In simple logistic or linear regression, there is an assumption made on
+  the functional form of the relationship between predictors and response
+  variable. These are called parametric models, where the data is
+  exclusivelly used to estimate values for coefficients. Non-parametric
+  models, on the other hand, use the data to estimate both coefficients
+  and the function that serves to connect response to predictors. While on
+  the surface this seems like a great idea (more reliance on your data and
+  less assumptions!), such an exclusivelly non-parametric model would
+  suffer greatly from the curse of dimensionality--where the addition of
+  multiple predictors or overreliance on data leads to substantial
+  over-fitting.
+  
+  The solution, then, is a Generalized Additive Model, or GAM. This model
+  lets us fit a different functional form to each observation, allowing
+  for assumptions to be made on the data where it is safe to do so, and
+  for non-parametric fitting when it is necessary. This model looks like:
+  
+  \[y_i = \alpha + \sum_{j = 1}^p \beta_j f_j(x_{ij}),\] where \(y_i\) the
+  i-th response variable, \(\alpha\) is the intercept term,
+  \(f_j, \beta_j\) a series of p functions and coefficients, and
+  \(x_{ij}\) the i-th observation for the j-th predictor. Note that for
+  \(f_j(x_j) = x_j\), this is a multilinear regression! (James et al.,
+  2017)
+  
+  A type of most commonly fit functions--and the type I will make use
+  of--are smoothing splines. These are cubic functions connected at
+  specific points called ``knots'', with the limitation that the full
+  function must be continuous and smooth. These are particularly useful
+  when modeling time variables, as they can be fitted to variables like
+  years or months in order to distinguish a secular trend from a general
+  trend over time. In terms of this thesis, this will help when responding
+  to Q2 as it was framed earlier in this chapter. (Barr, Diez, Wang,
+  Dominici, \& Samet, 2012)
   
   \subsection{Multilevel Models}\label{multilevel-models}
   
@@ -834,7 +873,7 @@ class.
   complete pooling model. You could also add indicator variables for each
   and every group, de facto estimating n different models for n groups;
   this would be a no pooling model. Multilevel modelling offers partial
-  pooling.
+  pooling (Gelman \& Hill, 2006).
   
   To consider what this model looks like, let's assume a dataset
   comprising of a vector of values for the response variable Y, a matrix
@@ -843,11 +882,7 @@ class.
   group level coefficients \(\Gamma\). Based on this, a multilevel model
   with intercept terms varying by group looks like:
   
-  \[Y_i = \alpha_{[i], j} + X_iB\]\\
-  \[\alpha_{[i], j} \sim N(U_{j[i]}\Gamma, \sigma_{\alpha}^2)\]\\
-  \emph{Maybe include varying slopes? Why/why not?}
-  
-  \subsection{General Additive Models}\label{general-additive-models}
+  \[Y_i = \alpha_{[i], j} + X_iB~,~~~~\alpha_{[i], j} \sim N(U_{j[i]}\Gamma, \sigma_{\alpha}^2)\]
   
   \chapter{Case Selection, Data, Model
   Parametrization}\label{case-selection-data-model-parametrization}
@@ -879,7 +914,7 @@ class.
   Continuing with demographic characteristics, Colorado has a median age
   of 34.3, and median household income of \$65,685. Colorado's population
   is mostly white, with a higher minority group population density in its
-  Southern regions, as shown on the following map. (Bureau, n.d.)
+  Southern regions, as shown on the following map. (Bureau, 2010)
   
   \begin{figure}
   
@@ -1210,14 +1245,289 @@ class.
   
   \section{Wrangling the Data}\label{wrangling-the-data}
   
+  The process of ``wrangling'' refers to manipulating the data into a form
+  that can then be used fo graphing, exploratory data analysis, modelling,
+  or presentation. In this case, wrangling also included aggregating data
+  across multiple sources and datasets. For this purpose, I made heavy use
+  of the tidyverse R package, and in particular the dplyr package. In this
+  section I will go through some of the key problems encountered during
+  the wrangling of these data, and then discuss the final form each
+  variable takes.
+  
   \subsection{Initial Problems with the 2017 Voter File and
   Solution}\label{initial-problems-with-the-2017-voter-file-and-solution}
+  
+  The first major issue I encountered--which merits discussion in its own
+  section--derives from the aforementioned fact that the voter records I
+  had access to are ``snapshots''. What this means, is that for each
+  person in each year of voter registration files, I will have their
+  corresponding history files for all ballots they have cast in Colorado,
+  but not their own history of registration and migration. If, say, a
+  voter moved from Boulder County to Summit County, I would have their
+  votes in Boulder County show up in the voter history file, but them
+  being registered in Summit. If you recall the turnout calculations
+  specified earlier on, this implies an overestimation when looking back
+  at elections that happened some time before the date of the
+  ``snapshot''. Additionally, ``snapshots'' of current voter files do not
+  reflect voters dropping off the rolls for whatever reason--death, moving
+  out of the state, long term inactivity, non-confirmable personal data
+  etc. Since for these voters the history files would also not be
+  included, the issue created is less one of overestimation of turnout
+  like before, but just the inclusion of additional room for error that is
+  created when subtracting one from the denominator and enumerator of
+  turnout.
+  
+  This was a significant problem from the beginning of this thesis, since
+  I started out with only one ``snapshot'' from 2017. After going through
+  turnout calculations, a significant majority of counties appeared to
+  have turnout exceeding 100\%, particularly for years between 2000 and
+  2012. This was, to put it mildly, concerning. With the help of my
+  advisers, I was able to procure similar ``snapshots'' for each year
+  between 2012-2016. After similar calculations, I returned the following
+  graph for the eight most populous counties as described above, including
+  different shapes for election type, colors for county, and a vertical
+  line at 2013 to signify the latest major change in how Colorado
+  administers elections:
+  
+  \begin{figure}
+  
+  {\centering \includegraphics[width=0.4\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/colorado_bigeight_turnout_graph} 
+  
+  }
+  
+  \caption[Turnout Plot for Eight Largest Colorado Counties, 2012-2016]{Turnout Plot for Eight Largest Colorado Counties, 2012-2016}\label{fig:big eight turnout plot}
+  \end{figure}
+  
+  To also further illustrate the in-county migration and dropped voter
+  problem, I created a graph that includes logged total counts of
+  registered voters calculated using the 2017 and the 2012-2016 files. The
+  plot also includes a line at y=x. If in-Colorado migration and dropped
+  voters are not an issue, most points on this graph should be at this
+  line.
+  
+  \begin{figure}
+  
+  {\centering \includegraphics[width=0.4\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/county_migration_A} 
+  
+  }
+  
+  \caption[Comparison of registration count methods]{Comparison of registration count methods}\label{fig:county migration A}
+  \end{figure}
+  
+  Two things should be clear from this plot. First, there is significant
+  deviation between the counts using just the 2017 file and all files
+  across years. Specifically, the 2017 count consistently underestimates
+  the total amount of registered voters--this is shown by the red linear
+  model smoothing line. This consistent difference confirms the hypothesis
+  that there is a substantial benefit to using ``snapshots'' for multiple
+  years. Second, counts get more accurate the closer to 2017 we get. This
+  should be even more apparent in the following graph, which limits the
+  scale to only some high registration counties, and adds a shape
+  indicator for county:
+  
+  \begin{figure}
+  
+  {\centering \includegraphics[width=0.4\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/county_migration_B} 
+  
+  }
+  
+  \caption[Comparison of registration count methods only for a few counties, 2012-2016]{Comparison of registration count methods only for a few counties, 2012-2016}\label{fig:county migration B}
+  \end{figure}
+  
+  Here the structure of the data becomes clear: for each county, there are
+  a series of almost vertically distributed points, which get closer to
+  the y = x line the closer the counts get to 2017. Through this series of
+  tests, it became clear that using multiple years of data was necessary
+  in order to conduct an accurate test of my hypotheses. My selection was
+  later vindicated, when looking at comparisons between reported rates of
+  turnout\footnote{Turnout is calculated over all registered voters} and
+  turnout calculated through my dataset for the 2014 midterm election:
+  
+  \begin{figure}
+  
+  {\centering \includegraphics[width=0.4\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/Calc_vs_rep_turnout} 
+  
+  }
+  
+  \caption[Comparison of reported and calculated turnout for 2014 midterms across county]{Comparison of reported and calculated turnout for 2014 midterms across county}\label{fig:comp turnout 2014}
+  \end{figure}
+  
+  The differences are insignificant. They exist because of ``noise'' added
+  on because of errors in the data, misreporting, private voter
+  registration files, voters dropped before the ``snapshot'' occured, and
+  other similar factors.
   
   \subsection{Other Wrangling Issues
   Faced}\label{other-wrangling-issues-faced}
   
+  Suffice to say, wrangling data was the majority of the work that went
+  into this thesis. Doing a full account would probably read like the
+  world's most cliche crime novel: a series of elusive final datasets, a
+  plucky yet occassionally naive young detective, two wisened mentors,
+  clues, dead ends, frustration, compromise, and\ldots{}spreadsheets. I
+  will spare the reader the whole story, but I will include a
+  non-comprehensive list of some of the difficulties associated with
+  wrangling voter files, as it was a crucial part of the learning process
+  I underwent while doing my research.
+  
+  \textbf{Missing Values}: The decision on how to deal with missing
+  values--or NAs--in a dataset is a lot more important than it may
+  initially seem. A first, intuitive reaction might be to just disregard
+  them; however this works under the assumption that there is no structure
+  inherent to why these data are missing! To give just two examples, in
+  the data I have collected, the PARTY value for the 2015 voter
+  registration file is missing. If I excluded all observations with
+  missing PARTY values, I would be excluding a fifth of my data. Missing
+  values were also present in the VOTING\_METHOD variable of the voter
+  history files. While this may have seemed troubling, after closer
+  examination it was revealed that the vast majority of such missing
+  values was concentrated in Jefferson County, and in elections prior to
+  2002. Therefore, these observations could be ignored, since they played
+  no role in my final dataset. The conclusion should be that choices made
+  on exclusion, inclusion, or estimation of missing data are very
+  important, and should be taken with much care and consideration for the
+  underlying structure of the data.
+  
+  \textbf{Data Input Errors}: Is ``Greece'' a legitimate voting method?
+  Probably not. However, ``Greece'' did show up as a value in the
+  VOTING\_METHOD variable for my 2012 voter history file snapshot. This
+  may have occured for a series of reasons, like data reading issues--the
+  data I acquired had changed hands some times, and also changed platforms
+  between STATA and R--or issues at time of input--each county counts
+  votes individually, and \emph{then} the state aggregates the data--, or
+  some bug in my code. Having adequately checked for the later of these
+  reasons, I treated all values that seemed more likelly than not to be
+  errors as NAs. There were not many of these--less than .001\% of my
+  data--but they were a hassle to find, analyze, and then recode into some
+  useful value.
+  
+  \textbf{Data Size}: Nothing to write home about here, just an
+  observation that multiple voter registration files can be \emph{huge},
+  which puts considerable strain on a computer's processing power. This
+  means that wrangling has to comprise of a series of careful, deliberate
+  moves. Brute force should be discouraged, as a dead end means several
+  hours of melodic computer fan panic.
+  
+  \textbf{Joining, Merging, Spreading, and the Multiplicity of Levels}:
+  For the data to end up in any functional shape, it eventually becomes
+  necessary to start joining datasets. Thankfully, a clear division of
+  modelling tasks between county and individual level models means that
+  joining on COUNTY or VOTER\_ID is ideal, and fairly straightforward. As
+  will become clear in later sections, I also had to consider the variety
+  of different units of observation, specifically: county, individual,
+  ballot, election, county-by-election.
+  
   \subsection{Final Variable
   Specifications}\label{final-variable-specifications}
+  
+  After the conclusion of the wrangling process, the resulting dataset
+  included a series of discrete and continuous variables. I will briefly
+  outline them here, along with their range and values.
+  
+  \begin{itemize}
+  \tightlist
+  \item
+    VOTER\_ID: Discrete variable, unique value given to each individual
+    voter. Useful for merging.
+  \item
+    COUNTY: Discrete variable, the 64 counties of Colorado.
+  \item
+    REGISTRATION\_DATE: Discrete variable, date of registration for each
+    registrant. Useful to get total registrants on election day.
+  \item
+    TURNOUT: Continuous variable, in the range {[}0,1{]}. The response
+    variable for my county-level models.
+  \item
+    ELECTION\_TYPE: Discrete variable, the four types of elections:
+    Primary, Coordinated, Midterm, Presidential.
+  \item
+    ELECTION\_DATE: Discrete variable, self-explanatory.
+  \item
+    VBM\_PCT: Continuous variable, in the range {[}0,1{]}. This is the
+    focus of my analysis, as it counts the percentage of total ballots
+    that were mail ballots.
+  \item
+    PCT\_WHITE: Continuous variable, in the range {[}0,1{]}. Percentage of
+    white residents per county.
+  \item
+    PCT\_URBAN: Continuous variable, in the range {[}0,1{]}. Percentage of
+    urban residents per county.
+  \item
+    PARTY: Discrete variable. For each voter, the party they are
+    registered with. Can be: Republican, Democrat, Other, or Unaffiliated.
+  \item
+    GENDER: Discrete binary variable, Male or Female.
+  \item
+    AGE: The age of the individual registrant.
+  \item
+    VOTING\_METHOD: The method used by an individual voter to cast their
+    ballot. Is coded as either VBM or In Person, according to the
+    following table:
+  \end{itemize}
+  
+  \begin{longtable}[]{@{}lll@{}}
+  \toprule
+  \begin{minipage}[b]{0.13\columnwidth}\raggedright\strut
+  Voting Method\strut
+  \end{minipage} & \begin{minipage}[b]{0.63\columnwidth}\raggedright\strut
+  Description of Method\strut
+  \end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\raggedright\strut
+  Final Designation\strut
+  \end{minipage}\tabularnewline
+  \midrule
+  \endhead
+  \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
+  Absentee Carry\strut
+  \end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright\strut
+  Voters who carried an absentee ballot with them from an early voting
+  location\strut
+  \end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+  VBM\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
+  Absentee Mail\strut
+  \end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright\strut
+  Voters who were sent an absentee ballot, and mailed it in\strut
+  \end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+  VBM\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
+  Early Voting\strut
+  \end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright\strut
+  Voters who physically went to an Early Voting location and voted\strut
+  \end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+  In Person\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
+  In Person\strut
+  \end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright\strut
+  Voters who physically went to a polling place and voted on paper\strut
+  \end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+  In Person\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
+  Mail Ballot\strut
+  \end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright\strut
+  Vote By Mail\strut
+  \end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+  VBM\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
+  Polling Place\strut
+  \end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright\strut
+  Traditional polling place voting, discontinued in 2013\strut
+  \end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+  In Person\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
+  Vote Center\strut
+  \end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright\strut
+  Voters who cast their ballots at Vote Centers\strut
+  \end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+  In Person\strut
+  \end{minipage}\tabularnewline
+  \bottomrule
+  \end{longtable}
   
   \section{Model Parametrization}\label{model-parametrization}
   
@@ -1412,6 +1722,7 @@ class.
   \[\alpha_{[c],l} \sim N(X_c \gamma, \sigma_{\alpha}^2),~for~c = 1,...,64\]
   
   Where \(X_c\) as defined above, and \(\gamma\) a vector of coefficients.
+  
   \textbf{Model 10} Include extra model with EM algorithm applied to 2015
   data maybe?
   
@@ -1469,6 +1780,13 @@ class.
   and Public Policy}, \emph{4}(1), 1--10.
   \url{http://doi.org/10.1080/2330443X.2017.1389620}
   
+  \hypertarget{ref-barr_comprehensive_2012}{}
+  Barr, C. D., Diez, D. M., Wang, Y., Dominici, F., \& Samet, J. M.
+  (2012). Comprehensive Smoking Bans and Acute Myocardial Infarction Among
+  Medicare Enrollees in 387 US Counties: 1999--2008. \emph{American
+  Journal of Epidemiology}, \emph{176}(7), 642--648.
+  \url{http://doi.org/10.1093/aje/kws267}
+  
   \hypertarget{ref-bergman_changing_2011}{}
   Bergman, E., \& Yates, P. A. (2011). Changing Election Methods: How Does
   Mandated Vote-By-Mail Affect Individual Registrants? \emph{Election Law
@@ -1496,8 +1814,8 @@ class.
   of Election Reform. \emph{American Journal of Political Science},
   \emph{58}(1), 95--109. \url{http://doi.org/10.1111/ajps.12063}
   
-  \hypertarget{ref-census_data_2010}{}
-  Bureau, U. C. (n.d.). U.S. Census Bureau QuickFacts: Colorado. Retrieved
+  \hypertarget{ref-us_census_bureau_us_2010}{}
+  Bureau, U. C. (2010). US Census Bureau QuickFacts: Colorado. Retrieved
   from \url{https://www.census.gov/quickfacts/co}
   
   \hypertarget{ref-deufel_race_2010}{}
@@ -1522,6 +1840,11 @@ class.
   \emph{Journal of Politics}, \emph{68}(2), 335--344.
   \url{http://doi.org/10.1111/j.1468-2508.2006.00410.x}
   
+  \hypertarget{ref-gelman_data_2006}{}
+  Gelman, A., \& Hill, J. (2006). \emph{Data Analysis Using Regression and
+  Multilevel/Hierarchical Models} (1 edition). Cambridge ; New York:
+  Cambridge University Press.
+  
   \hypertarget{ref-gerber_identifying_2013}{}
   Gerber, A. S., Huber, G. A., \& Hill, S. J. (2013). Identifying the
   Effect of All-Mail Elections on Turnout: Staggered Reform in the
@@ -1540,6 +1863,11 @@ class.
   Revisiting Southwell and Burchett. \emph{American Politics Research},
   \emph{40}(6), 976--997. \url{http://doi.org/10.1177/1532673X12457809}
   
+  \hypertarget{ref-james_introduction_2017}{}
+  James, G., Witten, D., Hastie, T., \& Tibshirani, R. (2017). \emph{An
+  Introduction to Statistical Learning: With Applications in R} (1st ed.
+  2013, Corr. 7th printing 2017 edition). New York: Springer.
+  
   \hypertarget{ref-keele_geographic_2017}{}
   Keele, L., \& Titiunik, R. (2017). Geographic Natural Experiments with
   Interference: The Effect of All-Mail Voting on Turnout in Colorado.
@@ -1555,6 +1883,12 @@ class.
   Politics Research}, \emph{40}(4), 636--664.
   \url{http://doi.org/10.1177/1532673X11432470}
   
+  \hypertarget{ref-plutzer_becoming_2002}{}
+  Plutzer, E. (2002). Becoming a Habitual Voter: Inertia, Resources, and
+  Growth in Young Adulthood. \emph{The American Political Science Review},
+  \emph{96}(1), 41--56. Retrieved from
+  \url{https://www.jstor.org/stable/3117809}
+  
   \hypertarget{ref-richey_sean_voting_2008}{}
   Richey Sean. (2008). Voting by Mail: Turnout and Institutional Reform in
   Oregon*. \emph{Social Science Quarterly}, \emph{89}(4), 902--915.
@@ -1568,6 +1902,11 @@ class.
   meta-analysis of individual-level research on voter turnout.
   \emph{Electoral Studies}, \emph{32}(2), 344--359.
   \url{http://doi.org/10.1016/j.electstud.2012.12.006}
+  
+  \hypertarget{ref-stein_engaging_2008}{}
+  Stein, R. M., \& Vonnahme, G. (2008). Engaging the Unengaged Voter: Vote
+  Centers and Voter Turnout. \emph{The Journal of Politics}, \emph{70}(2),
+  487--497. \url{http://doi.org/10.1017/S0022381608080456}
 
 
   % Index?

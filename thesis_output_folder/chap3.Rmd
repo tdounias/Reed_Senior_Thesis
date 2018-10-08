@@ -12,7 +12,7 @@ In this chapter, I will first go through a description of the state of Colorado;
    
 Colorado--named the Centennial State due to assuming statehood on the centennial of the Union--lies in the Southwestern United States, with its Western half squarely atop the Rocky Mountains. Based on its estimated population of just over 5.5 million, Colorado is the 21st most populous state, and ranks 37th in population density. The vast majority of that population is gathered in a series of urban areas that comprise a North-to-South strip in the middle of the state, containing the Denver-Aurora-Lakewood Metro Area, Colorado Springs, Pueblo, and Fort Collins. Apart from the Western town of Grand Junction, the rest of the population resides in vast rural areas.  
   
-Continuing with demographic characteristics, Colorado has a median age of 34.3, and median household income of $65,685. Colorado's population is mostly white, with a higher minority group population density in its Southern regions, as shown on the following map. [@census_data_2010]
+Continuing with demographic characteristics, Colorado has a median age of 34.3, and median household income of $65,685. Colorado's population is mostly white, with a higher minority group population density in its Southern regions, as shown on the following map. [@us_census_bureau_us_2010]
 
 ```{r white pct map, echo=FALSE, fig.cap="Map of Percentage of White Residents Per County", out.width = '40%', fig.align='center'}
 knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_white_county_map.png")
@@ -104,12 +104,78 @@ In the Voter Registration files, the unit of observation is the individual voter
 In the Voter History files, the unit of observation here is a single ballot cast, and all variables are initially coded as character strings. This means that for each voter registered--and so included in the VRF--the history file should contain an observation for each time they voted. This file includes two types of data: first, identifiers for the election like county, date, description, and type; second, identifiers for the individual vote including voter ID and voting method.
   
 ## Wrangling the Data
+   
+The process of "wrangling" refers to manipulating the data into a form that can then be used fo graphing, exploratory data analysis, modelling, or presentation. In this case, wrangling also included aggregating data across multiple sources and datasets. For this purpose, I made heavy use of the tidyverse R package, and in particular the dplyr package. In this section I will go through some of the key problems encountered during the wrangling of these data, and then discuss the final form each variable takes.
 
 ### Initial Problems with the 2017 Voter File and Solution
+   
+The first major issue I encountered--which merits discussion in its own section--derives from the aforementioned fact that the voter records I had access to are "snapshots". What this means, is that for each person in each year of voter registration files, I will have their corresponding history files for all ballots they have cast in Colorado, but not their own history of registration and migration. If, say, a voter moved from Boulder County to Summit County, I would have their votes in Boulder County show up in the voter history file, but them being registered in Summit. If you recall the turnout calculations specified earlier on, this implies an overestimation when looking back at elections that happened some time before the date of the "snapshot". Additionally, "snapshots" of current voter files do not reflect voters dropping off the rolls for whatever reason--death, moving out of the state, long term inactivity, non-confirmable personal data etc. Since for these voters the history files would also not be included, the issue created is less one of overestimation of turnout like before, but just the inclusion of additional room for error that is created when subtracting one from the denominator and enumerator of turnout.   
+   
+This was a significant problem from the beginning of this thesis, since I started out with only one "snapshot" from 2017. After going through turnout calculations, a significant majority of counties appeared to have turnout exceeding 100%, particularly for years between 2000 and 2012. This was, to put it mildly, concerning. With the help of my advisers, I was able to procure similar "snapshots" for each year between 2012-2016. After similar calculations, I returned the following graph for the eight most populous counties as described above, including different shapes for election type, colors for county, and a vertical line at 2013 to signify the latest major change in how Colorado administers elections:
 
+```{r big eight turnout plot, echo=FALSE, fig.cap="Turnout Plot for Eight Largest Colorado Counties, 2012-2016", out.width = '40%', fig.align='center'}
+knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/colorado_bigeight_turnout_graph.png")
+```
+   
+To also further illustrate the in-county migration and dropped voter problem, I created a graph that includes logged total counts of registered voters calculated using the 2017 and the 2012-2016 files. The plot also includes a line at y=x. If in-Colorado migration and dropped voters are not an issue, most points on this graph should be at this line. 
+   
+```{r county migration A, echo=FALSE, fig.cap="Comparison of registration count methods", out.width = '40%', fig.align='center'}
+knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/county_migration_A.png")
+```
+   
+Two things should be clear from this plot. First, there is significant deviation between the counts using just the 2017 file and all files across years. Specifically, the 2017 count consistently underestimates the total amount of registered voters--this is shown by the red linear model smoothing line. This consistent difference confirms the hypothesis that there is a substantial benefit to using "snapshots" for multiple years. Second, counts get more accurate the closer to 2017 we get. This should be even more apparent in the following graph, which limits the scale to only some high registration counties, and adds a shape indicator for county:
+
+```{r county migration B, echo=FALSE, fig.cap="Comparison of registration count methods only for a few counties, 2012-2016", out.width = '40%', fig.align='center'}
+knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/county_migration_B.png")
+```
+   
+Here the structure of the data becomes clear: for each county, there are a series of almost vertically distributed points, which get closer to the y = x line the closer the counts get to 2017. Through this series of tests, it became clear that using multiple years of data was necessary in order to conduct an accurate test of my hypotheses. My selection was later vindicated, when looking at comparisons between reported rates of turnout^[Turnout is calculated over all registered voters] and turnout calculated through my dataset for the 2014 midterm election:  
+
+```{r comp turnout 2014, echo=FALSE, fig.cap="Comparison of reported and calculated turnout for 2014 midterms across county", out.width = '40%', fig.align='center'}
+knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/Calc_vs_rep_turnout.png")
+```
+  
+The differences are insignificant. They exist because of "noise" added on because of errors in the data, misreporting, private voter registration files, voters dropped before the "snapshot" occured, and other similar factors.  
+   
 ### Other Wrangling Issues Faced
 
+Suffice to say, wrangling data was the majority of the work that went into this thesis. Doing a full account would probably read like the world's most cliche crime novel: a series of elusive final datasets, a plucky yet occassionally naive young detective, two wisened mentors, clues, dead ends, frustration, compromise, and...spreadsheets. I will spare the reader the whole story, but I will include a non-comprehensive list of some of the difficulties associated with wrangling voter files, as it was a crucial part of the learning process I underwent while doing my research.
+  
+**Missing Values**: The decision on how to deal with missing values--or NAs--in a dataset is a lot more important than it may initially seem. A first, intuitive reaction might be to just disregard them; however this works under the assumption that there is no structure inherent to why these data are missing! To give just two examples, in the data I have collected, the PARTY value for the 2015 voter registration file is missing. If I excluded all observations with missing PARTY values, I would be excluding a fifth of my data. Missing values were also present in the VOTING_METHOD variable of the voter history files. While this may have seemed troubling, after closer examination it was revealed that the vast majority of such missing values was concentrated in Jefferson County, and in elections prior to 2002. Therefore, these observations could be ignored, since they played no role in my final dataset. The conclusion should be that choices made on exclusion, inclusion, or estimation of missing data are very important, and should be taken with much care and consideration for the underlying structure of the data.
+   
+**Data Input Errors**: Is "Greece" a legitimate voting method? Probably not. However, "Greece" did show up as a value in the VOTING_METHOD variable for my 2012 voter history file snapshot. This may have occured for a series of reasons, like data reading issues--the data I acquired had changed hands some times, and also changed platforms between STATA and R--or issues at time of input--each county counts votes individually, and *then* the state aggregates the data--, or some bug in my code. Having adequately checked for the later of these reasons, I treated all values that seemed more likelly than not to be errors as NAs. There were not many of these--less than .001% of my data--but they were a hassle to find, analyze, and then recode into some useful value.  
+  
+**Data Size**: Nothing to write home about here, just an observation that multiple voter registration files can be *huge*, which puts considerable strain on a computer's processing power. This means that wrangling has to comprise of a series of careful, deliberate moves. Brute force should be discouraged, as a dead end means several hours of melodic computer fan panic.  
+  
+**Joining, Merging, Spreading, and the Multiplicity of Levels**: For the data to end up in any functional shape, it eventually becomes necessary to start joining datasets. Thankfully, a clear division of modelling tasks between county and individual level models means that joining on COUNTY or VOTER_ID is ideal, and fairly straightforward. As will become clear in later sections, I also had to consider the variety of different units of observation, specifically: county, individual, ballot, election, county-by-election.  
+
 ### Final Variable Specifications
+   
+After the conclusion of the wrangling process, the resulting dataset included a series of discrete and continuous variables. I will briefly outline them here, along with their range and values.
+
+* VOTER_ID: Discrete variable, unique value given to each individual voter. Useful for merging.
+* COUNTY: Discrete variable, the 64 counties of Colorado.
+* REGISTRATION_DATE: Discrete variable, date of registration for each registrant. Useful to get total registrants on election day.
+* TURNOUT: Continuous variable, in the range [0,1]. The response variable for my county-level models.
+* ELECTION_TYPE: Discrete variable, the four types of elections: Primary, Coordinated, Midterm, Presidential.
+* ELECTION_DATE: Discrete variable, self-explanatory.
+* VBM_PCT: Continuous variable, in the range [0,1]. This is the focus of my analysis, as it counts the percentage of total ballots that were mail ballots.
+* PCT_WHITE: Continuous variable, in the range [0,1]. Percentage of white residents per county.
+* PCT_URBAN: Continuous variable, in the range [0,1]. Percentage of urban residents per county.
+* PARTY: Discrete variable. For each voter, the party they are registered with. Can be: Republican, Democrat, Other, or Unaffiliated.
+* GENDER: Discrete binary variable, Male or Female.
+* AGE: The age of the individual registrant.
+* VOTING_METHOD: The method used by an individual voter to cast their ballot. Is coded as either VBM or In Person, according to the following table:
+
+|Voting Method  |Description of Method                                                         |Final Designation |
+|:--------------|:-----------------------------------------------------------------------------|:-----------------|
+|Absentee Carry |Voters who carried an absentee ballot with them from an early voting location |VBM               |
+|Absentee Mail  |Voters who were sent an absentee ballot, and mailed it in                     |VBM               |
+|Early Voting   |Voters who physically went to an Early Voting location and voted              |In Person         |
+|In Person      |Voters who physically went to a polling place and voted on paper              |In Person         |
+|Mail Ballot    |Vote By Mail                                                                  |VBM               |
+|Polling Place  |Traditional polling place voting, discontinued in 2013                        |In Person         |
+|Vote Center    |Voters who cast their ballots at Vote Centers                                 |In Person         |
    
 ## Model Parametrization
 

@@ -61,9 +61,7 @@ Lastly, from a narrower perspective specific to the study of early and mail voti
 
 ## Methodology
 
-Before directly defining all parameters of the models I will later use in writing this thesis, I will go through each type of method to provide some background on the statistics behind the models. In the next chapter, I will introduce the data and fully outline my models. This section should serve as a general introduction to the methods.
-
-### Multiple Regression -- Ordinary Least Squares
+Before directly defining all parameters of the models I will later use in writing this thesis, I will go through each type of method to provide some background on the statistics behind the models. In the next chapter, I will introduce the data and fully outline my models. This section should serve as a general introduction to the methods. I will not extensivelly go through the statistics behind linear or multiple regression, but will assume that it is common knowledge. For an extensive introduction to such methods, James et al.(2017) or Chihara and Hesterberg (2011) are particularly usefull. 
 
 ### Logistic Regression
 
@@ -77,17 +75,25 @@ where Y is a vector of response variable values, X is a matrix of predictors, an
 When wanting to compute a model on a binary response through its corresponding Bernoulli distribution probability parameter, the inverse logit function should be a perfect fit for a link function, since it maps values from all real numbers to a range between 0 and 1. Using the inverse logit function, we arrive at the final form of logistic regression, which is:  
 $$\mathbb{P} (Y_i = 1) = \text{logit}^{-1} (XB)$$
     
-Conveniently, despite the use of a link function, there is an easy way to interpret the coefficients of such a regression. While obviously individual values from the $B$ matrix will not be particularly helpful, $e^B$ can be used as a matrix of multiplicative, one-unit shifts in the value of the probability that $Y_i = 1$. This means that a one unit increase in any predictor will cause an effect equal to multiplying p by the exponent of the corresponding coefficient. 
+Conveniently, despite the use of a link function, there is an easy way to interpret the coefficients of such a regression. While obviously individual values from the $B$ matrix will not be particularly helpful, $e^B$ can be used as a matrix of multiplicative, one-unit shifts in the value of the probability that $Y_i = 1$. This means that a one unit increase in any predictor will cause an effect equal to multiplying p by the exponent of the corresponding coefficient. [@james_introduction_2017]
+  
+### Generalized Additive Models
+   
+In simple logistic or linear regression, there is an assumption made on the functional form of the relationship between predictors and response variable. These are called parametric models, where the data is exclusivelly used to estimate values for coefficients. Non-parametric models, on the other hand, use the data to estimate both coefficients and the function that serves to connect response to predictors. While on the surface this seems like a great idea (more reliance on your data and less assumptions!), such an exclusivelly non-parametric model would suffer greatly from the curse of dimensionality--where the addition of multiple predictors or overreliance on data leads to substantial over-fitting.   
+  
+The solution, then, is a Generalized Additive Model, or GAM. This model lets us fit a different functional form to each observation, allowing for assumptions to be made on the data where it is safe to do so, and for non-parametric fitting when it is necessary. This model looks like:
+
+$$y_i = \alpha + \sum_{j = 1}^p \beta_j f_j(x_{ij}),$$
+where $y_i$ the i-th response variable, $\alpha$ is the intercept term, $f_j, \beta_j$ a series of p functions and coefficients, and $x_{ij}$ the i-th observation for the j-th predictor. Note that for $f_j(x_j) = x_j$, this is a multilinear regression! [@james_introduction_2017]   
+   
+A type of most commonly fit functions--and the type I will make use of--are smoothing splines. These are cubic functions connected at specific points called "knots", with the limitation that the full function must be continuous and smooth. These are particularly useful when modeling time variables, as they can be fitted to variables like years or months in order to distinguish a secular trend from a general trend over time. In terms of this thesis, this will help when responding to Q2 as it was framed earlier in this chapter. [@barr_comprehensive_2012]
+
 
 ### Multilevel Models  
   
-Multilevel models--otherwise known as hierarchical or "mixed effects" models--can be intuitivelly pictured in two ways: either as a set of models working on different "levels", where one is calculated first, with its effects having implications for the second, or as a model where some of the parameters estimated act under a particular series of constraints. Multilevel models are, in essence, a compromise between levels of "pooling" data. If the dataset on which parameters are being estimate operates in different units of observation--say on the individual and county level--you could run a model that treats all individuals as coming from the same larger group; this would be a complete pooling model. You could also add indicator variables for each and every group, de facto estimating n different models for n groups; this would be a no pooling model. Multilevel modelling offers partial pooling.  
+Multilevel models--otherwise known as hierarchical or "mixed effects" models--can be intuitivelly pictured in two ways: either as a set of models working on different "levels", where one is calculated first, with its effects having implications for the second, or as a model where some of the parameters estimated act under a particular series of constraints. Multilevel models are, in essence, a compromise between levels of "pooling" data. If the dataset on which parameters are being estimate operates in different units of observation--say on the individual and county level--you could run a model that treats all individuals as coming from the same larger group; this would be a complete pooling model. You could also add indicator variables for each and every group, de facto estimating n different models for n groups; this would be a no pooling model. Multilevel modelling offers partial pooling [@gelman_data_2006].
   
 To consider what this model looks like, let's assume a dataset comprising of a vector of values for the response variable Y, a matrix of i individual level predictors X, a matrix of j group level predictors U, intercept terms $\alpha$, individual level coefficients B, and group level coefficients $\Gamma$. Based on this, a multilevel model with intercept terms varying by group looks like:
 
-$$Y_i = \alpha_{[i], j} + X_iB$$  
-$$\alpha_{[i], j} \sim N(U_{j[i]}\Gamma, \sigma_{\alpha}^2)$$   
-*Maybe include varying slopes? Why/why not?*
-   
-### General Additive Models   
+$$Y_i = \alpha_{[i], j} + X_iB~,~~~~\alpha_{[i], j} \sim N(U_{j[i]}\Gamma, \sigma_{\alpha}^2)$$   
    

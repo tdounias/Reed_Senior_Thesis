@@ -100,7 +100,7 @@ yearXcounty_reg <- function(filesource){
 
 yearXcounty_reg_2017 <- function(){
   #Read in the data
-  reg_per_year_sos <- read_csv("2017_CO/VRF_2017/CO_2017_VRF_full.csv", 
+  reg_per_year_sos <- read_csv("CO_2017_VRF_full.csv", 
                                col_types = cols_only(VOTER_ID = col_guess(), 
                                                      COUNTY = col_guess(),
                                                      REGISTRATION_DATE = col_guess()))
