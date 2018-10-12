@@ -394,3 +394,21 @@ extract_indiv_model_data <- function(indiv_voter_list){
   
   indiv_data
 }
+
+#' Divide an age variable into three
+#'
+#' @param age  An age vector
+#' @return Values from 1 to 3 based on age groups
+#' 
+
+age_group <- function(age){
+  vec <- rep(0, length(age))
+  for(i in 1:length(age)){
+    out <- 0
+    if(age[i] <= 35) out <- 1
+    if(age[i] %in% c(36:60)) out <- 2
+    if(age[i] > 60) out <- 3
+    vec[i] <- out
+  }
+  vec
+}
