@@ -13,42 +13,61 @@ In this chapter, I introduce a series of questions resulting from the literature
   
 Before moving in to outlining hypotheses, the first step necessary is to frame a series of questions, which the hypotheses will flow from. Based on relevant research, the most obvious first question to ask would be:
 
-$$Q1: What~is~the~effect~of~mail~voting~on~turnout? $$
-  
-I went through this question substantially in the previous chapter; it should be clear that depending on which paradigm of participation choice is present, the answer here can be radically different.   
-   
-In order to best answer the previous question, it is necessary to establish some conditions on importance of effect. Therefore it is also necessary to ask the following question:   
-   
-$$Q2: Is ~this~ effect~ significant ~when~ compared~ to ~other~ metrics~ that~ affect~ turnout?$$
-   
+\begin{center}
+Q1: \textit{What is the effect of mail voting on turnout?}
+\end{center}
+
+I went through this question substantially in the previous chapter; it should be clear that depending on which paradigm of participation choice is present, the answer here can be radically different. In order to best answer the previous question, it is necessary to establish some conditions on importance of effect. Therefore it is also necessary to ask the following question:  
+
+\begin{center}   
+Q2: \textit{Is  this  effect  significant  when  compared  to  other  metrics  that  affect  turnout?}
+\end{center}   
+
 The last question asked in this thesis is more specific to a particular formulation of Aldritch's hypothesis on voting "at the margins". I mentioned in the previous section that VBM could be theorized to have a more significant effect when discussing elections at the local level, or the regional level, rather than national general elections. Therefore a third question is:
-   
-$$Q3: Is ~the ~effect~ of~ VBM~ more ~pronounced ~as ~significant, ~national~ determinants ~of~ turnout ~dull?$$
-   
+
+\begin{center}   
+Q3: \textit{Is  the  effect  of  VBM  more  pronounced  as  significant,  national  determinants  of  turnout  dull?}
+\end{center}
+
 ### Hypotheses
    
-Using the above questions I can now move on to formulate more clear hypotheses. I intend this thesis to be a test of Aldritch's voting decision paradigm, and will therefore word my hypotheses accordingly. In response to Q1, Q2, a first hypothesis is:  
-  
-$$H1: Mail ~voting ~is ~another ~marginal~ effect~ on~ voting ~decisions,$$
-$$~and ~therefore~ does ~not ~significantly~ affect ~turnout$$
-   
+Using the above questions I can now move on to formulate more clear hypotheses. Before diving right into that, I note that I intend this thesis to serve two purposes: first, to test voter choice theories between each other; second, to serve as an analytical tool for later evaluations of mail voting as policy. Based on the theoretical review of the previous chapter it should be apparent that of these two purposes, the former is primarily addressed, with the later tangentially arising from my conclusions. The hypotheses in this section spring mostly from a wish to test theories of voter choice, and in particular a wish to defend the theory of voting "at the margins" as introduced by Aldritch. Therefore all hypotheses in this section will be phrased from the perspective of this theory, with the competing alternate hypotheses being counter-claims potentially rooted in different theories of voter participation.
+
+In response to Q1, Q2, a first hypothesis is: 
+
+\begin{center}  
+\text{H1}: \textit{Mail voting is another marginal effect on voting decisions, and therefore
+does not significantly affect turnout}
+\end{center}
+
 The alternative hypothesis would be:
-$$H1': Mail ~voting ~significantly~ affects ~turnout, ~even ~compared~ to~ other~ metrics$$
-    
+
+\begin{center}  
+H1': \textit{Mail  voting  significantly  affects  turnout,  even  compared  to  other  metrics}
+\end{center}   
     
 Similarly, for the third question, a corresponding hypothesis derived from Aldritch's paradigm is:
-$$H2: The~ effect ~of ~VBM ~on ~turnout ~is ~more~ pronounced ~as ~national ~effects ~dull$$
+
+\begin{center}  
+H2: \textit{The  effect  of  VBM  on  turnout  is  more  pronounced  as  national  effects  dull}
+\end{center}
   
 The alternative hypothesis is:
-$$H2': The~ effect ~of ~VBM ~on ~turnout ~is~ consistent ~and ~independent$$
+
+\begin{center}  
+H2': \textit{The  effect  of  VBM  on  turnout  is  consistent  and  independent}
+\end{center}
     
 ### Criteria
   
 A first, glaring issue that needs to be clarified is the apparent contradictions between my two hypothesized results. This becomes clear, however, if I define "significant effect" in the context of my first hypothesis. Aldritch's paradigm does state that "conveniences" like mail voting should not have significant effects, but those effects are defined in the context of huge, clashing forces that vastly outweigh them. This does not necessarily mean that they are literally non-existent, but that they are poor indicators of consistently increased turnout. Therefore, I will confirm my first hypothesis not only if the effect of mail voting on turnout is statistically insignificant, but also if it is relatively small in comparison to the effects of other variables I include. I will confirm the alternative hypothesis if, across multiple of the models I will parametrize and fit, VBM retains a consistent, significant effect on turnout. If the effect is negative, this may point to a habitual or structural voting paradigm being present. If the effect is positive, this may be a signifier that issues of convenience in voting--having a mail delivered ballot, voting from your kitchen table etc.--have a particularly strong effect in the examined elections.  
    
 Moving on to the second hypothesis. It is extremely hard to correctly operationalize and account for all variables going into turnout. Therefore, instead of trying to include all national effects into a model and try to see how they interact with VBM, I will test my hypothesis on more localized elections. At least in theory, I can assume that if mail voting significantly impacts people's decision to vote, it will be in a context where the convenience of voting significantly outweighs information effects from national media, communal pressures, or national campaigns. This can be found to some extent in primary elections, but much more significantly in off year local state elections. A potential re-formulation of the second hypothesis, that makes it more specific to the criteria I have set, is:
-  
-$$H3:The~ effect ~of ~VBM ~on ~turnout ~is ~more~ pronounced ~in ~local~ or ~off~year~elections$$
+
+\begin{center}    
+H3: \textit{The  effect  of  VBM  on  turnout  is  more  pronounced  in  local  or  off year elections}
+\end{center}
+
 I will confirm this hypothesis if mail voting has significantly larger positive effects on turnout in smaller, local elections.
   
 ### Importance of Hypotheses
