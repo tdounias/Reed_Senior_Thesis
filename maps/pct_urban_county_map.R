@@ -29,7 +29,7 @@ ggplot(col_pct_urban, mapping = aes(long, lat, group = group, fill = PCT_URBAN))
   geom_polygon(color = "black") +
   theme(legend.title = element_text(),
         legend.key.width = unit(.5, "in")) +
-  labs(fill = "Percentage Urban", "Percentage of Urban Population") + 
+  labs(fill = "% Urban") + 
   theme(panel.grid = element_blank(),
         axis.title = element_blank(),
         axis.text = element_blank(),

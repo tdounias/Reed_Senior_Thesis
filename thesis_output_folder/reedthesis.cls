@@ -200,7 +200,7 @@
 \def\thedivisionof#1{\gdef \@thedivisionof{#1}}
 \def\@thedivisionof{The Division of}
 \def\approvedforthe#1{\gdef \@approvedforthe{#1}}
-\def\@approvedforthe{Division}
+\def\@approvedforthe{Committee}
 \def\advisor#1{\gdef \@advisor{#1}}
 \def\@advisor{\@latex@warning@no@line{No \noexpand\advisor given}}
 \def\altadvisor#1{\gdef \@altadvisor{#1} \@altadvisortrue}
@@ -301,7 +301,9 @@
     \vfil
     A Thesis \\
     Presented to \\
-    \@thedivisionof \ \@division \\
+    the Interdivisional Committee for Mathematics and Natural Sciences, \\
+    History and Social Sciences \\
+    \textit{(Mathematics and Political Science)} \\
     Reed College
     \vfil
     \centerline{\hbox to \wd0 {\hbox{}\hrulefill\hbox{}}}

@@ -15,5 +15,4 @@ ggplot(graph_data, aes(x = dates, y = turnout, shape = types, col = county)) +
   geom_hline(yintercept = 1) +
   geom_point() +
   scale_color_brewer(palette = "Reds") +
-  labs(title = "Turnout in Colorado Elections for the Largest 8 Counties, 2012-2016", 
-       x = "Election Year", y = "Turnout as % of Registered Voters")
+  labs(x = "Election Year", y = "Turnout as % of Registered Voters")

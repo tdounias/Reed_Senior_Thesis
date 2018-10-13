@@ -27,7 +27,7 @@ ggplot(pct_reg_map, mapping = aes(long, lat, group = group, fill = PCT_REGISTERE
   geom_polygon(color = "black") +
   theme(legend.title = element_text(),
         legend.key.width = unit(.5, "in")) +
-  labs(fill = "% Registered", title = "Percentage of Registered Voters") + 
+  labs(fill = "% Registered") + 
   theme(panel.grid = element_blank(),
         axis.title = element_blank(),
         axis.text = element_blank(),

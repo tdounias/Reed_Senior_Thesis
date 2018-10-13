@@ -4,7 +4,7 @@ output: pdf_document
 
 # The State of the Literature {#rmd-basics}
 
-In this chapter I will go through the existing literature on Vote-By-Mail (VBM).I will first go through some general literature on theories of voting decisions. I will define what Vote-By-Mail is; I will then summarize the expectations that researchers have of the effects of VBM on turnout, based on existing theories of electoral participation. I will continue with a summary of previous quantitative research on the effects that VBM and similar policies have had on turnout. I will conclude with some more general comments on the available data, and literature concerning the most commonly used quantitative methods.
+In this chapter I will go through the existing literature on Vote-By-Mail (VBM).I will first go through some general literature on theories of voting decisions. I will define what Vote-By-Mail is; I will then summarize the expectations that researchers have of the effects of VBM on turnout, based on existing theories of electoral participation. I will continue with a summary of previous quantitative research on the effects that VBM and similar policies have had on turnout. 
 
 ## Deciding to Vote 
    
@@ -101,17 +101,5 @@ A last issue with surveys worth mentioning is that they are contingent on quanti
 ### The Importance of VRF  
   
 As mentioned in my introduction, access to voter registration files has provided researchers with unique insight into the voting process. Quantitative research has expanded significantly, for three key reasons. First, VRF data exists in a consolidated, state-wide format at least for national elections. This means that the process of data collection involves interaction with significantly fewer government agencies, and a data wrangling process that can be quickly adapted to a set format. This is, of course, not to say that the process of data collection and handling doesn't still pose a significant challenge, as will become apparent in my second chapter. Second,  there is a huge benefit attached to the fact that VRF data describes the whole population, rather than a sample. As mentioned in the previous section, survey data might give more insight into variables not included in VRF, but that comes at a steep cost for accuracy. Using VRF, the problem of self-reporting bias is eliminated for some studies, and transformed into a problem of record linkage and ecological inference for others [@ansolabehere_adgn:_2017, @burden_new_1998]. Third, wide public access means reproducibility and accessibility, which translates into greater accountability for researchers. This effect is important, even if mitigated somewhat by private data companies and access fees.  
-
-## Common Methods Used and Problems Encountered  
-
-### Methods  
-
-* *Synthetic Control Group*: Abadie (2010), McClleland (2017), Gronke (2017)
-* *Record Linkage*: Ansolabehere and Hersch (2017), Harvey (1994, 97), Koudas (2013)
-* *GLM (Probit/Logit/Poisson)*:  Barreto (2004), Dow (2004)
-* *DID*: Bertrand et al. (2002)
-* *E.I.*: King (2013), Burden (1998), Calvo (2003), Chao (2004), Rm Stein (2002)
-* *Mixed-Effects*: Gelman and Hill (2007)
-* *General EDA and Models*: James et al. (2013), Chapman and Hall (2017)
 
 

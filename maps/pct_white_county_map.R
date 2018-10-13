@@ -14,10 +14,10 @@ col <- map_data("county") %>%
   filter(region == 'colorado')
 
 #Read in and process racial demographi data
-pct_urban <- read_csv("data/Pop_Rurban.csv")
+pct_white <- read_csv("data/Pct_White.csv")
 
-pct_urban <- pct_urban %>%
-  mutate(PCT_URBAN = URBAN/TOTAL) %>%
+pct_white <- pct_white %>%
+  mutate(PCT_WHITE = WHITE/TOTAL_POP) %>%
   slice(-1)
 
 pct_white$COUNTY <- tolower(pct_white$COUNTY)
@@ -29,7 +29,7 @@ ggplot(col_pct_white, mapping = aes(long, lat, group = group, fill = PCT_WHITE))
   geom_polygon(color = "black") +
   theme(legend.title = element_text(),
         legend.key.width = unit(.5, "in")) +
-  labs(fill = "Percentage White", title = "Percentage of White Residents") + 
+  labs(fill = "% White") + 
   theme(panel.grid = element_blank(),
         axis.title = element_blank(),
         axis.text = element_blank(),

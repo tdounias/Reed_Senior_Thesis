@@ -12,8 +12,6 @@
 \contentsline {section}{\numberline {1.4}Voter Registration Files}{9}{section.1.4}
 \contentsline {subsection}{\numberline {1.4.1}Inaccuracy of Survey Data}{9}{subsection.1.4.1}
 \contentsline {subsection}{\numberline {1.4.2}The Importance of VRF}{10}{subsection.1.4.2}
-\contentsline {section}{\numberline {1.5}Common Methods Used and Problems Encountered}{10}{section.1.5}
-\contentsline {subsection}{\numberline {1.5.1}Methods}{10}{subsection.1.5.1}
 \contentsline {chapter}{Chapter 2: Hypotheses and Methods}{11}{chapter.2}
 \contentsline {section}{\numberline {2.1}Hypotheses}{11}{section.2.1}
 \contentsline {subsection}{\numberline {2.1.1}Questions}{11}{subsection.2.1.1}
@@ -28,7 +26,7 @@
 \contentsline {section}{\numberline {3.1}The Centennial State and Its Voters}{17}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}Demographics and Characteristics}{17}{subsection.3.1.1}
 \contentsline {subsection}{\numberline {3.1.2}Voting in Colorado}{18}{subsection.3.1.2}
-\contentsline {section}{\numberline {3.2}Getting the Data}{20}{section.3.2}
+\contentsline {section}{\numberline {3.2}Acquiring the Data}{20}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}Sources and first glance}{21}{subsection.3.2.1}
 \contentsline {subsubsection}{2010 US Census}{21}{section*.9}
 \contentsline {subsubsection}{Colorado Voter Files}{21}{section*.10}
@@ -39,15 +37,15 @@
 \contentsline {section}{\numberline {3.4}Model Parametrization}{27}{section.3.4}
 \contentsline {subsection}{\numberline {3.4.1}Notation for predictors}{27}{subsection.3.4.1}
 \contentsline {subsubsection}{County and County-per-Election Level}{27}{section*.15}
-\contentsline {subsubsection}{Election Level}{27}{section*.16}
-\contentsline {subsubsection}{Individual and Individual-per-Election Level}{27}{section*.17}
+\contentsline {subsubsection}{Election Level}{28}{section*.16}
+\contentsline {subsubsection}{Individual and Individual-per-Election Level}{28}{section*.17}
 \contentsline {subsection}{\numberline {3.4.2}County Level Models}{28}{subsection.3.4.2}
 \contentsline {subsection}{\numberline {3.4.3}Individual Level Models}{30}{subsection.3.4.3}
-\contentsline {chapter}{Chapter 4: Results}{31}{chapter.4}
-\contentsline {section}{\numberline {4.1}EDA}{31}{section.4.1}
-\contentsline {section}{\numberline {4.2}Models}{31}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}County Level Models}{31}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Individual Level Models}{31}{subsection.4.2.2}
-\contentsline {chapter}{Chapter 5: Expanding on the Previous Models}{33}{chapter.5}
-\contentsline {chapter}{Conclusion}{35}{chapter*.18}
-\contentsline {chapter}{References}{37}{appendix*.19}
+\contentsline {chapter}{Chapter 4: Results}{33}{chapter.4}
+\contentsline {section}{\numberline {4.1}EDA}{33}{section.4.1}
+\contentsline {section}{\numberline {4.2}Models}{33}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}County Level Models}{33}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Individual Level Models}{33}{subsection.4.2.2}
+\contentsline {chapter}{Chapter 5: Expanding on the Previous Models}{35}{chapter.5}
+\contentsline {chapter}{Conclusion}{37}{chapter*.18}
+\contentsline {chapter}{References}{39}{appendix*.19}

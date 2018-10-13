@@ -2,8 +2,8 @@
 author: 'Theodore Dounias'
 date: 'December 2018'
 division: 'Mathematics and Natural Sciences and History and Social Sciences'
-advisor: 'Andrew Bray'
-altadvisor: 'Paul Gronke'
+advisor: 'Paul Gronke'
+altadvisor: 'Andrew Bray'
 department: 'Mathematics and Political Science'
 title: 'Turnout and Mail Voting in Colorado'
 abstract: >

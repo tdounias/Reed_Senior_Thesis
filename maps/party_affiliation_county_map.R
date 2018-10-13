@@ -33,9 +33,7 @@ ggplot(party_map, mapping = aes(long, lat, group = group, fill = PARTY_LEAN)) +
   geom_polygon(color = "black") +
   theme(legend.title = element_text(),
         legend.key.width = unit(.5, "in")) +
-  labs(fill = "Party Lean (DEM to REP)", "Party Affiliation Lean", 
-       title = 
-         "Colorado Party Affiliation Map") + 
+  labs(fill = "Party Lean", "Party Affiliation Lean") + 
   theme(panel.grid = element_blank(),
         axis.title = element_blank(),
         axis.text = element_blank(),

@@ -73,10 +73,10 @@
 % The month and year that you submit your FINAL draft TO THE LIBRARY (May or December)
 \date{December 2018}
 \division{Mathematics and Natural Sciences and History and Social Sciences}
-\advisor{Andrew Bray}
+\advisor{Paul Gronke}
 %If you have two advisors for some reason, you can use the following
 % Uncommented out by CII
-\altadvisor{Paul Gronke} 
+\altadvisor{Andrew Bray} 
 % End of CII addition
 
 %%% Remember to use the correct department!
@@ -202,9 +202,7 @@ class.
   then summarize the expectations that researchers have of the effects of
   VBM on turnout, based on existing theories of electoral participation. I
   will continue with a summary of previous quantitative research on the
-  effects that VBM and similar policies have had on turnout. I will
-  conclude with some more general comments on the available data, and
-  literature concerning the most commonly used quantitative methods.
+  effects that VBM and similar policies have had on turnout.
   
   \section{Deciding to Vote}\label{deciding-to-vote}
   
@@ -615,33 +613,6 @@ class.
   accountability for researchers. This effect is important, even if
   mitigated somewhat by private data companies and access fees.
   
-  \section{Common Methods Used and Problems
-  Encountered}\label{common-methods-used-and-problems-encountered}
-  
-  \subsection{Methods}\label{methods}
-  
-  \begin{itemize}
-  \tightlist
-  \item
-    \emph{Synthetic Control Group}: Abadie (2010), McClleland (2017),
-    Gronke (2017)
-  \item
-    \emph{Record Linkage}: Ansolabehere and Hersch (2017), Harvey (1994,
-    97), Koudas (2013)
-  \item
-    \emph{GLM (Probit/Logit/Poisson)}: Barreto (2004), Dow (2004)
-  \item
-    \emph{DID}: Bertrand et al. (2002)
-  \item
-    \emph{E.I.}: King (2013), Burden (1998), Calvo (2003), Chao (2004), Rm
-    Stein (2002)
-  \item
-    \emph{Mixed-Effects}: Gelman and Hill (2007)
-  \item
-    \emph{General EDA and Models}: James et al. (2013), Chapman and Hall
-    (2017)
-  \end{itemize}
-  
   \chapter{Hypotheses and Methods}\label{hypotheses-and-methods}
   
   In this chapter, I introduce a series of questions resulting from the
@@ -914,15 +885,15 @@ class.
   Continuing with demographic characteristics, Colorado has a median age
   of 34.3, and median household income of \$65,685. Colorado's population
   is mostly white, with a higher minority group population density in its
-  Southern regions, as shown on the following map. (Bureau, 2010)
+  Southern regions, as shown in figure 3.1. (Bureau, 2010)
   
   \begin{figure}
   
-  {\centering \includegraphics[width=0.4\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_white_county_map} 
+  {\centering \includegraphics[width=0.6\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_white_county_map} 
   
   }
   
-  \caption[Map of Percentage of White Residents Per County]{Map of Percentage of White Residents Per County}\label{fig:white pct map}
+  \caption[White voters per Colorado county]{White voters per Colorado county}\label{fig:white pct map}
   \end{figure}
   
   The State Capital is Denver. Colorado is split into 64 Counties, of
@@ -962,10 +933,10 @@ class.
   registered in that county. Unsurprisingly, the same eight most populous
   counties are also the counties with the majority of registered voters,
   as their registrants comprise 73\% of total Colorado registered voters
-  (as of November 2017). As Table shows, these eight counties have a
-  registration rate between 60-80\%, compared to a Colorado-wide rate of
-  about 67\%. Registration rates for all counties are also graphically
-  depicted in Figure 2.
+  (as of November 2017). As the following table shows, these eight
+  counties have a registration rate between 60-80\%, compared to a
+  Colorado-wide rate of about 67\%. Registration rates for all counties
+  are also graphically depicted in figure 3.2.
   
   \begin{longtable}[]{@{}lrlr@{}}
   \toprule
@@ -1075,25 +1046,25 @@ class.
   
   \begin{figure}
   
-  {\centering \includegraphics[width=0.4\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_registered_county_map} 
+  {\centering \includegraphics[width=0.6\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_registered_county_map} 
   
   }
   
-  \caption[Map of Registration Rates Per County]{Map of Registration Rates Per County}\label{fig:reg per county map}
+  \caption[Registration rates per Colorado county]{Registration rates per Colorado county}\label{fig:reg per county map}
   \end{figure}
   
   In terms of Party registration, Colorado as a whole leans democratic by
   a very narrow margin. This is also reflected in the state's Cook
   Partisan Voting Index of D +1, making it a solidly purple battleground
-  state (Figure 3).
+  state (figure 3.3).
   
   \begin{figure}
   
-  {\centering \includegraphics[width=0.4\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/party_affiliation_county_map} 
+  {\centering \includegraphics[width=0.6\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/party_affiliation_county_map} 
   
   }
   
-  \caption[Map of Party Affiliation Per County]{Map of Party Affiliation Per County}\label{fig:party reg per county map}
+  \caption[Democratic/Republican party lean per Colorado county]{Democratic/Republican party lean per Colorado county}\label{fig:party reg per county map}
   \end{figure}
   
   In the past 25 years, there have been a series of key changes in the way
@@ -1153,7 +1124,7 @@ class.
   partially by mail, making comparative, county- or individual- level case
   studies particularly alluring.
   
-  \section{Getting the Data}\label{getting-the-data}
+  \section{Acquiring the Data}\label{acquiring-the-data}
   
   This thesis relies on county and individual level models to draw
   conclusions on voting behaviours, and how they are affected by voting
@@ -1283,19 +1254,19 @@ class.
   have turnout exceeding 100\%, particularly for years between 2000 and
   2012. This was, to put it mildly, concerning. With the help of my
   advisers, I was able to procure similar ``snapshots'' for each year
-  between 2012-2016. After similar calculations, I returned the following
-  graph for the eight most populous counties as described above, including
-  different shapes for election type, colors for county, and a vertical
-  line at 2013 to signify the latest major change in how Colorado
-  administers elections:
+  between 2012-2016. After similar calculations, I returned figure 3.4 for
+  the eight most populous counties as described above, including different
+  shapes for election type, colors for county, and a vertical line at 2013
+  to signify the latest major change in how Colorado administers
+  elections.
   
   \begin{figure}
   
-  {\centering \includegraphics[width=0.4\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/colorado_bigeight_turnout_graph} 
+  {\centering \includegraphics[width=0.6\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/colorado_bigeight_turnout_graph} 
   
   }
   
-  \caption[Turnout Plot for Eight Largest Colorado Counties, 2012-2016]{Turnout Plot for Eight Largest Colorado Counties, 2012-2016}\label{fig:big eight turnout plot}
+  \caption[Turnout plot for eight largest Colorado counties, 2012-2016]{Turnout plot for eight largest Colorado counties, 2012-2016}\label{fig:big eight turnout plot}
   \end{figure}
   
   To also further illustrate the in-county migration and dropped voter
@@ -1307,27 +1278,27 @@ class.
   
   \begin{figure}
   
-  {\centering \includegraphics[width=0.4\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/county_migration_A} 
+  {\centering \includegraphics[width=0.6\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/county_migration_A} 
   
   }
   
   \caption[Comparison of registration count methods]{Comparison of registration count methods}\label{fig:county migration A}
   \end{figure}
   
-  Two things should be clear from this plot. First, there is significant
+  Two things should be clear from figure 3.5. First, there is significant
   deviation between the counts using just the 2017 file and all files
   across years. Specifically, the 2017 count consistently underestimates
   the total amount of registered voters--this is shown by the red linear
   model smoothing line. This consistent difference confirms the hypothesis
   that there is a substantial benefit to using ``snapshots'' for multiple
   years. Second, counts get more accurate the closer to 2017 we get. This
-  should be even more apparent in the following graph, which limits the
-  scale to only some high registration counties, and adds a shape
-  indicator for county:
+  should be even more apparent in figure 3.6, which limits the scale to
+  only some high registration counties, and adds a shape indicator for
+  county.
   
   \begin{figure}
   
-  {\centering \includegraphics[width=0.4\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/county_migration_B} 
+  {\centering \includegraphics[width=0.6\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/county_migration_B} 
   
   }
   
@@ -1341,11 +1312,12 @@ class.
   in order to conduct an accurate test of my hypotheses. My selection was
   later vindicated, when looking at comparisons between reported rates of
   turnout\footnote{Turnout is calculated over all registered voters} and
-  turnout calculated through my dataset for the 2014 midterm election:
+  turnout calculated through my dataset for the 2014 midterm election (se
+  fig. 3.7).
   
   \begin{figure}
   
-  {\centering \includegraphics[width=0.4\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/Calc_vs_rep_turnout} 
+  {\centering \includegraphics[width=0.6\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/Calc_vs_rep_turnout} 
   
   }
   

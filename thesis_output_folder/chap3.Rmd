@@ -12,9 +12,9 @@ In this chapter, I will first go through a description of the state of Colorado;
    
 Colorado--named the Centennial State due to assuming statehood on the centennial of the Union--lies in the Southwestern United States, with its Western half squarely atop the Rocky Mountains. Based on its estimated population of just over 5.5 million, Colorado is the 21st most populous state, and ranks 37th in population density. The vast majority of that population is gathered in a series of urban areas that comprise a North-to-South strip in the middle of the state, containing the Denver-Aurora-Lakewood Metro Area, Colorado Springs, Pueblo, and Fort Collins. Apart from the Western town of Grand Junction, the rest of the population resides in vast rural areas.  
   
-Continuing with demographic characteristics, Colorado has a median age of 34.3, and median household income of $65,685. Colorado's population is mostly white, with a higher minority group population density in its Southern regions, as shown on the following map. [@us_census_bureau_us_2010]
+Continuing with demographic characteristics, Colorado has a median age of 34.3, and median household income of $65,685. Colorado's population is mostly white, with a higher minority group population density in its Southern regions, as shown in figure 3.1. [@us_census_bureau_us_2010]
 
-```{r white pct map, echo=FALSE, fig.cap="Map of Percentage of White Residents Per County", out.width = '40%', fig.align='center'}
+```{r white pct map, echo=FALSE, fig.cap="White voters per Colorado county", out.width = '60%', fig.align='center'}
 knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_white_county_map.png")
 ```
    
@@ -36,7 +36,7 @@ The State Capital is Denver. Colorado is split into 64 Counties, of which the mo
 
 ### Voting in Colorado  
     
-Each County individually administrates local, coordinated, primary, and general elections, under the supervision of the Colorado Secretary of State. This means that each county individually handles the voters registered in that county. Unsurprisingly, the same eight most populous counties are also the counties with the majority of registered voters, as their registrants comprise 73% of total Colorado registered voters (as of November 2017). As Table shows, these eight counties have a registration rate between 60-80%, compared to a Colorado-wide rate of about 67%. Registration rates for all counties are also graphically depicted in Figure 2.
+Each County individually administrates local, coordinated, primary, and general elections, under the supervision of the Colorado Secretary of State. This means that each county individually handles the voters registered in that county. Unsurprisingly, the same eight most populous counties are also the counties with the majority of registered voters, as their registrants comprise 73% of total Colorado registered voters (as of November 2017). As the following table shows, these eight counties have a registration rate between 60-80%, compared to a Colorado-wide rate of about 67%. Registration rates for all counties are also graphically depicted in figure 3.2.
     
 County    | Total Registered Voters|County Voter Registration Rate | % of Statewide Registrants|
 |:---------|-----------------------:|:------------------------------|--------------------------:|
@@ -51,13 +51,13 @@ County    | Total Registered Voters|County Voter Registration Rate | % of Statew
 |Other     |                 1009392|---                            |                  0.2703027|
 |Colorado  |                 3734303|---                            |                100.0000000|
 
-```{r reg per county map, echo=FALSE, fig.cap="Map of Registration Rates Per County", out.width = '40%', fig.align='center'}
+```{r reg per county map, echo=FALSE, fig.cap="Registration rates per Colorado county", out.width = '60%', fig.align='center'}
 knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_registered_county_map.png")
 ```
 
-In terms of Party registration, Colorado as a whole leans democratic by a very narrow margin. This is also reflected in the state's Cook Partisan Voting Index of D +1, making it a solidly purple battleground state (Figure 3).
+In terms of Party registration, Colorado as a whole leans democratic by a very narrow margin. This is also reflected in the state's Cook Partisan Voting Index of D +1, making it a solidly purple battleground state (figure 3.3).
 
-```{r party reg per county map, echo=FALSE, fig.cap="Map of Party Affiliation Per County", out.width = '40%', fig.align='center'}
+```{r party reg per county map, echo=FALSE, fig.cap="Democratic/Republican party lean per Colorado county", out.width = '60%', fig.align='center'}
 knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/party_affiliation_county_map.png")
 ```
    
@@ -71,7 +71,7 @@ In the past 25 years, there have been a series of key changes in the way Colorad
     
 Colorado presents such an interesting case for research on Vote By Mail exactly because it has gone through such a long transitional process to reach its current elections system. It has steadily developed voting policy through a mixture of state mandates, county action, and outside policy motivations. It gives researchers access to approximatelly 22 years during which at least part of the state conducted elections partially by mail, making comparative, county- or individual- level case studies particularly alluring.
   
-## Getting the Data  
+## Acquiring the Data  
 
 This thesis relies on county and individual level models to draw conclusions on voting behaviours, and how they are affected by voting method. As such, the data I need will optimally contain the following:
 
@@ -111,27 +111,27 @@ The process of "wrangling" refers to manipulating the data into a form that can 
    
 The first major issue I encountered--which merits discussion in its own section--derives from the aforementioned fact that the voter records I had access to are "snapshots". What this means, is that for each person in each year of voter registration files, I will have their corresponding history files for all ballots they have cast in Colorado, but not their own history of registration and migration. If, say, a voter moved from Boulder County to Summit County, I would have their votes in Boulder County show up in the voter history file, but them being registered in Summit. If you recall the turnout calculations specified earlier on, this implies an overestimation when looking back at elections that happened some time before the date of the "snapshot". Additionally, "snapshots" of current voter files do not reflect voters dropping off the rolls for whatever reason--death, moving out of the state, long term inactivity, non-confirmable personal data etc. Since for these voters the history files would also not be included, the issue created is less one of overestimation of turnout like before, but just the inclusion of additional room for error that is created when subtracting one from the denominator and enumerator of turnout.   
    
-This was a significant problem from the beginning of this thesis, since I started out with only one "snapshot" from 2017. After going through turnout calculations, a significant majority of counties appeared to have turnout exceeding 100%, particularly for years between 2000 and 2012. This was, to put it mildly, concerning. With the help of my advisers, I was able to procure similar "snapshots" for each year between 2012-2016. After similar calculations, I returned the following graph for the eight most populous counties as described above, including different shapes for election type, colors for county, and a vertical line at 2013 to signify the latest major change in how Colorado administers elections:
+This was a significant problem from the beginning of this thesis, since I started out with only one "snapshot" from 2017. After going through turnout calculations, a significant majority of counties appeared to have turnout exceeding 100%, particularly for years between 2000 and 2012. This was, to put it mildly, concerning. With the help of my advisers, I was able to procure similar "snapshots" for each year between 2012-2016. After similar calculations, I returned figure 3.4 for the eight most populous counties as described above, including different shapes for election type, colors for county, and a vertical line at 2013 to signify the latest major change in how Colorado administers elections.
 
-```{r big eight turnout plot, echo=FALSE, fig.cap="Turnout Plot for Eight Largest Colorado Counties, 2012-2016", out.width = '40%', fig.align='center'}
+```{r big eight turnout plot, echo=FALSE, fig.cap="Turnout plot for eight largest Colorado counties, 2012-2016", out.width = '60%', fig.align='center'}
 knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/colorado_bigeight_turnout_graph.png")
 ```
    
 To also further illustrate the in-county migration and dropped voter problem, I created a graph that includes logged total counts of registered voters calculated using the 2017 and the 2012-2016 files. The plot also includes a line at y=x. If in-Colorado migration and dropped voters are not an issue, most points on this graph should be at this line. 
    
-```{r county migration A, echo=FALSE, fig.cap="Comparison of registration count methods", out.width = '40%', fig.align='center'}
+```{r county migration A, echo=FALSE, fig.cap="Comparison of registration count methods", out.width = '60%', fig.align='center'}
 knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/county_migration_A.png")
 ```
    
-Two things should be clear from this plot. First, there is significant deviation between the counts using just the 2017 file and all files across years. Specifically, the 2017 count consistently underestimates the total amount of registered voters--this is shown by the red linear model smoothing line. This consistent difference confirms the hypothesis that there is a substantial benefit to using "snapshots" for multiple years. Second, counts get more accurate the closer to 2017 we get. This should be even more apparent in the following graph, which limits the scale to only some high registration counties, and adds a shape indicator for county:
+Two things should be clear from figure 3.5. First, there is significant deviation between the counts using just the 2017 file and all files across years. Specifically, the 2017 count consistently underestimates the total amount of registered voters--this is shown by the red linear model smoothing line. This consistent difference confirms the hypothesis that there is a substantial benefit to using "snapshots" for multiple years. Second, counts get more accurate the closer to 2017 we get. This should be even more apparent in figure 3.6, which limits the scale to only some high registration counties, and adds a shape indicator for county.
 
-```{r county migration B, echo=FALSE, fig.cap="Comparison of registration count methods only for a few counties, 2012-2016", out.width = '40%', fig.align='center'}
+```{r county migration B, echo=FALSE, fig.cap="Comparison of registration count methods only for a few counties, 2012-2016", out.width = '60%', fig.align='center'}
 knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/county_migration_B.png")
 ```
    
-Here the structure of the data becomes clear: for each county, there are a series of almost vertically distributed points, which get closer to the y = x line the closer the counts get to 2017. Through this series of tests, it became clear that using multiple years of data was necessary in order to conduct an accurate test of my hypotheses. My selection was later vindicated, when looking at comparisons between reported rates of turnout^[Turnout is calculated over all registered voters] and turnout calculated through my dataset for the 2014 midterm election:  
+Here the structure of the data becomes clear: for each county, there are a series of almost vertically distributed points, which get closer to the y = x line the closer the counts get to 2017. Through this series of tests, it became clear that using multiple years of data was necessary in order to conduct an accurate test of my hypotheses. My selection was later vindicated, when looking at comparisons between reported rates of turnout^[Turnout is calculated over all registered voters] and turnout calculated through my dataset for the 2014 midterm election (se fig. 3.7).
 
-```{r comp turnout 2014, echo=FALSE, fig.cap="Comparison of reported and calculated turnout for 2014 midterms across county", out.width = '40%', fig.align='center'}
+```{r comp turnout 2014, echo=FALSE, fig.cap="Comparison of reported and calculated turnout for 2014 midterms across county", out.width = '60%', fig.align='center'}
 knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/Calc_vs_rep_turnout.png")
 ```
   
