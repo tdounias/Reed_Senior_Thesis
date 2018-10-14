@@ -8,7 +8,7 @@ In this chapter, I will first go through a description of the state of Colorado;
 
 ## The Centennial State and Its Voters  
 
-### Demographics and Characteristics
+### Demographics
    
 Colorado--named the Centennial State due to assuming statehood on the centennial of the Union--lies in the Southwestern United States, with its Western half squarely atop the Rocky Mountains. Based on its estimated population of just over 5.5 million, Colorado is the 21st most populous state, and ranks 37th in population density. The vast majority of that population is gathered in a series of urban areas that comprise a North-to-South strip in the middle of the state, containing the Denver-Aurora-Lakewood Metro Area, Colorado Springs, Pueblo, and Fort Collins. Apart from the Western town of Grand Junction, the rest of the population resides in vast rural areas.  
   
@@ -22,40 +22,40 @@ The State Capital is Denver. Colorado is split into 64 Counties, of which the mo
 
 |County    | Total Population| CO Population %|Largest Metro Area                |
 |:---------|----------------:|---------------:|:---------------------------------|
-|Adams     |           441603|       0.0878079|Denver-Aurora-Lakewood Metro Area |
-|Arapahoe  |           572003|       0.1137365|Denver-Aurora-Lakewood Metro Area |
-|Boulder   |           294567|       0.0585714|Boulder                           |
-|Denver    |           600158|       0.1193348|Denver                            |
-|Douglas   |           285465|       0.0567616|Denver-Aurora-Lakewood Metro Area |
-|El Paso   |           622263|       0.1237301|Colorado Springs                  |
-|Jefferson |           534543|       0.1062880|Denver-Aurora-Lakewood Metro Area |
-|Larimer   |           299630|       0.0595781|Fort COllins                      |
-|Other     |          1378964|       0.2741917|                                  |
-|Colorado  |          5029196|     100.0000000|                                  |
+|Adams     |          44,1603|            0.09|Denver-Aurora-Lakewood Metro Area |
+|Arapahoe  |          572,003|            0.11|Denver-Aurora-Lakewood Metro Area |
+|Boulder   |          294,567|            0.06|Boulder                           |
+|Denver    |          600,158|            0.12|Denver                            |
+|Douglas   |          285,465|            0.06|Denver-Aurora-Lakewood Metro Area |
+|El Paso   |          622,263|            0.12|Colorado Springs                  |
+|Jefferson |          534,543|            0.11|Denver-Aurora-Lakewood Metro Area |
+|Larimer   |          299,630|            0.06|Fort COllins                      |
+|Other     |        1,378,964|            0.27|                                  |
+|Colorado  |        5,029,196|            1.00|                                  |
 
 
 ### Voting in Colorado  
     
 Each County individually administrates local, coordinated, primary, and general elections, under the supervision of the Colorado Secretary of State. This means that each county individually handles the voters registered in that county. Unsurprisingly, the same eight most populous counties are also the counties with the majority of registered voters, as their registrants comprise 73% of total Colorado registered voters (as of November 2017). As the following table shows, these eight counties have a registration rate between 60-80%, compared to a Colorado-wide rate of about 67%. Registration rates for all counties are also graphically depicted in figure 3.2.
     
-County    | Total Registered Voters|County Voter Registration Rate | % of Statewide Registrants|
+ County    | Total Registered Voters|County Voter Registration Rate | % of Statewide Registrants|
 |:---------|-----------------------:|:------------------------------|--------------------------:|
-|Adams     |                  270303|0.612095026528352              |                  0.0723838|
-|Arapahoe  |                  410546|0.717733997898612              |                  0.1099391|
-|Boulder   |                  237091|0.804879704787026              |                  0.0634900|
-|Denver    |                  450616|0.750828948376927              |                  0.1206694|
-|Douglas   |                  237659|0.832532884942112              |                  0.0636421|
-|El Paso   |                  445708|0.716269487338955              |                  0.1193551|
-|Jefferson |                  422362|0.790136621375642              |                  0.1131033|
-|Larimer   |                  250626|0.836451623669192              |                  0.0671145|
-|Other     |                 1009392|---                            |                  0.2703027|
-|Colorado  |                 3734303|---                            |                100.0000000|
+|Adams     |                 27,0303|0.61                           |                       0.07|
+|Arapahoe  |                 410,546|0.72                           |                       0.11|
+|Boulder   |                 237,091|0.80                           |                       0.06|
+|Denver    |                 450,616|0.75                           |                       0.12|
+|Douglas   |                 237,659|0.83                           |                       0.06|
+|El Paso   |                 445,708|0.71                           |                       0.12|
+|Jefferson |                 422,362|0.79                           |                       0.11|
+|Larimer   |                 250,626|0.84                           |                       0.06|
+|Other     |               1,009,392|---                            |                       0.27|
+|Colorado  |               3,734,303|0.67                           |                       1.00|
 
 ```{r reg per county map, echo=FALSE, fig.cap="Registration rates per Colorado county", out.width = '60%', fig.align='center'}
 knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_registered_county_map.png")
 ```
 
-In terms of Party registration, Colorado as a whole leans democratic by a very narrow margin. This is also reflected in the state's Cook Partisan Voting Index of D +1, making it a solidly purple battleground state (figure 3.3).
+In terms of Party registration, Colorado as a whole leans democratic by a very narrow margin. This is also reflected in the state's Cook Partisan Voting Index of D +1, making it a solidly purple battleground state (figure 3.3). 
 
 ```{r party reg per county map, echo=FALSE, fig.cap="Democratic/Republican party lean per Colorado county", out.width = '60%', fig.align='center'}
 knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/party_affiliation_county_map.png")
@@ -63,13 +63,15 @@ knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/party_a
    
 In the past 25 years, there have been a series of key changes in the way Colorado administers elections, in relation to Vote By Mail and other reforms targeted and expanding the democratic franchise. In 1992, Colorado introduced no-excuse absentee voting, allowing voters to either physically pick up a mail ballot at a Vote Center or County Office, or have a ballot mailed to them prior to election day. In 2008, this reform was expanded to a permanent Vote-By-Mail system, which gave voters the option to be permanently put on a list of addresses that received mail ballots prior to the election. The State also entered a transitional status to full mail elections, giving counties the option to make all coordinated local elections, general elections, and primary elections exclusively VBM. In 2013, the Colorado State Legislature passed HB13-1303: The Voter Access and Modernized Elections Act, which mandated that every voter currently registered receive a mail ballot for all future elections. The Act also expanded the use of Vote Centers instead of traditional polling places, instituted same-day voter registration, and revamped the way active and inactive voter status was designated on voter rolls--more on this in future sections. These changes are summarised in Table.
   
-|Year |Key Changes                                                                                                                 |
-|:----|:---------------------------------------------------------------------------------------------------------------------------|
-|1992 |No Excuse Absentee Statewide Implementation                                                                                 |
-|2008 |Permanent No-Excuse VBM Lists, Option of Full-VBM Elections                                                                 |
-|2013 |Automatic Mail Ballot System Implemented Statewide, Established Vote Centers                                                |
+|Year |Key Changes                                                                                                   |
+|:----|:-------------------------------------------------------------------------------------------------------------|
+|1992 |No Excuse Absentee Statewide Implementation                                                                   |
+|2008 |Permanent No-Excuse VBM Lists, Option of Full-VBM Elections                                                   |
+|2013 |Automatic Mail Ballot System Implemented Statewide, Established Vote Centers                                  |
     
 Colorado presents such an interesting case for research on Vote By Mail exactly because it has gone through such a long transitional process to reach its current elections system. It has steadily developed voting policy through a mixture of state mandates, county action, and outside policy motivations. It gives researchers access to approximatelly 22 years during which at least part of the state conducted elections partially by mail, making comparative, county- or individual- level case studies particularly alluring.
+
+### Colorado as a Case for this Thesis
   
 ## Acquiring the Data  
 
