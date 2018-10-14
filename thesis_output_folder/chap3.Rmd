@@ -10,7 +10,7 @@ In this chapter, I will first go through a description of the state of Colorado;
 
 ### Demographics
    
-Colorado--named the Centennial State due to assuming statehood on the centennial of the Union--lies in the Southwestern United States, with its Western half squarely atop the Rocky Mountains. Based on its estimated population of just over 5.5 million, Colorado is the 21st most populous state, and ranks 37th in population density. The vast majority of that population is gathered in a series of urban areas that comprise a North-to-South strip in the middle of the state, containing the Denver-Aurora-Lakewood Metro Area, Colorado Springs, Pueblo, and Fort Collins. Apart from the Western town of Grand Junction, the rest of the population resides in vast rural areas.  
+Colorado--named the Centennial State due to assuming statehood on the centennial of the Union--lies in the Southwestern United States, with its Western half squarely atop the Rocky Mountains. Based on its estimated population of just over 5.5 million, Colorado is the 21st most populous state, and ranks 37th in population density. The vast majority of that population is gathered in a series of urban areas that comprise a North-to-South strip in the middle of the state, containing the Denver-Aurora-Lakewood Metro Area, Colorado Springs, Pueblo, and Fort Collins. Apart from the Western town of Grand Junction, the rest of the population resides in vast rural areas. Colorado is landlocked, and far from any coastal town; in place of seaside resorts, Colorado attracts a substantial amount of tourists to its mountains every year. Therefore the more mountainous regions have developed skiing and mountaineering resorts. They also heavily depend on federal money and protection for national parks. 
   
 Continuing with demographic characteristics, Colorado has a median age of 34.3, and median household income of $65,685. Colorado's population is mostly white, with a higher minority group population density in its Southern regions, as shown in figure 3.1. [@us_census_bureau_us_2010]
 
@@ -34,9 +34,13 @@ The State Capital is Denver. Colorado is split into 64 Counties, of which the mo
 |Colorado  |        5,029,196|            1.00|                                  |
 
 
+### The Politics of Colorado
+
+Colorado is both a typical and non-typical froniter state.
+
 ### Voting in Colorado  
     
-Each County individually administrates local, coordinated, primary, and general elections, under the supervision of the Colorado Secretary of State. This means that each county individually handles the voters registered in that county. Unsurprisingly, the same eight most populous counties are also the counties with the majority of registered voters, as their registrants comprise 73% of total Colorado registered voters (as of November 2017). As the following table shows, these eight counties have a registration rate between 60-80%, compared to a Colorado-wide rate of about 67%. Registration rates for all counties are also graphically depicted in figure 3.2.
+Each County individually administrates local, coordinated, primary, and general elections, under the supervision of the Colorado Secretary of State. This means that each county individually handles the voters registered in that county. Unsurprisingly, the same eight most populous counties are also the counties with the majority of registered voters, as their registrants comprise 73% of total Colorado registered voters (as of November 2017). As the following table shows, these eight counties have a registration rate between 60-80%, compared to a Colorado-wide rate of about 67%. Registration rates for all counties are also graphically depicted in figure 3.2. In terms of Party registration, Colorado as a whole leans democratic by a very narrow margin(figure 3.3). 
     
  County    | Total Registered Voters|County Voter Registration Rate | % of Statewide Registrants|
 |:---------|-----------------------:|:------------------------------|--------------------------:|
@@ -55,8 +59,6 @@ Each County individually administrates local, coordinated, primary, and general 
 knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_registered_county_map.png")
 ```
 
-In terms of Party registration, Colorado as a whole leans democratic by a very narrow margin. This is also reflected in the state's Cook Partisan Voting Index of D +1, making it a solidly purple battleground state (figure 3.3). 
-
 ```{r party reg per county map, echo=FALSE, fig.cap="Democratic/Republican party lean per Colorado county", out.width = '60%', fig.align='center'}
 knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/party_affiliation_county_map.png")
 ```
@@ -69,9 +71,9 @@ In the past 25 years, there have been a series of key changes in the way Colorad
 |2008 |Permanent No-Excuse VBM Lists, Option of Full-VBM Elections                                                   |
 |2013 |Automatic Mail Ballot System Implemented Statewide, Established Vote Centers                                  |
     
-Colorado presents such an interesting case for research on Vote By Mail exactly because it has gone through such a long transitional process to reach its current elections system. It has steadily developed voting policy through a mixture of state mandates, county action, and outside policy motivations. It gives researchers access to approximatelly 22 years during which at least part of the state conducted elections partially by mail, making comparative, county- or individual- level case studies particularly alluring.
-
 ### Colorado as a Case for this Thesis
+
+Colorado presents such an interesting case for research on Vote By Mail exactly because it has gone through such a long transitional process to reach its current elections system. It has steadily developed voting policy through a mixture of state mandates, county action, and outside policy motivations. It gives researchers access to approximatelly 22 years during which at least part of the state conducted elections partially by mail, making comparative, county- or individual- level case studies particularly alluring.
   
 ## Acquiring the Data  
 

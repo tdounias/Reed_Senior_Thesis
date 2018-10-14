@@ -25,23 +25,24 @@
 \contentsline {chapter}{Chapter 3: Case Selection, Data, Model Parametrization}{17}{chapter.3}
 \contentsline {section}{\numberline {3.1}The Centennial State and Its Voters}{17}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}Demographics}{17}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Voting in Colorado}{18}{subsection.3.1.2}
-\contentsline {subsection}{\numberline {3.1.3}Colorado as a Case for this Thesis}{20}{subsection.3.1.3}
-\contentsline {section}{\numberline {3.2}Acquiring the Data}{20}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Sources and first glance}{21}{subsection.3.2.1}
-\contentsline {subsubsection}{2010 US Census}{21}{section*.9}
-\contentsline {subsubsection}{Colorado Voter Files}{21}{section*.10}
-\contentsline {section}{\numberline {3.3}Wrangling the Data}{22}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Initial Problems with the 2017 Voter File and Solution}{22}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.1.2}The Politics of Colorado}{18}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}Voting in Colorado}{19}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.4}Colorado as a Case for this Thesis}{21}{subsection.3.1.4}
+\contentsline {section}{\numberline {3.2}Acquiring the Data}{22}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Sources and first glance}{22}{subsection.3.2.1}
+\contentsline {subsubsection}{2010 US Census}{22}{section*.9}
+\contentsline {subsubsection}{Colorado Voter Files}{23}{section*.10}
+\contentsline {section}{\numberline {3.3}Wrangling the Data}{23}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Initial Problems with the 2017 Voter File and Solution}{23}{subsection.3.3.1}
 \contentsline {subsection}{\numberline {3.3.2}Other Wrangling Issues Faced}{25}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Final Variable Specifications}{26}{subsection.3.3.3}
-\contentsline {section}{\numberline {3.4}Model Parametrization}{27}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}Notation for predictors}{27}{subsection.3.4.1}
-\contentsline {subsubsection}{County and County-per-Election Level}{27}{section*.15}
-\contentsline {subsubsection}{Election Level}{28}{section*.16}
-\contentsline {subsubsection}{Individual and Individual-per-Election Level}{28}{section*.17}
-\contentsline {subsection}{\numberline {3.4.2}County Level Models}{28}{subsection.3.4.2}
-\contentsline {subsection}{\numberline {3.4.3}Individual Level Models}{30}{subsection.3.4.3}
+\contentsline {subsection}{\numberline {3.3.3}Final Variable Specifications}{27}{subsection.3.3.3}
+\contentsline {section}{\numberline {3.4}Model Parametrization}{29}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Notation for predictors}{29}{subsection.3.4.1}
+\contentsline {subsubsection}{County and County-per-Election Level}{29}{section*.15}
+\contentsline {subsubsection}{Election Level}{29}{section*.16}
+\contentsline {subsubsection}{Individual and Individual-per-Election Level}{29}{section*.17}
+\contentsline {subsection}{\numberline {3.4.2}County Level Models}{30}{subsection.3.4.2}
+\contentsline {subsection}{\numberline {3.4.3}Individual Level Models}{32}{subsection.3.4.3}
 \contentsline {chapter}{Chapter 4: Results}{33}{chapter.4}
 \contentsline {section}{\numberline {4.1}EDA}{33}{section.4.1}
 \contentsline {section}{\numberline {4.2}Models}{33}{section.4.2}
