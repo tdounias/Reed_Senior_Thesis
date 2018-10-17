@@ -192,7 +192,7 @@ sum(model_dt$MAIL_VOTE == model_dt$voted)
 
 #Build dtst for this model
 model_alts <- model_dt %>%
-  filter(COUNTY %in% c("Yuma", "Bent"))
+  filter(COUNTY %in% c("Washington", "Yuma", "Summit"))
 
 cols <- c("COUNTY", "PARTY", "GENDER", "VOTER_ID")
 
@@ -201,7 +201,7 @@ model_alts <- left_join(model_alts, demographics, by = "COUNTY")
 model_alts[cols] <- lapply(model_alts[cols], factor)
 
 model_alts$ELECTION_TYPE <- as.factor(model_alts$ELECTION_TYPE)
-model_alts$ELECTION_DATE <- year(model_alts$ELECTION_DATE)
+model_alts$ELECTION_DATE <- as.factor(year(model_alts$ELECTION_DATE))
 model_alts$AGE <- scale(model_alts$AGE)
 
 library(gamm4)
@@ -211,3 +211,21 @@ library(gamm4)
 #                   random =~ (1|COUNTY),
 #                   data = model_alts, family = binomial)
 #This doesn't actually work...
+
+md_alt_1 <- glmer(data = model_alts, family = "binomial",
+                 voted ~ PARTY + GENDER + AGE + AGE^2 + (1|COUNTY) +
+                   ELECTION_TYPE + ELECTION_DATE)
+
+arm::display(md_alt_1)
+
+#Check the previous model for linear dependency by running the fixed effects version
+
+md_alt_1_check <- glm(data = model_alts, family = "binomial",
+                  voted ~ PARTY + GENDER + AGE + AGE^2 + COUNTY +
+                    PCT_WHITE + PCT_URBAN + ELECTION_TYPE + ELECTION_DATE)
+
+alias(md_alt_1_check)
+
+#Conclusion is that county-level predictors are actually incorporated in the coefficients
+#For those particular counties in the glm. Also, I don't think there's a way around dropping some 
+#Values in the election type/date, other than coding dates as year/month. I'm not sure how to do that though...
