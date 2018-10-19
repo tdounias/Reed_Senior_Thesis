@@ -1,5 +1,9 @@
 ---
 output: pdf_document
+header-includes:
+- \usepackage{graphicx,latexsym}
+- \usepackage{amssymb,amsthm,amsmath}
+- \usepackage{longtable,booktabs,setspace}
 ---
 
 # Case Selection, Data, Model Parametrization
@@ -22,23 +26,40 @@ Continuing with demographic characteristics, Colorado has a median age of 34.3 a
    
 The State Capital is Denver. Colorado is split into 64 Counties, of which the most populous are, in no particular order, the following:  El Paso, Denver, Arapahoe, Jefferson, Adams, Larimer, Boulder, and Douglas. These counties comprise 73% of the total population of Colorado.  
 
-|County    | Total Population| CO Population %|Largest Metro Area                |
-|:---------|----------------:|---------------:|:---------------------------------|
-|Adams     |          441,603|            0.09|Denver-Aurora-Lakewood Metro Area |
-|Arapahoe  |          572,003|            0.11|Denver-Aurora-Lakewood Metro Area |
-|Boulder   |          294,567|            0.06|Boulder                           |
-|Denver    |          600,158|            0.12|Denver                            |
-|Douglas   |          285,465|            0.06|Denver-Aurora-Lakewood Metro Area |
-|El Paso   |          622,263|            0.12|Colorado Springs                  |
-|Jefferson |          534,543|            0.11|Denver-Aurora-Lakewood Metro Area |
-|Larimer   |          299,630|            0.06|Fort Collins                      |
-|Other     |        1,378,964|            0.27|                                  |
-|Colorado  |        5,029,196|            1.00|                                  |
+-------------------------------------------------------------------------------
+  County     Total Population   CO Population %        Largest Metro Area      
+----------- ------------------ ----------------- ------------------------------
+   Adams          441603            0.08781       Denver-Aurora-Lakewood Metro 
+                                                              Area             
 
+ Arapahoe         572003            0.1137        Denver-Aurora-Lakewood Metro 
+                                                              Area             
+
+  Boulder         294567            0.05857                 Boulder            
+
+  Denver          600158            0.1193                   Denver            
+
+  Douglas         285465            0.05676       Denver-Aurora-Lakewood Metro 
+                                                              Area             
+
+  El Paso         622263            0.1237              Colorado Springs       
+
+ Jefferson        534543            0.1063        Denver-Aurora-Lakewood Metro 
+                                                              Area             
+
+  Larimer         299630            0.05958               Fort Collins         
+
+   Other         1378964            0.2742                                     
+
+ Colorado        5029196              100                                      
+-------------------------------------------------------------------------------
+Table: Colorado population for largest counties \label{tab:pop_table}
 
 ### The Politics of Colorado
 
 Curtis Martin (1962) notes that Colorado, due to its status as a frontier state, has always been fiercly democratic and independent. He connects this fact with Colorado's past, by pointing out that its political institutions were deeply rooted in mining culture, ordinary citizens' participation,a strong feeling of being "far away" from sources of centralized power in the coasts, and a wish for the protection and preservation of Colorado's natural environment. As such, Colorado can be described as a populist state with a strong libertarian streak, that highly values democratic processes when they serve the people or protect and fund national parks, but staunchly opposes state intervention when it is unwaranted. [@martin_colorado_1962]
+
+\clearpage
   
 This 1964 study of Colorado politics rings true to this day. One needs not search for long to see instances when Colorado honored this description. One example is TABOR, or the Taxpayer's Bill of Rights; a strongly libertarian, small-government, populist series of regulations that mandated a referendum for any measure that would increase state taxes, and caped gobernment spending. TABOR was passed by referendum in 1992, and later ammended in 2005 after the dot com economic crisis exposed the fact that inability to spend is very bad for a state government trying to jump start its economy. [@colorado_general_assembly_tabor_nodate]   
   
@@ -48,20 +69,32 @@ Setting policy aside, this description of Colorado is also confirmed by polling 
 
 ### Voting in Colorado  
     
-Each County individually administrates local, coordinated, primary, and general elections, under the supervision of the Colorado Secretary of State. This means that each county individually handles the voters registered in that county. Unsurprisingly, the same eight most populous counties are also the counties with the majority of registered voters, as their registrants comprise 73% of total Colorado registered voters (as of November 2017). As the following table shows, these eight counties have a registration rate between 60-80%, compared to a Colorado-wide rate of about 67%. Registration rates for all counties are also graphically depicted in figure 3.2. In terms of Party registration, Colorado as a whole leans democratic by a very narrow margin(figure 3.3). 
-    
- County    | Total Registered Voters|County Voter Registration Rate | % of Statewide Registrants|
-|:---------|-----------------------:|:------------------------------|--------------------------:|
-|Adams     |                 27,0303|0.61                           |                       0.07|
-|Arapahoe  |                 410,546|0.72                           |                       0.11|
-|Boulder   |                 237,091|0.80                           |                       0.06|
-|Denver    |                 450,616|0.75                           |                       0.12|
-|Douglas   |                 237,659|0.83                           |                       0.06|
-|El Paso   |                 445,708|0.71                           |                       0.12|
-|Jefferson |                 422,362|0.79                           |                       0.11|
-|Larimer   |                 250,626|0.84                           |                       0.06|
-|Other     |               1,009,392|---                            |                       0.27|
-|Colorado  |               3,734,303|0.67                           |                       1.00|
+Each County individually administrates local, coordinated, primary, and general elections, under the supervision of the Colorado Secretary of State. This means that each county individually handles the voters registered in that county. Unsurprisingly, the same eight most populous counties are also the counties with the majority of registered voters, as their registrants comprise 73% of total Colorado registered voters (as of November 2017). As table 3.2 shows, these eight counties have a registration rate between 60-80%, compared to a Colorado-wide rate of about 67%. Registration rates for all counties are also graphically depicted in figure 3.2. In terms of Party registration, Colorado as a whole leans democratic by a very narrow margin (figure 3.3). 
+
+-------------------------------------------------------------------------------------------------------------  
+ County       Total Registered Voters       County Voter Registration Rate      % of Statewide Registrants 
+------------ ----------------------------- ------------------------------------ --------------------------------
+  Adams            270,303                             0.61                                0.07
+  
+  Arapahoe         410,546                             0.72                                0.11
+  
+  Boulder          237,091                             0.80                                0.06
+  
+  Denver           450,616                             0.75                                0.12
+  
+  Douglas          237,659                             0.83                                0.06
+  
+  El Paso          445,708                             0.71                                0.12
+  
+  Jefferson        422,362                             0.79                                0.11
+  
+  Larimer          250,626                             0.84                                0.06
+  
+  Other          1,009,392                             ---                                 0.27
+  
+  Colorado       3,734,303                             0.67                                1.00
+------------- ----------------------------- ------------------------------------ --------------------------------
+Table: Colorado voter registration for largest counties \label{tab:voter_reg}
 
 ```{r reg per county map, echo=FALSE, fig.cap="Registration rates per Colorado county", out.width = '50%', fig.align='center'}
 knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_registered_county_map.png")
@@ -71,13 +104,19 @@ knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_reg
 knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/party_affiliation_county_map.png")
 ```
    
-In the past 25 years, there have been a series of key changes in the way Colorado administers elections, in relation to Vote By Mail and other reforms targeted and expanding the democratic franchise. In 1992, Colorado introduced no-excuse absentee voting, allowing voters to either physically pick up a mail ballot at a Vote Center or County Office, or have a ballot mailed to them prior to election day. In 2008, this reform was expanded to a permanent Vote-By-Mail system, which gave voters the option to be permanently put on a list of addresses that received mail ballots prior to the election. The State also entered a transitional status to full mail elections, giving counties the option to make all coordinated local elections, general elections, and primary elections exclusively VBM. In 2013, the Colorado State Legislature passed HB13-1303: The Voter Access and Modernized Elections Act, which mandated that every voter currently registered receive a mail ballot for all future elections. The Act also expanded the use of Vote Centers instead of traditional polling places, instituted same-day voter registration, and revamped the way active and inactive voter status was designated on voter rolls--more on this in future sections. These changes are summarised in Table.
+In the past 25 years, there have been a series of key changes in the way Colorado administers elections, in relation to Vote By Mail and other reforms targeted and expanding the democratic franchise. In 1992, Colorado introduced no-excuse absentee voting, allowing voters to either physically pick up a mail ballot at a Vote Center or County Office, or have a ballot mailed to them prior to election day. In 2008, this reform was expanded to a permanent Vote-By-Mail system, which gave voters the option to be permanently put on a list of addresses that received mail ballots prior to the election. The State also entered a transitional status to full mail elections, giving counties the option to make all coordinated local elections, general elections, and primary elections exclusively VBM. In 2013, the Colorado State Legislature passed HB13-1303: The Voter Access and Modernized Elections Act, which mandated that every voter currently registered receive a mail ballot for all future elections. The Act also expanded the use of Vote Centers instead of traditional polling places, instituted same-day voter registration, and revamped the way active and inactive voter status was designated on voter rolls--more on this in future sections. These changes are summarised in Table 3.3.
   
-|Year |Key Changes                                                                                                   |
-|:----|:-------------------------------------------------------------------------------------------------------------|
-|1992 |No Excuse Absentee Statewide Implementation                                                                   |
-|2008 |Permanent No-Excuse VBM Lists, Option of Full-VBM Elections                                                   |
-|2013 |Automatic Mail Ballot System Implemented Statewide, Established Vote Centers                                  |
+
+-------------------------------------------------------------------------------------------------------------
+  Year             Key Changes                                                                                                   
+------- -----------------------------------------------------------------------------------------------------
+  1992             No Excuse Absentee Statewide Implementation                                                                   
+  
+  2008             Permanent No-Excuse VBM Lists, Option of Full-VBM Elections                                                   
+  
+  2013             Automatic Mail Ballot System Implemented Statewide, Established Vote Centers  
+------- -----------------------------------------------------------------------------------------------------
+Table: Key changes to Colorado elections policy \label{tab:elect_policy}
     
 ### Colorado as a Case for this Thesis
 
@@ -110,9 +149,7 @@ I use two datasets from the Census. For both, the unit of observation is one of 
 #### Colorado Voter Files
 
 As any state, Colorado maintains a statewide registry of all currently registered voters. This registry is typically under the purview of the Secretary of State--in this case, Wayne W. Williams. Voter Registration Files are constantly updated with new information on existing voters, new voters, or with the removal of inactive or otherwise ineligible voters. Therefore, this file will be different every time it is accessed or shared. Based on when this file is accessed, only a "snapshot" of the file can be obtained. I have managed to procure "snapshots" for each year between 2012 and 2017.  
-  
-\clearpage
-    
+
 Similarly with VRFs, a Voter History File is maintained and constantly updated by the state. This file is uniquelly connected to its VRF: only voters showing up as registrants will have their histories included. I have similarly procured "snapshots" of the Voter History File for the years between 2012 and 2017.
 
 In the Voter Registration files, the unit of observation is the individual voter, and all variables are initially coded as character strings. Each voter is assigned a unique voter ID, which serves as a point of refference between the two files. Broadly speaking, data in this file can be divided between three categories: first, personal identification information like address, ZIP code, or phone number; second, demographic information like age and gender; third, information pertinent to elections administration like congressional district, local elections for which the individual should receive a ballot, voter ID, and party registration. I will further elaborate on relevant variables in the wrangling section.
@@ -181,15 +218,23 @@ After the conclusion of the wrangling process, the resulting dataset included a 
 * PARTY: Discrete variable. For each voter, the party they are registered with. Can be: Republican, Democrat, Other, or Unaffiliated.
 * GENDER: Discrete binary variable, Male or Female.
 * AGE: The age of the individual registrant.
-* VOTING_METHOD: The method used by an individual voter to cast their ballot. Is coded as either VBM or In Person, according to the following table:
+* VOTING_METHOD: The method used by an individual voter to cast their ballot. Is coded as either VBM or In Person, according to Table 3.4:
 
-|Voting Method  |Description of Method                                                         |Final Designation |
-|:--------------|:-----------------------------------------------------------------------------|:-----------------|
-|Absentee Carry |Voters who carried an absentee ballot with them from an early voting location |VBM               |
-|Absentee Mail  |Voters who were sent an absentee ballot, and mailed it in                     |VBM               |
-|Early Voting   |Voters who physically went to an Early Voting location and voted              |In Person         |
-|In Person      |Voters who physically went to a polling place and voted on paper              |In Person         |
-|Mail Ballot    |Vote By Mail                                                                  |VBM               |
-|Polling Place  |Traditional polling place voting, discontinued in 2013                        |In Person         |
-|Vote Center    |Voters who cast their ballots at Vote Centers                                 |In Person         |
-   
+--------------------------------------------------------------------------------------------------------------------------
+  Voting Method                   Description of Method                                                 Final Designation  
+----------------- ---------------------------------------------------------------------------------- --------------------- 
+  Absentee Carry      Voters who carried an absentee ballot with them from an early voting location       VBM                
+  
+  Absentee Mail       Voters who were sent an absentee ballot, and mailed it in                           VBM                
+  
+  Early Voting        Voters who physically went to an Early Voting location and voted                    In Person          
+  
+  In Person           Voters who physically went to a polling place and voted on paper                    In Person          
+  
+  Mail Ballot         Vote By Mail                                                                        VBM                
+  
+  Polling Place       Traditional polling place voting, discontinued in 2013                              In Person          
+  
+  Vote Center         Voters who cast their ballots at Vote Centers                                       In Person          
+----------------- ---------------------------------------------------------------------------------- ---------------------
+Table: Voting method designation table \label{tab:voting_method}

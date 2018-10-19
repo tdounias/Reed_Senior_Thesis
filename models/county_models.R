@@ -2,6 +2,7 @@ library(tidyverse)
 library(lubridate)
 library(Matrix)
 library(lme4)
+library(gamm4)
 source("~/Desktop/Reed_Senior_Thesis/riggd/R/utils.R")
 setwd("~/Desktop/Reed_Senior_Thesis/Data_and_results/data")
 
@@ -25,6 +26,8 @@ model_dt$county <- as.factor(model_dt$county)
 
 ##MODEL 1
 
+print("MODEL 1")
+
 md_1 <- lm(data = model_dt, turnout ~ pct_white + pct_urban + county)
 
 summary(md_1)
@@ -32,6 +35,8 @@ summary(md_1)
 alias(md_1)
 
 ##MODEL 2
+
+print("MODEL 2")
 
 md_2 <- lmer(data = model_dt, turnout ~ pct_white + pct_urban + (1|county))
 
@@ -42,6 +47,8 @@ ranef(md_2)
 fixef(md_2)
 
 ##MODEL 3
+
+print("MODEL 3")
 
 md_3 <- lmer(data = model_dt, turnout ~ 1 + types + pct_vbm +
                pct_urban + pct_white + pct_vbm*types + (1|county))
@@ -56,6 +63,8 @@ fixef(md_3)
 anova(md_2, md_3)
 
 ##MODEL 4
+
+print("MODEL 4")
 
 model_dt$dates <-  as.integer(model_dt$dates)
 

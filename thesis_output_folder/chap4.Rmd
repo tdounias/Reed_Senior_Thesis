@@ -6,23 +6,6 @@ header-includes:
 - \usepackage{longtable,booktabs,setspace}
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-library(tidyverse)
-library(lubridate)
-library(knitr)
-library(Matrix)
-library(lme4)
-library(arm)
-source("~/Desktop/Reed_Senior_Thesis/riggd/R/utils.R")
-
-index <- data.frame(c("Ballot", "Individual", "County", "Election", "Local Result", "General Index"), 
-                    c("u", "z", "x", "w", "v", "--"), 
-                    c("i", "j", "k", "l", "k,l", "i'"))
-
-names(index) <- c("Purpose/Unit", "Variable", "Index")
-```
-
 # Model Specification and Results
 
 In this chapter I do a step-by-step construction and fitting of a series of models. I begin with a thorough analysis of my notation, and specification of models. I then extract results from the models that best fit the data, and draw inferences on my hypotheses. There are two types of models that will be included here: county-level, and individual-level. They will be treated as seperate sections.
@@ -59,9 +42,11 @@ Table: Variable names and indices per unit of observation \label{tab:units_vars}
 
 ## County Level Models
 
-In this section I will go through a step-by step creation of models at the county level. County level models use a series of variables at the election, county, and local result levels. The response variable is always turnout as a local result. If this model is considered at its most basic, it could be thought of as an assignement of voting tendencies across counties; each county independent of election has a unique range of turnout results. With the addition of some county-level characteristics, it is possible to build a naive, baseline model of turnout as follows:
+### Specifications
 
-$$y^{turnout}_{k,l} = \beta_0 + (\sum_{k=1}^{64}\beta_kx_k^{county}) + \beta_{65}x_k^{\% white} + \beta_{66}x_k^{\%urban},$$
+In this section I will go through a step-by step creation of models at the county level. County level models use a series of variables at the election, county, and local result levels. The response variable is always turnout as a local result. If this model is considered at its most basic, it could be thought of as an assignement of voting tendencies across counties; each county independent of election has a unique range of turnout results. In this way it is possible to build a naive, baseline model of turnout as follows:
+
+$$y^{turnout}_{k,l} = \beta_0 + (\sum_{k=1}^{64}\beta_kx_k^{county}),$$
 
 where $x_k^{county}$ is a series of 64 dummy variables for each county of Colorado. Here differences between elections come from normally distributed error terms, rather than predictors. I name this *Model 1*, and it does not reflect the data particularly well. First off, this model includes the assumption that counties are independent of one another, which is probably false; just consider that these counties are areas of the same state, in the same country, with populations moving between them at regular intervals, and many of them covering the same metropolitan area or congressional district. Additionally, this model cannot fully calculate relevant coefficients, since a number of counties can be represented as perfect linear functions of the other variables. This means they will be dropped by \textit{R} when the model is called in the `lm()` function.  
   
@@ -86,6 +71,20 @@ $$y^{turnout}_{k,l} = a_{k} + \beta_{1}x_k^{\% white} + \beta_{2}x_k^{\% urban} 
 $$a_{k} \sim N(\gamma_0, \sigma_{\alpha}^2)$$
 where $s()$ is a thin plate spline function with seven knots--equal to the number of years.^[I used the `gam.check()` function that is present in the `mgcv` \textit{R} package, whose call determined that the number of knots here may be too low. However, given the data available to me, I was limited to the inclusion of seven years and as such cannot increase the number of knots any further.] A summary of these four models is provided in the following table:  
   
-**INSERT TABLE**
+-------------------------------------------------------------------------------------------------
+  Model No                                    Model Description
+-------------- ----------------------------------------------------------------------------------
+  Model 1          Naive model with only county specific effects
+  
+  Model 2          Multilevel model; added county level predictors
+  
+  Model 3          Multilevel model; added VBM, interaction terms, and election fixed effects
+  
+  Model 4          Multilevel General Additive model; added spline function for election year
+-------------- ----------------------------------------------------------------------------------
+Table: County level model descriptions \label{tab:model_desc_county}
+
+
+### Results
 
 ## Individual Level Models

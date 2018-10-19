@@ -27,7 +27,7 @@ pop_table <- rbind(pop_table, other) %>%
 
 #Create statewide row
 Colorado <- data.frame("Colorado", sum(pop_table$TOTAL_POP), 
-                       sum(pop_table$TOTAL_REGISTERED), mean(pop_table$PCT_REGISTERED), 100, 100)
+                       sum(pop_table$TOTAL_REGISTERED), mean(as.numeric(pop_table$PCT_REGISTERED)), 100, 100)
 
 names(Colorado) <- names(pop_table)
 
@@ -49,7 +49,7 @@ names(pop_table) <- c("County", "Total Population", "Total Registered Voters",
                       "Largest Metro Area")
 
 #First table, of statewide population
-kable(select(pop_table, 1, 2, 5, 7))
+pandoc.table(select(pop_table, 1, 2, 5, 7))
 
 #Second Table, of Voter registration
 kable(select(pop_table, 1, 3, 4, 6))
