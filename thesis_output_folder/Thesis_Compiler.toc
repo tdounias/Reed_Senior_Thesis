@@ -40,6 +40,5 @@
 \contentsline {section}{\numberline {4.1}Variable Specification}{31}{section.4.1}
 \contentsline {section}{\numberline {4.2}County Level Models}{32}{section.4.2}
 \contentsline {section}{\numberline {4.3}Individual Level Models}{33}{section.4.3}
-\contentsline {chapter}{Chapter 5: Expanding on the Previous Models}{35}{chapter.5}
-\contentsline {chapter}{Conclusion}{37}{chapter*.15}
-\contentsline {chapter}{References}{39}{appendix*.16}
+\contentsline {chapter}{Conclusion}{35}{chapter*.15}
+\contentsline {chapter}{References}{37}{appendix*.16}
