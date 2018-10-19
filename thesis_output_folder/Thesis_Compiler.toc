@@ -32,22 +32,14 @@
 \contentsline {subsection}{\numberline {3.2.1}Sources and first glance}{22}{subsection.3.2.1}
 \contentsline {subsubsection}{2010 US Census}{22}{section*.9}
 \contentsline {subsubsection}{Colorado Voter Files}{23}{section*.10}
-\contentsline {section}{\numberline {3.3}Wrangling the Data}{23}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Initial Problems with the 2017 Voter File and Solution}{23}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Other Wrangling Issues Faced}{25}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Final Variable Specifications}{27}{subsection.3.3.3}
-\contentsline {section}{\numberline {3.4}Model Parametrization}{29}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}Notation for predictors}{29}{subsection.3.4.1}
-\contentsline {subsubsection}{County and County-per-Election Level}{29}{section*.15}
-\contentsline {subsubsection}{Election Level}{29}{section*.16}
-\contentsline {subsubsection}{Individual and Individual-per-Election Level}{29}{section*.17}
-\contentsline {subsection}{\numberline {3.4.2}County Level Models}{30}{subsection.3.4.2}
-\contentsline {subsection}{\numberline {3.4.3}Individual Level Models}{32}{subsection.3.4.3}
-\contentsline {chapter}{Chapter 4: Results}{33}{chapter.4}
-\contentsline {section}{\numberline {4.1}EDA}{33}{section.4.1}
-\contentsline {section}{\numberline {4.2}Models}{33}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}County Level Models}{33}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Individual Level Models}{33}{subsection.4.2.2}
+\contentsline {section}{\numberline {3.3}Wrangling the Data}{24}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Initial Problems with the 2017 Voter File and Solution}{24}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Other Wrangling Issues Faced}{27}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Final Variable Specifications}{28}{subsection.3.3.3}
+\contentsline {chapter}{Chapter 4: Model Specification and Results}{31}{chapter.4}
+\contentsline {section}{\numberline {4.1}Variable Specification}{31}{section.4.1}
+\contentsline {section}{\numberline {4.2}County Level Models}{32}{section.4.2}
+\contentsline {section}{\numberline {4.3}Individual Level Models}{33}{section.4.3}
 \contentsline {chapter}{Chapter 5: Expanding on the Previous Models}{35}{chapter.5}
-\contentsline {chapter}{Conclusion}{37}{chapter*.18}
-\contentsline {chapter}{References}{39}{appendix*.19}
+\contentsline {chapter}{Conclusion}{37}{chapter*.15}
+\contentsline {chapter}{References}{39}{appendix*.16}

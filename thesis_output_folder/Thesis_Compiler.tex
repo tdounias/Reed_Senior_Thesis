@@ -858,8 +858,8 @@ class.
   when modeling time variables, as they can be fitted to variables like
   years or months in order to distinguish a secular trend from a general
   trend over time. In terms of this thesis, this will help when responding
-  to Q2 as it was framed earlier in this chapter. (Barr, Diez, Wang,
-  Dominici, \& Samet, 2012)
+  to Q2 as it was framed earlier in this chapter (Barr, Diez, Wang,
+  Dominici, \& Samet, 2012).
   
   \subsection{Multilevel Models}\label{multilevel-models}
   
@@ -887,6 +887,13 @@ class.
   
   \[Y_i = \alpha_{[i], j} + X_iB~,~~~~\alpha_{[i], j} \sim N(U_{j[i]}\Gamma, \sigma_{\alpha}^2)\]
   
+  Multilevel models can be fit using the \texttt{lme4} \textit{R} package
+  that uses restricted maximum likelihood calculations for estimating
+  coefficients (Bates, Mächler, Bolker, \& Walker, 2014). Multilevel
+  modelling also works perfectly well with general additive models! In
+  \textit{R} this can be accomplished with the \texttt{gamm4} package (S.
+  Wood \& Scheipl, 2017).
+  
   \chapter{Case Selection, Data, Model
   Parametrization}\label{case-selection-data-model-parametrization}
   
@@ -913,6 +920,15 @@ class.
   Collins. Apart from the Western town of Grand Junction, the rest of the
   population resides in vast rural areas.
   
+  \begin{figure}
+  
+  {\centering \includegraphics[width=0.5\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_white_county_map} 
+  
+  }
+  
+  \caption[White voters per Colorado county]{White voters per Colorado county}\label{fig:white pct map}
+  \end{figure}
+  
   Colorado is landlocked, and far from any coastal town; in place of
   seaside resorts, Colorado attracts a substantial amount of tourists to
   its mountains every year. Therefore the more mountainous regions have
@@ -924,20 +940,10 @@ class.
   is mostly white, with a higher minority group population density in its
   Southern regions, as shown in figure 3.1. (Bureau, 2010)
   
-  \begin{figure}
-  
-  {\centering \includegraphics[width=0.6\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_white_county_map} 
-  
-  }
-  
-  \caption[White voters per Colorado county]{White voters per Colorado county}\label{fig:white pct map}
-  \end{figure}
-  
   The State Capital is Denver. Colorado is split into 64 Counties, of
-  which the most populous are, in no particular order, the following
-  eight: El Paso, Denver, Arapahoe, Jefferson, Adams, Larimer, Boulder,
-  and Douglas. These counties comprise 73\% of the total population of
-  Colorado.
+  which the most populous are, in no particular order, the following: El
+  Paso, Denver, Arapahoe, Jefferson, Adams, Larimer, Boulder, and Douglas.
+  These counties comprise 73\% of the total population of Colorado.
   
   \begin{longtable}[]{@{}lrrl@{}}
   \toprule
@@ -945,7 +951,7 @@ class.
   Area\tabularnewline
   \midrule
   \endhead
-  Adams & 44,1603 & 0.09 & Denver-Aurora-Lakewood Metro
+  Adams & 441,603 & 0.09 & Denver-Aurora-Lakewood Metro
   Area\tabularnewline
   Arapahoe & 572,003 & 0.11 & Denver-Aurora-Lakewood Metro
   Area\tabularnewline
@@ -956,7 +962,7 @@ class.
   El Paso & 622,263 & 0.12 & Colorado Springs\tabularnewline
   Jefferson & 534,543 & 0.11 & Denver-Aurora-Lakewood Metro
   Area\tabularnewline
-  Larimer & 299,630 & 0.06 & Fort COllins\tabularnewline
+  Larimer & 299,630 & 0.06 & Fort Collins\tabularnewline
   Other & 1,378,964 & 0.27 &\tabularnewline
   Colorado & 5,029,196 & 1.00 &\tabularnewline
   \bottomrule
@@ -984,18 +990,19 @@ class.
   taxes, and caped gobernment spending. TABOR was passed by referendum in
   1992, and later ammended in 2005 after the dot com economic crisis
   exposed the fact that inability to spend is very bad for a state
-  government trying to jump start its economy. (Assembly, n.d.) Similarly,
-  Amendment 64 passed in 2012 made Colorado one of the first states to
-  legalize the selling, possession, and consumption of recreational
-  marijuana--a policy advocated by progressives and libertarians alike.
-  Colorado was also the staging ground for what has been coined the
-  ``Sagebrush Rebellion'': a movement primarily consisting on ranchers in
-  dispute with the federal government over land use laws and wildlife
-  protection. While this ``rebellion'' primarily consisted of battles in
-  local legislatures or elections in the 1970s, its echoes can be heard
-  till today in events like the Bundy Standoff, with ranchers taking up
-  arms against federal employees and occupying federal land (Thompson,
-  2016).
+  government trying to jump start its economy. (Assembly, n.d.)
+  
+  Similarly, Amendment 64 passed in 2012 made Colorado one of the first
+  states to legalize the selling, possession, and consumption of
+  recreational marijuana--a policy advocated by progressives and
+  libertarians alike. Colorado was also the staging ground for what has
+  been coined the ``Sagebrush Rebellion'': a movement primarily consisting
+  on ranchers in dispute with the federal government over land use laws
+  and wildlife protection. While this ``rebellion'' primarily consisted of
+  battles in local legislatures or elections in the 1970s, its echoes can
+  be heard till today in events like the Bundy Standoff, with ranchers
+  taking up arms against federal employees and occupying federal land
+  (Thompson, 2016).
   
   Setting policy aside, this description of Colorado is also confirmed by
   polling data and election results. While being traditionally more
@@ -1139,7 +1146,7 @@ class.
   
   \begin{figure}
   
-  {\centering \includegraphics[width=0.6\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_registered_county_map} 
+  {\centering \includegraphics[width=0.5\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_registered_county_map} 
   
   }
   
@@ -1148,7 +1155,7 @@ class.
   
   \begin{figure}
   
-  {\centering \includegraphics[width=0.6\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/party_affiliation_county_map} 
+  {\centering \includegraphics[width=0.5\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/party_affiliation_county_map} 
   
   }
   
@@ -1299,6 +1306,8 @@ class.
   or shared. Based on when this file is accessed, only a ``snapshot'' of
   the file can be obtained. I have managed to procure ``snapshots'' for
   each year between 2012 and 2017.
+  
+  \clearpage
   
   Similarly with VRFs, a Voter History File is maintained and constantly
   updated by the state. This file is uniquelly connected to its VRF: only
@@ -1613,212 +1622,149 @@ class.
   \bottomrule
   \end{longtable}
   
-  \section{Model Parametrization}\label{model-parametrization}
+  \chapter{Model Specification and
+  Results}\label{model-specification-and-results}
   
-  \subsection{Notation for predictors}\label{notation-for-predictors}
+  In this chapter I do a step-by-step construction and fitting of a series
+  of models. I begin with a thorough analysis of my notation, and
+  specification of models. I then extract results from the models that
+  best fit the data, and draw inferences on my hypotheses. There are two
+  types of models that will be included here: county-level, and
+  individual-level. They will be treated as seperate sections.
   
-  There are four distinct types of predictors for use in these models.
+  \section{Variable Specification}\label{variable-specification}
   
-  \subsubsection{County and County-per-Election
-  Level}\label{county-and-county-per-election-level}
+  I will not go through each individual variable in this section, but will
+  briefly describe my procedure on notation for the following models. I
+  will include more comments whenever they seem necessary under each
+  model. In this thesis I include predictors on a series of variables that
+  can be divided into five categories based on unit of observation:
+  county, election, individual, local result, and ballot. The last two are
+  functions of other units: local result units are equal to the product of
+  elections and counties, while ballot units are equal to the number of
+  unique individuals multiplied by the number of elections each of them
+  was registered in. For notation, I follow this set of rules:
   
-  First, I define the following indicator variables:
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    If the variable is a response, it is coded \(y\).
+  \item
+    If the variable is a predictor, it is coded according to Table 4.1.
+  \item
+    The variable's superscript will provide information on what it
+    represents, else it will be explained.
+  \item
+    All variables represent a single value of that variable unless stated
+    otherwise.
+  \item
+    Unit of observation will also be specified in subscript, according to
+    the indices described in Table 4.1. These indices are also used in sum
+    notation.
+  \item
+    All Greek characters represent coefficients to be calculated.
+  \item
+    By \(k[j]\) I represent the k-value of the j-observation. In this
+    case, this would be the county that an individual is registered in.
+  \item
+    Note that for Local Result level variables, I use \(k,l\) as an
+    indice. This is because there are very few variables at this level, it
+    is a direct multiplicative product of two other units, and this
+    notation avoids confusion with even more indice types.
+  \end{enumerate}
   
-  \(\bullet ~x_c,~for~c\in [1, 64]\), dummy variables for each county in
-  Colorado.
+  \section{County Level Models}\label{county-level-models}
   
-  Furthermore, I have two county-level predictors:
+  In this section I will go through a step-by step creation of models at
+  the county level. County level models use a series of variables at the
+  election, county, and local result levels. The response variable is
+  always turnout as a local result. If this model is considered at its
+  most basic, it could be thought of as an assignement of voting
+  tendencies across counties; each county independent of election has a
+  unique range of turnout results. With the addition of some county-level
+  characteristics, it is possible to build a naive, baseline model of
+  turnout as follows:
   
-  \(\bullet~x^{white~\%}\), a vector of length 64, percentage of county
-  population that identifies as only white.
+  \[y^{turnout}_{k,l} = \beta_0 + (\sum_{k=1}^{64}\beta_kx_k^{county}) + \beta_{65}x_k^{\% white} + \beta_{66}x_k^{\%urban},\]
   
-  \(\bullet~x^{urban~\%}\), a vector of length 64, percentage of county
-  population living in an urban area.
+  where \(x_k^{county}\) is a series of 64 dummy variables for each county
+  of Colorado. Here differences between elections come from normally
+  distributed error terms, rather than predictors. I name this \emph{Model
+  1}, and it does not reflect the data particularly well. First off, this
+  model includes the assumption that counties are independent of one
+  another, which is probably false; just consider that these counties are
+  areas of the same state, in the same country, with populations moving
+  between them at regular intervals, and many of them covering the same
+  metropolitan area or congressional district. Additionally, this model
+  cannot fully calculate relevant coefficients, since a number of counties
+  can be represented as perfect linear functions of the other variables.
+  This means they will be dropped by \textit{R} when the model is called
+  in the \texttt{lm()} function.
   
-  There are two other predictors, varying by county and election. These
-  are of particular interest, as one is the response variable for my
-  county-level models, and the other is the variable of interest for this
-  study. Specifically:
+  A way to fix both these issues is to use a multilevel model with mixed
+  effects for county. By constraining coefficients at the county level to
+  a set distribution, this model does away with the assumption of
+  independence. The other county level predictors help to explain some of
+  the unexplained group level variation, which reduces the standard
+  deviation of county coefficients and helping provide more exact
+  estimates (Gelman \& Hill, 2006). I call this \emph{Model 2}, which can
+  be written as:
   
-  \(\bullet~x^{mail~vote~\%}\), a vector of percentage of votes that was
-  cast using mail ballots, per county and election.
+  \[y^{turnout}_{k,l} = a_{k} + \beta_{1}x_k^{\%white} + \beta_{2}x_k^{\%urban},\]
   
-  \(\bullet~y^{turnout~\%}\), a vector with turnout counts per county and
-  election. Coded with a \(y\) to identify as a response variable
+  \[a_{k} \sim N (\gamma_0, \sigma_{\alpha}^2)\]
   
-  Since the unit of observation for the county level models I will apply
-  are all counties per election, I define an aggregate matrix of length
-  equal to the number of elections times 64--the number of counties---,
-  and width equal to 3. This matrix includes all county level predictors:
-  \(X =(x^{white~\%},x^{urban~\%},x^{mail~vote~\%})\). Note that this
-  matrix includes percentage of mail ballots cast, which is the variable
-  whose coefficient I am interested in testing.
+  This model provides a more reasonable set of estimates for each county,
+  but still fails at providing any sort of guess as to secular trends,
+  time-specific effects, election type effects, or mail voting--the
+  variable of interest. I will amend this by adding a set of variables at
+  the election and local result levels: election type and an interaction
+  term between election type and mail voting. This variable should reflect
+  whether turnout effects of mail voting are more pronounced in a specific
+  type of election. I call this \emph{Model 3} and it can be specified as
+  follows:
   
-  \subsubsection{Election Level}\label{election-level}
+  \[y^{turnout}_{k,l} = a_{k} + \beta_{1}x_k^{\% white} + \beta_{2}x_k^{\% urban} + (\sum_{i'=1}^{4}\beta_{i'+3}w_{i'}^{election type})*(\beta_3v_{k,l}^{\% mail~vote} + 1),\]
   
-  There are two exclusivelly election-level dicrete variables: year, and
-  type of election. For both I define a series of indicator variables:
+  \[a_{k} \sim N(\gamma_0, \sigma_{\alpha}^2)\]
   
-  \(\bullet ~w^{election~type}\), for each election type (Midterm, Primary
-  , Coordinated, General).
+  where \(w_{i'}^{election type}\) is a series of four dummy variables for
+  each type of election (General, Primary, Coordinated, Midterm). This
+  model reflects nearly all the information I have available, apart from
+  election date. For the incorporation of election dates there are two
+  possible alternatives. First, I can simply add a dummy variable for each
+  year. This would assume independence between each year, as it would
+  specify different, independent ``slopes'' for the seven years I have
+  data for--this is like calculating seven different models, one for each
+  year. This is not particularly elegant as a solution nor does it reflect
+  the fact that years actually are interconnected; of course there can be
+  massive shifts in national or regional political climates, but those
+  shifts happened \emph{from some baseline}, which is reflected in
+  previous years. These elections can be thought of as systems for which
+  prior condition affects future outcomes, and therefore time cannot be
+  modelled as a series of independent effects. The solution here is adding
+  a spline function for time, using a general additive multilevel model.
+  The most commonly used spline function, and the default in the
+  \texttt{gamm4} \textit{R} package is a thin plate regression spline,
+  which I also use here (S. N. Wood, 2006). More on the subject of splines
+  can be found in the Wood (2006) textbook. The model, which I call
+  \emph{Model 4} can be written as follows:
   
-  \(\bullet ~w^{election~year}\), for each election year, between 2010 and
-  2016.
+  \[y^{turnout}_{k,l} = a_{k} + \beta_{1}x_k^{\% white} + \beta_{2}x_k^{\% urban} + (\sum_{i'=1}^{4}\beta_{i'+3}w_{i'}^{election type})*(\beta_3v_{k,l}^{\% mail vote} + 1) + s(w^{year}_{l}),\]
   
-  I will also use \(year\) as a variable for models using smoothing
-  splines. All election level predictors will be summarized for the
-  purposes of modelling in the 9 by 2 matrix
-  \(W = (w^{election~type}, w^{election~year})\).
+  \[a_{k} \sim N(\gamma_0, \sigma_{\alpha}^2)\] where \(s()\) is a thin
+  plate spline function with seven knots--equal to the number of
+  years.\footnote{I used the \texttt{gam.check()} function that is present
+    in the \texttt{mgcv} \textit{R} package, whose call determined that
+    the number of knots here may be too low. However, given the data
+    available to me, I was limited to the inclusion of seven years and as
+    such cannot increase the number of knots any further.} A summary of
+  these four models is provided in the following table:
   
-  \subsubsection{Individual and Individual-per-Election
-  Level}\label{individual-and-individual-per-election-level}
+  \textbf{INSERT TABLE}
   
-  The two aforementioned predictors--urban population and race--could be
-  defined as aggregates of individual level observations. I also have five
-  other distinct individual level variables:
-  
-  \(\bullet~z^{gender}\), a vector of discrete gender identifications for
-  each voter, varying only by voter.
-  
-  \(\bullet~z^{age}\), a vector of age for each vote, varying by voter and
-  election.
-  
-  \(\bullet~z^{party}\), a vector of party registration for each voter,
-  varying by voter and election. Coded as Republican, Democratic, Other,
-  or Unaffiliated.
-  
-  \(\bullet~z^{voted}\), with \(z^{voted}_{i,j} = 1\) if person i voted in
-  election j, and \(z^{voted}_{i,j} = 0\) if they did not.
-  
-  \(\bullet~z^{mail~ballot}\), a vector of binary values depending on
-  whether voting method was by mail for each voter, varying by voter and
-  election. Coded 0 if the individual did not vote.
-  
-  Since the unit of observation for the individual level models I will
-  apply are all individuals in a particular election, I define an
-  aggregate matrix of length equal to the total number of voters, and
-  width equal to 4. This matrix includes all individual level predictors:
-  \(Z =(z^{gender}, z^{age}, z^{party}, z^{mail~ballot})\). The fourth
-  variable defined in this section is the response variable in the
-  individual level model, and as such is not included in the predictors.
-  
-  \subsection{County Level Models}\label{county-level-models}
-  
-  \textbf{Model 1} is a fixed-effects, bare-bones model that exclusivelly
-  includes percentage of VBM votes, and dummy variables for year, election
-  type, and county. Its call would look a bit like:
-  
-  \[y^{turnout~\%}_{c, l} \sim x^{mail~vote~\%}_{c, l}\beta_1 + \sum_{k = 1}^{4}w_{k, l}^{election~type}\beta_{k+1} + \sum_{j = 1}^{7}w_{j, l}^{election~year}\beta_{j+5} + \sum_{c = 1}^{64} x_c\beta_{c+13} \]
-  
-  Where k sums over the four types of election, j sums over years between
-  2010 and 2016, c sums over counties, and l sums over elections
-  
-  \textbf{Model 2} A more informed baseline, model 1 plus variables of
-  urban and white population:
-  
-  \[y^{turnout~\%}_{c, l} \sim x^{mail~vote~\%}_{c, el}\beta_1 + \sum_{k = 1}^{4}w_{k, l}^{election~type}\beta_{k+1} + \sum_{j = 1}^{7}w_{j, l}^{election~year}\beta_{j+5} + \]
-  \[\sum_{c = 1}^{64} x_c\beta_{c+13} + x^{white~\%}_{c}\beta_{78} + x^{urban~\%}_{c}\beta_{79}\]
-  This would be the ``individual'' level model from Gelman and Hill. I'm
-  unsure what the ``group'' level for county would be. Maybe that part of
-  the book would be more helpful for discerning effects on people's
-  individual p-vote?
-  
-  Maybe more informative is what I did with exercise 12.2. The model tries
-  to predict the concentration of a particular chemical based on treatment
-  of children across time. Therefore the two levels are a visit by one
-  individual child (here an election! so type, vbm\_pct, year) and
-  predictors for that individual child that are stable across time, like
-  treatment type, or demographics (here race and urban pop per county).
-  
-  This means I can fit a model only based on election facts, with a
-  variable for county (models 1,3) or one that takes into account stable
-  characteristics of the county (models 2, 4).
-  
-  \textbf{Model 3} A mixed-effects version of model 1, just adds mixed
-  effects for county:
-  
-  \[y^{turnout~\%}_{c, l} \sim x^{mail~vote~\%}_{c, l}\beta_1 + \sum_{k = 1}^{4}w_{k, l}^{election~type}\beta_{k+1} + \sum_{j = 1}^{7}w_{j, l}^{election~year}\beta_{j+5} + \alpha_{[c],l}\]
-  
-  \[\alpha_{[c],l} \sim N(0, \sigma_{\alpha}^2)\]
-  
-  \textbf{Model 4} A mixed-effects version of model 2:
-  
-  \[y^{turnout~\%}_{c, l} \sim x^{mail~vote~\%}_{c, l}\beta_1 + \sum_{k = 1}^{4}w_{k, l}^{election~type}\beta_{k+1} + \sum_{j = 1}^{7}w_{j, l}^{election~year}\beta_{j+5} + \alpha_{[c],l}\]
-  
-  \[\alpha_{[c]l} \sim N(x^{white~\%}\gamma_{1} + x^{urban~\%}\gamma_{2}, \sigma_{\alpha}^2),~for~c = 1,...,64\]
-  
-  Where D is a 2 x 64 matrix of the county level predictors and \(\gamma\)
-  a vector of coefficients for the county-level regression.
-  
-  \textbf{Model 5} During one of my discussions with Andrew, we discussed
-  the possibility of making a model that answers the question: ``Does VBM
-  affect counties with some particular characteristic \emph{for which I
-  don't have data} more than others?'' As such, this model would
-  substitute county-level effects with a set of 3-4 dummy variables
-  created through my intuitive understanding of Colorado politics and
-  counties. For example, maybe a distinciton between central Colorado
-  urban counties, East Colorado plains counties, and West Colorado
-  mountain counties. The model would look a bit like:
-  
-  \[y^{turnout~\%}_{c, l} \sim x^{mail~vote~\%}_{c, l}\beta_1 + \sum_{k = 1}^{4}w_{k, l}^{election~type}\beta_{k+1} + \]
-  \[\sum_{j = 1}^{7}w_{j, l}^{election~year}\beta_{j+5} + \sum_{c = 1}^{n} x^{county~classification}_c\beta_{c+13}\]
-  Where \(x^{county~classification}_c\) are \(n\) dummy variables, one for
-  each county classification group.
-  
-  \textbf{Model 6} As a check on the previous model, run a Principle
-  Components Analysis on full demographic data from the 2010 census, to
-  classify counties in the same number of groups. This model would be
-  expected to \emph{massively overfit}. Learning experience for all!
-  
-  \textbf{Note} All models can work as General Additive Models with some
-  sort of non-linear smoothing function for year. Just replace
-  \(\sum_{j = 1}^{7}w_j^{election~year}\beta_{j+5}\) with \(ns(year)\).
-  
-  \textbf{Model 7} In order to test the hypothesis that voting by mail
-  varies by election type, I can also construct the following model, based
-  on model 4:
-  
-  \[x^{mail~vote~\%}_{c, l} \sim \sum_{k = 1}^{4}w_{k, l}^{election~type}\beta_{k} + \sum_{j = 1}^{7}w_{j, l}^{election~year}\beta_{j+4} + \alpha_{[c]}\]
-  \[\alpha_{[c],l} \sim N(x^{white~\%}\gamma_{1} + x^{urban~\%}\gamma_{2}, \sigma_{\alpha}^2),~for~c = 1,...,64\]
-  This would predict whether there are specific county or election
-  characteristics that increase the amount of mail ballots individuals
-  cast.
-  
-  \subsection{Individual Level Models}\label{individual-level-models}
-  
-  This section follows directly from the intro to Gelman \& Hill's 11th
-  chapter.
-  
-  \textbf{Model 8} As a baseline for all further analysis, a logistic
-  regression that treats each vote in a single election as uniform across
-  counties, as such not including any group-level predictors.
-  
-  \[P(z^{voted}_{i, l} = 1) = logit^{-1}(Z_{i, l}\delta + W_l\beta)\]
-  
-  Where matrices Z, Y are as described above, i is an indice for each
-  voter, and l for each election. \(\delta, \beta\) are vectors of
-  coefficients to be estimated.
-  
-  \textbf{Model 9} Add group level mixed effects and predictors.
-  
-  \[P(z^{voted}_{i, l} = 1) = logit^{-1}(Z_{i, l}\alpha + W_l\beta + \alpha_{[c],l})\]
-  
-  \[\alpha_{[c],l} \sim N(X_c \gamma, \sigma_{\alpha}^2),~for~c = 1,...,64\]
-  
-  Where \(X_c\) as defined above, and \(\gamma\) a vector of coefficients.
-  
-  \textbf{Model 10} Include extra model with EM algorithm applied to 2015
-  data maybe?
-  
-  \chapter{Results}\label{results}
-  
-  \section{EDA}\label{eda}
-  
-  \section{Models}\label{models}
-  
-  \subsection{County Level Models}\label{county-level-models-1}
-  
-  \subsection{Individual Level Models}\label{individual-level-models-1}
+  \section{Individual Level Models}\label{individual-level-models}
   
   \chapter{Expanding on the Previous
   Models}\label{expanding-on-the-previous-models}
@@ -1875,6 +1821,11 @@ class.
   Medicare Enrollees in 387 US Counties: 1999--2008. \emph{American
   Journal of Epidemiology}, \emph{176}(7), 642--648.
   \url{http://doi.org/10.1093/aje/kws267}
+  
+  \hypertarget{ref-bates_fitting_2014}{}
+  Bates, D., Mächler, M., Bolker, B., \& Walker, S. (2014). Fitting Linear
+  Mixed-Effects Models using lme4. \emph{arXiv:1406.5823 {[}Stat{]}}.
+  Retrieved from \url{http://arxiv.org/abs/1406.5823}
   
   \hypertarget{ref-bergman_changing_2011}{}
   Bergman, E., \& Yates, P. A. (2011). Changing Election Methods: How Does
@@ -2018,6 +1969,15 @@ class.
   Thompson, J. (2016). The first Sagebrush Rebellion: What sparked it and
   how it ended. Retrieved from
   \url{https://www.hcn.org/articles/a-look-back-at-the-first-sagebrush-rebellion}
+  
+  \hypertarget{ref-wood_generalized_2006}{}
+  Wood, S. N. (2006). \emph{Generalized Additive Models: An Introduction
+  with R} (1 edition). Boca Raton, FL: Chapman; Hall/CRC.
+  
+  \hypertarget{ref-wood_gamm4:_2017}{}
+  Wood, S., \& Scheipl, F. (2017, July). Gamm4: Generalized Additive Mixed
+  Models using 'mgcv' and 'lme4'. Retrieved from
+  \url{https://CRAN.R-project.org/package=gamm4}
 
 
   % Index?

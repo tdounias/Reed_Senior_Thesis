@@ -105,7 +105,7 @@ The solution, then, is a Generalized Additive Model, or GAM. This model lets us 
 $$y_i = \alpha + \sum_{j = 1}^p \beta_j f_j(x_{ij}),$$
 where $y_i$ the i-th response variable, $\alpha$ is the intercept term, $f_j, \beta_j$ a series of p functions and coefficients, and $x_{ij}$ the i-th observation for the j-th predictor. Note that for $f_j(x_j) = x_j$, this is a multilinear regression! [@james_introduction_2017]   
    
-A type of most commonly fit functions--and the type I will make use of--are smoothing splines. These are cubic functions connected at specific points called "knots", with the limitation that the full function must be continuous and smooth. These are particularly useful when modeling time variables, as they can be fitted to variables like years or months in order to distinguish a secular trend from a general trend over time. In terms of this thesis, this will help when responding to Q2 as it was framed earlier in this chapter. [@barr_comprehensive_2012]
+A type of most commonly fit functions--and the type I will make use of--are smoothing splines. These are cubic functions connected at specific points called "knots", with the limitation that the full function must be continuous and smooth. These are particularly useful when modeling time variables, as they can be fitted to variables like years or months in order to distinguish a secular trend from a general trend over time. In terms of this thesis, this will help when responding to Q2 as it was framed earlier in this chapter [@barr_comprehensive_2012].
 
 
 ### Multilevel Models  
@@ -115,4 +115,5 @@ Multilevel models--otherwise known as hierarchical or "mixed effects" models--ca
 To consider what this model looks like, let's assume a dataset comprising of a vector of values for the response variable Y, a matrix of i individual level predictors X, a matrix of j group level predictors U, intercept terms $\alpha$, individual level coefficients B, and group level coefficients $\Gamma$. Based on this, a multilevel model with intercept terms varying by group looks like:
 
 $$Y_i = \alpha_{[i], j} + X_iB~,~~~~\alpha_{[i], j} \sim N(U_{j[i]}\Gamma, \sigma_{\alpha}^2)$$   
-   
+
+Multilevel models can be fit using the `lme4` \textit{R} package that uses restricted maximum likelihood calculations for estimating coefficients [@bates_fitting_2014]. Multilevel modelling also works perfectly well with general additive models! In \textit{R} this can be accomplished with the `gamm4` package [@wood_gamm4:_2017].

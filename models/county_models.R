@@ -78,7 +78,7 @@ library(gamm4)
 model_dt$dates <-  as.integer(model_dt$dates)
 
 md_gam <- gamm4(turnout ~ 1 + types + pct_vbm +
-                 pct_urban + pct_white + pct_vbm*types + s(dates, k = 7), 
+                 pct_urban + pct_white + pct_vbm*types + ns(dates), 
                random =~ (1|county), 
                data = model_dt)
 
@@ -86,3 +86,10 @@ summary(md_gam$mer)
 
 #This runs, but I don't know how to 
 #diagnose the model
+
+
+md_test <- lmer(data = model_dt, turnout ~ pct_urban + pct_white + (1|county) + types  + pct_vbm*types)
+
+arm::display(md_test)
+
+fixef(md_test)
