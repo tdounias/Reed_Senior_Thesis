@@ -26,17 +26,15 @@ model_dt$county <- as.factor(model_dt$county)
 
 ##MODEL 1
 
-print("MODEL 1")
-
 md_1 <- lm(data = model_dt, turnout ~ pct_white + pct_urban + county)
 
 summary(md_1)
 
 alias(md_1)
 
-##MODEL 2
+plot(md_1)
 
-print("MODEL 2")
+##MODEL 2
 
 md_2 <- lmer(data = model_dt, turnout ~ pct_white + pct_urban + (1|county))
 
@@ -46,9 +44,11 @@ ranef(md_2)
 
 fixef(md_2)
 
-##MODEL 3
+plot(md_2)
 
-print("MODEL 3")
+qqnorm(residuals(md_2))
+
+##MODEL 3
 
 md_3 <- lmer(data = model_dt, turnout ~ 1 + types + pct_vbm +
                pct_urban + pct_white + pct_vbm*types + (1|county))
@@ -59,12 +59,14 @@ ranef(md_3)
 
 fixef(md_3)
 
+plot(md_3)
+
+qqnorm(residuals(md_3))
+
 #Significant difference by adding extra variables
 anova(md_2, md_3)
 
 ##MODEL 4
-
-print("MODEL 4")
 
 model_dt$dates <-  as.integer(model_dt$dates)
 
@@ -74,3 +76,7 @@ md_4 <- gamm4(turnout ~ 1 + types + types +
              data = model_dt)
 
 summary(md_4$mer)
+
+plot(fitted(md_4$mer), residuals(md_4$mer))
+
+qqnorm(residuals(md_4$mer))
