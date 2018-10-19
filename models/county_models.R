@@ -5,7 +5,7 @@ library(lme4)
 source("~/Desktop/Reed_Senior_Thesis/riggd/R/utils.R")
 setwd("~/Desktop/Reed_Senior_Thesis/Data_and_results/data")
 
-#Load the data
+#DATA
 load("all_turnouts.RData")
 demographics <- read_csv("colorado_demographic_stats_by_county.csv")
 names(demographics) <- tolower(names(demographics))
@@ -21,75 +21,47 @@ model_dt <- left_join(model_dt, demographics, by = "county")
 
 model_dt$county <- as.factor(model_dt$county)
 
-#######################
-##Mixed Effects Model##
-#######################
+#MODELS
 
-md_1 <- lmer(data = model_dt, turnout ~ 1 + dates + types + pct_vbm +
-       pct_urban + pct_white + pct_vbm*types + (1 | county))
+##MODEL 1
 
-arm::display(md_1)
+md_1 <- lm(data = model_dt, turnout ~ pct_white + pct_urban + county)
 
-#Check for linear dependence
-md_1_check <-  lm(data = model_dt, turnout ~ 1 + dates + types + pct_vbm +
-                      pct_urban + pct_white + pct_vbm*types + county)
+summary(md_1)
 
-summary(md_1_check)
-alias(md_1_check)
-#It's typesPrimary!
+alias(md_1)
 
-#Check normal diagnostic plots
-plot(md_1,type=c("p","smooth")) ## fitted vs residual
-plot(md_1,sqrt(abs(resid(.)))~fitted(.) , type=c("p","smooth"))
-lattice::qqmath(md_1,id=0.05) ## quantile-quantile
+##MODEL 2
 
-#All these seem fine as well...
+md_2 <- lmer(data = model_dt, turnout ~ pct_white + pct_urban + (1|county))
 
-#ANOVA 
-anova(md_1)
+arm::display(md_2)
 
-#This shows that the types variable explains a massive amount ofnvariance 
-#in comparison to other metrics. Both VBM effects are rather small...
+ranef(md_2)
 
-#Let's make a model without vbm as a predictor and compare 
-#using a simple chi-square test:
+fixef(md_2)
 
-md_2 <- lmer(data = model_dt, turnout ~ 1 + dates + types +
-               pct_urban + pct_white + (1 | county))
+##MODEL 3
 
-#Compare
-anova(md_1, md_2)
+md_3 <- lmer(data = model_dt, turnout ~ 1 + types + pct_vbm +
+               pct_urban + pct_white + pct_vbm*types + (1|county))
 
-#There is a significant difference between the models. 
+arm::display(md_3)
 
-#How much do county-level predictors explain?
+ranef(md_3)
 
-md_3 <- lmer(data = model_dt, turnout ~ 1 + dates + types + pct_vbm +
-            pct_vbm*types + (1 | county))
+fixef(md_3)
 
-anova(md_1, md_3)
+#Significant difference by adding extra variables
+anova(md_2, md_3)
 
-###########################
-##Mixed Effects GAM Model##
-###########################
-
-library(gamm4)
+##MODEL 4
 
 model_dt$dates <-  as.integer(model_dt$dates)
 
-md_gam <- gamm4(turnout ~ 1 + types + pct_vbm +
-                 pct_urban + pct_white + pct_vbm*types + ns(dates), 
-               random =~ (1|county), 
-               data = model_dt)
+md_4 <- gamm4(turnout ~ 1 + types + types +
+               pct_urban + pct_white + pct_vbm*types + s(dates, k = 7), 
+             random =~ (1|county), 
+             data = model_dt)
 
-summary(md_gam$mer)
-
-#This runs, but I don't know how to 
-#diagnose the model
-
-
-md_test <- lmer(data = model_dt, turnout ~ pct_urban + pct_white + (1|county) + types  + pct_vbm*types)
-
-arm::display(md_test)
-
-fixef(md_test)
+summary(md_4$mer)

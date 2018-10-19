@@ -1674,6 +1674,74 @@ class.
     notation avoids confusion with even more indice types.
   \end{enumerate}
   
+  \begin{longtable}[]{@{}ccc@{}}
+  \caption{Variable names and indices per unit of observation
+  \label{tab:units_vars}}\tabularnewline
+  \toprule
+  \begin{minipage}[b]{0.27\columnwidth}\centering\strut
+  Units\strut
+  \end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\centering\strut
+  Variable\strut
+  \end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\centering\strut
+  Index\strut
+  \end{minipage}\tabularnewline
+  \midrule
+  \endfirsthead
+  \toprule
+  \begin{minipage}[b]{0.27\columnwidth}\centering\strut
+  Units\strut
+  \end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\centering\strut
+  Variable\strut
+  \end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\centering\strut
+  Index\strut
+  \end{minipage}\tabularnewline
+  \midrule
+  \endhead
+  \begin{minipage}[t]{0.27\columnwidth}\centering\strut
+  Ballot\strut
+  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+  u\strut
+  \end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+  i\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.27\columnwidth}\centering\strut
+  Individual\strut
+  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+  z\strut
+  \end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+  j\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.27\columnwidth}\centering\strut
+  County\strut
+  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+  x\strut
+  \end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+  k\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.27\columnwidth}\centering\strut
+  Election\strut
+  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+  w\strut
+  \end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+  l\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.27\columnwidth}\centering\strut
+  Local Result\strut
+  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+  v\strut
+  \end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+  k,l\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.27\columnwidth}\centering\strut
+  General Index\strut
+  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+  -\strut
+  \end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+  i'\strut
+  \end{minipage}\tabularnewline
+  \bottomrule
+  \end{longtable}
+  
   \section{County Level Models}\label{county-level-models}
   
   In this section I will go through a step-by step creation of models at
@@ -1741,15 +1809,17 @@ class.
   the fact that years actually are interconnected; of course there can be
   massive shifts in national or regional political climates, but those
   shifts happened \emph{from some baseline}, which is reflected in
-  previous years. These elections can be thought of as systems for which
-  prior condition affects future outcomes, and therefore time cannot be
-  modelled as a series of independent effects. The solution here is adding
-  a spline function for time, using a general additive multilevel model.
-  The most commonly used spline function, and the default in the
-  \texttt{gamm4} \textit{R} package is a thin plate regression spline,
-  which I also use here (S. N. Wood, 2006). More on the subject of splines
-  can be found in the Wood (2006) textbook. The model, which I call
-  \emph{Model 4} can be written as follows:
+  previous years.
+  
+  These elections can be thought of as systems for which prior condition
+  affects future outcomes, and therefore time cannot be modelled as a
+  series of independent effects. The solution here is adding a spline
+  function for time, using a general additive multilevel model. The most
+  commonly used spline function, and the default in the \texttt{gamm4}
+  \textit{R} package is a thin plate regression spline, which I also use
+  here (S. N. Wood, 2006). More on the subject of splines can be found in
+  the Wood (2006) textbook. The model, which I call \emph{Model 4} can be
+  written as follows:
   
   \[y^{turnout}_{k,l} = a_{k} + \beta_{1}x_k^{\% white} + \beta_{2}x_k^{\% urban} + (\sum_{i'=1}^{4}\beta_{i'+3}w_{i'}^{election type})*(\beta_3v_{k,l}^{\% mail vote} + 1) + s(w^{year}_{l}),\]
   

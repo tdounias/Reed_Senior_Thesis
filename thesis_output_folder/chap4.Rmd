@@ -1,5 +1,9 @@
 ---
 output: pdf_document
+header-includes:
+- \usepackage{graphicx,latexsym}
+- \usepackage{amssymb,amsthm,amsmath}
+- \usepackage{longtable,booktabs,setspace}
 ---
 
 ```{r setup, include=FALSE}
@@ -36,7 +40,22 @@ I will not go through each individual variable in this section, but will briefly
 7. By $k[j]$ I represent the k-value of the j-observation. In this case, this would be the county that an individual is registered in.
 8. Note that for Local Result level variables, I use $k,l$ as an indice. This is because there are very few variables at this level, it is a direct multiplicative product of two other units, and this notation avoids confusion with even more indice types.
 
-
+------------------------------------------------
+  Units                  Variable       Index 
+-------------------- --------------- ----------- 
+  Ballot                     u            i
+  
+  Individual                 z            j
+  
+  County                     x            k
+  
+  Election                   w            l  
+  
+  Local Result               v            k,l
+  
+  General Index              -            i'
+-------------------- --------------- -----------
+Table: Variable names and indices per unit of observation \label{tab:units_vars}
 
 ## County Level Models
 
