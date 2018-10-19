@@ -23,27 +23,6 @@ names(index) <- c("Purpose/Unit", "Variable", "Index")
 ```
   
 ## Introduction
-
-```{r read in data}
-voter_sample <- read_csv("~/Desktop/Reed_Senior_Thesis/Data_and_results/data/voter_sample.csv")
-
-county_demographics <- read_csv("~/Desktop/Reed_Senior_Thesis/Data_and_results/data/colorado_demographic_stats_by_county.csv")
-
-voter_sample <- left_join(voter_sample, county_demographics, by = "COUNTY")
-
-voter_sample$VOTER_ID <- as.factor(voter_sample$VOTER_ID)
-voter_sample$COUNTY <- as.factor(voter_sample$COUNTY)
-voter_sample$PARTY <- as.factor(voter_sample$PARTY)
-voter_sample$GENDER <- (voter_sample$GENDER == "Male")
-voter_sample$ELECTION_TYPE <- as.factor(voter_sample$ELECTION_TYPE)
-voter_sample$ELECTION_DATE <- as.factor(voter_sample$ELECTION_DATE)
-
-voter_sample <- mutate(voter_sample,
-                       ELECTION = paste(voter_sample$ELECTION_TYPE, voter_sample$ELECTION_DATE, sep = ""))
-
-voter_sample$ELECTION <- as.factor(voter_sample$ELECTION)
-```
-
   
 For the rest of this write-up, assume the following:
 
@@ -87,29 +66,6 @@ $$\hat{p\_vote} \sim \text{logit}^{-1}(a_{k[i]}), $$
 $$a_{k} \sim \text{N}(\gamma_0 + \sum_{i'=1}^{n^{\text{county vars}}}x_{k[i], i'}\gamma_{i'}, \sigma_{\alpha}^2)$$
   
 In the case of my specific data, for the time being I have county-level data for white population and urban population, so $n^{\text{county vars}} = 2$.
-
-```{r county models}
-#Model 1
-m1_c <- glm(data = voter_sample, family = "binomial", voted ~ COUNTY)
-summary(m1_c)
-
-#Model 2
-m2_c <- glmer(data = voter_sample, family = binomial, 
-              voted ~ (1|COUNTY))
-display(m2_c)  
-
-#Model 3
-m3_c <- glm(data = voter_sample, family = "binomial", 
-            voted ~ COUNTY + PCT_WHITE + PCT_URBAN)
-summary(m3_c)
-
-#Model 4
-m4_c <- glmer(data = voter_sample, family = binomial, 
-              voted ~ (1|COUNTY) + PCT_WHITE + PCT_URBAN)
-
-display(m4_c)
-```
-
    
 ### Individual Level
    
@@ -133,26 +89,6 @@ $$\delta_{j} \sim \text{N}(\zeta_0 + \sum_{i'=1}^{n^{\text{indiv vars}}}z_{j[i],
   
 In the case of my specific data, for the time being I have individual-level data for gender, so $n^{\text{indiv vars}} = 1$.
    
-```{r}
-#Model 1
-#m1_i <- glm(data = voter_sample, family = "binomial", voted ~ VOTER_ID)
-#Does not work
-
-#Model 2
-m2_i <- glmer(data = voter_sample, family = "binomial", 
-            voted ~ (1|VOTER_ID))
-display(m2_i)
-
-#Model 4
-m4_i <- glmer(data = voter_sample, family = "binomial", 
-            voted ~ (1|VOTER_ID) + GENDER)
-display(m4_i)
-
-#It's hard to estimate models because
-length(unique(voter_sample$VOTER_ID))
-```
-
-   
 ### Election Level
    
 Again as previously, four models come from including election level data. The first two are assuming I only knew what specific election the ballot comes from. Let $w_{i'}$ be an indicator variable for each election and $n^{elect}$ the number of elections. The model assuming independence, with $w_{i'}$ being indicator variables for each election, is:
@@ -174,19 +110,6 @@ $$\hat{p\_vote} \sim \text{logit}^{-1}(\eta_{l[i]}), $$
 $$\eta_{l} \sim \text{N}(\nu_0 + \sum_{i'=1}^{n^{\text{election vars}}}w_{l[i], i'}\nu_{i'}, \sigma_{\nu}^2)$$
 For the time being I have two different variables that describe individual elections: date and type. Note that the above models may not be the best way to describe dates! An alternative could be fitting a glm, with some smoothing spline function for year. As for type, this would include four distinct indicators; one for each election type. 
 
-```{r}
-#Model 3
-m3_l <- glm(data = voter_sample, family = "binomial", 
-            voted ~ ELECTION_TYPE + ELECTION_DATE)
-summary(m3_l)
-
-#Model 4
-m4_l <- glmer(data = voter_sample, family = "binomial", 
-            voted ~ (1|ELECTION) + ELECTION_DATE + ELECTION_TYPE)
-display(m4_l)
-```
-
-
 ### Ballot Level
    
 In this section I assume that the ballot has some key features written on it, like the voting method, age, or party registration of the person that filled it out. A mixed effects model here would make no sense, since all the data is at the same unit of observation. Therefore, when adding ballot level variables, the model would look like:
@@ -194,14 +117,6 @@ In this section I assume that the ballot has some key features written on it, li
 $$\hat{p\_vote}_i \sim \text{logit}^{-1}(\beta_0 + \sum_{i' = 1}^{n^{\text{ballot vars}}}u_{i,i'}\beta_{l'})$$
 
 Where $u_{i,i'}$ is the i-th value of the i'-th variable, and $n^{\text{ballot vars}}$ is the number of ballot level variables. For now, I have data on voting method, age, and party. Voting method is coded as a binary variable with value one if the method was a Mail Vote. Party includes four distinct indicators for REP, DEM, Other, and Unaffiliated. Age is tricky; for now the options would be: straight up inclusion as an integer, inclusion as a cubic polynomial, unclusion as a 2nd degree polynomial, inclusion in some form of spline function.
-
-```{r}
-#The model fit here is:
-m_ballot_level <- glm(data = voter_sample, family = "binomial", 
-                      voted ~ GENDER + PARTY + AGE)
-summary(m_ballot_level)
-```
-
    
 ## Estimation with two types of data
 
@@ -240,17 +155,4 @@ $$a_{k} \sim \text{N}(\gamma_0 + \sum_{i'=1}^{n^{\text{county vars}}}x_{k[i], i'
 $$\delta_{j} \sim \text{N}(\zeta_0 + \sum_{i'=1}^{n^{\text{indiv vars}}}z_{j[i], i'}\delta_{i'}, \sigma_{\delta}^2)$$
 
 $$\eta_{l} \sim \text{N}(\nu_0 + \sum_{i'=1}^{n^{\text{election vars}}}w_{l[i], i'}\nu_{i'}, \sigma_{\nu}^2)$$
-
-```{r, eval = FALSE}
-#Whole data models
-#Model 1
-
-
-#Model 2
-#Issues with model matrix!
-m2_full <- glmer(data = voter_sample, family = "binomial", 
-                 voted ~ (1|COUNTY) + (1|ELECTION) + GENDER + AGE +
-                   PARTY + PCT_WHITE + PCT_URBAN + MAIL_VOTE)
-display(m2)
-```
 
