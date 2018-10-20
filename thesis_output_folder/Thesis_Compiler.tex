@@ -68,7 +68,8 @@
 
 
 % To pass between YAML and LaTeX the dollar signs are added by CII
-\title{Turnout and Mail Voting in Colorado}
+\title{Turnout and Mail Voting in Colorado; or How I Learned to Stop Worrying
+and Love Voter Registration Files}
 \author{Theodore Dounias}
 % The month and year that you submit your FINAL draft TO THE LIBRARY (May or December)
 \date{December 2018}
@@ -226,25 +227,29 @@ class.
   \[ \% ~Turnout = \frac{Total~Ballots~Cast}{Measure~of~Total~Voting~Population}\times100\%~~~(1)\]
   
   The choice of numerator is fairly obvious and universal; the
-  denominator, however, is a different story. The two main statistics used
-  are the total voting age population, and the raw number of registered
-  voters in the geographical location we are examining. The total voting
-  age population is used as a measure to incorporate the total amount of
-  possible voters in a geographical area, and can be measured using data
-  from the US Census. This causes some issues with voters that cross over
-  to different districts; if someone lives in district A, it is still
-  likely that they are registered to vote in district B. If this is not
-  considered, the calculation of voting age population might be
-  misrepresentative.
+  denominator, however, is a different story. The three main statistics
+  used are the total voting age population, voting eligible population,
+  and the number of registered voters in a certain geographical location.
+  The total voting age population--all individuals over 18 years of
+  age--can be measured using data from the US Census. However, such an
+  interpretation of voting age population positivelly counts individuals
+  of age that are not allowed to vote--people with severe mental
+  illnessess or felons--, and does not count oversees voters or military
+  personell. Michael McDonald offers an alternative to voting age
+  population he calls ``voting eligible population'', which corrects for
+  such individuals (McDonald, n.d.).
   
-  Using registered voters also brings with it two problems. First, the
-  calculation necessarily uses voter registration files, which many times
-  can include discrepancies like deceased voters, voters included in
-  multiple counties, or individual voters included multiple times.
-  Furthermore, the total amount of actual voters among registered voters
-  can be misrepresentative of democratic participation; consider that if a
-  certain minority community has historically low registration rates they
-  are not included at all in calculations of the turnout statistic.
+  Counts of registered voters are also a useful tool for calculation of
+  turnout, as they usually require no estimation. These counts can simply
+  be extracted from voter registration files. Using registered voters,
+  however, also brings with it two problems. First, voter registration
+  files many times can include discrepancies like deceased voters, voters
+  included in multiple counties, or individual voters included multiple
+  times. Furthermore, the total amount of actual voters among registered
+  voters can be misrepresentative of democratic participation; consider
+  that if a certain minority community has historically low registration
+  rates they are not included at all in calculations of the turnout
+  statistic.
   
   The punch line here is that how the turnout statistic is calculated is
   not a clear choice, and will have an impact on how studies are set up.
@@ -555,45 +560,34 @@ class.
   \subsection{Inaccuracy of Survey Data}\label{inaccuracy-of-survey-data}
   
   Apart from Voter Registration Files, the main source of data on the
-  American electorate is national surveys, like the American NAtional
+  American electorate is national surveys, like the American National
   Election Studies' survey (ANES), or the Cooperative Congressional
   Elections Study (CCES). These are post-election surveys, distributed to
   voters, which include fields associated directly with
   voting--participation, precinct, which party you voted for--and
-  indirectly, through questions on societal factors like race, income, or
-  gender. On the surface these seem like a better source of data, since no
-  record linkage or ecological inference need be made to connect
-  individual voters with an extensive list of covariates. There is,
-  however, a significant problem with these data: survey misreporting.
+  indirectly, through questions on individual characteristics like race,
+  income, or gender. On the surface these seem like a better source of
+  data, since no record linkage or ecological inference need be made to
+  connect individual voters with an extensive list of covariates. There
+  is, however, a significant problem with these data: survey misreporting
+  (Burden, 2000).
   
-  Even without resorting to advanced statistical or data gathering
-  methods, the fact that the CCES and NES often misrepresent the
-  electorate is apparent just through looking at turnout statistics; both
-  show higher turnout than what the true value, calculated from the
-  population, was. When looking at surveys a bit closer, using either
-  private, extensive data files like Catalyst (Ansolabehere \& Hersh,
-  2012) or validated voter files from the late 20th century (Deufel \&
-  Kedar, 2010), the results show consistent misreporting among certain
-  groups, that tend to either be politically engaged non-voters or
-  minorities and low socioeconomic status individuals. This gap, according
-  to Deufel et al. (2010), has served to propagate societal stereotypes
-  and class entrenchment into studies on turnout, which in turn
-  negativelly effect policy, since research using the ANES and CCES are
-  widely used to study turnout among the groups that are consistently
-  misreporting. Admittedly, the fact that misreporting happens among
-  specific groups does open the way for statistical methods to compensate
-  for the bias intoduced, but for the purpose of my thesis I will prefer
-  the use of VRF.
-  
-  A last issue with surveys worth mentioning is that they are contingent
-  on quantity of responses as well as quality. There is no guarantee that
-  the CCES or NES will receive enough responses to correctly infer
-  population-wide statistics; something which is more likelly for the
-  American Community Survey or the Census, whcih are backed by the
-  legitimacy of the federal government. Survey under-reporting is directly
-  linked with the practices of the groups conducting the survey, and as
-  such is hard to control for after the results are published (Burden,
-  2000).
+  A cursory glance at the CCES and NES estimates of turnout reveals the
+  existence of a problem right off the bat: turnout calculated through
+  surveys is usually higher than reported figures. When looking at surveys
+  a bit closer, using either private, extensive data files like Catalyst
+  (Ansolabehere \& Hersh, 2012) or validated voter files from the late
+  20th century (Deufel \& Kedar, 2010), the results show consistent
+  misreporting among certain groups, that tend to either be politically
+  engaged non-voters or minorities and low socioeconomic status
+  individuals. This gap, according to Deufel et al. (2010), has served to
+  propagate societal stereotypes and class entrenchment into studies on
+  turnout, which in turn negativelly effect policy, since research using
+  the ANES and CCES are widely used to study turnout among the groups that
+  are consistently misreporting. Admittedly, the fact that misreporting
+  happens among specific groups does open the way for statistical methods
+  to compensate for the bias intoduced, but for the purpose of my thesis I
+  will prefer the use of Voter Registration Files.
   
   \subsection{The Importance of VRF}\label{the-importance-of-vrf}
   
@@ -647,7 +641,7 @@ class.
   ask the following question:
   
   \begin{center}   
-  Q2: \textit{Is  this  effect  significant  when  compared  to  other  metrics  that  affect  turnout?}
+  Q2: \textit{Does this effect persist when accounting for other relevant predictors of turnout?}
   \end{center}
   
   The last question asked in this thesis is more specific to a particular
@@ -658,7 +652,7 @@ class.
   third question is:
   
   \begin{center}   
-  Q3: \textit{Is  the  effect  of  VBM  more  pronounced  as  significant,  national  determinants  of  turnout  dull?}
+  Q3: \textit{Is  the  effect  of  VBM on turnout more  pronounced as significant, national determinants become less strong?}
   \end{center}
   
   \subsection{Hypotheses}\label{hypotheses-1}
@@ -2180,6 +2174,12 @@ class.
   Matsusaka, J. G., \& Palda, F. (1999). Voter turnout: How much can we
   explain? \emph{Public Choice}, \emph{98}(3-4), 431--446.
   \url{http://doi.org/10.1023/A:1018328621580}
+  
+  \hypertarget{ref-mcdonald_what_nodate}{}
+  McDonald, M. P. (n.d.). What is the voting-age population (VAP) and the
+  voting-eligible population (VEP)? \emph{United States Elections
+  Project}. Retrieved from
+  \url{http://www.electproject.org/home/voter-turnout/faq/denominator}
   
   \hypertarget{ref-neiheisel_impact_2012}{}
   Neiheisel, J. R., \& Burden, B. C. (2012). The Impact of Election Day

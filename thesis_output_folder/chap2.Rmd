@@ -20,13 +20,13 @@ Q1: \textit{What is the effect of mail voting on turnout?}
 I went through this question substantially in the previous chapter; it should be clear that depending on which paradigm of participation choice is present, the answer here can be radically different. In order to best answer the previous question, it is necessary to establish some conditions on importance of effect. Therefore it is also necessary to ask the following question:  
 
 \begin{center}   
-Q2: \textit{Is  this  effect  significant  when  compared  to  other  metrics  that  affect  turnout?}
+Q2: \textit{Does this effect persist when accounting for other relevant predictors of turnout?}
 \end{center}   
 
 The last question asked in this thesis is more specific to a particular formulation of Aldritch's hypothesis on voting "at the margins". I mentioned in the previous section that VBM could be theorized to have a more significant effect when discussing elections at the local level, or the regional level, rather than national general elections. Therefore a third question is:
 
 \begin{center}   
-Q3: \textit{Is  the  effect  of  VBM  more  pronounced  as  significant,  national  determinants  of  turnout  dull?}
+Q3: \textit{Is  the  effect  of  VBM on turnout more  pronounced as significant, national determinants become less strong?}
 \end{center}
 
 ### Hypotheses
