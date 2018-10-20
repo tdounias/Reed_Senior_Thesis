@@ -10,7 +10,7 @@ header-includes:
    
 In this chapter, I will first go through a description of the state of Colorado; its demographics, its politics, and its selection for the purposes of this thesis. I will then go through the sources and wrangling of the data I obtained on Colorado's elections. Finally, I will fully define the models I will be using to test the hypotheses outlined in the previous chapter.
 
-## The Centennial State and Its Voters  
+## The Centennial State and Its Voters 
 
 ### Demographics
    
@@ -20,11 +20,11 @@ Colorado--named the Centennial State due to assuming statehood on the centennial
 knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_white_county_map.png")
 ```
   
-Colorado is landlocked, and far from any coastal town; in place of seaside resorts, Colorado attracts a substantial amount of tourists to its mountains every year. Therefore the more mountainous regions have developed skiing and mountaineering resorts. They also heavily depend on federal money and protection for national parks. 
+Colorado is landlocked, and far from any coastal town; in place of seaside resorts, Colorado attracts a substantial amount of tourists to its mountains every year. Therefore the more mountainous regions have developed skiing and mountaineering resorts. They also heavily depend on federal money and protection for national parks. These importance of these characteristics will become apparent in the following sections.
   
-Continuing with demographic characteristics, Colorado has a median age of 34.3 and median household income of $65,685. Colorado's population is mostly white, with a higher minority group population density in its Southern regions, as shown in figure 3.1. [@us_census_bureau_us_2010]
+Colorado has a median age of 34.3 and median household income of $65,685. Colorado's population is mostly white, with a higher minority group population density in its Southern regions, as shown in figure 3.1. [@us_census_bureau_us_2010] The conclusion here is that Colorado is a relativelly young, mostly white, and fairly well-off state that is increasingly getting more diverse, particularly in the South. These factors are important as they serve to associate Colorado with other states; such associations are useful for the replication of this study or the generalization of my results.
    
-The State Capital is Denver. Colorado is split into 64 Counties, of which the most populous are, in no particular order, the following:  El Paso, Denver, Arapahoe, Jefferson, Adams, Larimer, Boulder, and Douglas. These counties comprise 73% of the total population of Colorado.  
+The State Capital is Denver; Colorado is split into 64 Counties, of which the most populous are, in no particular order, the following:  El Paso, Denver, Arapahoe, Jefferson, Adams, Larimer, Boulder, and Douglas. These counties comprise 73% of the total population of Colorado.  
 
 -------------------------------------------------------------------------------
   County     Total Population   CO Population %        Largest Metro Area      
@@ -69,7 +69,7 @@ Setting policy aside, this description of Colorado is also confirmed by polling 
 
 ### Voting in Colorado  
     
-Each County individually administrates local, coordinated, primary, and general elections, under the supervision of the Colorado Secretary of State. This means that each county individually handles the voters registered in that county. Unsurprisingly, the same eight most populous counties are also the counties with the majority of registered voters, as their registrants comprise 73% of total Colorado registered voters (as of November 2017). As table 3.2 shows, these eight counties have a registration rate between 60-80%, compared to a Colorado-wide rate of about 67%. Registration rates for all counties are also graphically depicted in figure 3.2. In terms of Party registration, Colorado as a whole leans democratic by a very narrow margin (figure 3.3). 
+Each County individually administers local, coordinated, primary, and general elections, under the supervision of the Colorado Secretary of State. This means that each county individually handles the voters registered in that county. Unsurprisingly, the same eight most populous counties are also the counties with the majority of registered voters, as their registrants comprise 73% of total Colorado registered voters (as of November 2017). As table 3.2 shows, these eight counties have a registration rate between 60-80%, compared to a Colorado-wide rate of about 67%. Registration rates for all counties are also graphically depicted in figure 3.2. In terms of Party registration, Colorado as a whole leans democratic by a very narrow margin (figure 3.3). 
 
 -------------------------------------------------------------------------------------------------------------  
  County       Total Registered Voters       County Voter Registration Rate      % of Statewide Registrants 
