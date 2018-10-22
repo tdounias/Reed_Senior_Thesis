@@ -169,7 +169,7 @@ ss <- getME(md_ballot_2,c("theta","fixef"))
 m2 <- update(md_ballot_2,start=ss,control=glmerControl(optCtrl=list(maxfun=2e4)))
 #Nope
 
-#Issue wit hsingularity maybe comes from MAIL_VOTE?
+#Issue wit singularity maybe comes from MAIL_VOTE?
 #If almost all votes are by mail, then it is basically the response
 #Let's try a call without it
 
