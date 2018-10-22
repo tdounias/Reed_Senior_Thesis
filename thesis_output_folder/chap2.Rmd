@@ -80,7 +80,7 @@ Lastly, from a narrower perspective specific to the study of early and mail voti
 
 ## Methodology
 
-Before directly defining all parameters of the models I will later use in writing this thesis, I will go through each type of method to provide some background on the statistics behind the models. In the next chapter, I will introduce the data and fully outline my models. This section should serve as a general introduction to the methods. I will not extensivelly go through the statistics behind linear or multiple regression, but will assume that it is common knowledge. For an extensive introduction to such methods, James et al.(2017) or Chihara and Hesterberg (2011) are particularly usefull. 
+Before directly defining all parameters of the models I will later use in writing this thesis, I will go through each type of method to provide some background on the statistics behind the models. In the next chapter, I will introduce the data and fully outline my models. This section should serve as a general introduction to the methods. I will not extensively go through the statistics behind linear or multiple regression, but will assume that it is common knowledge. For an extensive introduction to such methods, James et al.(2017) or Chihara and Hesterberg (2011) are particularly useful. 
 
 ### Logistic Regression
 
@@ -90,7 +90,7 @@ This is called the logit function or, when $p$ refers to a probability, the log-
 $$Y \sim \text{Bernoulli}(p),$$
 the logit function can be used as a link function to model Y in a generalized linear model. The generic form of a generalized linear model looks like:  
 $$f(Y) = XB,$$
-where Y is a vector of response variable values, X is a matrix of predictors, and B is a matrix of coefficients to be estimated. The function f is called a link function, because it "links" the response variable with the set of predictors included in the model. This is typically done to ensure that the range of values outputed by the model are consistent with the range of the response variable. 
+where Y is a vector of response variable values, X is a matrix of predictors, and B is a matrix of coefficients to be estimated. The function f is called a link function, because it "links" the response variable with the set of predictors included in the model. This is typically done to ensure that the range of values outputted by the model are consistent with the range of the response variable. 
 When wanting to compute a model on a binary response through its corresponding Bernoulli distribution probability parameter, the inverse logit function should be a perfect fit for a link function, since it maps values from all real numbers to a range between 0 and 1. Using the inverse logit function, we arrive at the final form of logistic regression, which is:  
 $$\mathbb{P} (Y_i = 1) = \text{logit}^{-1} (XB)$$
     
@@ -98,7 +98,7 @@ Conveniently, despite the use of a link function, there is an easy way to interp
   
 ### Generalized Additive Models
    
-In simple logistic or linear regression, there is an assumption made on the functional form of the relationship between predictors and response variable. These are called parametric models, where the data is exclusivelly used to estimate values for coefficients. Non-parametric models, on the other hand, use the data to estimate both coefficients and the function that serves to connect response to predictors. While on the surface this seems like a great idea (more reliance on your data and less assumptions!), such an exclusivelly non-parametric model would suffer greatly from the curse of dimensionality--where the addition of multiple predictors or overreliance on data leads to substantial over-fitting.   
+In simple logistic or linear regression, there is an assumption made on the functional form of the relationship between predictors and response variable. These are called parametric models, where the data is exclusively used to estimate values for coefficients. Non-parametric models, on the other hand, use the data to estimate both coefficients and the function that serves to connect response to predictors. While on the surface this seems like a great idea (more reliance on your data and less assumptions!), such an exclusively non-parametric model would suffer greatly from the curse of dimensionality--where the addition of multiple predictors or over-reliance on data leads to substantial over-fitting.   
   
 The solution, then, is a Generalized Additive Model, or GAM. This model lets us fit a different functional form to each observation, allowing for assumptions to be made on the data where it is safe to do so, and for non-parametric fitting when it is necessary. This model looks like:
 
@@ -110,7 +110,7 @@ A type of most commonly fit functions--and the type I will make use of--are smoo
 
 ### Multilevel Models  
   
-Multilevel models--otherwise known as hierarchical or "mixed effects" models--can be intuitivelly pictured in two ways: either as a set of models working on different "levels", where one is calculated first, with its effects having implications for the second, or as a model where some of the parameters estimated act under a particular series of constraints. Multilevel models are, in essence, a compromise between levels of "pooling" data. If the dataset on which parameters are being estimate operates in different units of observation--say on the individual and county level--you could run a model that treats all individuals as coming from the same larger group; this would be a complete pooling model. You could also add indicator variables for each and every group, de facto estimating n different models for n groups; this would be a no pooling model. Multilevel modelling offers partial pooling [@gelman_data_2006].
+Multilevel models--otherwise known as hierarchical or "mixed effects" models--can be intuitively pictured in two ways: either as a set of models working on different "levels", where one is calculated first, with its effects having implications for the second, or as a model where some of the parameters estimated act under a particular series of constraints. Multilevel models are, in essence, a compromise between levels of "pooling" data. If the dataset on which parameters are being estimate operates in different units of observation--say on the individual and county level--you could run a model that treats all individuals as coming from the same larger group; this would be a complete pooling model. You could also add indicator variables for each and every group, de facto estimating n different models for n groups; this would be a no pooling model. Multilevel modelling offers partial pooling [@gelman_data_2006].
   
 To consider what this model looks like, let's assume a dataset comprising of a vector of values for the response variable Y, a matrix of i individual level predictors X, a matrix of j group level predictors U, intercept terms $\alpha$, individual level coefficients B, and group level coefficients $\Gamma$. Based on this, a multilevel model with intercept terms varying by group looks like:
 
