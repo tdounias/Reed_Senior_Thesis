@@ -28,7 +28,7 @@ model_dt_county <- model_dt %>%
 demographics <- read_csv("colorado_demographic_stats_by_county.csv") %>%
   dplyr::select("COUNTY", "PCT_WHITE", "PCT_URBAN")
 
-model_dt_county <- left_join(model_dt_gen, demographics, by = "COUNTY")
+model_dt_county <- left_join(model_dt_county, demographics, by = "COUNTY")
 
 model_dt_county$COUNTY <- as.factor(model_dt_county$COUNTY)
 

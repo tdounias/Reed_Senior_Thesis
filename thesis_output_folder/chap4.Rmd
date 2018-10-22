@@ -6,6 +6,33 @@ header-includes:
 - \usepackage{longtable,booktabs,setspace}
 ---
 
+```{r setup, include = FALSE}
+library(tidyverse)
+library(lubridate)
+library(Matrix)
+library(lme4)
+library(gamm4)
+source("~/Desktop/Reed_Senior_Thesis/riggd/R/utils.R")
+setwd("~/Desktop/Reed_Senior_Thesis/Data_and_results/data")
+
+#DATA
+load("all_turnouts.RData")
+demographics <- read_csv("colorado_demographic_stats_by_county.csv")
+names(demographics) <- tolower(names(demographics))
+
+model_dt <- turnouts_county_data(turnout_list)
+
+model_dt$dates <- as.factor(model_dt$dates)
+model_dt$types <- as.factor(model_dt$types)
+
+model_dt <- filter(model_dt, !is.na(model_dt$reg))
+
+model_dt <- left_join(model_dt, demographics, by = "county")
+
+model_dt$county <- as.factor(model_dt$county)
+```
+
+
 # Model Specification and Results
 
 In this chapter I do a step-by-step construction and fitting of a series of models. I begin with a thorough analysis of my notation, and specification of models. I then extract results from the models that best fit the data, and draw inferences on my hypotheses. I will start with a disclaimer: why the data available to me is not necessarily enough to get the necessary causal leverage for significant results. This is particularly true of individual level models. This disclaimer should be considered a large part of the analytical results of my thesis; given several months of exploratory data analysis, such explanations should serve future research into Colorado voter files. I will then proceed to construct some actual models--disclaimer notwithstanding--starting with county and proceeding to individual level modelling. Some of these models may be speculative, as given the initial disclaimer they require more data, or more processing power to actually run. I will still include them as they may be used for future research.
@@ -114,4 +141,203 @@ Table: County level model descriptions \label{tab:model_desc_county}
 
 ### Results
 
+Calling model one results in the following:
+
+```{r county model 1}
+md_1 <- lm(data = model_dt, turnout ~ pct_white + pct_urban + county)
+
+summary(md_1)
+
+#If run this shows perfect linear relationship
+#alias(md_1)
+
+plot(md_1)
+```
+
+Calling Model two has the following result:
+
+```{r county model 2}
+md_2 <- lmer(data = model_dt, turnout ~ pct_white + pct_urban + (1|county),
+             REML = F)
+
+arm::display(md_2)
+
+#Run for specific county coefs
+#ranef(md_2)
+
+fixef(md_2)
+
+plot(md_2)
+
+qqnorm(residuals(md_2))
+```
+
+Calling Model three:
+
+```{r county model 3}
+md_3 <- lmer(data = model_dt, turnout ~ 1 + types + pct_vbm +
+               pct_urban + pct_white + pct_vbm:types + (1|county), 
+             REML = F)
+
+arm::display(md_3)
+
+#Run for county coefs
+#ranef(md_3)
+
+fixef(md_3)
+
+plot(md_3)
+
+qqnorm(residuals(md_3))
+
+anova(md_2, md_3)
+```
+
+Calling Model 4:
+
+```{r county model 4}
+model_dt$dates <-  as.integer(model_dt$dates)
+
+md_4 <- gamm4(turnout ~ 1 + types +
+               pct_urban + pct_white + pct_vbm*types + s(dates, k = 7), 
+             random =~ (1|county), 
+             data = model_dt)
+
+summary(md_4$mer)
+
+plot(fitted(md_4$mer), residuals(md_4$mer))
+
+qqnorm(residuals(md_4$mer))
+```
+
 ## Individual Level Models
+
+### Specifications
+  
+For the rest of this write-up, assume the following:
+
+$$y_i \sim \text{Bernoulli}(p\_vote)$$  
+
+Where $y_i \in \{0,1\}$ is the probability that the i-th ballot was completed.   
+  
+In this section I do not linearly add to the model until it reaches a final stage. The reasoning here is that there is no exact linear path to follow; there is an overarching unit of observation--the ballot--and all the rest are dependent between each other. For instance, adding a variable for Party at the ballot level would not significantly change the way I later add percentage of white residents at the county level. Therefore, the way I proceed is the following: I "build" the models step by step and separatelly for each group of variables (grouping by unit of observation). Then I present one example of what a model using two of these initial "building blocks" would look like. Since this is fairly generalizable, I then proceed directly to the full model which inlcudes all different variables. 
+   
+If receiving a ballot with no information, I would predict that the probability that an additional ballot was a vote in favor would be equal to turnout, as calculated through all other ballots. Therefore:
+
+$$\hat{p\_vote}_i = \frac{\# \text{votes cast}}{\# \text{ballots}}$$
+  
+### Estimation with only one type of data
+   
+There are four levels of data I will go through here: County, Election, Person, and Ballot. 
+  
+#### County Level
+  
+Assume that the ballot I am trying to assess completion for has the name of the county it is from written on it. There are two ways I can think of for predicting $p\_vote$. First, assume that each different county has a different, independent $p\_vote$. Therefore, in model-lingo this would look like:
+
+$$\hat{p\_vote}_i \sim \text{logit}^{-1}(\sum_{k = 1}^{64}x_{k,i}\beta_{k})$$
+
+Where k counts over the 64 counties of Colorado, and $x_{k}$ is an indicator variable for each county. If I, quite reasonably, throw away the assumption of independance--these counties are, after all, in the same state and the same country--I could also fit a mixed effects model as such:
+  
+$$\hat{p\_vote} \sim \text{logit}^{-1}(a_{k[i]}), $$
+$$a_{k} \sim \text{N}(\gamma_0, \sigma_{\alpha}^2)$$
+  
+Where $\alpha_{k[i]}$ varies by county, constrained by its standard deviation and $\gamma_0$, an intercept coefficient. Let's say now that along with the one ballot, I was given a short list of $n^{\text{county vars}}$ other county-level variables, be they discrete, continuous, or indicators. The two models would then look like:  
+
+$$\hat{p\_vote}_i \sim \text{logit}^{-1}(\sum_{k = 1}^{64}x_{k}\beta_{k} + \sum_{i'=1}^{n^{\text{county vars}}}x_{k[i], i'}\beta_{i'+64})$$
+   
+Where $x_{k[i], l}$ is the k-th value of the i'-th variable. If, as before, I do not assume independance, the model can be written as:
+  
+$$\hat{p\_vote} \sim \text{logit}^{-1}(a_{k[i]}), $$
+$$a_{k} \sim \text{N}(\gamma_0 + \sum_{i'=1}^{n^{\text{county vars}}}x_{k[i], i'}\gamma_{i'}, \sigma_{\alpha}^2)$$
+  
+In the case of my specific data, for the time being I have county-level data for white population and urban population, so $n^{\text{county vars}} = 2$.
+   
+#### Individual Level
+   
+Assuming that I know the voter ID of the individual that cast their ballot, I can treat this piece of information in about the same way that I did for county as described above. This means that the following is mostly an exercise in maintaining notation constant. For these purposes, let $n^{ID}$ be the number of total unique voter IDs--individuals--that I have data on, and j an indice that sums over all individuals. Also let $z_{j}$ be an indicator variable for each individual. Then:
+ 
+$$\hat{p\_vote}_i \sim \text{logit}^{-1}(\sum_{j = 1}^{n^{ID}}z_{j}\beta_{j})$$
+
+And the second model, not assuming independence, would be: 
+
+$$\hat{p\_vote} \sim \text{logit}^{-1}(\delta_{j[i]}), $$
+$$\delta_{j} \sim \text{N}(\zeta_0, \sigma_{\delta}^2)$$
+
+Again, in a similar way to county level data, there are variables at an individual level, thus making it relativelly easy to build further models. Let's say now that along with the one ballot, I was given a short list of $n^{\text{indiv vars}}$ other individual-level variables, be they discrete, continuous, or indicators. The two models would then look like:
+
+$$\hat{p\_vote}_i \sim \text{logit}^{-1}(\sum_{j = 1}^{n^{ID}}z_{j}\beta_{j} + \sum_{i'=1}^{n^{\text{indiv vars}}}z_{j[i], i'}\beta_{i'+n^{ID}})$$
+   
+Where $z_{j[i], l}$ is the j-th value of the i'-th variable. If, as before, I do not assume independance, the model can be written as:
+
+$$\hat{p\_vote} \sim \text{logit}^{-1}(\delta_{j[i]}), $$
+$$\delta_{j} \sim \text{N}(\zeta_0 + \sum_{i'=1}^{n^{\text{indiv vars}}}z_{j[i], i'}\delta_{i'}, \sigma_{\delta}^2)$$
+  
+In the case of my specific data, for the time being I have individual-level data for gender, so $n^{\text{indiv vars}} = 1$.
+   
+#### Election Level
+   
+Again as previously, four models come from including election level data. The first two are assuming I only knew what specific election the ballot comes from. Let $w_{i'}$ be an indicator variable for each election and $n^{elect}$ the number of elections. The model assuming independence, with $w_{i'}$ being indicator variables for each election, is:
+
+$$\hat{p\_vote}_i \sim \text{logit}^{-1}(\sum_{l = 1}^{n^{elect}}w_{l}\beta_{l})$$
+
+Again, as previously, it would be safe to assume that each election is not held in a vacuum. Adding mixed effects this model would be:
+
+$$\hat{p\_vote} \sim \text{logit}^{-1}(\eta_{l[i]}), $$
+$$\eta_{l} \sim \text{N}(\nu_0, \sigma_{\nu}^2)$$
+
+Again, in a similar way to county and individual level data, I add in variables at an election level. Let's say now that along with the one ballot, I was given a short list of $n^{\text{election vars}}$ other election-level variables, be they discrete, continuous, or indicators. The two models would then look like:
+
+$$\hat{p\_vote}_i \sim \text{logit}^{-1}(\sum_{l = 1}^{n^{elect}}w_{l}\beta_{l} + \sum_{i'=1}^{n^{\text{election vars}}}w_{l[i], i'}\beta_{i'+n^{elect}})$$
+Where $w_{l[i], i'}$ is the l-th value of the i'-th variable.
+
+Assuming independence:
+$$\hat{p\_vote} \sim \text{logit}^{-1}(\eta_{l[i]}), $$
+$$\eta_{l} \sim \text{N}(\nu_0 + \sum_{i'=1}^{n^{\text{election vars}}}w_{l[i], i'}\nu_{i'}, \sigma_{\nu}^2)$$
+For the time being I have two different variables that describe individual elections: date and type. Note that the above models may not be the best way to describe dates! An alternative could be fitting a glm, with some smoothing spline function for year. As for type, this would include four distinct indicators; one for each election type. 
+
+#### Ballot Level
+   
+In this section I assume that the ballot has some key features written on it, like the voting method, age, or party registration of the person that filled it out. A mixed effects model here would make no sense, since all the data is at the same unit of observation. Therefore, when adding ballot level variables, the model would look like:
+
+$$\hat{p\_vote}_i \sim \text{logit}^{-1}(\beta_0 + \sum_{i' = 1}^{n^{\text{ballot vars}}}u_{i,i'}\beta_{l'})$$
+
+Where $u_{i,i'}$ is the i-th value of the i'-th variable, and $n^{\text{ballot vars}}$ is the number of ballot level variables. For now, I have data on voting method, age, and party. Voting method is coded as a binary variable with value one if the method was a Mail Vote. Party includes four distinct indicators for REP, DEM, Other, and Unaffiliated. Age is tricky; for now the options would be: straight up inclusion as an integer, inclusion as a cubic polynomial, unclusion as a 2nd degree polynomial, inclusion in some form of spline function.
+   
+### Estimation with two types of data
+
+After the work of setting up the four models at four different levels of observation, combining them in twos should be failry straightforward. To avoid being nedlessly cumulative, I will pursue this combination for County and Individual level only--instead of the six different possible combinations.
+
+With the assumption that both counties and individuals are independent of one another, I proceed to the first type of model:
+
+$$\hat{p\_vote}_i \sim \text{logit}^{-1}(\sum_{k = 1}^{64}x_{k}\beta_{k} + \sum_{i'=1}^{n^{\text{county vars}}}x_{k[i], i'}\beta_{i'+64} + \sum_{j = 1}^{n^{ID}}z_{j}\beta_{j + n^{\text{county vars}} + 64} + \sum_{i'=1}^{n^{\text{indiv vars}}}z_{j[i], i'}\beta_{i'+n^{ID} + n^{\text{county vars}} + 64})$$
+
+This is large and clunky. It includes variables as described above: indicators for each county and individual, and all individual or county-level variables. For the corresponding mixed-effects model, I assume the tree-like structure we discussed on Monday. The hierarchy has two "levels", with the second level consisting of two different regressions:
+
+
+$$\hat{p\_vote} \sim \text{logit}^{-1}(\delta_{j[i]} + a_{k[i]}), $$
+$$a_{k} \sim \text{N}(\gamma_0 + \sum_{i'=1}^{n^{\text{county vars}}}x_{k[i], i'}\gamma_{i'}, \sigma_{\alpha}^2)$$
+$$\delta_{j} \sim \text{N}(\zeta_0 + \sum_{i'=1}^{n^{\text{indiv vars}}}z_{j[i], i'}\delta_{i'}, \sigma_{\delta}^2)$$
+
+### Estimation with the full dataset
+
+I now proceed to include variables from all units of observation into one model. The first model, assuming independence, is:
+
+$$
+\begin{aligned}
+\hat{p\_vote}_i \sim \text{logit}^{-1}(\sum_{k = 1}^{64}x_{k}\beta_{*} + \sum_{i'=1}^{n^{\text{county vars}}}x_{k[i], i'}\beta_{*} + \sum_{j = 1}^{n^{ID}}z_{j}\beta_{*} + \sum_{i'=1}^{n^{\text{indiv vars}}}z_{j[i], i'}\beta_{*} + \\
+\sum_{l = 1}^{n^{elect}}w_{l}\beta_{*} + \sum_{i'=1}^{n^{\text{election vars}}}w_{l[i], i'}\beta_{*} + \sum_{i' = 1}^{n^{\text{ballot vars}}}u_{i,i'}\beta_{*})
+\end{aligned}
+$$
+
+You will notice that I have ommited the subscript for all beta coefficients. This is because after two or three parameters, this becomes very, very large. I think it's reasonable to assume increasing indexes for different beta coefficients from left to right in this expression.
+
+The mixed effects model will again operate on two "levels" of hierarchy, but the second level will now include three distinct regressions. Caveats for variables like age and date should be noted from previous sections.
+
+$$\hat{p\_vote} \sim \text{logit}^{-1}(\sum_{i' = 1}^{n^{\text{ballot vars}}}u_{i,i'}\beta_{l'} +\delta_{j[i]} + a_{k[i]} + \eta_{l[i]}),$$
+
+$$a_{k} \sim \text{N}(\gamma_0 + \sum_{i'=1}^{n^{\text{county vars}}}x_{k[i], i'}\gamma_{i'}, \sigma_{\alpha}^2)$$
+
+$$\delta_{j} \sim \text{N}(\zeta_0 + \sum_{i'=1}^{n^{\text{indiv vars}}}z_{j[i], i'}\delta_{i'}, \sigma_{\delta}^2)$$
+
+$$\eta_{l} \sim \text{N}(\nu_0 + \sum_{i'=1}^{n^{\text{election vars}}}w_{l[i], i'}\nu_{i'}, \sigma_{\nu}^2)$$
+
