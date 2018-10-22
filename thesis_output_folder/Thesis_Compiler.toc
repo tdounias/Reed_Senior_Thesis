@@ -5,42 +5,41 @@
 \contentsline {subsection}{\numberline {1.1.2}Theories of Voting}{5}{subsection.1.1.2}
 \contentsline {section}{\numberline {1.2}From Theory to Policy}{6}{section.1.2}
 \contentsline {subsection}{\numberline {1.2.1}Voting Methods}{6}{subsection.1.2.1}
-\contentsline {subsection}{\numberline {1.2.2}What is VBM?}{6}{subsection.1.2.2}
-\contentsline {subsection}{\numberline {1.2.3}How Theories Apply to VBM}{7}{subsection.1.2.3}
-\contentsline {section}{\numberline {1.3}Previous Study Results}{8}{section.1.3}
-\contentsline {subsection}{\numberline {1.3.1}General Results on VBM}{8}{subsection.1.3.1}
-\contentsline {section}{\numberline {1.4}Voter Registration Files as Data Sources}{9}{section.1.4}
-\contentsline {subsection}{\numberline {1.4.1}Inaccuracy of Survey Data}{9}{subsection.1.4.1}
-\contentsline {subsection}{\numberline {1.4.2}The Importance of VRF}{10}{subsection.1.4.2}
-\contentsline {chapter}{Chapter 2: Hypotheses and Methods}{11}{chapter.2}
-\contentsline {section}{\numberline {2.1}Hypotheses}{11}{section.2.1}
-\contentsline {subsection}{\numberline {2.1.1}Questions}{11}{subsection.2.1.1}
-\contentsline {subsection}{\numberline {2.1.2}Hypotheses}{12}{subsection.2.1.2}
-\contentsline {subsection}{\numberline {2.1.3}Criteria}{12}{subsection.2.1.3}
-\contentsline {subsection}{\numberline {2.1.4}Importance of Hypotheses}{13}{subsection.2.1.4}
-\contentsline {section}{\numberline {2.2}Methodology}{14}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Logistic Regression}{14}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}Generalized Additive Models}{15}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}Multilevel Models}{15}{subsection.2.2.3}
-\contentsline {chapter}{Chapter 3: Case Selection, Data, Model Parametrization}{17}{chapter.3}
-\contentsline {section}{\numberline {3.1}The Centennial State and Its Voters}{17}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Demographics}{17}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}The Politics of Colorado}{18}{subsection.3.1.2}
-\contentsline {subsection}{\numberline {3.1.3}Voting in Colorado}{19}{subsection.3.1.3}
-\contentsline {subsection}{\numberline {3.1.4}Colorado as a Case for this Thesis}{21}{subsection.3.1.4}
-\contentsline {section}{\numberline {3.2}Acquiring the Data}{21}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Sources and first glance}{22}{subsection.3.2.1}
-\contentsline {subsubsection}{2010 US Census}{22}{section*.9}
-\contentsline {subsubsection}{Colorado Voter Files}{22}{section*.10}
-\contentsline {section}{\numberline {3.3}Wrangling the Data}{23}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Initial Problems with the 2017 Voter File and Solution}{23}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Other Wrangling Issues Faced}{26}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Final Variable Specifications}{27}{subsection.3.3.3}
-\contentsline {chapter}{Chapter 4: Model Specification and Results}{29}{chapter.4}
-\contentsline {section}{\numberline {4.1}Variable Specification}{29}{section.4.1}
-\contentsline {section}{\numberline {4.2}County Level Models}{30}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Specifications}{30}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Results}{32}{subsection.4.2.2}
-\contentsline {section}{\numberline {4.3}Individual Level Models}{32}{section.4.3}
-\contentsline {chapter}{Conclusion}{33}{chapter*.15}
-\contentsline {chapter}{References}{35}{appendix*.16}
+\contentsline {subsection}{\numberline {1.2.2}What is VBM?}{7}{subsection.1.2.2}
+\contentsline {subsection}{\numberline {1.2.3}How Theories Apply to VBM}{8}{subsection.1.2.3}
+\contentsline {subsection}{\numberline {1.2.4}General Results on VBM}{9}{subsection.1.2.4}
+\contentsline {section}{\numberline {1.3}Voter Registration Files as Data Sources}{10}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}Inaccuracy of Survey Data}{10}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.2}The Importance of VRF}{10}{subsection.1.3.2}
+\contentsline {chapter}{Chapter 2: Hypotheses and Methods}{13}{chapter.2}
+\contentsline {section}{\numberline {2.1}Hypotheses}{13}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Questions}{13}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Hypotheses}{14}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}Criteria}{14}{subsection.2.1.3}
+\contentsline {subsection}{\numberline {2.1.4}Importance of Hypotheses}{15}{subsection.2.1.4}
+\contentsline {section}{\numberline {2.2}Methodology}{16}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Logistic Regression}{16}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Generalized Additive Models}{17}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Multilevel Models}{17}{subsection.2.2.3}
+\contentsline {chapter}{Chapter 3: Case Selection, Data, Model Parametrization}{19}{chapter.3}
+\contentsline {section}{\numberline {3.1}The Centennial State and Its Voters}{19}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Demographics}{19}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}The Politics of Colorado}{20}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}Voting in Colorado}{21}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.4}Colorado as a Case for this Thesis}{23}{subsection.3.1.4}
+\contentsline {section}{\numberline {3.2}Acquiring the Data}{23}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Sources and first glance}{24}{subsection.3.2.1}
+\contentsline {subsubsection}{2010 US Census}{24}{section*.9}
+\contentsline {subsubsection}{Colorado Voter Files}{24}{section*.10}
+\contentsline {section}{\numberline {3.3}Wrangling the Data}{25}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Initial Problems with the 2017 Voter File and Solution}{25}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Other Wrangling Issues Faced}{28}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Final Variable Specifications}{29}{subsection.3.3.3}
+\contentsline {chapter}{Chapter 4: Model Specification and Results}{31}{chapter.4}
+\contentsline {section}{\numberline {4.1}Variable Specification}{31}{section.4.1}
+\contentsline {section}{\numberline {4.2}County Level Models}{32}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Specifications}{32}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Results}{34}{subsection.4.2.2}
+\contentsline {section}{\numberline {4.3}Individual Level Models}{34}{section.4.3}
+\contentsline {chapter}{Conclusion}{35}{chapter*.15}
+\contentsline {chapter}{References}{37}{appendix*.16}

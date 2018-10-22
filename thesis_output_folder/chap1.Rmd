@@ -37,6 +37,8 @@ Here I take one step back from turnout, and examine the theories surrounding ind
 
 * *Social/Structural Voting*: Close to habitual voting are those that support a model of social and structural voting; these researchers claim that the decision to vote or not is deeply rooted in socioeconomic factors, which means that the divide between traditionally voting and non-voting groups can only be bridged by directly dealing with the socioeconomic divide between them [@edlin_voting_2007 ;@berinsky_perverse_2005]. Their reasoning is that "at the margins" voting only addresses groups that do not face significant burdens against voting--like the working poor, or marginalized racial groups--, and are usually already registered. Similarly, they address habitual voting claims by arguing that they are too short-sighted; individuals themselves might be habitually voting, but their decision to do so is rooted in strong societal and policy factors.  
 
+* *Resources and Organization*: To some extent growing from structural theories of voting, resources and organizations theory emphasizes the interaction of personal political and societal characteristics of voters, and actions taken by politicians to mobilize participation. This theory is very broad in the inputs it assesses for voter participation, ranging from practical issues of access and resources--how easy it is for someone to vote, if they so choose--, to public policy feedback effects and signaling--how the government's policies effect the people, and how they react to them--, to how political parties and groups choose to mobilize and approach voters [@rosenstone_mobilization_2003]. Apart from Rosenstone and Hansen's work (2013), there have been several studies examining voter participation based on resources and organizations theory, a lot of which come from the public policy side of polictical science. Some examples are Chen's study of how distributive benefits like federal emergency aid affect participation among recipients, after controlling for partisan characteristics (2012), or Mettler and Stonecash's examination of correlation between wellfare program participation and political mobilization (2008), or Campbell's analysis of social security recipients and their voting patterns (2002). The punchline in all these studies is that public policy is correlated with trends in participation, either because recipients of benefits wish to protect such programs, or because of the interaction between partisanship and government support, or because of access related to resources and voting laws [@mettler_government_2008; @chen_voter_2013; @campbell_self-interest_2002].  
+
 
 ##From Theory to Policy
 
@@ -53,7 +55,6 @@ In trying to respond to the issues set up by theoretical paradigms, different st
 * *Vote-By-Mail, Absentee Early Voting*, for which individuals have a clear, no-excuse-necessary option for not being present when they vote, or for filing in a mailed ballot and droping it off at designated locations.  
 
 For the purposes of this thesis I will examine the latter category, and specifically Vote-By-Mail. The reason behind this is that the model of in-person, election day voting is usually seen as the baseline, the "vanilla" way of conducting elecions if you will. Therefore it has been of interest for researchers to examine if other systems can outperform that baseline. Specifically, it is most interesting to examine voting styles that are heralded for their expansion of turnout, to see whether popular beliefs on their benefits and drawbacks hold; if they are different from the base model of conducting American elections, or if they present new challenges and unique selling points. Vote-By-Mail is particularly intersting because it is quickly taking the form of a trend in state elections, as more and more states are enforcing more open models of VBM. In the next section, I will more closely examine the particulars of Vote-By-Mail. 
-
   
 ### What is VBM?  
 
@@ -77,12 +78,9 @@ If we asume habitual voting, the conclusion on VBM would differ significantly. I
 
 Under social and structural voting contexts, VBM retains rather than stimulates new voters [@berinsky_perverse_2005]. This means that already registered and semi-active voters are more likely to participate, but there is no significant change in the amount of new voters entering the franchise. This would mean that traditional forms of voting policy that emphasize access to the polls will do nothing to bring in disenfranchised people, and potentially hide the problem under an inflated turnout statistic calculated on registered voters. Berinsky in particular emphasizes the need for a shift towards voter education, rather than early voting or VBM policies [@berinsky_perverse_2005].
 
+Vote-by-Mail is obviously not a wellfare or spending program, but it does expand individual resources in terms of voting capacity. A ballot delivered to your home means that less resources need to be expended in the act of voting, which in turn has both a practical effect--building capacity--and a more behavioural effect--a feeling of inclusion, an interaction with the process of voting that comes through a ballot at your doorstep that owuld not exist if you had not gone to a polling place. Under a resources and organiztions framework, both these effects are most likelly to be net positive to political participation, and as such would predict a strong, positive effect of VBM on turnout. 
 
-## Previous Study Results  
-   
-In this section I will go through previous results from studies of Vote-By-Mail. I will also include a series of studies that are not necessarily about VBM, but have either been conducted in Vote-By-Mail states, or have to do with early voting which, as I have mentioned, is frequently linked to VBM. Most studies include a set of models or predictions of turnout, which are split into individual or county level results. I will group the studies according to whether the result shows a negative or positive effect on turnout.   
-
-###General Results on VBM 
+### General Results on VBM 
    
 I will start with studies that show a negative effect on turnout. Bergman (2011) uses a series of logit models of individual voting probability in California, during a period where part of the state conducted VBM elections, while others maintained traditional voting. This is called a "quasi-experiment", and is frequent throughout the literature. Bergman's results show a statistically significant drop in voting probability in VBM counties [@bergman_changing_2011]. Using a similar method, Keele (2018) takes a single city in Colorado, Basalt City, which is divided into two different voting districts using different voting systems. The conclusion is, again, a 2-4% drop in turnout along the VBM part of the city [@keele_geographic_2017]. Burden et al. (2014) takes a different approach, using country-wide election data from 2004 and 2008 presidential elections, and compares districts based on early voing practices. Their results show a significant drop in turnout, which can be associated to VBM as well due to its closeness to EV [@burden_election_2014].  
 
@@ -90,7 +88,10 @@ In contrast, Gerber et al. (2013), applying both individual and county-level mod
 
 The conclusion to be drawn from this section is that results on VBM vary significantly. There are multiple studies, using multiple methods, on multiple states, with multiple results. This only adds to the importance of being careful when constructing models and hypotheses to test VBM's effects on turnout, as assumptions made in the process can critically impact the results.  
 
+
 ## Voter Registration Files as Data Sources
+
+Before concluding this chapter, I want to birefly discuss some background research into the use of voter registration files for the purpose of elections research. This may seem like an abrupt shift from the previous section but, as I mentioned in my introduction, access to such files is what motivated and facilitated a lot of the aforementioned studies in the first place. I will not directly go into the structure of such files; such a section will be included later on in this thesis.
 
 ### Inaccuracy of Survey Data  
    
