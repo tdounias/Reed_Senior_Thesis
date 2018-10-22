@@ -7,13 +7,16 @@ setwd("~/Desktop/Reed_Senior_Thesis/Data_and_results/data")
 #Load the data
 load("all_turnouts.RData")
 
-graph_data <- turnouts_county_data(turnout_list)
+graph_data <- turnouts_county_data(turnout_list) %>%
+  group_by(dates) %>%
+  summarise(mean(pct_vbm))
 
-ggplot(graph_data, aes(x = dates, y = turnout, col = county)) +
-  facet_wrap(facets = "ELECTION_TYPE") +
+names(graph_data) <- c("year", "pct_vbm")
+
+ggplot(graph_data, aes(x = year, y = pct_vbm)) +
   geom_vline(xintercept = 2013, col = "red") +
   geom_hline(yintercept = 1) +
   geom_point(size = .2) +
-  geom_line(alpha = .3) +
-  labs(title = "Turnout in Colorado Elections by County, 2010-2016", x = "Election Year", y = "Turnout as % of Registered Voters") +
+  geom_line(alpha = .7, col = "dark blue") +
+  labs(x = "Election Year", y = "% of Mail Ballots Over Total Ballots") +
   guides(col=FALSE)

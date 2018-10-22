@@ -36,10 +36,11 @@
 \contentsline {subsection}{\numberline {3.3.2}Other Wrangling Issues Faced}{28}{subsection.3.3.2}
 \contentsline {subsection}{\numberline {3.3.3}Final Variable Specifications}{29}{subsection.3.3.3}
 \contentsline {chapter}{Chapter 4: Model Specification and Results}{31}{chapter.4}
-\contentsline {section}{\numberline {4.1}Variable Specification}{31}{section.4.1}
-\contentsline {section}{\numberline {4.2}County Level Models}{32}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Specifications}{32}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Results}{34}{subsection.4.2.2}
-\contentsline {section}{\numberline {4.3}Individual Level Models}{34}{section.4.3}
+\contentsline {section}{\numberline {4.1}Salt}{31}{section.4.1}
+\contentsline {section}{\numberline {4.2}Variable Specification}{31}{section.4.2}
+\contentsline {section}{\numberline {4.3}County Level Models}{32}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Specifications}{32}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Results}{34}{subsection.4.3.2}
+\contentsline {section}{\numberline {4.4}Individual Level Models}{34}{section.4.4}
 \contentsline {chapter}{Conclusion}{35}{chapter*.15}
 \contentsline {chapter}{References}{37}{appendix*.16}

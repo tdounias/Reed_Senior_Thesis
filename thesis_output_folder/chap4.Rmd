@@ -8,9 +8,25 @@ header-includes:
 
 # Model Specification and Results
 
-In this chapter I do a step-by-step construction and fitting of a series of models. I begin with a thorough analysis of my notation, and specification of models. I then extract results from the models that best fit the data, and draw inferences on my hypotheses. There are two types of models that will be included here: county-level, and individual-level. They will be treated as seperate sections.
+In this chapter I do a step-by-step construction and fitting of a series of models. I begin with a thorough analysis of my notation, and specification of models. I then extract results from the models that best fit the data, and draw inferences on my hypotheses. I will start with a disclaimer: why the data available to me is not necesarily enough to get the necessary causal leverage for significant results. This is particularly true of individual level models. This disclaimer should be considered a lagre part of the analytical results of my thesis; given several months of exploratory data analysis, such explanations should serve future research into Colorado voter files. I will then proceed to construct some actual models--disclaimer notwithstanding--starting with county and proceeding to individual level modelling. Some of these models may be speculative, as given the initial disclaimer they require more data, or more processing power to actually run. I will still include them as they may be used for future research.
 
-## Variable Specification
+##Salt
+
+The following models should be taken with a grain of salt because of a series of reasons. In this section, I will tackle these reasons one by one and then analyze what steps could be made to compensate.
+
+### Causal Leverage
+
+Causal leverage usually means having enough data to draw significant conclusions about correlation of variables, or in the best cases make safe causal inferences. Data that presents causal leverage should have certain characteristics. It should, first, be extensive enough. By this I mean that the raw number of observations should be as high as possible, and in the best cases significantly larger than the set of predictors that are present. This not only guarantees no issues with model matrices when running statistical models, but also that there will be enough data-per-variable to draw conclusions. Second, the data should be varied. To put it very simply, it's not enough to have hundreds of thousands of observations if they are all similar to eachother. If, for example, my data included a thousand people in Jefferson county, and 63 in all other counties of Colorado combined--one in each remaining county--, then I would not be able to leverage my data to draw conclusions on county-level effects. 
+
+As previously stated, I have registration files going back to 2012. From these files, I have extracted data for elections going back to 2010 ^[See section 3.3.1; I extracted data limited to this time period to avoid accuracy issues with migration and removal of inactive/unavailable voters]. In order to make inferences on VBM and turnout effects, given the previous criteria for causal leverage, I had to have extensive and varied data. I have extensive data--over 35 million observations at the individual level--but the data substantially lacks variance in voting method. Put simply, most people in Colorado from 2010 onwards either did not vote at all, or voted by mail. If you recall the changes in Colorado election law, in 2008 counties were allowed to conduct all mail elections, and no-excuse permanent absentee voting was implemented state-wide; then in 2013 Colorado transitioned to full VBM for all elections. This means that few people were still using traditional polling places or vote centers to cast their ballots. Figure 4.1 shows how, after 2013, and even before that in 2011--the coordinated, local election for which mail ballots were more convenient for counties--over 95% of ballots cast were mail ballots. Only in the general elections of 2010 and 2012 there is some variance, but mail ballots account for well over two thirds of total votes.
+
+```{r vbm png, echo=FALSE, fig.cap="Percentage of mail ballots over total ballots by year", out.width = '60%', fig.align='center'}
+knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/vbm_county_graph.png")
+```
+
+## Models
+
+### Variable Specification
 
 I will not go through each individual variable in this section, but will briefly describe my procedure on notation for the following models. I will include more comments whenever they seem necessary under each model. In this thesis I include predictors on a series of variables that can be divided into five categories based on unit of observation: county, election, individual, local result, and ballot. The last two are functions of other units: local result units are equal to the product of elections and counties, while ballot units are equal to the number of unique individuals multiplied by the number of elections each of them was registered in. For notation, I follow this set of rules:  
   
@@ -83,7 +99,6 @@ where $s()$ is a thin plate spline function with seven knots--equal to the numbe
   Model 4          Multilevel General Additive model; added spline function for election year
 -------------- ----------------------------------------------------------------------------------
 Table: County level model descriptions \label{tab:model_desc_county}
-
 
 ### Results
 
