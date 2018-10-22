@@ -24,6 +24,8 @@ As previously stated, I have registration files going back to 2012. From these f
 knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/vbm_county_graph.png")
 ```
 
+This issue is not completelly fatal for my county level models. There is still variance between counties that have 100% mail ballots and those that are around the 75-85% margin. 
+
 ## Models
 
 ### Variable Specification

@@ -9,7 +9,7 @@ load("all_turnouts.RData")
 
 graph_data <- turnouts_county_data(turnout_list) %>%
   group_by(dates) %>%
-  summarise(mean(pct_vbm))
+  summarise(state_wide = sum(reg*turnout*pct_vbm)/sum(reg*turnout))
 
 names(graph_data) <- c("year", "pct_vbm")
 
