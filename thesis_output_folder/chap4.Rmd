@@ -24,7 +24,17 @@ As previously stated, I have registration files going back to 2012. From these f
 knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/vbm_county_graph.png")
 ```
 
-This issue is not completelly fatal for my county level models. There is still variance between counties that have 100% mail ballots and those that are around the 75-85% margin. 
+This issue is not completelly fatal for my county level models. There is still variance between counties that have 100% mail ballots and those that are around the 75-85% margin. For individual level models--where I am estimating voting probability--VBM will be an almost perfect predictor for voting, and therefore will not present me with any substantial analytical result on how it affects voting probability. There are some ways to compensate for this issue, which I outline; due to time or data constraints, not all of these will be implemented in this thesis:
+
+* *More (Diverse) Data*: 
+
+* *Localized, Natural Experiment Studies*: 
+
+* *Synthetic Control Group*: 
+
+### Lack of Individual Data
+
+### Processing Power
 
 ## Models
 
