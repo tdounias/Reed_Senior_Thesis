@@ -151,7 +151,7 @@ summary(md_1)
 #If run this shows perfect linear relationship
 #alias(md_1)
 
-plot(md_1)
+#plot(md_1)
 ```
 
 Calling Model two has the following result:
@@ -167,9 +167,9 @@ arm::display(md_2)
 
 fixef(md_2)
 
-plot(md_2)
+#plot(md_2)
 
-qqnorm(residuals(md_2))
+#qqnorm(residuals(md_2))
 ```
 
 Calling Model three:
@@ -186,9 +186,9 @@ arm::display(md_3)
 
 fixef(md_3)
 
-plot(md_3)
+#plot(md_3)
 
-qqnorm(residuals(md_3))
+#qqnorm(residuals(md_3))
 
 anova(md_2, md_3)
 ```
@@ -205,9 +205,9 @@ md_4 <- gamm4(turnout ~ 1 + types +
 
 summary(md_4$mer)
 
-plot(fitted(md_4$mer), residuals(md_4$mer))
+#plot(fitted(md_4$mer), residuals(md_4$mer))
 
-qqnorm(residuals(md_4$mer))
+#qqnorm(residuals(md_4$mer))
 ```
 
 ## Individual Level Models
