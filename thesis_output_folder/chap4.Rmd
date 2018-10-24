@@ -309,7 +309,7 @@ Where $w_{l[i], i'}$ is the l-th value of the i'-th variable.
 Assuming independence:
 $$\hat{p\_vote} \sim \text{logit}^{-1}(\eta_{l[i]}), $$
 $$\eta_{l} \sim \text{N}(\nu_0 + \sum_{i'=1}^{n^{\text{election vars}}}w_{l[i], i'}\nu_{i'}, \sigma_{\nu}^2)$$
-For the time being I have two different variables that describe individual elections: date and type. Note that the above models may not be the best way to describe dates! An alternative could be fitting a glm, with some smoothing spline function for year. As for type, this would include four distinct indicators; one for each election type. I name this final model--including a smoothing spline for year, *Model 4*. 
+For the time being I have two different variables that describe individual elections: date and type. Note that the above models may not be the best way to describe dates! An alternative could be fitting a glm, with some smoothing spline function for year. As for type, this would include four distinct indicators; one for each election type. I name this final model--including a smoothing spline for year, *Model 4*. Model 4 would not be a mixed effects model, since all the variability between elections is incorporated in election type and election year--with those two variables I can fully describe each election.
 
 #### Ballot Level
    
@@ -370,7 +370,7 @@ In summary, Table 4.3 includes all noteworthy models from the previous section. 
   
   Model 3a         A combination of 2 and 3 without individual-level mixed effects
   
-  Model 4          Multilevel General Additive model; election-level mixed effects and predictors
+  Model 4          General Additive model; election predictors and time smoothing splines
   
   Model 5          Multilevel General Additive model; election, individual, county mixed effects and all predictors
 -------------- ----------------------------------------------------------------------------------
