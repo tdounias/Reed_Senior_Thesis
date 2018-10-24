@@ -30,6 +30,9 @@ model_dt <- filter(model_dt, !is.na(model_dt$reg))
 model_dt <- left_join(model_dt, demographics, by = "county")
 
 model_dt$county <- as.factor(model_dt$county)
+
+#Individual Model Data
+model_sample <- read_csv("model_indiv_sample.csv")
 ```
 
 
@@ -241,7 +244,20 @@ Where k counts over the 64 counties of Colorado, and $x_{k}$ is an indicator var
 $$\hat{p\_vote} \sim \text{logit}^{-1}(a_{k[i]}), $$
 $$a_{k} \sim \text{N}(\gamma_0, \sigma_{\alpha}^2)$$
   
-Where $\alpha_{k[i]}$ varies by county, constrained by its standard deviation and $\gamma_0$, an intercept coefficient. Let's say now that along with the one ballot, I was given a short list of $n^{\text{county vars}}$ other county-level variables, be they discrete, continuous, or indicators. The two models would then look like:  
+Where $\alpha_{k[i]}$ varies by county, constrained by its standard deviation and $\gamma_0$, an intercept coefficient. I name this *Model 1*.
+```{r indiv model 1}
+#Run the model
+md_1 <- glmer(family = "binomial", data = model_sample, 
+              voted ~ (1|COUNTY))
+
+#Display results
+arm::display(md_1)
+
+#Fixed effects
+fixef(md_1)
+```
+
+Let's say now that along with the one ballot, I was given a short list of $n^{\text{county vars}}$ other county-level variables, be they discrete, continuous, or indicators. The two models would then look like:  
 
 $$\hat{p\_vote}_i \sim \text{logit}^{-1}(\sum_{k = 1}^{64}x_{k}\beta_{k} + \sum_{i'=1}^{n^{\text{county vars}}}x_{k[i], i'}\beta_{i'+64})$$
    
@@ -250,7 +266,20 @@ Where $x_{k[i], l}$ is the k-th value of the i'-th variable. If, as before, I do
 $$\hat{p\_vote} \sim \text{logit}^{-1}(a_{k[i]}), $$
 $$a_{k} \sim \text{N}(\gamma_0 + \sum_{i'=1}^{n^{\text{county vars}}}x_{k[i], i'}\gamma_{i'}, \sigma_{\alpha}^2)$$
   
-In the case of my specific data, for the time being I have county-level data for white population and urban population, so $n^{\text{county vars}} = 2$.
+In the case of my specific data, for the time being I have county-level data for white population and urban population, so $n^{\text{county vars}} = 2$. I name this *Model 2*
+
+```{r indiv model 2}
+#Run the model
+md_2 <- glmer(family = "binomial", data = model_sample, 
+              voted ~ (1|COUNTY) + PCT_URBAN + PCT_WHITE)
+
+#Display results
+arm::display(md_2)
+
+#Fixed effects
+fixef(md_2)
+```
+
    
 #### Individual Level
    
