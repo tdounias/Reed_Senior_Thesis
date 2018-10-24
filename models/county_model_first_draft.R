@@ -8,8 +8,6 @@ setwd("~/Desktop/Reed_Senior_Thesis/Data_and_results/data")
 model_sample <- read_csv("model_indiv_sample.csv")
 demographics <- read_csv("colorado_demographic_stats_by_county.csv")
 
-model_sample <- left_join(model_sample, demographics, by = "COUNTY")
-
 #Run the model
 md_1 <- glmer(family = "binomial", data = model_sample, 
               voted ~ (1|COUNTY) + PCT_URBAN + PCT_WHITE)
@@ -52,6 +50,5 @@ ggplot(plot_data, aes(x = white, y = estimated_coefs)) +
 #                        "Boulder", "Bent", "Custer")) %>%
   
 
-ggplot(demographics, aes(x = PCT_URBAN, y = PCT_WHITE, col = PCT_OF_STATE_POP)) +
-  geom_jitter()
+
   

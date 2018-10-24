@@ -5,13 +5,7 @@ set.seed(14)
 source("~/Desktop/Reed_Senior_Thesis/riggd/R/utils.R")
 setwd("~/Desktop/Reed_Senior_Thesis/Data_and_results/data")
 
-#Load the data
-load("indiv_model_list.RData")
-
-#Make df from list
-model_dt <- extract_indiv_model_data(indiv_voter_list)
-
-#Take only specific elections (2012, 2016)
+model_sample <- read_csv("model_indiv_sample.csv")
 
 #Models
 library(lme4)
@@ -33,20 +27,20 @@ model_dt_county <- left_join(model_dt_county, demographics, by = "COUNTY")
 model_dt_county$COUNTY <- as.factor(model_dt_county$COUNTY)
 
 ##Only COUNTY
-md_county_1 <- glmer(data = model_dt_county, family = "binomial",
+md_county_1 <- glmer(data = model_sample, family = "binomial",
                      voted ~ (1|COUNTY))
 
-display(md_county_1)
+arm::display(md_county_1)
 
-coef(md_county_1)
+fixef(md_county_1)
 
 #COUNTY plus two demographics
-md_county_2 <- glmer(data = model_dt_county, family = "binomial",
+md_county_2 <- glmer(data = model_sample, family = "binomial",
                      voted ~ (1|COUNTY) + PCT_WHITE + PCT_URBAN)
 
-summary(md_county_2)
+arm::display(md_county_2)
 
-coef(md_county_2)
+fixef(md_county_2)
 
 #####################################
 ##Models with individual level data##

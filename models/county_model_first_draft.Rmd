@@ -15,7 +15,6 @@ source("~/Desktop/Reed_Senior_Thesis/riggd/R/utils.R")
 ```
 
 ```{r}
-#knitr::opts_chunk$set(root.dir ='~/Desktop/Reed_Senior_Thesis/Data_and_results/data')
 setwd("~/Desktop/Reed_Senior_Thesis/Data_and_results/data")
 model_sample <- read_csv("model_indiv_sample.csv")
 demographics <- read_csv("colorado_demographic_stats_by_county.csv")
