@@ -55,11 +55,11 @@ The State Capital is Denver; Colorado is split into 64 Counties, of which the mo
 -------------------------------------------------------------------------------
 Table: Colorado population for largest counties \label{tab:pop_table}
 
+\clearpage
+
 ### The Politics of Colorado
 
 Curtis Martin (1962) notes that Colorado, due to its status as a frontier state, has always been fiercely democratic and independent. He connects this fact with Colorado's past, by pointing out that its political institutions were deeply rooted in mining culture, ordinary citizens' participation,a strong feeling of being "far away" from sources of centralized power in the coasts, and a wish for the protection and preservation of Colorado's natural environment. As such, Colorado can be described as a populist state with a strong libertarian streak, that highly values democratic processes when they serve the people or protect and fund national parks, but staunchly opposes state intervention when it is unwarranted. [@martin_colorado_1962]
-
-\clearpage
   
 This 1964 study of Colorado politics rings true to this day. One needs not search for long to see instances when Colorado honored this description. One example is TABOR, or the Taxpayer's Bill of Rights; a strongly libertarian, small-government, populist series of regulations that mandated a referendum for any measure that would increase state taxes, and caped government spending. TABOR was passed by referendum in 1992, and later amended in 2005 after the dot com economic crisis exposed the fact that inability to spend is very bad for a state government trying to jump start its economy. [@colorado_general_assembly_tabor_nodate]   
   
@@ -117,6 +117,8 @@ In the past 25 years, there have been a series of key changes in the way Colorad
   2013             Automatic Mail Ballot System Implemented Statewide, Established Vote Centers  
 ------- -----------------------------------------------------------------------------------------------------
 Table: Key changes to Colorado elections policy \label{tab:elect_policy}
+    
+\clearpage
     
 ### Colorado as a Case for this Thesis
 

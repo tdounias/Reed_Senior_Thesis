@@ -216,7 +216,7 @@ If receiving a ballot with no information, I would predict that the probability 
 
 $$\hat{p\_vote}_i = \frac{\# \text{votes cast}}{\# \text{ballots}}$$
   
-### Estimation with only one type of data
+#### Estimation with only one type of data
    
 There are four levels of data I will go through here: County, Election, Person, and Ballot. 
   
@@ -232,17 +232,6 @@ $$\hat{p\_vote} \sim \text{logit}^{-1}(a_{k[i]}), $$
 $$a_{k} \sim \text{N}(\gamma_0, \sigma_{\alpha}^2)$$
   
 Where $\alpha_{k[i]}$ varies by county, constrained by its standard deviation and $\gamma_0$, an intercept coefficient. I name this *Model 1*.
-```{r indiv model 1}
-#Run the model
-md_1 <- glmer(family = "binomial", data = model_sample, 
-              voted ~ (1|COUNTY))
-
-#Display results
-arm::display(md_1)
-
-#Fixed effects
-fixef(md_1)
-```
 
 Let's say now that along with the one ballot, I was given a short list of $n^{\text{county vars}}$ other county-level variables, be they discrete, continuous, or indicators. The two models would then look like:  
 
@@ -254,19 +243,6 @@ $$\hat{p\_vote} \sim \text{logit}^{-1}(a_{k[i]}), $$
 $$a_{k} \sim \text{N}(\gamma_0 + \sum_{i'=1}^{n^{\text{county vars}}}x_{k[i], i'}\gamma_{i'}, \sigma_{\alpha}^2)$$
   
 In the case of my specific data, for the time being I have county-level data for white population and urban population, so $n^{\text{county vars}} = 2$. I name this *Model 2*
-
-```{r indiv model 2}
-#Run the model
-md_2 <- glmer(family = "binomial", data = model_sample, 
-              voted ~ (1|COUNTY) + PCT_URBAN + PCT_WHITE)
-
-#Display results
-arm::display(md_2)
-
-#Fixed effects
-fixef(md_2)
-```
-
    
 #### Individual Level
    
@@ -288,7 +264,7 @@ Where $z_{j[i], l}$ is the j-th value of the i'-th variable. If, as before, I do
 $$\hat{p\_vote} \sim \text{logit}^{-1}(\delta_{j[i]}), $$
 $$\delta_{j} \sim \text{N}(\zeta_0 + \sum_{i'=1}^{n^{\text{indiv vars}}}z_{j[i], i'}\delta_{i'}, \sigma_{\delta}^2)$$
   
-In the case of my specific data, for the time being I have individual-level data for gender, so $n^{\text{indiv vars}} = 1$. I name this model *Model 3*.
+In the case of my specific data, for the time being I have individual-level data for gender, so $n^{\text{indiv vars}} = 1$. I name the combination of this model and Model 2: *Model 3*.
    
 #### Election Level
    
@@ -317,9 +293,9 @@ In this section I assume that the ballot has some key features written on it, li
 
 $$\hat{p\_vote}_i \sim \text{logit}^{-1}(\beta_0 + \sum_{i' = 1}^{n^{\text{ballot vars}}}u_{i,i'}\beta_{l'})$$
 
-Where $u_{i,i'}$ is the i-th value of the i'-th variable, and $n^{\text{ballot vars}}$ is the number of ballot level variables. For now, I have data on voting method, age, and party. Voting method is coded as a binary variable with value one if the method was a Mail Vote. Party includes four distinct indicators for REP, DEM, Other, and Unaffiliated. Age is tricky; for now the options would be: inclusion as an integer, inclusion as a cubic polynomial, inclusion as a 2nd degree polynomial, inclusion in some form of spline function. 
+Where $u_{i,i'}$ is the i-th value of the i'-th variable, and $n^{\text{ballot vars}}$ is the number of ballot level variables. For now, I have data on voting method, age, and party. Voting method is coded as a binary variable with value one if the method was a Mail Vote. Party includes four distinct indicators for REP, DEM, Other, and Unaffiliated. Age is tricky; for now the options would be: inclusion as an integer, inclusion as a cubic polynomial, inclusion as a 2nd degree polynomial, inclusion in some form of spline function. I name this *Model 5*, including age as a linear predictor.
    
-### Estimation with two types of data
+#### Estimation with two types of data
 
 After the work of setting up the four models at four different levels of observation, combining them in twos should be fairly straightforward. To avoid being needlessly cumulative, I will pursue this combination for County and Individual level only--instead of the six different possible combinations.
 
@@ -327,14 +303,14 @@ With the assumption that both counties and individuals are independent of one an
 
 $$\hat{p\_vote}_i \sim \text{logit}^{-1}(\sum_{k = 1}^{64}x_{k}\beta_{k} + \sum_{i'=1}^{n^{\text{county vars}}}x_{k[i], i'}\beta_{i'+64} + \sum_{j = 1}^{n^{ID}}z_{j}\beta_{j + n^{\text{county vars}} + 64} + \sum_{i'=1}^{n^{\text{indiv vars}}}z_{j[i], i'}\beta_{i'+n^{ID} + n^{\text{county vars}} + 64})$$
 
-This is large and clunky. It includes variables as described above: indicators for each county and individual, and all individual or county-level variables. For the corresponding mixed-effects model, I assume the tree-like structure we discussed on Monday. The hierarchy has two "levels", with the second level consisting of two different regressions; this will be *Model 5*
+This is large and clunky. It includes variables as described above: indicators for each county and individual, and all individual or county-level variables. For the corresponding mixed-effects model, I assume the tree-like structure we discussed on Monday. The hierarchy has two "levels", with the second level consisting of two different regressions.
 
 
 $$\hat{p\_vote} \sim \text{logit}^{-1}(\delta_{j[i]} + a_{k[i]}), $$
 $$a_{k} \sim \text{N}(\gamma_0 + \sum_{i'=1}^{n^{\text{county vars}}}x_{k[i], i'}\gamma_{i'}, \sigma_{\alpha}^2)$$
 $$\delta_{j} \sim \text{N}(\zeta_0 + \sum_{i'=1}^{n^{\text{indiv vars}}}z_{j[i], i'}\delta_{i'}, \sigma_{\delta}^2)$$
 
-### Estimation with the full dataset
+#### Estimation with the full dataset
 
 I now proceed to include variables from all units of observation into one model. The first model, assuming independence, is:
 
@@ -372,6 +348,60 @@ In summary, Table 4.3 includes all noteworthy models from the previous section. 
   
   Model 4          General Additive model; election predictors and time smoothing splines
   
-  Model 5          Multilevel General Additive model; election, individual, county mixed effects and all predictors
+  Model 5          Ballot-level predictors fixed effects model
+  
+  Model 5a         Multilevel model; ballot predictors with county mixed effects
+  
+  Model 6          Multilevel General Additive model; year splines; individual, county mixed effects and all predictors
 -------------- ----------------------------------------------------------------------------------
 Table: Individual level model descriptions \label{tab:model_desc_individual}
+
+### Results
+
+To deal with the elephant in the room (page?) right off the bat, I do not recommend trusting these results wholeheartedly at the current stage. While the aforementioned models are all--to some degree--rational parametrizations of individual turnout predictors, the leap from theory to implimentation has proven too much for most. This is a direct result of the first section in this chapter and the problems outlined within. The reason I am still providing the results of these models is twofold: first, to show that the data I have on its own *can* be used to build and run an individual model of turnout regardless of if that model is usefull in responding to my hypotheses; second, to validate that the problems I outline in the beginning of this section are actually the root cause of the issues I'm having, as some results do give insight into this.  
+  
+In terms of trusting these results, I am very confident in the results of models 1 and 3a, somewhat confident in model 5, and less so for models 2, 3, and 5a. Models 2, 3 and 5a "failed to converge"; this means that the numeric approximation process by which \textit{R} impliments maximum likelihood estimation^[Estimation of maximum likelihood here uses Adaptive Gaussian-Hermitian Quadrature (AGQ) to estimate coefficients [@handayani_comparative_2017]] for coefficients doesn't give stable results, within certain conditions. While model 5 did converge, it suffers from lack of variance in the predictor for VBM, as explained in the beginning of this chapter; this is the reason why the coefficient for mail vote is so disproportionatelly large and variable. Model 6 simply did not run, even on a re-sampled dataset. While I can't really derive any conclusions from this fact, there is a distinct possibility that this either occured due to a lack of processing power, or lack of sufficient data for the model estimation to even reach close to convergance.
+
+\clearpage
+
+--------------------------------------------------------------------------------
+  Predictor    Model 1   Model 2    Model 3    Model 3a   Model 5     Model 5a
+------------- --------- ---------- ---------- ---------- ---------- ------------
+ (Intercept)   -0.175     -0.042     0.001      0.001      -2.478      -1.888   
+
+               (0.030)   (0.083)    (0.060)    (0.076)    (0.015)     (0.238)   
+
+  Pct_urban               -0.423     -0.436     -0.424                 -0.538   
+
+                         (0.055)    (0.059)    (0.062)                (0.114)   
+
+  Pct_white               0.067      0.075      0.073                  -0.151   
+
+                         (0.102)    (0.073)    (0.094)                (0.281)   
+
+ genderMale                          -0.097     -0.094                 0.094    
+
+                                    (0.007)    (0.007)                (0.017)   
+
+ Republican                                                0.233       0.208    
+
+                                                          (0.021)     (0.073)   
+
+    Other                                                  -0.085      -0.124   
+
+                                                          (0.073)     (0.073)   
+
+     UAF                                                   -0.308      0.325    
+
+                                                          (0.021)     (0.021)   
+
+  Mail Vote                                                23.764      26.502   
+
+                                                          (45.255)   (285.774)  
+
+     Age                                                   0.093       0.086    
+
+                                                          (0.009)     (0.009)   
+
+--------------------------------------------------------------------------------
+Table: Estimated coefficients for Individual level models \label{tab:model_indiv_coefs}

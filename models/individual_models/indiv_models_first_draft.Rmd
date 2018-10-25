@@ -16,7 +16,7 @@ source("~/Desktop/Reed_Senior_Thesis/riggd/R/utils.R")
 
 This section includes the two county level models and their coefficients. (Model 1, 2)
 
-```{r}
+```{r county-indiv}
 setwd("~/Desktop/Reed_Senior_Thesis/Data_and_results/data")
 model_sample <- read_csv("model_indiv_sample.csv")
 demographics <- read_csv("colorado_demographic_stats_by_county.csv")
@@ -58,5 +58,47 @@ ggplot(plot_data, aes(x = urban, y = estimated_coefs)) +
 ggplot(plot_data, aes(x = white, y = estimated_coefs)) +
   geom_pointrange(aes(ymin= estimated_coefs-coef_se, ymax=estimated_coefs+coef_se), size = .1) +
   geom_abline(slope = fixef(md_2)[3], intercept = fixef(md_2)[1])
+```
+
+
+The calls for models 3 and 3a:
+
+```{r id and county mixedeff}
+md3 <- glmer(family = "binomial", data = model_sample, 
+             voted ~ PCT_URBAN + PCT_WHITE + GENDER + (1|COUNTY) + (1|VOTER_ID))
+
+md_3a <- glmer(family = "binomial", data = model_sample, 
+              voted ~ PCT_URBAN + PCT_WHITE + GENDER + (1|COUNTY))
+
+summary(md3)
+
+summary(md_3a)
+```
+
+The calls for model 4:
+
+```{r election effects}
+md_4 <- gam(family = "binomial", data = model_sample, 
+            voted ~ ns(ELECTION_DATE) + ELECTION_TYPE)
+
+summary.gam(md_4)
+```
+
+The calls for model 5, 5a:
+
+```{r}
+model_sample$ELECTION_DATE <- (year(model_sample$ELECTION_DATE))
+model_sample$AGE <- scale(model_sample$AGE)
+
+md5 <- glm(data = model_sample, family= "binomial", 
+           voted ~ AGE + PARTY + MAIL_VOTE)
+
+summary(md5)
+
+md5a <- glmer(data = model_sample, family= "binomial", 
+              voted ~ AGE + PARTY + MAIL_VOTE + (1|COUNTY) +
+                PCT_WHITE + PCT_URBAN + GENDER)
+
+summary(md5a)
 ```
 

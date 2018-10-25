@@ -2,7 +2,7 @@ library(tidyverse)
 library(lubridate)
 library(Matrix)
 library(lme4)
-library(gam)
+library(gamm4)
 source("~/Desktop/Reed_Senior_Thesis/riggd/R/utils.R")
 setwd("~/Desktop/Reed_Senior_Thesis/Data_and_results/data")
 
@@ -11,9 +11,12 @@ demographics <- read_csv("colorado_demographic_stats_by_county.csv")
 
 model_sample$ELECTION_DATE <- year(model_sample$ELECTION_DATE)
 
-md_4 <- gam(family = "binomial", data = model_sample, 
-            voted ~ ns(ELECTION_DATE) + ELECTION_TYPE)
+md3 <- glmer(family = "binomial", data = model_sample, 
+             voted ~ PCT_URBAN + PCT_WHITE + GENDER + (1|COUNTY) + (1|VOTER_ID))
 
-summary(md_4)
+md_3a <- glmer(family = "binomial", data = model_sample, 
+              voted ~ PCT_URBAN + PCT_WHITE + GENDER + (1|COUNTY))
 
-coef(md_4)
+summary(md3)
+
+summary(md_3a)

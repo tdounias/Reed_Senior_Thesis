@@ -1109,6 +1109,8 @@ class.
   \bottomrule
   \end{longtable}
   
+  \clearpage
+  
   \subsection{The Politics of Colorado}\label{the-politics-of-colorado}
   
   Curtis Martin (1962) notes that Colorado, due to its status as a
@@ -1122,8 +1124,6 @@ class.
   streak, that highly values democratic processes when they serve the
   people or protect and fund national parks, but staunchly opposes state
   intervention when it is unwarranted. (Martin, 1962)
-  
-  \clearpage
   
   This 1964 study of Colorado politics rings true to this day. One needs
   not search for long to see instances when Colorado honored this
@@ -1375,6 +1375,8 @@ class.
   \end{minipage}\tabularnewline
   \bottomrule
   \end{longtable}
+  
+  \clearpage
   
   \subsection{Colorado as a Case for this
   Thesis}\label{colorado-as-a-case-for-this-thesis}
@@ -2503,7 +2505,7 @@ class.
   
   \[\hat{p\_vote}_i = \frac{\# \text{votes cast}}{\# \text{ballots}}\]
   
-  \subsection{Estimation with only one type of
+  \subsubsection{Estimation with only one type of
   data}\label{estimation-with-only-one-type-of-data}
   
   There are four levels of data I will go through here: County, Election,
@@ -2532,44 +2534,6 @@ class.
   deviation and \(\gamma_0\), an intercept coefficient. I name this
   \emph{Model 1}.
   
-  \begin{Shaded}
-  \begin{Highlighting}[]
-  \CommentTok{#Run the model}
-  \NormalTok{md_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\KeywordTok{glmer}\NormalTok{(}\DataTypeTok{family =} \StringTok{"binomial"}\NormalTok{, }\DataTypeTok{data =}\NormalTok{ model_sample, }
-  \NormalTok{              voted }\OperatorTok{~}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{|}\NormalTok{COUNTY))}
-  
-  \CommentTok{#Display results}
-  \NormalTok{arm}\OperatorTok{::}\KeywordTok{display}\NormalTok{(md_}\DecValTok{1}\NormalTok{)}
-  \end{Highlighting}
-  \end{Shaded}
-  
-  \begin{verbatim}
-  glmer(formula = voted ~ (1 | COUNTY), data = model_sample, family = "binomial")
-  coef.est  coef.se 
-     -0.17     0.03 
-  
-  Error terms:
-   Groups   Name        Std.Dev.
-   COUNTY   (Intercept) 0.25    
-   Residual             1.00    
-  ---
-  number of obs: 370586, groups: COUNTY, 64
-  AIC = 500001, DIC = 499488.8
-  deviance = 499743.0 
-  \end{verbatim}
-  
-  \begin{Shaded}
-  \begin{Highlighting}[]
-  \CommentTok{#Fixed effects}
-  \KeywordTok{fixef}\NormalTok{(md_}\DecValTok{1}\NormalTok{)}
-  \end{Highlighting}
-  \end{Shaded}
-  
-  \begin{verbatim}
-  (Intercept) 
-   -0.1749732 
-  \end{verbatim}
-  
   Let's say now that along with the one ballot, I was given a short list
   of \(n^{\text{county vars}}\) other county-level variables, be they
   discrete, continuous, or indicators. The two models would then look
@@ -2586,57 +2550,6 @@ class.
   In the case of my specific data, for the time being I have county-level
   data for white population and urban population, so
   \(n^{\text{county vars}} = 2\). I name this \emph{Model 2}
-  
-  \begin{Shaded}
-  \begin{Highlighting}[]
-  \CommentTok{#Run the model}
-  \NormalTok{md_}\DecValTok{2}\NormalTok{ <-}\StringTok{ }\KeywordTok{glmer}\NormalTok{(}\DataTypeTok{family =} \StringTok{"binomial"}\NormalTok{, }\DataTypeTok{data =}\NormalTok{ model_sample, }
-  \NormalTok{              voted }\OperatorTok{~}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{|}\NormalTok{COUNTY) }\OperatorTok{+}\StringTok{ }\NormalTok{PCT_URBAN }\OperatorTok{+}\StringTok{ }\NormalTok{PCT_WHITE)}
-  \end{Highlighting}
-  \end{Shaded}
-  
-  \begin{verbatim}
-  Warning in checkConv(attr(opt, "derivs"), opt$par, ctrl =
-  control$checkConv, : Model failed to converge with max|grad| = 0.00165893
-  (tol = 0.001, component 1)
-  \end{verbatim}
-  
-  \begin{Shaded}
-  \begin{Highlighting}[]
-  \CommentTok{#Display results}
-  \NormalTok{arm}\OperatorTok{::}\KeywordTok{display}\NormalTok{(md_}\DecValTok{2}\NormalTok{)}
-  \end{Highlighting}
-  \end{Shaded}
-  
-  \begin{verbatim}
-  glmer(formula = voted ~ (1 | COUNTY) + PCT_URBAN + PCT_WHITE, 
-      data = model_sample, family = "binomial")
-              coef.est coef.se
-  (Intercept) -0.04     0.08  
-  PCT_URBAN   -0.42     0.06  
-  PCT_WHITE    0.07     0.10  
-  
-  Error terms:
-   Groups   Name        Std.Dev.
-   COUNTY   (Intercept) 0.19    
-   Residual             1.00    
-  ---
-  number of obs: 370586, groups: COUNTY, 64
-  AIC = 499976, DIC = 499520.5
-  deviance = 499744.3 
-  \end{verbatim}
-  
-  \begin{Shaded}
-  \begin{Highlighting}[]
-  \CommentTok{#Fixed effects}
-  \KeywordTok{fixef}\NormalTok{(md_}\DecValTok{2}\NormalTok{)}
-  \end{Highlighting}
-  \end{Shaded}
-  
-  \begin{verbatim}
-  (Intercept)   PCT_URBAN   PCT_WHITE 
-  -0.04186451 -0.42289055  0.06749027 
-  \end{verbatim}
   
   \subsubsection{Individual Level}\label{individual-level}
   
@@ -2673,7 +2586,7 @@ class.
   
   In the case of my specific data, for the time being I have
   individual-level data for gender, so \(n^{\text{indiv vars}} = 1\). I
-  name this model \emph{Model 3}.
+  name the combination of this model and Model 2: \emph{Model 3}.
   
   \subsubsection{Election Level}\label{election-level}
   
@@ -2710,7 +2623,10 @@ class.
   glm, with some smoothing spline function for year. As for type, this
   would include four distinct indicators; one for each election type. I
   name this final model--including a smoothing spline for year,
-  \emph{Model 4}.
+  \emph{Model 4}. Model 4 would not be a mixed effects model, since all
+  the variability between elections is incorporated in election type and
+  election year--with those two variables I can fully describe each
+  election.
   
   \subsubsection{Ballot Level}\label{ballot-level}
   
@@ -2729,9 +2645,10 @@ class.
   Party includes four distinct indicators for REP, DEM, Other, and
   Unaffiliated. Age is tricky; for now the options would be: inclusion as
   an integer, inclusion as a cubic polynomial, inclusion as a 2nd degree
-  polynomial, inclusion in some form of spline function.
+  polynomial, inclusion in some form of spline function. I name this
+  \emph{Model 5}, including age as a linear predictor.
   
-  \subsection{Estimation with two types of
+  \subsubsection{Estimation with two types of
   data}\label{estimation-with-two-types-of-data}
   
   After the work of setting up the four models at four different levels of
@@ -2750,13 +2667,13 @@ class.
   county-level variables. For the corresponding mixed-effects model, I
   assume the tree-like structure we discussed on Monday. The hierarchy has
   two ``levels'', with the second level consisting of two different
-  regressions; this will be \emph{Model 5}
+  regressions.
   
   \[\hat{p\_vote} \sim \text{logit}^{-1}(\delta_{j[i]} + a_{k[i]}), \]
   \[a_{k} \sim \text{N}(\gamma_0 + \sum_{i'=1}^{n^{\text{county vars}}}x_{k[i], i'}\gamma_{i'}, \sigma_{\alpha}^2)\]
   \[\delta_{j} \sim \text{N}(\zeta_0 + \sum_{i'=1}^{n^{\text{indiv vars}}}z_{j[i], i'}\delta_{i'}, \sigma_{\delta}^2)\]
   
-  \subsection{Estimation with the full
+  \subsubsection{Estimation with the full
   dataset}\label{estimation-with-the-full-dataset}
   
   I now proceed to include variables from all units of observation into
@@ -2835,14 +2752,371 @@ class.
   \begin{minipage}[t]{0.15\columnwidth}\centering\strut
   Model 4\strut
   \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\centering\strut
-  Multilevel General Additive model; election-level mixed effects and
-  predictors\strut
+  General Additive model; election predictors and time smoothing
+  splines\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.15\columnwidth}\centering\strut
   Model 5\strut
   \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\centering\strut
-  Multilevel General Additive model; election, individual, county mixed
-  effects and all predictors\strut
+  Ballot-level predictors fixed effects model\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+  Model 5a\strut
+  \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\centering\strut
+  Multilevel model; ballot predictors with county mixed effects\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+  Model 6\strut
+  \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\centering\strut
+  Multilevel General Additive model; year splines; individual, county
+  mixed effects and all predictors\strut
+  \end{minipage}\tabularnewline
+  \bottomrule
+  \end{longtable}
+  
+  \subsection{Results}\label{results-1}
+  
+  To deal with the elephant in the room (page?) right off the bat, I do
+  not recommend trusting these results wholeheartedly at the current
+  stage. While the aforementioned models are all--to some degree--rational
+  parametrizations of individual turnout predictors, the leap from theory
+  to implimentation has proven too much for most. This is a direct result
+  of the first section in this chapter and the problems outlined within.
+  The reason I am still providing the results of these models is twofold:
+  first, to show that the data I have on its own \emph{can} be used to
+  build and run an individual model of turnout regardless of if that model
+  is usefull in responding to my hypotheses; second, to validate that the
+  problems I outline in the beginning of this section are actually the
+  root cause of the issues I'm having, as some results do give insight
+  into this.
+  
+  In terms of trusting these results, I am very confident in the results
+  of models 1 and 3a, somewhat confident in model 5, and less so for
+  models 2, 3, and 5a. Models 2, 3 and 5a ``failed to converge''; this
+  means that the numeric approximation process by which \textit{R}
+  impliments maximum likelihood estimation\footnote{Estimation of maximum
+    likelihood here uses Adaptive Gaussian-Hermitian Quadrature (AGQ) to
+    estimate coefficients (Handayani, Notodiputro, Sadik, \& Kurnia, 2017)}
+  for coefficients doesn't give stable results, within certain conditions.
+  While model 5 did converge, it suffers from lack of variance in the
+  predictor for VBM, as explained in the beginning of this chapter; this
+  is the reason why the coefficient for mail vote is so
+  disproportionatelly large and variable. Model 6 simply did not run, even
+  on a re-sampled dataset. While I can't really derive any conclusions
+  from this fact, there is a distinct possibility that this either occured
+  due to a lack of processing power, or lack of sufficient data for the
+  model estimation to even reach close to convergance.
+  
+  \clearpage
+  
+  \begin{longtable}[]{@{}ccccccc@{}}
+  \caption{Estimated coefficients for Individual level models
+  \label{tab:model_indiv_coefs}}\tabularnewline
+  \toprule
+  \begin{minipage}[b]{0.14\columnwidth}\centering\strut
+  Predictor\strut
+  \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\centering\strut
+  Model 1\strut
+  \end{minipage} & \begin{minipage}[b]{0.11\columnwidth}\centering\strut
+  Model 2\strut
+  \end{minipage} & \begin{minipage}[b]{0.11\columnwidth}\centering\strut
+  Model 3\strut
+  \end{minipage} & \begin{minipage}[b]{0.11\columnwidth}\centering\strut
+  Model 3a\strut
+  \end{minipage} & \begin{minipage}[b]{0.11\columnwidth}\centering\strut
+  Model 5\strut
+  \end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\centering\strut
+  Model 5a\strut
+  \end{minipage}\tabularnewline
+  \midrule
+  \endfirsthead
+  \toprule
+  \begin{minipage}[b]{0.14\columnwidth}\centering\strut
+  Predictor\strut
+  \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\centering\strut
+  Model 1\strut
+  \end{minipage} & \begin{minipage}[b]{0.11\columnwidth}\centering\strut
+  Model 2\strut
+  \end{minipage} & \begin{minipage}[b]{0.11\columnwidth}\centering\strut
+  Model 3\strut
+  \end{minipage} & \begin{minipage}[b]{0.11\columnwidth}\centering\strut
+  Model 3a\strut
+  \end{minipage} & \begin{minipage}[b]{0.11\columnwidth}\centering\strut
+  Model 5\strut
+  \end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\centering\strut
+  Model 5a\strut
+  \end{minipage}\tabularnewline
+  \midrule
+  \endhead
+  \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  (Intercept)\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  -0.175\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  -0.042\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  0.001\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  0.001\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  -2.478\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  -1.888\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  (0.030)\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  (0.083)\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  (0.060)\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  (0.076)\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  (0.015)\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  (0.238)\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  Pct\_urban\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  -0.423\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  -0.436\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  -0.424\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  -0.538\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  (0.055)\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  (0.059)\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  (0.062)\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  (0.114)\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  Pct\_white\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  0.067\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  0.075\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  0.073\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  -0.151\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  (0.102)\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  (0.073)\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  (0.094)\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  (0.281)\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  genderMale\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  -0.097\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  -0.094\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  0.094\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  (0.007)\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  (0.007)\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  (0.017)\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  Republican\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  0.233\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  0.208\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  (0.021)\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  (0.073)\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  Other\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  -0.085\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  -0.124\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  (0.073)\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  (0.073)\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  UAF\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  -0.308\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  0.325\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  (0.021)\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  (0.021)\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  Mail Vote\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  23.764\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  26.502\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  (45.255)\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  (285.774)\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  Age\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  0.093\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  0.086\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  (0.009)\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  (0.009)\strut
   \end{minipage}\tabularnewline
   \bottomrule
   \end{longtable}
@@ -3004,6 +3278,12 @@ class.
   how its politics have changed) since 1980. \emph{The Denver Post}.
   Retrieved from
   \url{https://www.denverpost.com/2017/12/22/how-colorado-votes/}
+  
+  \hypertarget{ref-handayani_comparative_2017}{}
+  Handayani, D., Notodiputro, K. A., Sadik, K., \& Kurnia, A. (2017). A
+  comparative study of approximation methods for maximum likelihood
+  estimation in generalized linear mixed models (GLMM). In (p. 020033).
+  Jawa Barat, Indonesia. \url{http://doi.org/10.1063/1.4979449}
   
   \hypertarget{ref-hersh_hacking_2015}{}
   Hersh, E. D. (2015). \emph{Hacking the Electorate: How Campaigns
