@@ -123,11 +123,11 @@ and Love Voter Registration Files}
 }
 
 \Preface{
---- output: html\_document --- hihi.
+
 }
 
 \Abstract{
---- output: pdf\_document --- Hihi.
+Hihi.
 }
 
 % End of CII addition
@@ -145,9 +145,6 @@ and Love Voter Registration Files}
   \pagestyle{empty} % this removes page numbers from the frontmatter
 
   
-      \begin{preface}
-      --- output: html\_document --- hihi.
-    \end{preface}
   
       \hypersetup{linkcolor=black}
     \setcounter{tocdepth}{3}
@@ -158,7 +155,7 @@ and Love Voter Registration Files}
       \listoffigures
   
       \begin{abstract}
-      --- output: pdf\_document --- Hihi.
+      Hihi.
     \end{abstract}
   
   
@@ -1825,44 +1822,35 @@ and Love Voter Registration Files}
   series of reasons. In this section, I will tackle these reasons one by
   one and then analyze what steps could be made to compensate.
   
-  \subsection{Causal Leverage}\label{causal-leverage}
+  \subsection{Lack of variability}\label{lack-of-variability}
   
-  Causal leverage usually means having enough data to draw significant
-  conclusions about correlation of variables, or in the best cases make
-  safe causal inferences. Data that presents causal leverage should have
-  certain characteristics. It should, first, be extensive enough. By this
-  I mean that the raw number of observations should be as high as
-  possible, and in the best cases significantly larger than the set of
-  predictors that are present. This not only guarantees no issues with
-  model matrices when running statistical models, but also that there will
-  be enough data-per-variable to draw conclusions. Second, the data should
-  be varied. To put it very simply, it's not enough to have hundreds of
-  thousands of observations if they are all similar to eachother. If, for
-  example, my data included a thousand people in Jefferson county, and 63
-  in all other counties of Colorado combined--one in each remaining
-  county--, then I would not be able to leverage my data to draw
-  conclusions on county-level effects.
+  To put it very simply, it's not enough to have hundreds of thousands of
+  observations if they are all almost identical for some important
+  variable. If, for example, my data included a thousand people in
+  Jefferson county, and 63 in all other counties of Colorado combined--one
+  in each remaining county--, then I would not be able to leverage my data
+  to draw conclusions on county-level effects.
   
   As previously stated, I have registration files going back to 2012. From
   these files, I have extracted data for elections going back to
   2010.\footnote{See section 3.3.1; I extracted data limited to this time
     period to avoid accuracy issues with migration and removal of
     inactive/unavailable voters} In order to make inferences on VBM and
-  turnout effects, given the previous criteria for causal leverage, I had
-  to have extensive and varied data. I have extensive data--over 35
-  million observations at the individual level--but the data substantially
-  lacks variance in voting method. Put simply, most people in Colorado
-  from 2010 onward either did not vote at all, or voted by mail. If you
-  recall the changes in Colorado election law, in 2008 counties were
-  allowed to conduct all mail elections, and no-excuse permanent absentee
-  voting was implemented state-wide; then in 2013 Colorado transitioned to
-  full VBM for all elections. This means that few people were still using
-  traditional polling places or vote centers to cast their ballots. Figure
-  4.1 shows how, after 2013, and even before that in 2011--the
-  coordinated, local election for which mail ballots were more convenient
-  for counties--over 95\% of ballots cast were mail ballots. Only in the
-  general elections of 2010 and 2012 there is some variance, but mail
-  ballots account for well over two thirds of total votes.
+  turnout effects I had to have extensive and varied data. I have
+  extensive data--over 35 million observations at the individual
+  level--but the data substantially lacks variance in voting method. Put
+  simply, the vast majority of registrants in Colorado from 2010 onward
+  either did not vote at all, or voted by mail. If you recall the changes
+  in Colorado election law, in 2008 counties were allowed to conduct all
+  mail elections, and no-excuse permanent absentee voting was implemented
+  state-wide; then in 2013 Colorado transitioned to full VBM for all
+  elections. This means that few people were still using traditional
+  polling places or vote centers to cast their ballots. Figure 4.1 shows
+  how, after 2013, and even before that in 2011--the coordinated, local
+  election for which mail ballots were more convenient for counties--over
+  95\% of ballots cast were mail ballots. Only in the general elections of
+  2010 and 2012 there is some variance, but mail ballots account for well
+  over two thirds of total votes.
   
   \begin{figure}
   
@@ -1885,16 +1873,62 @@ and Love Voter Registration Files}
   
   \begin{itemize}
   \item
-    \emph{More (Diverse) Data}:
+    \emph{More (Diverse) Data}: It would be amazing to get snapshot data
+    of Colorado voter files from, say, 2004 to today, because it would
+    allow for an extensive study on how the 2008 and 2013 election laws
+    re-shaped voting decisions in the state. It would be amazing, but also
+    expensive and very time consuming--involving several purchases of data
+    from the Secretary of State of Colorado. Voter registration files also
+    tend to get messier the further back one goes, which means that the
+    process of cleaning up the data would get substantially harder. It
+    would also require more processing power to handle more observations.
+    My research here does not do this, as the scope of a senior thesis is
+    a lot more limited than such an overarching study that would probably
+    be conducted by multiple researchers with several assistants. I do
+    however present several replicable materials for such a study, through
+    the creation of an \textit{R} package I include on my gitHub page
+    along with the final results of this thesis. This thesis does not go
+    that far, but it may help similar studies in the future.
   \item
-    \emph{Localized, Natural Experiment Studies}:
+    \emph{Localized, Natural Experiment Studies}: A natural experiment is
+    when, due to policy changes and circumstances, a ``control'' and
+    ``treatment'' group of such a policy are created in the same
+    approximate geographical area. This happens when, for example, only
+    some of the counties in a state enact a specific change. Several such
+    studies exist already, with some even tackling VBM in Colorado (Keele
+    \& Titiunik, 2017), or how turnout rates are affected by new,
+    restrictive registration laws (Burden \& Neiheisel, 2013). This method
+    would allow for more accurracy in both the individual and county level
+    models, and through the existance of a treatment and control group
+    would guarantee the variability that I am currently lacking.
   \item
-    \emph{Synthetic Control Group}:
+    \emph{Synthetic Control Group}: The synthetic control group method is
+    a way of creating a control group when no such group seems to exist.
+    It involves gathering a set of characteristics from the treatment
+    group members and then using statistical methods to combine them into
+    making the appropriate control (McClelland \& Gault, 2017). I will not
+    go into the particulars of this method--the sources cited here should
+    provide a decent introduction--, but this method has been successful
+    in assessing policy effects such as anti-smoking laws (Barr et al.,
+    2012), or even motor voter laws in Oregon\footnote{This is in
+      refference to a paper presented by advisor Paul Gronke at the 2017
+      Elections Sciences Reform and Administration Conference in Portland,
+      Oregon.}.
   \end{itemize}
   
-  \subsection{Lack of Individual Data}\label{lack-of-individual-data}
-  
   \subsection{Processing Power}\label{processing-power}
+  
+  These models take a really long time to run, and many times do not even
+  reach results. For this purpose, I acquired a MacBook Pro from Reed
+  College Computer User Services that substantially increased the amount
+  of RAM I had available for this thesis. This was useful, but not enough.
+  Particularly the individual level models, for which I have almost 35
+  million different observations, do not run. A long term solution to this
+  issue could be the use of a virtual machine, or some RStudio server, ar
+  Amazon Work Spaces (AWS). For now, I compensated for this problem by
+  using stratified sampling to sample a subset of my observations.
+  
+  Stratified sampling
   
   \section{Models}\label{models}
   
@@ -2791,14 +2825,14 @@ and Love Voter Registration Files}
   root cause of the issues I'm having, as some results do give insight
   into this.
   
-  In terms of trusting these results, I am very confident in the results
-  of models 1 and 3a, somewhat confident in model 5, and less so for
-  models 2, 3, and 5a. Models 2, 3 and 5a ``failed to converge''; this
-  means that the numeric approximation process by which \textit{R}
-  impliments maximum likelihood estimation\footnote{Estimation of maximum
-    likelihood here uses Adaptive Gaussian-Hermitian Quadrature (AGQ) to
-    estimate coefficients (Handayani, Notodiputro, Sadik, \& Kurnia, 2017)}
-  for coefficients doesn't give stable results, within certain conditions.
+  In terms of trusting these results, I am confident in the results of
+  models 1 and 3a, somewhat confident in model 5, and less so for models
+  2, 3, and 5a. Models 2, 3 and 5a ``failed to converge''; this means that
+  the numeric approximation process by which \textit{R} impliments maximum
+  likelihood estimation\footnote{Estimation of maximum likelihood here
+    uses Adaptive Gaussian-Hermitian Quadrature (AGQ) to estimate
+    coefficients (Handayani, Notodiputro, Sadik, \& Kurnia, 2017)} for
+  coefficients doesn't give stable results, within certain conditions.
   While model 5 did converge, it suffers from lack of variance in the
   predictor for VBM, as explained in the beginning of this chapter; this
   is the reason why the coefficient for mail vote is so
@@ -2807,6 +2841,32 @@ and Love Voter Registration Files}
   from this fact, there is a distinct possibility that this either occured
   due to a lack of processing power, or lack of sufficient data for the
   model estimation to even reach close to convergance.
+  
+  There are two conclusions that can be derived from these results. None
+  of these conclusions are, sadly, related to my initial hypotheses on
+  VBM. The first is that the lack of variance in the data and a lack of
+  processing power are direct causes of my inability to estimate these
+  models. This is apparent in how model 6 does not run, other models do
+  not converge, and the coefficient for VBM is absurdly large--since it
+  doesn't vary enough even after stratified sampling to account for any
+  variance between mail vote and conventional ballots. The second
+  conclusion here is that, despite these issues, there are some
+  confirmable results on turnout in general that are common between
+  individual and county models. For example, across models 2, 3, 3a the
+  urban population of a county is a substantial, negative factor in
+  probability of voting, while the white population is a very small,
+  positive effect\footnote{This did, however, fail to reach statistical
+    significance in both county and individual level models. This means
+    that the small, positive effect is not that distinguishable from no
+    effect at all.}. Same goes for male gender, which is a very small
+  negative effect in voting probability as compared to female gender.
+  These effects being stable across several models mean that they are
+  independent of the additions to those models; for example, gender, urban
+  population, and white population have effects that are not accounted for
+  when adding individual level mixed effects. Despite not being able to
+  assess VBM as a factor of turnout probability, these models of turnout
+  at least show that the data does have substantial use for modelling at
+  the individual level.
   
   \clearpage
   
@@ -3201,6 +3261,12 @@ and Love Voter Registration Files}
   Ticket Splitting. \emph{The American Political Science Review},
   \emph{92}(3), 533--544. \url{http://doi.org/10.2307/2585479}
   
+  \hypertarget{ref-burden_election_2013}{}
+  Burden, B. C., \& Neiheisel, J. R. (2013). Election Administration and
+  the Pure Effect of Voter Registration on Turnout. \emph{Political
+  Research Quarterly}, \emph{66}(1), 77--90.
+  \url{http://doi.org/10.1177/1065912911430671}
+  
   \hypertarget{ref-burden_election_2014}{}
   Burden, B. C., Canon, D. T., Mayer, K. R., \& Moynihan, D. P. (2014).
   Election Laws, Mobilization, and Turnout: The Unanticipated Consequences
@@ -3308,6 +3374,11 @@ and Love Voter Registration Files}
   Matsusaka, J. G., \& Palda, F. (1999). Voter turnout: How much can we
   explain? \emph{Public Choice}, \emph{98}(3-4), 431--446.
   \url{http://doi.org/10.1023/A:1018328621580}
+  
+  \hypertarget{ref-mcclelland_synthetic_2017}{}
+  McClelland, R., \& Gault, S. (2017). The Synthetic Control Method as a
+  Tool to Understand State Policy. \emph{Washington, DC: Urban-Brookings
+  Tax Policy Center}.
   
   \hypertarget{ref-mcdonald_what_nodate}{}
   McDonald, M. P. (n.d.). What is the voting-age population (VAP) and the
