@@ -36,7 +36,7 @@ This issue is not completely fatal for my county level models. There is still va
 
 These models take a really long time to run, and many times do not even reach results. For this purpose, I acquired a MacBook Pro from Reed College Computer User Services that substantially increased the amount of RAM I had available for this thesis. This was useful, but not enough. Particularly the individual level models, for which I have almost 35 million different observations, do not run. A long term solution to this issue could be the use of a virtual machine, or some RStudio server, ar Amazon Work Spaces (AWS). For now, I compensated for this problem by using stratified sampling to sample a subset of my observations.  
   
-Stratified sampling 
+The form of stratified sampling I am using is very simple; based on county, mail vote, and electoral participation, I use `dplyr` in \textit{R} to draw a sample that contains equal proportions of every combination of values of these variables to those in the poriginal dataset. If, for example, the original dataset had 2% of entries being voters from Jefferson county that participated using a mail ballot, the sampled dataset would have a proportion that is approximatelly equal to 2% [@chihara_mathematical_2011]. In this way I draw a sample of around 400,000 observations from my initial ballot dataset, on which I run all my individual models. After checking the variable ratios in sampled and population datasets, I found that the differences between ratios had a mean and standard deviation of less than a hundredth of a percentile. Therefore this sampled dataset could serve as a decent approximation of my population.
 
 ## Models
 

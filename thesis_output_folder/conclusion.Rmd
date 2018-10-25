@@ -3,10 +3,18 @@ output: pdf_document
 ---
 
 # Conclusion {.unnumbered}
-  \setcounter{chapter}{4}
+  \setcounter{chapter}{5}
 	\setcounter{section}{0}
 
+At the end of the day I am unable to draw concrete conclusions on my hypotheses. My county level models do provide some indication that my second and third hypotheses (H2,H3)--relating to stronger VBM effects on lower level elections--is probably false for Colorado, when comparing general elections to primaries or coordinated local races. I do not however draw conclusions on my first hypothesis; while it seems that the effect of mail voting is present, and consistent through time, it doesn't seem like this effect is particularly different from any other effects like urban population. I would say that this is weak evidence in favor of H1, but not enough to solidly confirm it. 
+  
+Resulting from this, the main contribution of my thesis has to be in analysis of data wrangling, the construction of multilevel general additive models for turnout, and the accompanying \textit{R} package. To take these one by one, I have provided arguments in favor of preferring multiple snapshots of registration files rather than just the latest iteration of the record. I have analyzed the pitfalls that exist in such documents, and given specific examples on how this can be dealt with for the Colorado data files. I have also provided a set of variable specification that can be useful as indicators of the content of these data, or the potential uses of voter registration files in other future studies. Finally, I have presented potential future solutions to issues these data have with variability, and ways to circumvent processing power limitations.
+   
+Additionally, I have meticulously gone through the creation of multilevel general additive models of individual and county level turnout. While due to data and processing power limitations I am unable to run all these models. this does not mean that they present no value to future research. Quite the contrary, they aid in future studies just having to go through the data clean-up stage, and then implement my models without having to construct them from scratch. In particular, mixed effects and general additive models are not widely used in such studies, making their presentation and specification rather unique regardless of their application in this piece of research.  
+  
+Lastly, I provide an extensive library of code used to create this document and the research I conduct. I have made an \textit{R} package--which I named `riggd`--that includes more than a dozen different functions that serve data wrangling and presentation purposes. These functions are made for use on Colorado files, but require relatively small amounts of changes to be applied to voter files from around the US. I also provide code for all tables and graphics that are included in this thesis on gitHub, which is a testament to the reproducibility and future value of the research I conducted.  
 
+I recognize that, despite many obstacles in terms of data or computing power, the outcome of this thesis being more constructive rather than conclusive is to some extent my fault. There were many problems in this thesis that I should have been aware of earlier in the process, which may have allowed me to present some concrete result rather than a series of tools and methods. However, in the combination of my existing conclusions and the materials I have created through this process, it is my belief that this thesis does in fact present a step forward in the literature, and that it adds to existing quantitative elections studies works. This is a small step, but it helps in our understanding of how the franchise of democracy governs itself, and what the actual results of elections policy are. 
 
 <!--
 If you feel it necessary to include an appendix, it goes here.
