@@ -6,17 +6,10 @@ advisor: 'Paul Gronke'
 altadvisor: 'Andrew Bray'
 department: 'Mathematics and Political Science'
 title: 'Turnout and Mail Voting in Colorado; or How I Learned to Stop Worrying and Love Voter Registration Files'
-abstract: >
+abstract: |
   `r paste(readLines('abstract.Rmd'), collapse = ' ')`
-# If you'd rather include the preliminary content in files instead of inline
-# like below, use a command like that for the abstract above.  Note that a tab is 
-# needed on the line after the >.
-acknowledgements: >
-  
-dedication: >
- 
-preface: >
-  This is an example of a thesis setup to use the reed thesis document class.
+preface: |
+  `r paste(readLines('preface.Rmd'), collapse = ' ')`
 bibliography: bib/thesis.bib
 # Download your specific bibliography database file and refer to it in the line above.
 csl: csl/apa.csl
