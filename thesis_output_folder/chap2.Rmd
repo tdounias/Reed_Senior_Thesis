@@ -31,19 +31,19 @@ Q3: \textit{Is  the  effect  of  VBM on turnout more  pronounced as significant,
 
 ### Hypotheses
    
-Using the above questions I can now move on to formulate more clear hypotheses. Before diving right into that, I note that I intend this thesis to serve two purposes: first, to test voter choice theories between each other; second, to serve as an analytical tool for later evaluations of mail voting as policy. Based on the theoretical review of the previous chapter it should be apparent that of these two purposes, the former is primarily addressed, with the later tangentially arising from my conclusions. The hypotheses in this section spring mostly from a wish to test theories of voter choice, and in particular a wish to defend the theory of voting "at the margins" as introduced by Aldritch. Therefore all hypotheses in this section will be phrased from the perspective of this theory, with the competing alternate hypotheses being counter-claims potentially rooted in different theories of voter participation.
+Using the above questions I can now move on to formulate more clear hypotheses. Before diving right into that, I note that I intend this thesis to serve two purposes: first, to test competing voter choice theories; second, to serve as an analytical tool for later evaluations of mail voting as policy. Based on the theoretical review of the previous chapter it should be apparent that of these two purposes, the former is primarily addressed, with the later tangentially arising from my conclusions. The hypotheses in this section spring mostly from a wish to test theories of voter choice, and in particular a wish to defend the theory of voting "at the margins" as introduced by Aldritch. Therefore all hypotheses in this section will be phrased from the perspective of this theory, with the competing alternate hypotheses being counter-claims potentially rooted in different theories of voter participation.
 
 In response to Q1, Q2, a first hypothesis is: 
 
 \begin{center}  
-\text{H1}: \textit{Mail voting is another marginal effect on voting decisions, and therefore
+H1: \textit{Mail voting is another incremental effect on voting decisions, and therefore
 does not significantly affect turnout}
 \end{center}
 
 The alternative hypothesis would be:
 
 \begin{center}  
-H1': \textit{Mail  voting  significantly  affects  turnout,  even  compared  to  other  metrics}
+H1$'$: \textit{Mail  voting  significantly  affects  turnout,  even  compared  to  other  metrics}
 \end{center}   
     
 Similarly, for the third question, a corresponding hypothesis derived from Aldritch's paradigm is:
@@ -55,7 +55,7 @@ H2: \textit{The  effect  of  VBM  on  turnout  is  more  pronounced  as  nationa
 The alternative hypothesis is:
 
 \begin{center}  
-H2': \textit{The  effect  of  VBM  on  turnout  is  consistent  and  independent}
+H2$'$: \textit{The  effect  of  VBM  on  turnout  is  consistent  and  independent}
 \end{center}
     
 ### Criteria
@@ -72,11 +72,11 @@ I will confirm this hypothesis if mail voting has significantly larger positive 
   
 ### Importance of Hypotheses
    
-The importance of these hypotheses is intrinsically tied to the importance of different theories of electoral participation. Confirming or rejecting each hypothesis--even when only applied to a single state--serves as an argument for or against one of the aforementioned theories. The theories in and of themselves are significant, since they form a part of a broader literature on elections, democracy, and electoral processes, that can be said to be foundational to political science as a whole. Elections are the root from which all democratic governing springs; understanding why people participate in them is understanding how they choose to be included or excluded from the process of policy-building, and how they interact with the state.  
+The importance of these hypotheses is intrinsically tied to the importance of different theories of electoral participation. Confirming or rejecting each hypothesis--even when only applied to a single state--serves as an argument for or against one of the aforementioned theories. The theories in and of themselves are important, since they form a part of a broader literature on elections, democracy, and electoral processes, that can be said to be foundational to political science as a whole. Elections are the root from which all democratic governing springs; understanding why people participate in them is understanding how they choose to be included or excluded from the process of policy-building, and how they interact with the state.  
   
 Additionally, from a public policy perspective, these hypotheses are significant since they serve as metrics for the effectiveness of mail voting as an electoral reform. Whether, in general, mail voting increases turnout is directly connected to whether it is successful in expanding the democratic franchise. If it is not, questions can be raised as to the effectiveness of expanding voter access through elections administration, rather than education, or even measures like voting-day-holidays or local transportation to poling places. In local elections in particular, significant effects of mail voting could be precursors to more general involvement of individuals in their local politics. This may open the way to numerous comparative studies on local politics between states that apply VBM and states that do not.
   
-Lastly, from a narrower perspective specific to the study of early and mail voting, my first hypothesis can still be said to be significant, yet mundane. It does its job according to the particular state I chose to look at--in this case Colorado--to add to existing literature on mail voting effects in different parts of the country. However, my second and third hypotheses are much more unique in their scope. There have not been many studies that look at VBM at a more localized level, and any addition to the literature on this front--however limited--could be significant.
+Lastly, from a narrower perspective specific to the study of early and mail voting, my first hypothesis can still be said to be quite important, yet mundane. It does its job according to the particular state I chose to look at--in this case Colorado--to add to existing literature on mail voting effects in different parts of the country. However, my second and third hypotheses are much more unique in their scope. There have not been many studies that look at VBM at a more localized level, and any addition to the literature on this front--however limited--could be significant.
 
 ## Methodology
 
@@ -89,30 +89,30 @@ $$f(p) = \text{logit}(p) = \text{log}\left( \frac{p}{1-p} \right)$$
 This is called the logit function or, when $p$ refers to a probability, the log-odds function. When modelling a binary response Y, which follows a Bernoulli distribution:
 $$Y \sim \text{Bernoulli}(p),$$
 the logit function can be used as a link function to model Y in a generalized linear model. The generic form of a generalized linear model looks like:  
-$$f(Y) = XB,$$
-where Y is a vector of response variable values, X is a matrix of predictors, and B is a matrix of coefficients to be estimated. The function f is called a link function, because it "links" the response variable with the set of predictors included in the model. This is typically done to ensure that the range of values outputted by the model are consistent with the range of the response variable. 
+$$f(Y) = X\beta ,$$
+where Y is a vector of response variable values, X is a matrix of predictors, and B is a vector of coefficients to be estimated. The function $f$ is called a link function, because it "links" the response variable with the set of predictors included in the model. This is typically done to ensure that the range of values outputted by the model are consistent with the range of the response variable ^[Or, in this case, the range of the parameter defining the distribution of the response, which is p for the Bernoulli distribution]. 
 When wanting to compute a model on a binary response through its corresponding Bernoulli distribution probability parameter, the inverse logit function should be a perfect fit for a link function, since it maps values from all real numbers to a range between 0 and 1. Using the inverse logit function, we arrive at the final form of logistic regression, which is:  
-$$\mathbb{P} (Y_i = 1) = \text{logit}^{-1} (XB)$$
+$$\mathbb{P} (Y = 1) = \text{logit}^{-1} (XB)$$
     
-Conveniently, despite the use of a link function, there is an easy way to interpret the coefficients of such a regression. While obviously individual values from the $B$ matrix will not be particularly helpful, $e^B$ can be used as a matrix of multiplicative, one-unit shifts in the value of the probability that $Y_i = 1$. This means that a one unit increase in any predictor will cause an effect equal to multiplying p by the exponent of the corresponding coefficient. [@james_introduction_2017]
+Conveniently, despite the use of a link function, there is an easy way to interpret the coefficients of such a regression. While obviously individual values from the $B$ vecotr will not be particularly helpful, $e^B$ can be used as a vector of multiplicative, one-unit shifts in the value of the probability that $Y = 1$. This means that a one unit increase in any predictor will cause an effect equal to multiplying p by the exponent of the corresponding coefficient^[This can be simplified even more, if one approximates the process of exponentiating with just dividing the coefficient by 4. Crude, yet effective for a quick scan of the results]. [@james_introduction_2017]
   
 ### Generalized Additive Models
    
-In simple logistic or linear regression, there is an assumption made on the functional form of the relationship between predictors and response variable. These are called parametric models, where the data is exclusively used to estimate values for coefficients. Non-parametric models, on the other hand, use the data to estimate both coefficients and the function that serves to connect response to predictors. While on the surface this seems like a great idea (more reliance on your data and less assumptions!), such an exclusively non-parametric model would suffer greatly from the curse of dimensionality--where the addition of multiple predictors or over-reliance on data leads to substantial over-fitting.   
+In simple logistic or linear regression, there is an assumption made on the functional form of the relationship between predictors and response variable. These are called parametric models, where the data is exclusively used to estimate values for coefficients. Non-parametric models, on the other hand, use the data to estimate both coefficients and the function that serves to connect response to predictors. While on the surface this seems like a great idea (more reliance on your data and fewer assumptions!), such an exclusively non-parametric model would suffer greatly from the curse of dimensionality--where the addition of multiple predictors or over-reliance on data leads to substantial over-fitting.   
   
-The solution, then, is a Generalized Additive Model, or GAM. This model lets us fit a different functional form to each observation, allowing for assumptions to be made on the data where it is safe to do so, and for non-parametric fitting when it is necessary. This model looks like:
+One solution is the Generalized Additive Model, or GAM. This model lets us fit a different functional form to each observation, allowing for assumptions to be made on the data where it is safe to do so, and for non-parametric fitting when it is necessary. This model looks like:
 
 $$y_i = \alpha + \sum_{j = 1}^p \beta_j f_j(x_{ij}),$$
-where $y_i$ the i-th response variable, $\alpha$ is the intercept term, $f_j, \beta_j$ a series of p functions and coefficients, and $x_{ij}$ the i-th observation for the j-th predictor. Note that for $f_j(x_j) = x_j$, this is a multilinear regression! [@james_introduction_2017]   
+where $y_i$ the i-th response variable, $\alpha$ is the intercept term, $f_j, \beta_j$ a series of $p$ functions and coefficients, and $x_{ij}$ the i-th observation for the j-th predictor. Note that for $f_j(x_j) = x_j$, this is a multilinear regression! [@james_introduction_2017]   
    
-A type of most commonly fit functions--and the type I will make use of--are smoothing splines. These are cubic functions connected at specific points called "knots", with the limitation that the full function must be continuous and smooth. These are particularly useful when modeling time variables, as they can be fitted to variables like years or months in order to distinguish a secular trend from a general trend over time. In terms of this thesis, this will help when responding to Q2 as it was framed earlier in this chapter [@barr_comprehensive_2012].
+A type of most commonly fit functions--and the type I will make use of--are smoothing splines. These are cubic functions connected at specific points called "knots", with the limitation that the full function must be continuous and smooth. These are particularly useful when modeling time variables, as they can be fitted to variables like years or months in order to distinguish a secular trend from a general trend over time [@barr_comprehensive_2012]. In terms of this thesis, this will help when responding to Q2 as it was framed earlier in this chapter.
 
 
 ### Multilevel Models  
   
-Multilevel models--otherwise known as hierarchical or "mixed effects" models--can be intuitively pictured in two ways: either as a set of models working on different "levels", where one is calculated first, with its effects having implications for the second, or as a model where some of the parameters estimated act under a particular series of constraints. Multilevel models are, in essence, a compromise between levels of "pooling" data. If the dataset on which parameters are being estimate operates in different units of observation--say on the individual and county level--you could run a model that treats all individuals as coming from the same larger group; this would be a complete pooling model. You could also add indicator variables for each and every group, de facto estimating n different models for n groups; this would be a no pooling model. Multilevel modelling offers partial pooling [@gelman_data_2006].
+Multilevel models--otherwise known as hierarchical or "mixed effects" models--can be intuitively pictured in two ways: either as a set of models working on different "levels", where one is calculated first, with its effects having implications for the second, or as a model where some of the parameters are estimated under a particular series of constraints. Multilevel models are, in essence, a compromise between levels of "pooling" data. If the dataset on which parameters are being estimate operates in different units of observation--say on the individual and county level--you could run a model that treats all individuals as coming from the same larger group; this would be a complete pooling model. You could also add indicator variables for each and every group, de facto estimating $n$ different models for $n$ groups; this would be a no pooling model. Multilevel modelling offers partial pooling [@gelman_data_2006].
   
-To consider what this model looks like, let's assume a dataset comprising of a vector of values for the response variable Y, a matrix of i individual level predictors X, a matrix of j group level predictors U, intercept terms $\alpha$, individual level coefficients B, and group level coefficients $\Gamma$. Based on this, a multilevel model with intercept terms varying by group looks like:
+To consider what this model looks like, let's assume a dataset comprising of a vector of values for the response variable $Y$, a matrix of $i$ individual level predictors $X$, a matrix of $j$ group level predictors $U$, intercept terms $\alpha$, individual level coefficients $B$, and group level coefficients $\Gamma$. Based on this, a multilevel model with intercept terms varying by group looks like:
 
 $$Y_i = \alpha_{[i], j} + X_iB~,~~~~\alpha_{[i], j} \sim N(U_{j[i]}\Gamma, \sigma_{\alpha}^2)$$   
 
