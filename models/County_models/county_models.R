@@ -3,6 +3,7 @@ library(lubridate)
 library(Matrix)
 library(lme4)
 library(gamm4)
+library(lmerTest)
 source("~/Desktop/Reed_Senior_Thesis/riggd/R/utils.R")
 setwd("~/Desktop/Reed_Senior_Thesis/Data_and_results/data")
 
@@ -40,6 +41,8 @@ md_2 <- lmer(data = model_dt, turnout ~ pct_white + pct_urban + (1|county))
 
 arm::display(md_2)
 
+summary(md_2)
+
 ranef(md_2)
 
 fixef(md_2)
@@ -54,6 +57,8 @@ md_3 <- lmer(data = model_dt, turnout ~ 1 + types + pct_vbm +
                pct_urban + pct_white + pct_vbm*types + (1|county))
 
 arm::display(md_3)
+
+summary(md_3)
 
 ranef(md_3)
 

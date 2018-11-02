@@ -44,8 +44,8 @@
 \contentsline {section}{\numberline {4.3}County Level Models}{37}{section.4.3}
 \contentsline {subsection}{\numberline {4.3.1}Specifications}{37}{subsection.4.3.1}
 \contentsline {subsection}{\numberline {4.3.2}Results}{39}{subsection.4.3.2}
-\contentsline {section}{\numberline {4.4}Individual Level Models}{40}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Specifications}{40}{subsection.4.4.1}
+\contentsline {section}{\numberline {4.4}Individual Level Models}{41}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Specifications}{41}{subsection.4.4.1}
 \contentsline {subsubsection}{Estimation with only one type of data}{41}{section*.17}
 \contentsline {subsubsection}{County Level}{41}{section*.18}
 \contentsline {subsubsection}{Individual Level}{42}{section*.19}
