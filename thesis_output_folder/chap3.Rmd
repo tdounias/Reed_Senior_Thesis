@@ -27,31 +27,27 @@ Colorado has a median age of 34.3 and median household income of $65,685. Colora
 The State Capital is Denver; Colorado is split into 64 Counties, of which the most populous are, in no particular order, the following:  El Paso, Denver, Arapahoe, Jefferson, Adams, Larimer, Boulder, and Douglas. These counties comprise 73% of the total population of Colorado.  
 
 -------------------------------------------------------------------------------
-  County     Total Population   CO Population %        Largest Metro Area      
+County       Total Population   CO Population %  Largest Metro Area      
 ----------- ------------------ ----------------- ------------------------------
-   Adams          441603            0.08781       Denver-Aurora-Lakewood Metro 
-                                                              Area             
+Adams             441603            0.08781      Denver-Aurora-Lakewood           
 
- Arapahoe         572003            0.1137        Denver-Aurora-Lakewood Metro 
-                                                              Area             
+Arapahoe          572003            0.1137       Denver-Aurora-Lakewood
 
-  Boulder         294567            0.05857                 Boulder            
+Boulder           294567            0.05857      Boulder            
 
-  Denver          600158            0.1193                   Denver            
+Denver            600158            0.1193       Denver            
 
-  Douglas         285465            0.05676       Denver-Aurora-Lakewood Metro 
-                                                              Area             
+Douglas           285465            0.05676      Denver-Aurora-Lakewood       
 
-  El Paso         622263            0.1237              Colorado Springs       
+El Paso           622263            0.1237       Colorado Springs       
 
- Jefferson        534543            0.1063        Denver-Aurora-Lakewood Metro 
-                                                              Area             
+Jefferson         534543            0.1063       Denver-Aurora-Lakewood       
 
-  Larimer         299630            0.05958               Fort Collins         
+Larimer           299630            0.05958      Fort Collins         
 
-   Other         1378964            0.2742                                     
+Other            1378964            0.2742                                     
 
- Colorado        5029196              100                                      
+Colorado         5029196              100                                      
 -------------------------------------------------------------------------------
 Table: Colorado population for largest counties \label{tab:pop_table}
 
@@ -72,27 +68,27 @@ Setting policy aside, this description of Colorado is also confirmed by polling 
 Each County individually administers local, coordinated, primary, and general elections, under the supervision of the Colorado Secretary of State. This means that each county individually handles the voters registered in that county. Unsurprisingly, the same eight most populous counties are also the counties with the majority of registered voters, as their registrants comprise 73% of total Colorado registered voters (as of November 2017). As table 3.2 shows, these eight counties have a registration rate between 60-80%, compared to a Colorado-wide rate of about 67%. Registration rates for all counties are also graphically depicted in figure 3.2. In terms of Party registration, Colorado as a whole leans democratic by a very narrow margin (figure 3.3). 
 
 -------------------------------------------------------------------------------------------------------------  
- County       Total Registered Voters       County Voter Registration Rate      % of Statewide Registrants 
+County        Total Registered Voters       County Registration Rate               % of Statewide Registrants 
 ------------ ----------------------------- ------------------------------------ --------------------------------
-  Adams            270,303                             0.61                                0.07
+Adams              270,303                             0.61                                0.07
   
-  Arapahoe         410,546                             0.72                                0.11
+Arapahoe           410,546                             0.72                                0.11
   
-  Boulder          237,091                             0.80                                0.06
+Boulder            237,091                             0.80                                0.06
   
-  Denver           450,616                             0.75                                0.12
+Denver             450,616                             0.75                                0.12
   
-  Douglas          237,659                             0.83                                0.06
+Douglas            237,659                             0.83                                0.06
   
-  El Paso          445,708                             0.71                                0.12
+El Paso            445,708                             0.71                                0.12
   
-  Jefferson        422,362                             0.79                                0.11
+Jefferson          422,362                             0.79                                0.11
   
-  Larimer          250,626                             0.84                                0.06
+Larimer            250,626                             0.84                                0.06
   
-  Other          1,009,392                             ---                                 0.27
+Other            1,009,392                             ---                                 0.27
   
-  Colorado       3,734,303                             0.67                                1.00
+Colorado         3,734,303                             0.67                                1.00
 ------------- ----------------------------- ------------------------------------ --------------------------------
 Table: Colorado voter registration for largest counties \label{tab:voter_reg}
 
@@ -108,13 +104,13 @@ In the past 25 years, there have been a series of key changes in the way Colorad
   
 
 -------------------------------------------------------------------------------------------------------------
-  Year             Key Changes                                                                                                   
+  Year  Key Changes                                                                                        
 ------- -----------------------------------------------------------------------------------------------------
-  1992             No Excuse Absentee Statewide Implementation                                                                   
+  1992  No Excuse Absentee Statewide Implementation                                                                   
   
-  2008             Permanent No-Excuse VBM Lists, Option of Full-VBM Elections                                                   
+  2008  Permanent No-Excuse VBM Lists, Option of Full-VBM Elections                                                   
   
-  2013             Automatic Mail Ballot System Implemented Statewide, Established Vote Centers  
+  2013  Automatic Mail Ballot System Implemented Statewide, Established Vote Centers  
 ------- -----------------------------------------------------------------------------------------------------
 Table: Key changes to Colorado elections policy \label{tab:elect_policy}
     
@@ -223,20 +219,20 @@ After the conclusion of the wrangling process, the resulting dataset included a 
 * VOTING_METHOD: The method used by an individual voter to cast their ballot. Is coded as either VBM or In Person, according to Table 3.4:
 
 --------------------------------------------------------------------------------------------------------------------------
-  Voting Method                   Description of Method                                                 Final Designation  
+Method            Description                                                                        Designation
 ----------------- ---------------------------------------------------------------------------------- --------------------- 
-  Absentee Carry      Voters who carried an absentee ballot with them from an early voting location       VBM                
+Absentee Carry    Voters who carried an absentee ballot from an early voting location                VBM                
   
-  Absentee Mail       Voters who were sent an absentee ballot, and mailed it in                           VBM                
+Absentee Mail     Voters who were sent an absentee ballot, and mailed it in                          VBM                
   
-  Early Voting        Voters who physically went to an Early Voting location and voted                    In Person          
+Early Voting      Voters who physically went to an Early Voting location and voted                   In Person          
   
-  In Person           Voters who physically went to a polling place and voted on paper                    In Person          
+In Person         Voters who physically went to a polling place and voted on paper                   In Person          
   
-  Mail Ballot         Vote By Mail                                                                        VBM                
+Mail Ballot       Vote By Mail                                                                       VBM                
   
-  Polling Place       Traditional polling place voting, discontinued in 2013                              In Person          
+Polling Place     Traditional polling place voting, discontinued in 2013                             In Person          
   
-  Vote Center         Voters who cast their ballots at Vote Centers                                       In Person          
+Vote Center       Voters who cast their ballots at Vote Centers                                      In Person          
 ----------------- ---------------------------------------------------------------------------------- ---------------------
 Table: Voting method designation table \label{tab:voting_method}
