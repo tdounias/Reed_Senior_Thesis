@@ -39,16 +39,6 @@ ggplot(plot_data, aes(x = white, y = estimated_coefs)) +
   geom_pointrange(aes(ymin= estimated_coefs-coef_se, ymax=estimated_coefs+coef_se), size = .1) +
   geom_abline(slope = fixef(md_1)[3], intercept = fixef(md_1)[1])
 
-##3D Graph
-library(plotly)
-
-p <- plot_ly(plot_data, x = ~urban, y = ~white, z = ~estimated_coefs)
-
-plot_ly(
-  type = 'surface',
-  z = fixef(md_1)[1] + fixef(md_1)[3]*white + fixef(md_1)[2]*urban
-)
-
 ##12.5 Graphs
 #Put counties into plot_data
 # county <- demographics[,2]

@@ -119,7 +119,7 @@ mse <- rep(0,5)
 for(i in 1:5){
   md_2.fit <- lmer(data = model_dt, subset = -folds[[i]], turnout ~ pct_white + pct_urban + (1|county))
   
-  mse[i] <- mean((model_dt$turnout - predict(md_2.fit, model_dt))[-folds[[i]]]^2)
+  mse[i] <- mean((model_dt$turnout - predict(md_2.fit, model_dt))[folds[[i]]]^2)
 }
 
 mean(mse)
@@ -131,7 +131,7 @@ for(i in 1:5){
   md_3.fit <- lmer(data = model_dt, subset = -folds[[i]], turnout ~ 1 + types + pct_vbm +
                  pct_urban + pct_white + pct_vbm*types + (1|county))
   
-  mse[i] <- mean((model_dt$turnout - predict(md_3.fit, model_dt))[-folds[[i]]]^2)
+  mse[i] <- mean((model_dt$turnout - predict(md_3.fit, model_dt))[folds[[i]]]^2)
 }
 
 mean(mse)
@@ -147,7 +147,7 @@ for(i in 1:5){
                 random =~ (1|county), 
                 data = model_dt, subset = -folds[[i]])
   
-  mse[i] <- mean((model_dt$turnout - predict(md_4.fit$gam, model_dt))[-folds[[i]]]^2)
+  mse[i] <- mean((model_dt$turnout - predict(md_4.fit$gam, model_dt))[folds[[i]]]^2)
 }
 
 mean(mse)
