@@ -58,5 +58,5 @@
 \contentsline {subsubsection}{Estimation with two types of data}{46}{section*.26}
 \contentsline {subsubsection}{Estimation with the full dataset}{47}{section*.27}
 \contentsline {subsection}{\numberline {4.4.2}Results}{48}{subsection.4.4.2}
-\contentsline {chapter}{Conclusion}{51}{chapter*.28}
-\contentsline {chapter}{References}{53}{appendix*.29}
+\contentsline {chapter}{Conclusion}{51}{chapter*.29}
+\contentsline {chapter}{References}{53}{appendix*.30}

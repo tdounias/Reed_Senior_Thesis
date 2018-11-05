@@ -412,3 +412,20 @@ age_group <- function(age){
   }
   vec
 }
+
+#' Get an ROC object from a classification model
+#'
+#' @param model A classification statistical model
+#' @param vote_data A dataset containing a discrete variable of whether an individual voted or not
+#' @return An ROC object for that model
+#' @examples get_rocs(logistic_model, vote_data)
+
+get_rocs <- function(model, vote_data){
+  prob <- predict(model, vote_data, type = "response")
+  
+  temp_data <- data.frame(prob, vote_data$voted)
+  names(temp_data) <- c("prob", "voted")
+  
+  g <- roc(voted ~ prob, data = temp_data)
+  g
+}
