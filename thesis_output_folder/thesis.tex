@@ -1035,6 +1035,110 @@ as an extensive coding library to aid future research on the subject.
   \textit{R} this can be accomplished with the \texttt{gamm4} package (S.
   Wood \& Scheipl, 2017).
   
+  \subsection{Model Accurracy and Quality of
+  Fit}\label{model-accurracy-and-quality-of-fit}
+  
+  \subsubsection{Mean Squared Error (MSE)}\label{mean-squared-error-mse}
+  
+  For all generalized linear regression models (including GAMs, mixed and
+  fixed effects models) I use Mean Squared Error to asses the accuracy of
+  the fit. Assuming a dataset
+  \(\{(y_0, x_0^1, x_0^2, ..., x_0^m),...,(y_n, x_n^1, x_n^2, ..., x_n^m)\}\)
+  of n observations and m predictors, with \(X_i\) a vector of the
+  predictors for the i-th observation, and \(f:R^m \to R\) the true
+  multivariate function connecting the predictors and response, mean
+  squared error is calculated as follows:
+  \[\text{MSE} = \frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{f}(X_i))^2\]
+  
+  MSE can be calculated either using the same dataset used in estimating
+  the model coefficients, or on a new dataset. In the later case it is
+  called predictive or test MSE. Despite prediction not being the purpose
+  of the models presented in this thesis, I use test MSE because of the
+  independence such a calculation method brings from the data used for the
+  fit, compensating in a way for overfitting(James et al., 2017). To
+  calculate test MSE I use five-fold cross-validation, which will be
+  analyzed shortly.
+  
+  \subsubsection{Area Under the Curve
+  (AUC)}\label{area-under-the-curve-auc}
+  
+  Logistic regression models estimate the probability of a binary variable
+  taking a TRUE value. The predictive output of such a model will be a
+  series of probabilities. These probabilities can then be used to
+  approximate a dataset of positive and negative values for the response
+  variable (in my case, voting). Based on the true values of the response,
+  one can calculate the counts of true positive, true negative, false
+  positive, and false negative predictions. To make this calculation, a
+  probability threshold is set over which the prediction for the response
+  is positive. Positive predictive values of the response are assigned
+  based on the following statement:
+  
+  \[\text{P}(y_i = 1|X_i) > p\]
+  
+  where \(y_i, X_i\) can be assumed to be the same as in the previous
+  section, and \(p\) is the threshold. A common and intuitive threshold is
+  \(0.5\), but any number in \((0,1)\) can be used. After getting counts
+  for true/false negative/positive values, one can then calculate
+  \emph{specificity} and \emph{sensitivity} for the model. These are:
+  
+  \[\text{specificity} = \frac{\text{True Positive}}{\text{False Negative + True Positive}}\]
+  
+  \[\text{sensitivity} = \frac{\text{True Negative}}{\text{False Positive + True Negative}}\]
+  
+  Using these three metrics--sensitivity, specificity, and probability
+  threshold--it's possible to create an ROC curve, which is one of the
+  most widely used diagnostic plots for classification models\footnote{The
+    ROC curve takes its name from a term in communications science, the
+    \emph{receiver operating characteristics curve}. The name is historic,
+    and not relevant to its statistical application.}. The ROC curve has
+  \(1-\text{specificity}\) on the x-axis, \(\text{sensitivity}\) on the
+  y-axis, and each point describes a pair of x-y values for each value of
+  the probability threshold. Using this plot, it's possible to measure the
+  \emph{area under the (ROC) curve}, or AUC, which serves as a
+  goodness-of-fit measure for classification models. The AUC is a number
+  in the \([0,1]\) range and should be maximized; a \(.5\) AUC is
+  representative of an ROC curve on the \(y = x\) line, which is a
+  coin-toss no-information classifier(James et al., 2017). Plot 2.1 is an
+  example of an ROC curve.
+  
+  \begin{figure}
+  
+  {\centering \includegraphics[width=0.5\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/roc_example} 
+  
+  }
+  
+  \caption[Example of an ROC curve]{Example of an ROC curve}\label{fig:roc example}
+  \end{figure}
+  
+  Similarly to MSE, there is value in calculating AUC from a test dataset,
+  rather than the dataset used to train the model. Therefore I also use
+  5-fold cross-validation for AUC as well\footnote{This also compensates
+    for models not converging, as some of mine do.}.
+  
+  \subsubsection{k-Folds Cross Validation}\label{k-folds-cross-validation}
+  
+  The goal of statistical modeling is to approximate the true function
+  that links predictors to response. While the final model's coefficients
+  should be estimated using as much data as possible, when assesing how
+  good a fit that model is there can be better uses of the power that
+  large amounts of data give us. k-Folds cross validation allows for
+  better approximations of goodness-of-of-fit metrics, by partitioning the
+  data into training datasets and test datasets. The fundamental idea is
+  that the data is split into k different subsets, which are then
+  sequentially used to fit the model and calculate the value of some
+  metric(James et al., 2017). The algorithm goes as follows:
+  
+  \begin{enumerate}
+  \item Partition data into k folds
+  \item Fit model on all but the i-th fold
+  \item Calculate goodness-of-fit metric on the i-th fold
+  \item Repeat 2 and 3 for i$\in [0,k]$
+  \item Calculate the average of all obtained goodness-of-fit measurements
+  \end{enumerate}
+  
+  I perform 5-fold cross validation to calculate MSE and AUC for all
+  models which I can fit in R.
+  
   \chapter{Case Selection, Data, Model
   Parametrization}\label{case-selection-data-model-parametrization}
   
