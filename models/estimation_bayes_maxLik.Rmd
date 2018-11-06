@@ -1,0 +1,154 @@
+---
+title: "Estimation of Models—Applied"
+author: "Theodore Dounias"
+date: "11/5/2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(lubridate)
+library(Matrix)
+library(lme4)
+library(gamm4)
+source("~/Desktop/Reed_Senior_Thesis/riggd/R/utils.R")
+setwd("~/Desktop/Reed_Senior_Thesis/Data_and_results/data")
+
+model_sample <- read_csv("model_indiv_sample.csv")
+
+#DATA
+load("all_turnouts.RData")
+demographics <- read_csv("colorado_demographic_stats_by_county.csv")
+names(demographics) <- tolower(names(demographics))
+
+model_dt <- turnouts_county_data(turnout_list)
+
+model_dt$dates <- as.factor(model_dt$dates)
+model_dt$types <- as.factor(model_dt$types)
+
+model_dt <- filter(model_dt, !is.na(model_dt$reg))
+
+model_dt <- left_join(model_dt, demographics, by = "county")
+
+model_dt$county <- as.factor(model_dt$county)
+
+cnt_vec <- as.character(unique(model_dt$county))
+```
+
+## Gibbs Sampler for the County Models
+
+### Simple County Mixed-Effects Model
+
+```{r}
+## Gibbs sampler in R
+a.update <- function(){
+  a.new <- rep (NA, J)
+  for (j in 1:J){
+    n.j <- sum (model_dt$county==cnt_vec[j])
+    y.bar.j <- mean (model_dt$turnout[model_dt$county==cnt_vec[j]])
+    a.hat.j <- ((n.j/sigma.y^2)*y.bar.j + (1/sigma.a^2)*mu.a)/
+               (n.j/sigma.y^2 + 1/sigma.a^2)
+    V.a.j <- 1/(n.j/sigma.y^2 + 1/sigma.a^2)
+    a.new[j] <- rnorm (1, a.hat.j, sqrt(V.a.j))
+  }
+  return (a.new)
+}
+mu.a.update <- function(){
+  mu.a.new <- rnorm (1, mean(a), sigma.a/sqrt(J))
+  return (mu.a.new)
+}
+sigma.y.update <- function(){
+  sigma.y.new <- sqrt(sum((model_dt$turnout-a[model_dt$county])^2)/rchisq(1,703))
+  return (sigma.y.new)
+}
+sigma.a.update <- function(){
+  sigma.a.new <- sqrt(sum((a-mu.a)^2)/rchisq(1,J-1))
+  return (sigma.a.new)
+}
+
+J <- 64
+n.chains <- 3
+n.iter <- 1000
+sims <- array (NA, c(n.iter, n.chains, J+3))
+dimnames (sims) <- list (NULL, NULL, c (paste ("a[", 1:J, "]", sep=""), "mu.a",
+   "sigma.y", "sigma.a"))
+
+for (m in 1:n.chains){
+  mu.a <- rnorm (1, mean(model_dt$turnout), sd(model_dt$turnout))
+  sigma.y <- runif (1, 0, sd(model_dt$turnout))
+  sigma.a <- runif (1, 0, sd(model_dt$turnout))
+  for (t in 1:n.iter){
+    a <- a.update ()
+    mu.a <- mu.a.update ()
+    sigma.y <- sigma.y.update ()
+    sigma.a <- sigma.a.update ()
+    sims[t,m,] <- c (a, mu.a, sigma.y, sigma.a)
+  }
+}
+
+md_1 <- lmer(data = model_dt, turnout ~ 1 + (1|county))
+
+arm::display(md_1)
+
+#Get Values after convergance
+vals <- data.frame(rep(0,3))
+for(i in 1:67){
+  for(j in 1:3){
+    vals[j,i] <- mean(sims[-c(1:500),j,i])
+  }
+}
+
+vals <- vals %>%
+  summarise_all(mean)
+
+names(vals) <- c (paste ("a[", 1:J, "]", sep=""), "mu.a",
+   "sigma.y", "sigma.a")
+
+vals[1,65:67]
+```
+
+Note that these values are approximately the same as the ones outputed by 
+
+```{r}
+# ## Gibbs sampler for a multilevel model w/ predictors
+# a.update <- function(){
+#   y.temp <- y - X%*%b - U[county]%*%g
+#   eta.new <- rep (NA, J)
+#   for (j in 1:J){
+#     n.j <- sum (county==j)
+#     y.bar.j <- mean (y.temp[county==j])
+#     eta.hat.j <- ((n.j/sigma.y^2)*y.bar.j/
+#                  (n.j/sigma.y^2 + 1/sigma.a^2))
+#     V.eta.j <- 1/(n.j/sigma.y^2 + 1/sigma.a^2)
+#     eta.new[j] <- rnorm (1, eta.hat.j, sqrt(V.eta.j))
+#   }
+#   a.new <- U%*%g + eta.new
+#   return (a.new)
+# }
+# b.update <- function(){
+#   y.temp <- y - a[county]
+#   lm.0 <- lm (y.temp ~ X)
+#   b.new <- sim (lm.0, n.sims=1)
+#   return (b.new)
+# }
+# g.update <- function(){
+#   lm.0 <- lm (a ~ U)
+#   g.new <- sim (lm.0, n.sims=1)
+#   return (g.new)
+# }
+# sigma.y.update <- function(){
+#   sigma.y.new <- sqrt(sum((y-a[county]-X%*%b)^2)/rchisq(1,n-1))
+#   return (sigma.y.new)
+# }
+# sigma.a.update <- function(){
+#   sigma.a.new <- sqrt(sum((a-U%*%g)^2)/rchisq(1,J-1))
+#   return (sigma.a.new)
+# }
+```
+
+
+
+
+## A First Pass at a Simple Logistic Model
+
