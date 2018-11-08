@@ -6,6 +6,12 @@ header-includes:
 - \usepackage{longtable,booktabs,setspace}
 ---
 
+```{r ,include = FALSE}
+options(xtable.comment = FALSE)
+library(xtable)
+```
+
+
 # Model Specification and Results
 
 In this chapter I do a step-by-step construction and fitting of a series of models. I begin with a thorough analysis of my notation, and specification of models. I then extract results from the models that best fit the data, and draw inferences on my hypotheses. I will start with a disclaimer: why the data available to me is not necessarily enough to get the necessary causal leverage for significant results. This is particularly true of individual level models. This disclaimer should be considered a large part of the analytical results of my thesis; given several months of exploratory data analysis, such explanations should serve future research into Colorado voter files. I will then proceed to construct some actual models--disclaimer notwithstanding--starting with county and proceeding to individual level modelling. Some of these models may be speculative, as given the initial disclaimer they require more data, or more processing power to actually run. I will still include them as they may be used for future research.
@@ -118,53 +124,11 @@ Table: County level model descriptions \label{tab:model_desc_county}
 
 The table in this section presents coefficients and standard errors for all four county level models. This table does not include any metrics for county--either mixed or fixed effects. I have chosen to omit these because they firstly are not very relevant to my hypotheses, and secondly because they are very extensive--64 coefficients for each of the four models. I have also not included any metric for time--here measured in years and used only in the fourth model. Both the mixed effects for county and the measure for time should be considered as controls: the first controls for county-specific trends while still restricting these to allow for non-independence, and the second makes sure that my results are indicative of a secular trend, independent of any shifts along time.  
 
------------------------------------------------------------------------------------
-Variables              Naive Model   County Effects   Election Effects   Time Data 
---------------------- ------------- ---------------- ------------------ -----------
-(Intercept)               0.369          0.492             0.455           0.470   
+```{r test table, results = "asis", echo = FALSE, message=FALSE}
+source("~/Desktop/Reed_Senior_Thesis/tables/county_coef_table.R")
+tab <- pandoc.table(table_data, caption = "Estimated county level coefficients \\label{tab:county_coef}", auto = TRUE)
+```
 
-                         (0.60)        (0.045)**         (0.078)**        (0.072)  
-
-Pct_white                                0.034             0.033           0.031   
-
-                                        (0.053)           (0.050)         (0.050)  
-
-Pct_urban                                -0.118            -0.117         -0.119   
-
-                                       (0.022)**         (0.021)**        (0.021)  
-
-typeGeneral                                                0.190           0.254   
-
-                                                         (0.070)**        (0.065)  
-
-typeMidterm                                                0.252           0.070   
-
-                                                         (0.068)**        (0.063)  
-
-typePrimary                                                -0.071         -0.170   
-
-                                                          (0.069)         (0.062)  
-
-typeCoordinated*VBM                                        -0.001          0.002   
-
-                                                          (0.067)         (0.058)  
-
-typeGeneral*VBM                                            0.151           0.087   
-
-                                                          (0.073)*        (0.037)  
-
-typeMidterm*VBM                                            -0.058          0.109   
-
-                                                          (0.026)         (0.030)  
-
-typePrimary*VBM                                            -0.089         -0.003   
-
-                                                          (0.028)         (0.027)
-                                                          
-MSE                                                        -0.089         -0.003   
-
------------------------------------------------------------------------------------
-Table: Estimated coefficients for County level models \label{tab:model_county_coefs}
   
 Given that, the first observable result is that the percentage of white population and the percentage of urban population are fairly stable indicators of a small positive and negative shift in turnout respectively. The lack of variability between models is not surprising; these represent a county-level, time-independent demographic statistic, and there would be no reason to assume that part of their effect would be subsumed by other variables in models 3 and 4.  
   
@@ -300,9 +264,9 @@ You will notice that I have omitted the subscript for all beta coefficients. Thi
 
 The mixed effects model will again operate on two "levels" of hierarchy, but the second level will now include three distinct regressions. Caveats for variables like age and date should be noted from previous sections. This, the most complete model, will be *Model 6*
 
-$$\hat{p\_vote} \sim \text{logit}^{-1}(\sum_{i' = 1}^{n^{\text{ballot vars}}}u_{i,i'}\beta_{l'} +\delta_{j[i]} + a_{k[i]} + \eta_{l[i]}),$$
+$$\hat{p\_vote} \sim \text{logit}^{-1}(\sum_{i' = 1}^{n^{\text{ballot vars}}}u_{i,i'}\beta_{l'} +\delta_{j[i]} + \alpha_{k[i]} + \eta_{l[i]}),$$
 
-$$a_{k} \sim \text{N}(\gamma_0 + \sum_{i'=1}^{n^{\text{county vars}}}x_{k[i], i'}\gamma_{i'}, \sigma_{\alpha}^2)$$
+$$\alpha_{k} \sim \text{N}(\gamma_0 + \sum_{i'=1}^{n^{\text{county vars}}}x_{k[i], i'}\gamma_{i'}, \sigma_{\alpha}^2)$$
 
 $$\delta_{j} \sim \text{N}(\zeta_0 + \sum_{i'=1}^{n^{\text{indiv vars}}}z_{j[i], i'}\delta_{i'}, \sigma_{\delta}^2)$$
 
@@ -387,3 +351,4 @@ There are two conclusions that can be derived from these results. None of these 
      AUC       0.543     0.543                  0.545       0.733     0.961       0.963
 --------------------------------------------------------------------------------------------
 Table: Estimated coefficients for Individual level models \label{tab:model_indiv_coefs}
+

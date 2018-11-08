@@ -1,4 +1,4 @@
-library(tidyverse)
+suppressMessages(library(tidyverse))
 library(lubridate)
 library(Matrix)
 library(lme4)
@@ -9,7 +9,7 @@ setwd("~/Desktop/Reed_Senior_Thesis/Data_and_results/data")
 
 #DATA
 load("all_turnouts.RData")
-demographics <- read_csv("colorado_demographic_stats_by_county.csv")
+demographics <- suppressMessages(suppressWarnings(read_csv("colorado_demographic_stats_by_county.csv")))
 names(demographics) <- tolower(names(demographics))
 
 model_dt <- turnouts_county_data(turnout_list)
@@ -56,5 +56,3 @@ md4coef <- c("0.470", "(0.072)", "0.031", "(0.050)", "-0.119", "(0.021)", "0.254
 table_data <- data.frame(varnames, md1coef, md2coef, md3coef, md4coef)
 
 names(table_data) <- c("Variables", "Naive Model", "County Effects", "Election Effects", "Time Data")
-
-pandoc.table(table_data, justify = c("left", "center", "center", "center", "center"))

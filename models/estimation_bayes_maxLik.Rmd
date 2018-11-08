@@ -108,7 +108,7 @@ names(vals) <- c (paste ("a[", 1:J, "]", sep=""), "mu.a",
 vals[1,65:67]
 ```
 
-Note that these values are approximately the same as the ones outputed by 
+Note that these values are approximately the same as the ones outputed by the model!
 
 ```{r}
 # ## Gibbs sampler for a multilevel model w/ predictors
