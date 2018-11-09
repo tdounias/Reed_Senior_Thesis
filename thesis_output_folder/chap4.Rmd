@@ -14,11 +14,7 @@ library(xtable)
 
 # Model Specification and Results
 
-In this chapter I do a step-by-step construction and fitting of a series of models. I begin with a thorough analysis of my notation, and specification of models. I then extract results from the models that best fit the data, and draw inferences on my hypotheses. I will start with a disclaimer: why the data available to me is not necessarily enough to get the necessary causal leverage for significant results. This is particularly true of individual level models. This disclaimer should be considered a large part of the analytical results of my thesis; given several months of exploratory data analysis, such explanations should serve future research into Colorado voter files. I will then proceed to construct some actual models--disclaimer notwithstanding--starting with county and proceeding to individual level modelling. Some of these models may be speculative, as given the initial disclaimer they require more data, or more processing power to actually run. I will still include them as they may be used for future research.
-
-##Salt
-
-The following models should be taken with a grain of salt because of a series of reasons. In this section, I will tackle these reasons one by one and then analyze what steps could be made to compensate.
+## Modelling Issues
 
 ### Lack of variability
 
@@ -126,7 +122,7 @@ The table in this section presents coefficients and standard errors for all four
 
 ```{r test table, results = "asis", echo = FALSE, message=FALSE}
 source("~/Desktop/Reed_Senior_Thesis/tables/county_coef_table.R")
-tab <- pandoc.table(table_data, caption = "Estimated county level coefficients \\label{tab:county_coef}", auto = TRUE)
+pandoc.table(table_data, caption = "Estimated county level coefficients \\label{tab:county_coef}")
 ```
 
   

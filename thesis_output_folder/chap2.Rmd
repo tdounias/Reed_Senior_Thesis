@@ -5,8 +5,6 @@ output: pdf_document
 
 # Hypotheses and Methods
    
-In this chapter, I introduce a series of questions resulting from the literature review of Chapter 1, which I will use to formulate hypotheses. I will then operationalize these hypotheses, and attempt to predict analytical outcomes based on the theories of Chapter 1. Following these hypotheses, I will outline key methods I will use to test them.
-   
 ## Hypotheses
   
 ### Questions

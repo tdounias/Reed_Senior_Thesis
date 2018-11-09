@@ -160,23 +160,29 @@ try giving a woefully incomplete list. (After my first draft)
 }
 
 \Abstract{
-Mail voting in the United States has always existed to some degree, for
-absentee or overseas voters. Starting with Oregon in 1996, several
-states have implemented mail voting more generally, making it available
-to all individuals for general, midterm, primary, or local elections. In
-2013, Colorado implemented the latest in a series of in-state election
-reforms, ensuring that every Coloradoan receives a mail ballot for every
-election. This thesis aims at following a series of studies that conduct
-quantitative assessments of the impact of mail voting on voter turnout
-by examining Colorado voter registration files, and describing, fitting,
-and interpreting multilevel general additive regression models. In terms
-of my hypotheses, I conclude that there is evidence of a positive effect
-of mail voting on turnout in national elections, but that this evidence
-is weak and present only in my county level models. Through this
-process, I also contribute to the literature by presenting a description
-of modeling and data wrangling difficulties associated with voter
-registration files, and giving a series of potential solutions, as well
-as an extensive coding library to aid future research on the subject.
+Mail voting in the United States was conceived and first implemented to
+serve absentee voters during the Civil War (Fortier, 2006) and has
+persisted until the present day, becoming one of the key reforms
+associated with ``convenience voting'' and the expansion of the
+democratic franchise (Gronke, Galanes-Rosenbaum, Miller, \& Toffey,
+2008). In 2013, Colorado implemented the latest in a series of in-state
+election reforms and became the third state in the nation with universal
+mail voting for all elections, after Oregon and Washington. Despite
+claims by policymakers that mail voting should have a strong, positive
+effect on voter turnout, a recent series of studies on Oregon,
+Washington, parts of California, and Colorado have failed to show
+consistent results, disagreeing both on the scale and the direction
+(positive or negative) that this effect has. This thesis aims at
+following this series of studies by examining Colorado voter
+registration files for recent elections (2010-2016) and describing,
+fitting, and interpreting multilevel general additive regression models
+of voter turnout based on these data. I show that there is a small
+positive effect of mail voting on turnout in national elections at the
+county level. This thesis also contributes to the literature by
+presenting a description of modeling and data wrangling difficulties
+associated with voter registration files, and giving a series of
+potential solutions, as well as an extensive coding library to aid
+future research on the subject.
 }
 
 % End of CII addition
@@ -240,23 +246,29 @@ as an extensive coding library to aid future research on the subject.
       \listoffigures
   
       \begin{abstract}
-      Mail voting in the United States has always existed to some degree, for
-      absentee or overseas voters. Starting with Oregon in 1996, several
-      states have implemented mail voting more generally, making it available
-      to all individuals for general, midterm, primary, or local elections. In
-      2013, Colorado implemented the latest in a series of in-state election
-      reforms, ensuring that every Coloradoan receives a mail ballot for every
-      election. This thesis aims at following a series of studies that conduct
-      quantitative assessments of the impact of mail voting on voter turnout
-      by examining Colorado voter registration files, and describing, fitting,
-      and interpreting multilevel general additive regression models. In terms
-      of my hypotheses, I conclude that there is evidence of a positive effect
-      of mail voting on turnout in national elections, but that this evidence
-      is weak and present only in my county level models. Through this
-      process, I also contribute to the literature by presenting a description
-      of modeling and data wrangling difficulties associated with voter
-      registration files, and giving a series of potential solutions, as well
-      as an extensive coding library to aid future research on the subject.
+      Mail voting in the United States was conceived and first implemented to
+      serve absentee voters during the Civil War (Fortier, 2006) and has
+      persisted until the present day, becoming one of the key reforms
+      associated with ``convenience voting'' and the expansion of the
+      democratic franchise (Gronke, Galanes-Rosenbaum, Miller, \& Toffey,
+      2008). In 2013, Colorado implemented the latest in a series of in-state
+      election reforms and became the third state in the nation with universal
+      mail voting for all elections, after Oregon and Washington. Despite
+      claims by policymakers that mail voting should have a strong, positive
+      effect on voter turnout, a recent series of studies on Oregon,
+      Washington, parts of California, and Colorado have failed to show
+      consistent results, disagreeing both on the scale and the direction
+      (positive or negative) that this effect has. This thesis aims at
+      following this series of studies by examining Colorado voter
+      registration files for recent elections (2010-2016) and describing,
+      fitting, and interpreting multilevel general additive regression models
+      of voter turnout based on these data. I show that there is a small
+      positive effect of mail voting on turnout in national elections at the
+      county level. This thesis also contributes to the literature by
+      presenting a description of modeling and data wrangling difficulties
+      associated with voter registration files, and giving a series of
+      potential solutions, as well as an extensive coding library to aid
+      future research on the subject.
     \end{abstract}
   
   
@@ -299,14 +311,6 @@ as an extensive coding library to aid future research on the subject.
   or linking disparate voter records (Ansolabehere \& Hersh, 2017).
   
   \chapter{The State of the Literature}\label{rmd-basics}
-  
-  In this chapter I will go through the existing literature on
-  Vote-By-Mail (VBM). I will first go through some general literature on
-  theories of voting decisions. I will define what Vote-By-Mail is; I will
-  then summarize the expectations that researchers have of the effects of
-  VBM on turnout, based on existing theories of electoral participation. I
-  will continue with a summary of previous quantitative research on the
-  effects that VBM and similar policies have had on turnout.
   
   \section{Deciding to Vote}\label{deciding-to-vote}
   
@@ -576,11 +580,11 @@ as an extensive coding library to aid future research on the subject.
   voters receive their ballots around two weeks in advance of election
   day; they are also able to return that ballot whenever they wish within
   that time-frame. This means that Vote-By-Mail can be counted as a
-  ``convenience voting'' reform. These are usually implemented by state
-  and local governments with the argument that they either expand the
-  democratic franchise by bringing in new voters, or by making it more
-  likely that current registered voters participate in the electoral
-  process (State Legislatures, n.d.).
+  ``convenience voting'' reform (Gronke et al., 2008). These are usually
+  implemented by state and local governments with the argument that they
+  either expand the democratic franchise by bringing in new voters, or by
+  making it more likely that current registered voters participate in the
+  electoral process (State Legislatures, n.d.).
   
   \subsection{How Theories Apply to VBM}\label{how-theories-apply-to-vbm}
   
@@ -750,13 +754,6 @@ as an extensive coding library to aid future research on the subject.
   mitigated somewhat by private data companies and access fees.
   
   \chapter{Hypotheses and Methods}\label{hypotheses-and-methods}
-  
-  In this chapter, I introduce a series of questions resulting from the
-  literature review of Chapter 1, which I will use to formulate
-  hypotheses. I will then operationalize these hypotheses, and attempt to
-  predict analytical outcomes based on the theories of Chapter 1.
-  Following these hypotheses, I will outline key methods I will use to
-  test them.
   
   \section{Hypotheses}\label{hypotheses}
   
@@ -1141,13 +1138,6 @@ as an extensive coding library to aid future research on the subject.
   
   \chapter{Case Selection, Data, Model
   Parametrization}\label{case-selection-data-model-parametrization}
-  
-  In this chapter, I will first go through a description of the state of
-  Colorado; its demographics, its politics, and its selection for the
-  purposes of this thesis. I will then go through the sources and
-  wrangling of the data I obtained on Colorado's elections. Finally, I
-  will fully define the models I will be using to test the hypotheses
-  outlined in the previous chapter.
   
   \section{The Centennial State and Its
   Voters}\label{the-centennial-state-and-its-voters}
@@ -2009,27 +1999,7 @@ as an extensive coding library to aid future research on the subject.
   \chapter{Model Specification and
   Results}\label{model-specification-and-results}
   
-  In this chapter I do a step-by-step construction and fitting of a series
-  of models. I begin with a thorough analysis of my notation, and
-  specification of models. I then extract results from the models that
-  best fit the data, and draw inferences on my hypotheses. I will start
-  with a disclaimer: why the data available to me is not necessarily
-  enough to get the necessary causal leverage for significant results.
-  This is particularly true of individual level models. This disclaimer
-  should be considered a large part of the analytical results of my
-  thesis; given several months of exploratory data analysis, such
-  explanations should serve future research into Colorado voter files. I
-  will then proceed to construct some actual models--disclaimer
-  notwithstanding--starting with county and proceeding to individual level
-  modelling. Some of these models may be speculative, as given the initial
-  disclaimer they require more data, or more processing power to actually
-  run. I will still include them as they may be used for future research.
-  
-  \section{Salt}\label{salt}
-  
-  The following models should be taken with a grain of salt because of a
-  series of reasons. In this section, I will tackle these reasons one by
-  one and then analyze what steps could be made to compensate.
+  \section{Modelling Issues}\label{modelling-issues}
   
   \subsection{Lack of variability}\label{lack-of-variability}
   
@@ -3663,6 +3633,10 @@ as an extensive coding library to aid future research on the subject.
   \emph{Rationality and Society}, \emph{19}(3), 293--314.
   \url{http://doi.org/10.1177/1043463107077384}
   
+  \hypertarget{ref-fortier_absentee_2006}{}
+  Fortier, J. C. (2006). \emph{Absentee and early voting: Trends,
+  promises, and perils}. Washington, DC: AEI Press.
+  
   \hypertarget{ref-fowler_habitual_2006}{}
   Fowler, J. H. (2006). Habitual Voting and Behavioral Turnout.
   \emph{Journal of Politics}, \emph{68}(2), 335--344.
@@ -3690,6 +3664,12 @@ as an extensive coding library to aid future research on the subject.
   Gronke, P., \& Miller, P. (2012). Voting by Mail and Turnout in Oregon:
   Revisiting Southwell and Burchett. \emph{American Politics Research},
   \emph{40}(6), 976--997. \url{http://doi.org/10.1177/1532673X12457809}
+  
+  \hypertarget{ref-gronke_convenience_2008}{}
+  Gronke, P., Galanes-Rosenbaum, E., Miller, P. A., \& Toffey, D. (2008).
+  Convenience Voting. \emph{Annual Review of Political Science},
+  \emph{11}(1), 437--455.
+  \url{http://doi.org/10.1146/annurev.polisci.11.053006.190912}
   
   \hypertarget{ref-hamm_how_2017}{}
   Hamm, K. (2017). How Colorado has voted in presidential elections (and

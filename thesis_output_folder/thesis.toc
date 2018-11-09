@@ -14,10 +14,10 @@
 \contentsline {chapter}{Chapter 2: Hypotheses and Methods}{13}{chapter.2}
 \contentsline {section}{\numberline {2.1}Hypotheses}{13}{section.2.1}
 \contentsline {subsection}{\numberline {2.1.1}Questions}{13}{subsection.2.1.1}
-\contentsline {subsection}{\numberline {2.1.2}Hypotheses}{14}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.2}Hypotheses}{13}{subsection.2.1.2}
 \contentsline {subsection}{\numberline {2.1.3}Criteria}{14}{subsection.2.1.3}
 \contentsline {subsection}{\numberline {2.1.4}Importance of Hypotheses}{15}{subsection.2.1.4}
-\contentsline {section}{\numberline {2.2}Methodology}{16}{section.2.2}
+\contentsline {section}{\numberline {2.2}Methodology}{15}{section.2.2}
 \contentsline {subsection}{\numberline {2.2.1}Logistic Regression}{16}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}Generalized Additive Models}{17}{subsection.2.2.2}
 \contentsline {subsection}{\numberline {2.2.3}Multilevel Models}{17}{subsection.2.2.3}
@@ -40,23 +40,23 @@
 \contentsline {subsection}{\numberline {3.3.2}Other Wrangling Issues Faced}{31}{subsection.3.3.2}
 \contentsline {subsection}{\numberline {3.3.3}Final Variable Specifications}{32}{subsection.3.3.3}
 \contentsline {chapter}{Chapter 4: Model Specification and Results}{35}{chapter.4}
-\contentsline {section}{\numberline {4.1}Salt}{35}{section.4.1}
+\contentsline {section}{\numberline {4.1}Modelling Issues}{35}{section.4.1}
 \contentsline {subsection}{\numberline {4.1.1}Lack of variability}{35}{subsection.4.1.1}
 \contentsline {subsection}{\numberline {4.1.2}Processing Power}{37}{subsection.4.1.2}
-\contentsline {section}{\numberline {4.2}Models}{38}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Variable Specification}{38}{subsection.4.2.1}
-\contentsline {section}{\numberline {4.3}County Level Models}{39}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Specifications}{39}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}Results}{41}{subsection.4.3.2}
-\contentsline {section}{\numberline {4.4}Individual Level Models}{43}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Specifications}{43}{subsection.4.4.1}
+\contentsline {section}{\numberline {4.2}Models}{37}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Variable Specification}{37}{subsection.4.2.1}
+\contentsline {section}{\numberline {4.3}County Level Models}{38}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Specifications}{38}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Results}{40}{subsection.4.3.2}
+\contentsline {section}{\numberline {4.4}Individual Level Models}{42}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Specifications}{42}{subsection.4.4.1}
 \contentsline {subsubsection}{Estimation with only one type of data}{43}{section*.21}
 \contentsline {subsubsection}{County Level}{43}{section*.22}
 \contentsline {subsubsection}{Individual Level}{44}{section*.23}
-\contentsline {subsubsection}{Election Level}{45}{section*.24}
-\contentsline {subsubsection}{Ballot Level}{46}{section*.25}
+\contentsline {subsubsection}{Election Level}{44}{section*.24}
+\contentsline {subsubsection}{Ballot Level}{45}{section*.25}
 \contentsline {subsubsection}{Estimation with two types of data}{46}{section*.26}
-\contentsline {subsubsection}{Estimation with the full dataset}{47}{section*.27}
-\contentsline {subsection}{\numberline {4.4.2}Results}{48}{subsection.4.4.2}
+\contentsline {subsubsection}{Estimation with the full dataset}{46}{section*.27}
+\contentsline {subsection}{\numberline {4.4.2}Results}{47}{subsection.4.4.2}
 \contentsline {chapter}{Conclusion}{51}{chapter*.29}
 \contentsline {chapter}{References}{53}{appendix*.30}

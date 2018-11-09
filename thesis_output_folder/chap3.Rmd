@@ -7,8 +7,6 @@ header-includes:
 ---
 
 # Case Selection, Data, Model Parametrization
-   
-In this chapter, I will first go through a description of the state of Colorado; its demographics, its politics, and its selection for the purposes of this thesis. I will then go through the sources and wrangling of the data I obtained on Colorado's elections. Finally, I will fully define the models I will be using to test the hypotheses outlined in the previous chapter.
 
 ## The Centennial State and Its Voters 
 
