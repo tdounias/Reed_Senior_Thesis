@@ -50,13 +50,13 @@
 \contentsline {subsection}{\numberline {4.3.2}Results}{40}{subsection.4.3.2}
 \contentsline {section}{\numberline {4.4}Individual Level Models}{42}{section.4.4}
 \contentsline {subsection}{\numberline {4.4.1}Specifications}{42}{subsection.4.4.1}
-\contentsline {subsubsection}{Estimation with only one type of data}{43}{section*.21}
-\contentsline {subsubsection}{County Level}{43}{section*.22}
-\contentsline {subsubsection}{Individual Level}{44}{section*.23}
-\contentsline {subsubsection}{Election Level}{44}{section*.24}
-\contentsline {subsubsection}{Ballot Level}{45}{section*.25}
-\contentsline {subsubsection}{Estimation with two types of data}{46}{section*.26}
-\contentsline {subsubsection}{Estimation with the full dataset}{46}{section*.27}
-\contentsline {subsection}{\numberline {4.4.2}Results}{47}{subsection.4.4.2}
-\contentsline {chapter}{Conclusion}{51}{chapter*.29}
-\contentsline {chapter}{References}{53}{appendix*.30}
+\contentsline {subsubsection}{Estimation with only one type of data}{43}{section*.25}
+\contentsline {subsubsection}{County Level}{43}{section*.26}
+\contentsline {subsubsection}{Individual Level}{44}{section*.27}
+\contentsline {subsubsection}{Election Level}{45}{section*.28}
+\contentsline {subsubsection}{Ballot Level}{45}{section*.29}
+\contentsline {subsubsection}{Estimation with two types of data}{46}{section*.30}
+\contentsline {subsubsection}{Estimation with the full dataset}{46}{section*.31}
+\contentsline {subsection}{\numberline {4.4.2}Results}{48}{subsection.4.4.2}
+\contentsline {chapter}{Conclusion}{51}{chapter*.33}
+\contentsline {chapter}{References}{53}{appendix*.34}
