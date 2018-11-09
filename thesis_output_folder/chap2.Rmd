@@ -1,5 +1,8 @@
 ---
 output: pdf_document
+header-includes:
+- \usepackage{graphicx,latexsym}
+- \usepackage{amssymb,amsthm,amsmath}
 ---
 
 
@@ -11,62 +14,62 @@ output: pdf_document
   
 Before moving in to outlining hypotheses, the first step necessary is to frame a series of questions, which the hypotheses will flow from. Based on relevant research, the most obvious first question to ask would be:
 
-\begin{center}
+\begin{quotation}
 Q1: \textit{What is the effect of mail voting on turnout?}
-\end{center}
+\end{quotation}
 
 I went through this question substantially in the previous chapter; it should be clear that depending on which paradigm of participation choice is present, the answer here can be radically different. In order to best answer the previous question, it is necessary to establish some conditions on importance of effect. Therefore it is also necessary to ask the following question:  
 
-\begin{center}   
+\begin{quotation}   
 Q2: \textit{Does this effect persist when accounting for other relevant predictors of turnout?}
-\end{center}   
+\end{quotation}   
 
-The last question asked in this thesis is more specific to a particular formulation of Aldritch's hypothesis on voting "at the margins". I mentioned in the previous section that VBM could be theorized to have a more significant effect when discussing elections at the local level, or the regional level, rather than national general elections. Therefore a third question is:
+The last question asked in this thesis is more specific to a particular formulation of Aldrich's hypothesis on voting "at the margins". I mentioned in the previous section that VBM could be theorized to have a more significant effect when discussing elections at the local level, or the regional level, rather than national general elections. Therefore a third question is:
 
-\begin{center}   
+\begin{quotation}   
 Q3: \textit{Is  the  effect  of  VBM on turnout more  pronounced as significant, national determinants become less strong?}
-\end{center}
+\end{quotation}
 
 ### Hypotheses
    
-Using the above questions I can now move on to formulate more clear hypotheses. Before diving right into that, I note that I intend this thesis to serve two purposes: first, to test competing voter choice theories; second, to serve as an analytical tool for later evaluations of mail voting as policy. Based on the theoretical review of the previous chapter it should be apparent that of these two purposes, the former is primarily addressed, with the later tangentially arising from my conclusions. The hypotheses in this section spring mostly from a wish to test theories of voter choice, and in particular a wish to defend the theory of voting "at the margins" as introduced by Aldritch. Therefore all hypotheses in this section will be phrased from the perspective of this theory, with the competing alternate hypotheses being counter-claims potentially rooted in different theories of voter participation.
+Using the above questions I can now move on to formulate more clear hypotheses. The hypotheses in this section are meant to test theories of voter choice from the perspective of the theory of voting "at the margins" as introduced by Aldrich.
 
 In response to Q1, Q2, a first hypothesis is: 
 
-\begin{center}  
+\begin{quotation}  
 H1: \textit{Mail voting is another incremental effect on voting decisions, and therefore
 does not significantly affect turnout}
-\end{center}
+\end{quotation}
 
 The alternative hypothesis would be:
 
-\begin{center}  
+\begin{quotation}  
 H1$'$: \textit{Mail  voting  significantly  affects  turnout,  even  compared  to  other  metrics}
-\end{center}   
+\end{quotation}   
     
-Similarly, for the third question, a corresponding hypothesis derived from Aldritch's paradigm is:
+Similarly, for the third question, a corresponding hypothesis derived from Aldrich's paradigm is:
 
-\begin{center}  
-H2: \textit{The  effect  of  VBM  on  turnout  is  more  pronounced  as  national  effects  dull}
-\end{center}
+\begin{quotation}  
+H2: \textit{The  effect  of  VBM  on  turnout  is  larger  as  national  effects  become less pronounced}
+\end{quotation}
   
 The alternative hypothesis is:
 
-\begin{center}  
-H2$'$: \textit{The  effect  of  VBM  on  turnout  is  consistent  and  independent}
-\end{center}
+\begin{quotation}  
+H2$'$: \textit{The  effect  of  VBM  on  turnout  is either independent of or proportional to how pronounced national effects are}
+\end{quotation}
     
 ### Criteria
   
-A first, glaring issue that needs to be clarified is the apparent contradictions between my two hypothesized results. This becomes clear, however, if I define "significant effect" in the context of my first hypothesis. Aldritch's paradigm does state that "conveniences" like mail voting should not have significant effects, but those effects are defined in the context of huge, clashing forces that vastly outweigh them. This does not necessarily mean that they are literally non-existent, but that they are poor indicators of consistently increased turnout. Therefore, I will confirm my first hypothesis not only if the effect of mail voting on turnout is statistically insignificant, but also if it is relatively small in comparison to the effects of other variables I include. I will confirm the alternative hypothesis if, across multiple of the models I will parametrize and fit, VBM retains a consistent, significant effect on turnout. If the effect is negative, this may point to a habitual or structural voting paradigm being present. If the effect is positive, this may be a signifier that issues of convenience in voting--having a mail delivered ballot, voting from your kitchen table etc.--have a particularly strong effect in the examined elections.  
+A first, glaring issue that needs to be clarified is the apparent contradictions between my two hypothesized results. This becomes clear, however, if I define "significant effect" in the context of my first hypothesis. Aldrich's paradigm does state that "conveniences" like mail voting should not have significant effects, but those effects are defined in the context of huge, clashing forces that vastly outweigh them. This does not necessarily mean that they are literally non-existent, but that they are poor indicators of consistently increased turnout. Therefore, I will confirm my first hypothesis not only if the effect of mail voting on turnout is vanishingly small, but also if it is relatively small in comparison to the effects of other variables I include. I will confirm the alternative hypothesis if, across multiple of the models I will parametrize and fit, VBM retains a consistent, significant effect on turnout. If the effect is negative, this may point to a habitual or structural voting paradigm being present. If the effect is positive, this may be a signifier that issues of convenience in voting--having a mail delivered ballot, voting from your kitchen table etc.--have a particularly strong effect in the examined elections.  
    
-Moving on to the second hypothesis. It is extremely hard to correctly operationalize and account for all variables going into turnout. Therefore, instead of trying to include all national effects into a model and try to see how they interact with VBM, I will test my hypothesis on more localized elections. At least in theory, I can assume that if mail voting significantly impacts people's decision to vote, it will be in a context where the convenience of voting significantly outweighs information effects from national media, communal pressures, or national campaigns. This can be found to some extent in primary elections, but much more significantly in off year local state elections. A potential re-formulation of the second hypothesis, that makes it more specific to the criteria I have set, is:
+Moving on to the second hypothesis. It is extremely hard to correctly operationalize and account for all variables going into turnout. Therefore, instead of trying to include all possibly relevant effects into a model and try to see how they interact with VBM, I will test my hypothesis on different levels of elections: local, midterm, presidential, and primary. National effects on turnout should be especially present in presidential races, since a specific set of candidates is running across the whole nation. These effects should also be present in midterm and primary elections to some extent, as the results of local races are aggregated in control of congress or high-profile governorship. Apart from the off-chance of a nationally reported-on ballot measure, or a singularly high-profile race, local off-year election turnout should have a negligible relation to national effects. Therefore I will use election level as a stand-in for the prominence of national turnout effects. A potential re-formulation of the second hypothesis that makes it more specific to the criteria I have set is:
 
 \begin{center}    
 H3: \textit{The  effect  of  VBM  on  turnout  is  more  pronounced  in  local  or  off year elections}
 \end{center}
 
-I will confirm this hypothesis if mail voting has significantly larger positive effects on turnout in smaller, local elections.
+I will confirm this hypothesis if mail voting has substantially larger positive effects on turnout in smaller, local elections.
   
 ### Importance of Hypotheses
    
@@ -92,18 +95,20 @@ where Y is a vector of response variable values, X is a matrix of predictors, an
 When wanting to compute a model on a binary response through its corresponding Bernoulli distribution probability parameter, the inverse logit function should be a perfect fit for a link function, since it maps values from all real numbers to a range between 0 and 1. Using the inverse logit function, we arrive at the final form of logistic regression, which is:  
 $$\mathbb{P} (Y = 1) = \text{logit}^{-1} (XB)$$
     
-Conveniently, despite the use of a link function, there is an easy way to interpret the coefficients of such a regression. While obviously individual values from the $B$ vecotr will not be particularly helpful, $e^B$ can be used as a vector of multiplicative, one-unit shifts in the value of the probability that $Y = 1$. This means that a one unit increase in any predictor will cause an effect equal to multiplying p by the exponent of the corresponding coefficient^[This can be simplified even more, if one approximates the process of exponentiating with just dividing the coefficient by 4. Crude, yet effective for a quick scan of the results]. [@james_introduction_2017]
+Conveniently, despite the use of a link function, there is an easy way to interpret the coefficients of such a regression. While obviously individual values from the $B$ vector will not be particularly helpful, $e^B$ can be used as a vector of multiplicative, one-unit shifts in the value of the probability that $Y = 1$. This means that a one unit increase in any predictor will cause an effect equal to multiplying p by the exponent of the corresponding coefficient^[This can be simplified even more, if one approximates the process of exponentiation with just dividing the coefficient by 4. Crude, yet effective for a quick scan of the results]. [@james_introduction_2017]
   
 ### Generalized Additive Models
    
 In simple logistic or linear regression, there is an assumption made on the functional form of the relationship between predictors and response variable. These are called parametric models, where the data is exclusively used to estimate values for coefficients. Non-parametric models, on the other hand, use the data to estimate both coefficients and the function that serves to connect response to predictors. While on the surface this seems like a great idea (more reliance on your data and fewer assumptions!), such an exclusively non-parametric model would suffer greatly from the curse of dimensionality--where the addition of multiple predictors or over-reliance on data leads to substantial over-fitting.   
   
-One solution is the Generalized Additive Model, or GAM. This model lets us fit a different functional form to each observation, allowing for assumptions to be made on the data where it is safe to do so, and for non-parametric fitting when it is necessary. This model looks like:
+One solution is the Generalized Additive Model, or GAM. This model lets us fit a different functional form to each predictor, allowing for assumptions to be made on the data where it is safe to do so, and for non-parametric fitting when it is necessary. This model looks like:
 
-$$y_i = \alpha + \sum_{j = 1}^p \beta_j f_j(x_{ij}),$$
-where $y_i$ the i-th response variable, $\alpha$ is the intercept term, $f_j, \beta_j$ a series of $p$ functions and coefficients, and $x_{ij}$ the i-th observation for the j-th predictor. Note that for $f_j(x_j) = x_j$, this is a multilinear regression! [@james_introduction_2017]   
+$$y_i = \alpha + \sum_{j = 1}^p \beta_j f_j(x_{ij}), ~~j \in \{1,2,...p\}, i \in \{1,2,...n\} $$
+
+
+where $y_i$ the i-th response variable, $\alpha$ is the intercept term, $f_j, \beta_j$ a series of $p$ functions and coefficients, and $x_{ij}$ the i-th observation for the j-th predictor. Note that for $f(x_{ij}) = x_{ij}$, this is a multilinear regression! [@james_introduction_2017]   
    
-A type of most commonly fit functions--and the type I will make use of--are smoothing splines. These are cubic functions connected at specific points called "knots", with the limitation that the full function must be continuous and smooth. These are particularly useful when modeling time variables, as they can be fitted to variables like years or months in order to distinguish a secular trend from a general trend over time [@barr_comprehensive_2012]. In terms of this thesis, this will help when responding to Q2 as it was framed earlier in this chapter.
+A type of most commonly fit functions--and the type I will make use of--are smoothing splines. These are functions connected at specific points called "knots", with the limitation that the full function must be continuous and smooth, and have a continuous first and second derivative. Between knots, different functional forms are fit to the data, within some constraints; they may, for example, all have to be cubic polynomials. These are particularly useful when modeling time variables, as they can be fitted to variables like years or months in order to distinguish a secular trend from a general trend over time [@barr_comprehensive_2012]. In terms of this thesis, this will help when responding to Q2 as it was framed earlier in this chapter.
 
 
 ### Multilevel Models  
@@ -123,7 +128,7 @@ Multilevel models can be fit using the `lme4` \textit{R} package that uses restr
 For all generalized linear regression models (including GAMs, mixed and fixed effects models) I use Mean Squared Error to asses the accuracy of the fit. Assuming a dataset $\{(y_0, x_0^1, x_0^2, ..., x_0^m),...,(y_n, x_n^1, x_n^2, ..., x_n^m)\}$ of n observations and m predictors, with $X_i$ a vector of the predictors for the i-th observation, and $f:R^m \to R$ the true multivariate function connecting the predictors and response, mean squared error is calculated as follows:
 $$\text{MSE} = \frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{f}(X_i))^2$$
 
-MSE can be calculated either using the same dataset used in estimating the model coefficients, or on a new dataset. In the later case it is called predictive or test MSE. Despite prediction not being the purpose of the models presented in this thesis, I use test MSE because of the independence such a calculation method brings from the data used for the fit, compensating in a way for overfitting[@james_introduction_2017]. To calculate test MSE I use five-fold cross-validation, which will be analyzed shortly. 
+MSE can be calculated either using the same dataset used in estimating the model coefficients, or on a new dataset. In the later case it is called predictive or test MSE. Despite prediction not being the purpose of the models presented in this thesis, I use test MSE because of the independence such a calculation method brings from the data used for the fit, compensating in a way for over-fitting[@james_introduction_2017]. To calculate test MSE I use five-fold cross-validation, which will be analyzed shortly. 
 
 #### Area Under the Curve (AUC)
 
@@ -147,7 +152,7 @@ Similarly to MSE, there is value in calculating AUC from a test dataset, rather 
  
 #### k-Folds Cross Validation
   
-The goal of statistical modeling is to approximate the true function that links predictors to response. While the final model's coefficients should be estimated using as much data as possible, when assesing how good a fit that model is there can be better uses of the power that large amounts of data give us. k-Folds cross validation allows for better approximations of goodness-of-of-fit metrics, by partitioning the data into training datasets and test datasets. The fundamental idea is that the data is split into k different subsets, which are then sequentially used to fit the model and calculate the value of some metric[@james_introduction_2017]. The algorithm goes as follows:
+The goal of statistical modeling is to approximate the true function that links predictors to response. While the final model's coefficients should be estimated using as much data as possible, when assessing how good a fit that model is there can be better uses of the power that large amounts of data give us. k-Folds cross validation allows for better approximations of goodness-of-of-fit metrics, by partitioning the data into training datasets and test datasets. The fundamental idea is that the data is split into k different subsets, which are then sequentially used to fit the model and calculate the value of some metric[@james_introduction_2017]. The algorithm goes as follows:
 
 \begin{enumerate}
 \item Partition data into k folds
