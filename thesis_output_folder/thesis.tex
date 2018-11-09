@@ -1156,7 +1156,7 @@ future research on the subject.
   
   \begin{figure}
   
-  {\centering \includegraphics[width=0.5\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_white_county_map} 
+  {\centering \includegraphics[width=0.8\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_white_county_map} 
   
   }
   
@@ -1498,7 +1498,7 @@ future research on the subject.
   
   \begin{figure}
   
-  {\centering \includegraphics[width=0.5\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_registered_county_map} 
+  {\centering \includegraphics[width=0.8\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_registered_county_map} 
   
   }
   
@@ -1507,7 +1507,7 @@ future research on the subject.
   
   \begin{figure}
   
-  {\centering \includegraphics[width=0.5\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/party_affiliation_county_map} 
+  {\centering \includegraphics[width=0.8\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/party_affiliation_county_map} 
   
   }
   
@@ -1520,19 +1520,19 @@ future research on the subject.
   Colorado introduced no-excuse absentee voting, allowing voters to either
   physically pick up a mail ballot at a Vote Center or County Office, or
   have a ballot mailed to them prior to election day. In 2008, this reform
-  was expanded to a permanent Vote-By-Mail system, which gave voters the
-  option to be permanently put on a list of addresses that received mail
-  ballots prior to the election. The State also entered a transitional
-  status to full mail elections, giving counties the option to make all
-  coordinated local elections, general elections, and primary elections
-  exclusively VBM. In 2013, the Colorado State Legislature passed
-  HB13-1303: The Voter Access and Modernized Elections Act, which mandated
-  that every voter currently registered receive a mail ballot for all
-  future elections. The Act also expanded the use of Vote Centers instead
-  of traditional polling places, instituted same-day voter registration,
-  and revamped the way active and inactive voter status was designated on
-  voter rolls--more on this in future sections. These changes are
-  summarized in Table 3.3.
+  was expanded to a permanent Vote-By-Mail system, which gave counties the
+  option to allow voters to be permanently put on a list of addresses that
+  received mail ballots prior to the election. The State also entered a
+  transitional status to full mail elections, giving counties the option
+  to make all coordinated local elections, general elections, and primary
+  elections exclusively VBM. In 2013, the Colorado State Legislature
+  passed HB13-1303: The Voter Access and Modernized Elections Act, which
+  mandated that every voter currently registered receive a mail ballot for
+  all future elections. The Act also expanded the use of Vote Centers
+  instead of traditional polling places, instituted same-day voter
+  registration, and revamped the way active and inactive voter status was
+  designated on voter rolls--more on this in future sections (Hullinghorst
+  \& Pabon, 2013). These changes are summarized in Table 3.3.
   
   \begin{longtable}[]{@{}cl@{}}
   \caption{Key changes to Colorado elections policy
@@ -1629,16 +1629,21 @@ future research on the subject.
   the second and third of these areas. I was unable to procure individual
   level data on demographic characteristics apart from gender, age, and
   party registration. However, reasonable conclusions can still be drawn
-  from county or precinct aggregates.
+  from county or precinct aggregates\footnote{}.
   
   \subsection{Sources and first glance}\label{sources-and-first-glance}
   
-  I used two sources of data: Colorado voter records procured from the
+  I used two sources of data: Colorado voter records gathered by the
   Colorado Secretary of State's office, and demographic data from the 2010
   US Census. In the process of procuring these data I was aided by a
   series of other researchers and professionals with experience in the
-  field of elections administration; they are mentioned in my
-  acknowledgements.
+  field of elections administration. Andrew Menger in particular was kind
+  enough to give me access to data files for Colorado for the years of
+  2012-2016 that he had already collected for his research\footnote{Doctor
+    Menger's website with links to his research can be found at
+    www.andrewmenger.com}. I directly obtained the 2017 from the Colorado
+  Secretary of State's office, with the help of Mr.~Judd Choate, Director
+  of Elections.
   
   \subsubsection{2010 US Census}\label{us-census}
   
@@ -1668,14 +1673,12 @@ future research on the subject.
   new voters, or with the removal of inactive or otherwise ineligible
   voters. Therefore, this file will be different every time it is accessed
   or shared. Based on when this file is accessed, only a ``snapshot'' of
-  the file can be obtained. I have managed to procure ``snapshots'' for
-  each year between 2012 and 2017.
-  
-  Similarly with VRFs, a Voter History File is maintained and constantly
-  updated by the state. This file is uniquely connected to its VRF: only
-  voters showing up as registrants will have their histories included. I
-  have similarly procured ``snapshots'' of the Voter History File for the
-  years between 2012 and 2017.
+  the file can be obtained. Similarly with VRFs, a Voter History File is
+  maintained and constantly updated by the state. This file is uniquely
+  connected to its VRF: only voters showing up as registrants will have
+  their histories included. I have both Voter Registration and History
+  files for the years between 2012-2017, obtained with the help of Judd
+  Choate and Andrew Menger.
   
   In the Voter Registration files, the unit of observation is the
   individual voter, and all variables are initially coded as character
@@ -1711,17 +1714,19 @@ future research on the subject.
   \subsection{Initial Problems with the 2017 Voter File and
   Solution}\label{initial-problems-with-the-2017-voter-file-and-solution}
   
-  The first major issue I encountered--which merits discussion in its own
-  section--derives from the aforementioned fact that the voter records I
-  had access to are ``snapshots''. What this means, is that for each
-  person in each year of voter registration files, I will have their
-  corresponding history files for all ballots they have cast in Colorado,
-  but not their own history of registration and migration. If, say, a
-  voter moved from Boulder County to Summit County, I would have their
-  votes in Boulder County show up in the voter history file, but them
-  being registered in Summit. If you recall the turnout calculations
-  specified earlier on, this implies an overestimation when looking back
-  at elections that happened some time before the date of the
+  In my initial research, I intended to only use the 2017 snapshots of the
+  Colorado Registration and History file. The major issue I
+  encountered--which merits discussion in its own section, and
+  necessitated that I search for more data--comes from the aforementioned
+  fact that the records I had access to are ``snapshots''. What this
+  means, is that for each person in each year of voter registration files,
+  I have their corresponding history files for all ballots they have cast
+  in Colorado, but not their own history of registration and migration.
+  If, say, a voter moved from Boulder County to Summit County, I would
+  have their votes in Boulder County show up in the voter history file,
+  but them being registered in Summit. If you recall the turnout
+  calculations specified earlier on, this implies an overestimation when
+  looking back at elections that happened some time before the date of the
   ``snapshot''. Additionally, ``snapshots'' of current voter files do not
   reflect voters dropping off the rolls for whatever reason--death, moving
   out of the state, long term inactivity, non-confirmable personal data
@@ -1731,21 +1736,19 @@ future research on the subject.
   created when subtracting one from the denominator and enumerator of
   turnout.
   
-  This was a significant problem from the beginning of this thesis, since
-  I started out with only one ``snapshot'' from 2017. After going through
-  turnout calculations, a significant majority of counties appeared to
-  have turnout exceeding 100\%, particularly for years between 2000 and
-  2012. This was, to put it mildly, concerning. With the help of my
-  advisers, I was able to procure similar ``snapshots'' for each year
-  between 2012-2016. After similar calculations, I returned figure 3.4 for
-  the eight most populous counties as described above, including different
-  shapes for election type, colors for county, and a vertical line at 2013
-  to signify the latest major change in how Colorado administers
-  elections.
+  After going through turnout calculations with the 2017 files, a
+  significant majority of counties appeared to have turnout exceeding
+  80\%, particularly for years between 2000 and 2012. This was, to put it
+  mildly, concerning. With the aforementioned help, I was given access to
+  similar ``snapshots'' for each year between 2012-2016. After similar
+  calculations, I returned figure 3.4 for the eight most populous counties
+  as described above, including different shapes for election type, colors
+  for county, and a vertical line at 2013 to signify the latest major
+  change in how Colorado administers elections.
   
   \begin{figure}
   
-  {\centering \includegraphics[width=0.6\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/colorado_bigeight_turnout_graph} 
+  {\centering \includegraphics[width=0.8\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/colorado_bigeight_turnout_graph} 
   
   }
   
@@ -1761,7 +1764,7 @@ future research on the subject.
   
   \begin{figure}
   
-  {\centering \includegraphics[width=0.6\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/county_migration_A} 
+  {\centering \includegraphics[width=0.8\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/county_migration_A} 
   
   }
   
@@ -1772,16 +1775,16 @@ future research on the subject.
   deviation between the counts using just the 2017 file and all files
   across years. Specifically, the 2017 count consistently underestimates
   the total amount of registered voters--this is shown by the red linear
-  model smoothing line. This consistent difference confirms the hypothesis
-  that there is a substantial benefit to using ``snapshots'' for multiple
-  years. Second, counts get more accurate the closer to 2017 we get. This
+  model smoothing line. This consistent difference means that it is
+  impossible to generate conclusions on my hypotheses using only the 2017
+  files. Second, counts get more accurate the closer to 2017 we get. This
   should be even more apparent in figure 3.6, which limits the scale to
   only some high registration counties, and adds a shape indicator for
   county.
   
   \begin{figure}
   
-  {\centering \includegraphics[width=0.6\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/county_migration_B} 
+  {\centering \includegraphics[width=0.8\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/county_migration_B} 
   
   }
   
@@ -1800,7 +1803,7 @@ future research on the subject.
   
   \begin{figure}
   
-  {\centering \includegraphics[width=0.6\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/Calc_vs_rep_turnout} 
+  {\centering \includegraphics[width=0.8\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/Calc_vs_rep_turnout} 
   
   }
   
@@ -1815,15 +1818,18 @@ future research on the subject.
   \subsection{Other Wrangling Issues
   Faced}\label{other-wrangling-issues-faced}
   
-  Suffice to say, wrangling data was the majority of the work that went
-  into this thesis. Doing a full account would probably read like the
-  world's most cliche crime novel: a series of elusive final datasets, a
-  plucky yet occasionally naive young detective, two wisened mentors,
-  clues, dead ends, frustration, compromise, and\ldots{}spreadsheets. I
-  will spare the reader the whole story, but I will include a
-  non-comprehensive list of some of the difficulties associated with
-  wrangling voter files, as it was a crucial part of the learning process
-  I underwent while doing my research.
+  Wrangling the data was the majority of the work that went into this
+  thesis. As will become clear in this section, apart from accurately
+  processing, diagnosing, and merging the data, the process of wrangling
+  includes several non-trivial decisions about how to treat missing values
+  and variable specification. Doing a full account would probably read
+  like the world's most cliche crime novel: a series of elusive final
+  datasets, a plucky yet occasionally naive young detective, two wisened
+  mentors, clues, dead ends, frustration, compromise,
+  and\ldots{}spreadsheets. I will spare the reader the whole story, but I
+  will include a non-comprehensive list of some of the difficulties
+  associated with wrangling voter files, as it was a crucial part of the
+  learning process I underwent while doing my research.
   
   \textbf{Missing Values}: The decision on how to deal with missing
   values--or NAs--in a dataset is a lot more important than it may
@@ -1846,15 +1852,18 @@ future research on the subject.
   \textbf{Data Input Errors}: Is ``Greece'' a legitimate voting method?
   Probably not. However, ``Greece'' did show up as a value in the
   VOTING\_METHOD variable for my 2012 voter history file snapshot. This
-  may have occurred for a series of reasons, like data reading issues--the
-  data I acquired had changed hands some times, and also changed platforms
-  between STATA and R--or issues at time of input--each county counts
-  votes individually, and \emph{then} the state aggregates the data--, or
-  some bug in my code. Having adequately checked for the later of these
-  reasons, I treated all values that seemed more likely than not to be
-  errors as NAs. There were not many of these--less than .001\% of my
-  data--but they were a hassle to find, analyze, and then recode into some
-  useful value.
+  may occur for a number of reasons, the most likely of which is the
+  introduction of errors when transferring these data. The data I have has
+  been read and written by multiple operating systems (iOS and Windows)
+  and programming platforms (STATA, R); they have also been uploaded,
+  downloaded, and written unto CDs, as well as transferred between County
+  and Colorado Secretary of State's Office when they were created.
+  Characters that would be normally read into one platform as line or
+  value delimiters may have been misinterpreted by another platform, with
+  no operator error involved. In my analysis I treated all values that
+  seemed more likely than not to be errors as NAs. There were not many of
+  these--less than .001\% of my data--but they were a hassle to find,
+  analyze, and then recode into some useful value.
   
   \textbf{Data Size}: Nothing to write home about here, just an
   observation that multiple voter registration files can be \emph{huge},
@@ -2003,11 +2012,11 @@ future research on the subject.
   \subsection{Lack of variability}\label{lack-of-variability}
   
   To put it very simply, it's not enough to have hundreds of thousands of
-  observations if they are all almost identical for some important
-  variable. If, for example, my data included a thousand people in
-  Jefferson county, and 63 in all other counties of Colorado combined--one
-  in each remaining county--, then I would not be able to leverage my data
-  to draw conclusions on county-level effects.
+  observations if they are all almost identical to each other. If, for
+  example, my data included a thousand people in Jefferson county, and 63
+  in all other counties of Colorado combined--one in each remaining
+  county--, then I would not be able to leverage my data to draw
+  conclusions on county-level effects.
   
   As previously stated, I have registration files going back to 2012. From
   these files, I have extracted data for elections going back to
@@ -2051,14 +2060,14 @@ future research on the subject.
   
   \begin{itemize}
   \item
-    \emph{More (Diverse) Data}: It would be amazing to get snapshot data
-    of Colorado voter files from, say, 2004 to today, because it would
-    allow for an extensive study on how the 2008 and 2013 election laws
-    re-shaped voting decisions in the state. It would be amazing, but also
-    expensive and very time consuming--involving several purchases of data
-    from the Secretary of State of Colorado. Voter registration files also
-    tend to get messier the further back one goes, which means that the
-    process of cleaning up the data would get substantially harder. It
+    \emph{More (Diverse) Data}: It would be very useful to get snapshot
+    data of Colorado voter files from, say, 2004 to today, because it
+    would allow for an extensive study on how the 2008 and 2013 election
+    laws re-shaped voting decisions in the state. It would be amazing, but
+    also expensive and very time consuming--involving several purchases of
+    data from the Secretary of State of Colorado. Voter registration files
+    also tend to get messier the further back one goes, which means that
+    the process of cleaning up the data would get substantially harder. It
     would also require more processing power to handle more observations.
     My research here does not do this, as the scope of a senior thesis is
     a lot more limited than such an overarching study that would probably
@@ -2088,23 +2097,18 @@ future research on the subject.
     go into the particulars of this method--the sources cited here should
     provide a decent introduction--, but this method has been successful
     in assessing policy effects such as anti-smoking laws (Barr et al.,
-    2012), or even motor voter laws in Oregon\footnote{This is in
-      refference to a paper presented by advisor Paul Gronke at the 2017
-      Elections Sciences Reform and Administration Conference in Portland,
-      Oregon.}.
+    2012), or even motor voter laws in Oregon(Gronke, McGhee, Romero, \&
+    Griffin, 2017).
   \end{itemize}
   
   \subsection{Processing Power}\label{processing-power}
   
-  These models take a really long time to run, and many times do not even
-  reach results. For this purpose, I acquired a MacBook Pro from Reed
-  College Computer User Services that substantially increased the amount
-  of RAM I had available for this thesis. This was useful, but not enough.
-  Particularly the individual level models, for which I have almost 35
-  million different observations, do not run. A long term solution to this
-  issue could be the use of a virtual machine, or some RStudio server, ar
-  Amazon Work Spaces (AWS). For now, I compensated for this problem by
-  using stratified sampling to sample a subset of my observations.
+  The models are extremelly RAM intensive; particularly the individual
+  level models, for which I have almost 35 million different observations,
+  do not run. For now, I compensated for this problem by using stratified
+  sampling to sample a subset of my observations\footnote{A long term
+    solution to this issue could be the use of a virtual machine, or some
+    RStudio server, ar Amazon Work Spaces (AWS).}.
   
   The form of stratified sampling I am using is very simple; based on
   county, mail vote, and electoral participation, I use \texttt{dplyr} in
@@ -2279,7 +2283,7 @@ future research on the subject.
   
   \[a_{k} \sim N (\gamma_0, \sigma_{\alpha}^2)\] This model provides a
   more reasonable set of estimates for each county, but still fails at
-  providing any sort of guess as to secular trends, time-specific effects,
+  providing any information as to secular trends, time-specific effects,
   election type effects, or mail voting--the variable of interest. I will
   amend this by adding a set of variables at the election and local result
   levels: election type and an interaction term between election type and
@@ -2327,7 +2331,8 @@ future research on the subject.
     in the \texttt{mgcv} \textit{R} package, whose call determined that
     the number of knots here may be too low. However, given the data
     available to me, I was limited to the inclusion of seven years and as
-    such cannot increase the number of knots any further.} A summary of
+    such cannot increase the number of knots any further. Setting the
+    number of knots to seven also gave the lowest CV MSE.} A summary of
   these four models is provided in the following table:
   
   \begin{longtable}[]{@{}cc@{}}
@@ -2715,22 +2720,6 @@ future research on the subject.
   Where \(y_i \in \{0,1\}\) is the probability that the i-th ballot was
   completed.
   
-  In this section I do not linearly add to the model until it reaches a
-  final stage. The reasoning here is that there is no exact linear path to
-  follow; there is an overarching unit of observation--the ballot--and all
-  the rest are dependent between each other. For instance, adding a
-  variable for Party at the ballot level would not significantly change
-  the way I later add percentage of white residents at the county level.
-  Therefore, the way I proceed is the following: I ``build'' the models
-  step by step and separately for each group of variables (grouping by
-  unit of observation). Then I present one example of what a model using
-  two of these initial ``building blocks'' would look like. Since this is
-  fairly generalizable, I then proceed directly to the full model which
-  includes all different variables. Some models will be named; the models
-  for which I do so are the ones for which an \textit{R} call is
-  attempted, and results in either estimation of coefficients or some
-  interesting observation on why their call was not possible.
-  
   If receiving a ballot with no information, I would predict that the
   probability that an additional ballot was a vote in favor would be equal
   to turnout, as calculated through all other ballots. Therefore:
@@ -2746,10 +2735,9 @@ future research on the subject.
   \subsubsection{County Level}\label{county-level}
   
   Assume that the ballot I am trying to assess completion for has the name
-  of the county it is from written on it. There are two ways I can think
-  of for predicting \(\mathbb{P(y_i = 1)}\). First, assume that each
-  different county has a different, independent \(\mathbb{P(y_i = 1)}\),
-  then:
+  of the county it is from written on it. There are two ways to predict
+  \(\mathbb{P(y_i = 1)}\). First, assume that each different county has a
+  different, independent \(\mathbb{P(y_i = 1)}\), then:
   
   \[\hat{\mathbb{P}}(y_i = 1) \sim \text{logit}^{-1}(\sum_{k = 1}^{64}x_{k,i}\beta_{k})\]
   
@@ -3687,6 +3675,13 @@ future research on the subject.
   \emph{11}(1), 437--455.
   \url{http://doi.org/10.1146/annurev.polisci.11.053006.190912}
   
+  \hypertarget{ref-gronke_voter_2017}{}
+  Gronke, P., McGhee, E., Romero, M., \& Griffin, R. (2017).
+  Voter~~Registration~~and~~Turnout~~under
+  ``Oregon~~Motor~~Voter'':~~A~~Second~~Look. In. Portland, OR. Retrieved
+  from
+  \url{https://dl.dropboxusercontent.com/nativeprint?file=https\%3A\%2F\%2Fwww.dropbox.com\%2Fs\%2Fo63a0zi7j8plhgl\%2FOMV_and_Turnout_McGhee_Gronke_Romero_Griffin_July2017.pdf\%3Fdisable_range\%3D1\%26from_native_print\%3D1\%26preview\%3D1}
+  
   \hypertarget{ref-hamm_how_2017}{}
   Hamm, K. (2017). How Colorado has voted in presidential elections (and
   how its politics have changed) since 1980. \emph{The Denver Post}.
@@ -3702,6 +3697,10 @@ future research on the subject.
   \hypertarget{ref-hersh_hacking_2015}{}
   Hersh, E. D. (2015). \emph{Hacking the Electorate: How Campaigns
   Perceive Voters}. New York, NY: Cambridge University Press.
+  
+  \hypertarget{ref-hullinghorst_voter_2013}{}
+  Hullinghorst, D. L., \& Pabon, D. (2013, May). Voter Access and
+  Moderninzed Elections Act.
   
   \hypertarget{ref-james_introduction_2017}{}
   James, G., Witten, D., Hastie, T., \& Tibshirani, R. (2017). \emph{An
