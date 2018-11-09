@@ -2711,7 +2711,7 @@ future research on the subject.
   
   For the rest of this section, assume the following:
   
-  \[y_i \sim \text{Bernoulli}(p\_vote)\]
+  \[y_i \sim \text{Bernoulli}(p)\]
   
   Where \(y_i \in \{0,1\}\) is the probability that the i-th ballot was
   completed.
@@ -2736,7 +2736,7 @@ future research on the subject.
   probability that an additional ballot was a vote in favor would be equal
   to turnout, as calculated through all other ballots. Therefore:
   
-  \[\hat{p\_vote}_i = \frac{\# \text{votes cast}}{\# \text{ballots}}\]
+  \[\hat{\mathbb{P}}(y_i = 1) = \frac{\# \text{votes cast}}{\# \text{ballots}}\]
   
   \subsubsection{Estimation with only one type of
   data}\label{estimation-with-only-one-type-of-data}
@@ -2748,11 +2748,11 @@ future research on the subject.
   
   Assume that the ballot I am trying to assess completion for has the name
   of the county it is from written on it. There are two ways I can think
-  of for predicting \(p\_vote\). First, assume that each different county
-  has a different, independent \(p\_vote\). Therefore, in model-lingo this
-  would look like:
+  of for predicting \(\mathbb{P(y_i = 1)}\). First, assume that each
+  different county has a different, independent \(\mathbb{P(y_i = 1)}\),
+  then:
   
-  \[\hat{p\_vote}_i \sim \text{logit}^{-1}(\sum_{k = 1}^{64}x_{k,i}\beta_{k})\]
+  \[\hat{\mathbb{P}}(y_i = 1) \sim \text{logit}^{-1}(\sum_{k = 1}^{64}x_{k,i}\beta_{k})\]
   
   Where k counts over the 64 counties of Colorado, and \(x_{k}\) is an
   indicator variable for each county. If I, quite reasonably, throw away
@@ -2760,29 +2760,35 @@ future research on the subject.
   same state and the same country--I could also fit a mixed effects model
   as such:
   
-  \[\hat{p\_vote} \sim \text{logit}^{-1}(a_{k[i]}), \]
+  \begin{equation} \tag{Model 1}
+  \hat{\mathbb{P}}(y_i = 1) \sim \text{logit}^{-1}(a_{k[i]}),
+  \end{equation}
+  
   \[a_{k} \sim \text{N}(\gamma_0, \sigma_{\alpha}^2)\]
   
   Where \(\alpha_{k[i]}\) varies by county, constrained by its standard
   deviation and \(\gamma_0\), an intercept coefficient. I name this
-  \emph{Model 1}.
+  \textbf{Model 1}.
   
   Let's say now that along with the one ballot, I was given a short list
   of \(n^{\text{county vars}}\) other county-level variables, be they
   discrete, continuous, or indicators. The two models would then look
   like:
   
-  \[\hat{p\_vote}_i \sim \text{logit}^{-1}(\sum_{k = 1}^{64}x_{k}\beta_{k} + \sum_{i'=1}^{n^{\text{county vars}}}x_{k[i], i'}\beta_{i'+64})\]
+  \[\hat{\mathbb{P}}(y_i = 1) \sim \text{logit}^{-1}(\sum_{k = 1}^{64}x_{k}\beta_{k} + \sum_{i'=1}^{n^{\text{county vars}}}x_{k[i], i'}\beta_{i'+64})\]
   
   Where \(x_{k[i], l}\) is the k-th value of the i'-th variable. If, as
   before, I do not assume independence, the model can be written as:
   
-  \[\hat{p\_vote} \sim \text{logit}^{-1}(a_{k[i]}), \]
+  \begin{equation} \tag{Model 2}  
+  \hat{\mathbb{P}}(y_i = 1) \sim \text{logit}^{-1}(a_{k[i]}),
+  \end{equation}
+  
   \[a_{k} \sim \text{N}(\gamma_0 + \sum_{i'=1}^{n^{\text{county vars}}}x_{k[i], i'}\gamma_{i'}, \sigma_{\alpha}^2)\]
   
   In the case of my specific data, for the time being I have county-level
   data for white population and urban population, so
-  \(n^{\text{county vars}} = 2\). I name this \emph{Model 2}
+  \(n^{\text{county vars}} = 2\). I name this \textbf{Model 2}
   
   \subsubsection{Individual Level}\label{individual-level}
   
@@ -2795,11 +2801,11 @@ future research on the subject.
   all individuals. Also let \(z_{j}\) be an indicator variable for each
   individual. Then:
   
-  \[\hat{p\_vote}_i \sim \text{logit}^{-1}(\sum_{j = 1}^{n^{ID}}z_{j}\beta_{j})\]
+  \[\hat{\mathbb{P}}(y_i = 1) \sim \text{logit}^{-1}(\sum_{j = 1}^{n^{ID}}z_{j}\beta_{j})\]
   
   And the second model, not assuming independence, would be:
   
-  \[\hat{p\_vote} \sim \text{logit}^{-1}(\delta_{j[i]}), \]
+  \[\hat{\mathbb{P}}(y_i = 1) \sim \text{logit}^{-1}(\delta_{j[i]}), \]
   \[\delta_{j} \sim \text{N}(\zeta_0, \sigma_{\delta}^2)\]
   
   Again, in a similar way to county level data, there are variables at an
@@ -2809,17 +2815,20 @@ future research on the subject.
   variables, be they discrete, continuous, or indicators. The two models
   would then look like:
   
-  \[\hat{p\_vote}_i \sim \text{logit}^{-1}(\sum_{j = 1}^{n^{ID}}z_{j}\beta_{j} + \sum_{i'=1}^{n^{\text{indiv vars}}}z_{j[i], i'}\beta_{i'+n^{ID}})\]
+  \[\hat{\mathbb{P}}(y_i = 1) \sim \text{logit}^{-1}(\sum_{j = 1}^{n^{ID}}z_{j}\beta_{j} + \sum_{i'=1}^{n^{\text{indiv vars}}}z_{j[i], i'}\beta_{i'+n^{ID}})\]
   
   Where \(z_{j[i], l}\) is the j-th value of the i'-th variable. If, as
   before, I do not assume independence, the model can be written as:
   
-  \[\hat{p\_vote} \sim \text{logit}^{-1}(\delta_{j[i]}), \]
+  \begin{equation} \tag{Model 3*}
+  \hat{\mathbb{P}}(y_i = 1) \sim \text{logit}^{-1}(\delta_{j[i]}),
+  \end{equation}
+  
   \[\delta_{j} \sim \text{N}(\zeta_0 + \sum_{i'=1}^{n^{\text{indiv vars}}}z_{j[i], i'}\delta_{i'}, \sigma_{\delta}^2)\]
   
   In the case of my specific data, for the time being I have
   individual-level data for gender, so \(n^{\text{indiv vars}} = 1\). I
-  name the combination of this model and Model 2: \emph{Model 3}.
+  name the combination of this model and Model 2: \textbf{Model 3}.
   
   \subsubsection{Election Level}\label{election-level}
   
@@ -2830,12 +2839,12 @@ future research on the subject.
   independence, with \(w_{i'}\) being indicator variables for each
   election, is:
   
-  \[\hat{p\_vote}_i \sim \text{logit}^{-1}(\sum_{l = 1}^{n^{elect}}w_{l}\beta_{l})\]
+  \[\hat{\mathbb{P}}(y_i = 1) \sim \text{logit}^{-1}(\sum_{l = 1}^{n^{elect}}w_{l}\beta_{l})\]
   
   Again, as previously, it would be safe to assume that each election is
   not held in a vacuum. Adding mixed effects this model would be:
   
-  \[\hat{p\_vote} \sim \text{logit}^{-1}(\eta_{l[i]}), \]
+  \[\hat{\mathbb{P}}(y_i = 1) \sim \text{logit}^{-1}(\eta_{l[i]}), \]
   \[\eta_{l} \sim \text{N}(\nu_0, \sigma_{\nu}^2)\]
   
   Again, in a similar way to county and individual level data, I add in
@@ -2844,22 +2853,19 @@ future research on the subject.
   election-level variables, be they discrete, continuous, or indicators.
   The two models would then look like:
   
-  \[\hat{p\_vote}_i \sim \text{logit}^{-1}(\sum_{l = 1}^{n^{elect}}w_{l}\beta_{l} + \sum_{i'=1}^{n^{\text{election vars}}}w_{l[i], i'}\beta_{i'+n^{elect}})\]
-  Where \(w_{l[i], i'}\) is the l-th value of the i'-th variable.
+  \begin{equation} \tag{Model 4}
+  \hat{\mathbb{P}}(y_i = 1) \sim \text{logit}^{-1}(\sum_{l = 1}^{n^{elect}}w_{l}\beta_{l} + \sum_{i'=1}^{n^{\text{election vars}}}w_{l[i], i'}\beta_{i'+n^{elect}})
+  \end{equation}
   
-  Assuming independence:
-  \[\hat{p\_vote} \sim \text{logit}^{-1}(\eta_{l[i]}), \]
-  \[\eta_{l} \sim \text{N}(\nu_0 + \sum_{i'=1}^{n^{\text{election vars}}}w_{l[i], i'}\nu_{i'}, \sigma_{\nu}^2)\]
-  For the time being I have two different variables that describe
-  individual elections: date and type. Note that the above models may not
-  be the best way to describe dates! An alternative could be fitting a
-  glm, with some smoothing spline function for year. As for type, this
-  would include four distinct indicators; one for each election type. I
-  name this final model--including a smoothing spline for year,
-  \emph{Model 4}. Model 4 would not be a mixed effects model, since all
-  the variability between elections is incorporated in election type and
-  election year--with those two variables I can fully describe each
-  election.
+  Where \(w_{l[i], i'}\) is the l-th value of the i'-th variable. For the
+  time being I have two different variables that describe individual
+  elections: date and type. I choose to fit a glm with some smoothing
+  spline function for year. This would also include four distinct
+  indicators for election type. I name this final model (including a
+  smoothing spline for year) \textbf{Model 4}. Model 4 would not be a
+  mixed effects model, since all the variability between elections is
+  incorporated in election type and election year--with those two
+  variables I can fully describe each election.
   
   \subsubsection{Ballot Level}\label{ballot-level}
   
@@ -2869,7 +2875,9 @@ future research on the subject.
   since all the data is at the same unit of observation. Therefore, when
   adding ballot level variables, the model would look like:
   
-  \[\hat{p\_vote}_i \sim \text{logit}^{-1}(\beta_0 + \sum_{i' = 1}^{n^{\text{ballot vars}}}u_{i,i'}\beta_{l'})\]
+  \begin{equation} \tag{Model 5}
+  \hat{\mathbb{P}}(y_i = 1) \sim \text{logit}^{-1}(\beta_0 + \sum_{i' = 1}^{n^{\text{ballot vars}}}u_{i,i'}\beta_{l'})
+  \end{equation}
   
   Where \(u_{i,i'}\) is the i-th value of the i'-th variable, and
   \(n^{\text{ballot vars}}\) is the number of ballot level variables. For
@@ -2879,7 +2887,7 @@ future research on the subject.
   Unaffiliated. Age is tricky; for now the options would be: inclusion as
   an integer, inclusion as a cubic polynomial, inclusion as a 2nd degree
   polynomial, inclusion in some form of spline function. I name this
-  \emph{Model 5}, including age as a linear predictor.
+  \textbf{Model 5}, including age as a linear predictor.
   
   \subsubsection{Estimation with two types of
   data}\label{estimation-with-two-types-of-data}
@@ -2893,7 +2901,9 @@ future research on the subject.
   With the assumption that both counties and individuals are independent
   of one another, I proceed to the first type of model:
   
-  \[\hat{p\_vote}_i \sim \text{logit}^{-1}(\sum_{k = 1}^{64}x_{k}\beta_{k} + \sum_{i'=1}^{n^{\text{county vars}}}x_{k[i], i'}\beta_{i'+64} + \sum_{j = 1}^{n^{ID}}z_{j}\beta_{j + n^{\text{county vars}} + 64} + \sum_{i'=1}^{n^{\text{indiv vars}}}z_{j[i], i'}\beta_{i'+n^{ID} + n^{\text{county vars}} + 64})\]
+  \begin{multline*}
+  \hat{\mathbb{P}}(y_i = 1) \sim \text{logit}^{-1}(\sum_{k = 1}^{64}x_{k}\beta_{k} + \sum_{i'=1}^{n^{\text{county vars}}}x_{k[i], i'}\beta_{i'+64} + \sum_{j = 1}^{n^{ID}}z_{j}\beta_{j + n^{\text{county vars}} + 64} + \\ \sum_{i'=1}^{n^{\text{indiv vars}}}z_{j[i], i'}\beta_{i'+n^{ID} + n^{\text{county vars}} + 64})
+  \end{multline*}
   
   This is large and clunky. It includes variables as described above:
   indicators for each county and individual, and all individual or
@@ -2902,7 +2912,8 @@ future research on the subject.
   two ``levels'', with the second level consisting of two different
   regressions.
   
-  \[\hat{p\_vote} \sim \text{logit}^{-1}(\delta_{j[i]} + a_{k[i]}), \]
+  \[\hat{\mathbb{P}}(y_i = 1) \sim \text{logit}^{-1}(\delta_{j[i]} + a_{k[i]}), \]
+  
   \[a_{k} \sim \text{N}(\gamma_0 + \sum_{i'=1}^{n^{\text{county vars}}}x_{k[i], i'}\gamma_{i'}, \sigma_{\alpha}^2)\]
   \[\delta_{j} \sim \text{N}(\zeta_0 + \sum_{i'=1}^{n^{\text{indiv vars}}}z_{j[i], i'}\delta_{i'}, \sigma_{\delta}^2)\]
   
@@ -2912,12 +2923,10 @@ future research on the subject.
   I now proceed to include variables from all units of observation into
   one model. The first model, assuming independence, is:
   
-  \[
-  \begin{aligned}
-  \hat{p\_vote}_i \sim \text{logit}^{-1}(\sum_{k = 1}^{64}x_{k}\beta_{*} + \sum_{i'=1}^{n^{\text{county vars}}}x_{k[i], i'}\beta_{*} + \sum_{j = 1}^{n^{ID}}z_{j}\beta_{*} + \sum_{i'=1}^{n^{\text{indiv vars}}}z_{j[i], i'}\beta_{*} + \\
+  \begin{multline*}
+  \hat{\mathbb{P}}(y_i = 1) \sim \text{logit}^{-1}(\sum_{k = 1}^{64}x_{k}\beta_{*} + \sum_{i'=1}^{n^{\text{county vars}}}x_{k[i], i'}\beta_{*} + \sum_{j = 1}^{n^{ID}}z_{j}\beta_{*} + \sum_{i'=1}^{n^{\text{indiv vars}}}z_{j[i], i'}\beta_{*} + \\
   \sum_{l = 1}^{n^{elect}}w_{l}\beta_{*} + \sum_{i'=1}^{n^{\text{election vars}}}w_{l[i], i'}\beta_{*} + \sum_{i' = 1}^{n^{\text{ballot vars}}}u_{i,i'}\beta_{*})
-  \end{aligned}
-  \]
+  \end{multline*}
   
   You will notice that I have omitted the subscript for all beta
   coefficients. This is because after two or three parameters, this
@@ -2929,9 +2938,11 @@ future research on the subject.
   hierarchy, but the second level will now include three distinct
   regressions. Caveats for variables like age and date should be noted
   from previous sections. This, the most complete model, will be
-  \emph{Model 6}
+  \textbf{Model 6}
   
-  \[\hat{p\_vote} \sim \text{logit}^{-1}(\sum_{i' = 1}^{n^{\text{ballot vars}}}u_{i,i'}\beta_{l'} +\delta_{j[i]} + \alpha_{k[i]} + \eta_{l[i]}),\]
+  \begin{equation} \tag{Model 6}
+  \hat{p\_vote} \sim \text{logit}^{-1}(\sum_{i' = 1}^{n^{\text{ballot vars}}}u_{i,i'}\beta_{l'} +\delta_{j[i]} + \alpha_{k[i]} + \eta_{l[i]}),
+  \end{equation}
   
   \[\alpha_{k} \sim \text{N}(\gamma_0 + \sum_{i'=1}^{n^{\text{county vars}}}x_{k[i], i'}\gamma_{i'}, \sigma_{\alpha}^2)\]
   
