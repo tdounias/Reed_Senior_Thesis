@@ -1,6 +1,4 @@
-library(tidyverse)
-library(lubridate)
-library(knitr)
+library(pander)
 
 voting_methods <- data.frame(c("Absentee Carry", "Absentee Mail", 
                                "Early Voting", "In Person", 
@@ -16,6 +14,4 @@ voting_methods <- data.frame(c("Absentee Carry", "Absentee Mail",
                              c("VBM", "VBM", "In Person", "In Person", "VBM", "In Person", 
                                "In Person"))
 
-names(voting_methods) <- c("Voting Method", "Description of Method", "Final Designation")
-
-kable(voting_methods)
+names(voting_methods) <- c("Voting Method", "Description of Method", "Designation")

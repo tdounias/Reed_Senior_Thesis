@@ -1849,10 +1849,10 @@ future research on the subject.
   important, and should be taken with much care and consideration for the
   underlying structure of the data.
   
-  \textbf{Data Input Errors}: Is ``Greece'' a legitimate voting method?
-  Probably not. However, ``Greece'' did show up as a value in the
-  VOTING\_METHOD variable for my 2012 voter history file snapshot. This
-  may occur for a number of reasons, the most likely of which is the
+  \textbf{Data Input Errors}: Is ``QATAR'' a political party in Colorado?
+  State records say not. However, ``QATAR'' did show up as a value in the
+  Party variable for my 2016 voter registration file snapshot. This may
+  occur for a number of reasons, the most likely of which is the
   introduction of errors when transferring these data. The data I have has
   been read and written by multiple operating systems (iOS and Windows)
   and programming platforms (STATA, R); they have also been uploaded,
@@ -1927,6 +1927,82 @@ future research on the subject.
     VOTING\_METHOD: The method used by an individual voter to cast their
     ballot. Is coded as either VBM or In Person, according to Table 3.4:
   \end{itemize}
+  
+  \begin{longtable}[]{@{}lll@{}}
+  \caption{Voting methods coding table
+  \label{tab:voting_methods_table}}\tabularnewline
+  \toprule
+  \begin{minipage}[b]{0.22\columnwidth}\raggedright\strut
+  Voting Method\strut
+  \end{minipage} & \begin{minipage}[b]{0.42\columnwidth}\raggedright\strut
+  Description of Method\strut
+  \end{minipage} & \begin{minipage}[b]{0.18\columnwidth}\raggedright\strut
+  Designation\strut
+  \end{minipage}\tabularnewline
+  \midrule
+  \endfirsthead
+  \toprule
+  \begin{minipage}[b]{0.22\columnwidth}\raggedright\strut
+  Voting Method\strut
+  \end{minipage} & \begin{minipage}[b]{0.42\columnwidth}\raggedright\strut
+  Description of Method\strut
+  \end{minipage} & \begin{minipage}[b]{0.18\columnwidth}\raggedright\strut
+  Designation\strut
+  \end{minipage}\tabularnewline
+  \midrule
+  \endhead
+  \begin{minipage}[t]{0.22\columnwidth}\raggedright\strut
+  Absentee Carry\strut
+  \end{minipage} & \begin{minipage}[t]{0.42\columnwidth}\raggedright\strut
+  Voters who carried an absentee ballot with them from an early voting
+  location or county office\strut
+  \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+  VBM\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.22\columnwidth}\raggedright\strut
+  Absentee Mail\strut
+  \end{minipage} & \begin{minipage}[t]{0.42\columnwidth}\raggedright\strut
+  Voters who were sent an absentee ballot, and mailed it in\strut
+  \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+  VBM\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.22\columnwidth}\raggedright\strut
+  Early Voting\strut
+  \end{minipage} & \begin{minipage}[t]{0.42\columnwidth}\raggedright\strut
+  Voters who physically went to an Early Voting location and voted\strut
+  \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+  In Person\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.22\columnwidth}\raggedright\strut
+  In Person\strut
+  \end{minipage} & \begin{minipage}[t]{0.42\columnwidth}\raggedright\strut
+  Voters who physically went to a polling place and voted on paper\strut
+  \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+  In Person\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.22\columnwidth}\raggedright\strut
+  Mail Ballot\strut
+  \end{minipage} & \begin{minipage}[t]{0.42\columnwidth}\raggedright\strut
+  Vote By Mail\strut
+  \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+  VBM\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.22\columnwidth}\raggedright\strut
+  Polling Place\strut
+  \end{minipage} & \begin{minipage}[t]{0.42\columnwidth}\raggedright\strut
+  Traditional polling place voting, discontinued in 2013\strut
+  \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+  In Person\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.22\columnwidth}\raggedright\strut
+  Vote Center\strut
+  \end{minipage} & \begin{minipage}[t]{0.42\columnwidth}\raggedright\strut
+  Voters who cast their ballots at Vote Centers\strut
+  \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+  In Person\strut
+  \end{minipage}\tabularnewline
+  \bottomrule
+  \end{longtable}
   
   \begin{longtable}[]{@{}lll@{}}
   \caption{Voting method designation table
@@ -2325,11 +2401,11 @@ future research on the subject.
   y^{turnout}_{k,l} = a_{k} + \beta_{1}x_k^{\% white} + \beta_{2}x_k^{\% urban} + (\sum_{i'=1}^{4}\beta_{i'+3}w_{i'}^{election type})*(\beta_3v_{k,l}^{\% mail vote} + 1) + s(w^{year}_{l}),
   \end{equation}
   
-  \[a_{k} \sim N(\gamma_0, \sigma_{\alpha}^2)\] where \(s()\) is a thin
-  plate spline function with seven knots--equal to the number of
-  years.\footnote{I used the \texttt{gam.check()} function that is present
-    in the \texttt{mgcv} \textit{R} package, whose call determined that
-    the number of knots here may be too low. However, given the data
+  \[a_{k} \sim N(\gamma_0, \sigma_{\alpha}^2)\] where \(s()\) is a natural
+  cubic regression spline function with seven knots--equal to the number
+  of years.\footnote{I used the \texttt{gam.check()} function that is
+    present in the \texttt{mgcv} \textit{R} package, whose call determined
+    that the number of knots here may be too low. However, given the data
     available to me, I was limited to the inclusion of seven years and as
     such cannot increase the number of knots any further. Setting the
     number of knots to seven also gave the lowest CV MSE.} A summary of
@@ -2394,256 +2470,289 @@ future research on the subject.
   sure that my results are indicative of a secular trend, independent of
   any shifts along time.
   
-  \begin{longtable}[]{@{}ccccc@{}}
+  \begin{longtable}[]{@{}lcccc@{}}
   \caption{Estimated county level coefficients
   \label{tab:county_coef}}\tabularnewline
   \toprule
-  \begin{minipage}[b]{0.23\columnwidth}\centering\strut
+  \begin{minipage}[b]{0.26\columnwidth}\raggedright\strut
   Variables\strut
+  \end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\centering\strut
+  Model 1\strut
   \end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\centering\strut
-  Naive Model\strut
-  \end{minipage} & \begin{minipage}[b]{0.18\columnwidth}\centering\strut
-  County Effects\strut
-  \end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\centering\strut
-  Election Effects\strut
+  Model 2\strut
+  \end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\centering\strut
+  Model 3\strut
   \end{minipage} & \begin{minipage}[b]{0.11\columnwidth}\centering\strut
-  Time Data\strut
+  Model 4\strut
   \end{minipage}\tabularnewline
   \midrule
   \endfirsthead
   \toprule
-  \begin{minipage}[b]{0.23\columnwidth}\centering\strut
+  \begin{minipage}[b]{0.26\columnwidth}\raggedright\strut
   Variables\strut
+  \end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\centering\strut
+  Model 1\strut
   \end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\centering\strut
-  Naive Model\strut
-  \end{minipage} & \begin{minipage}[b]{0.18\columnwidth}\centering\strut
-  County Effects\strut
-  \end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\centering\strut
-  Election Effects\strut
+  Model 2\strut
+  \end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\centering\strut
+  Model 3\strut
   \end{minipage} & \begin{minipage}[b]{0.11\columnwidth}\centering\strut
-  Time Data\strut
+  Model 4\strut
   \end{minipage}\tabularnewline
   \midrule
   \endhead
-  \begin{minipage}[t]{0.23\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   (Intercept)\strut
-  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
   0.369\strut
-  \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   0.492\strut
-  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   0.455\strut
   \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
   0.470\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.23\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
   (0.60)\strut
-  \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.045)**\strut
-  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.078)**\strut
   \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
   (0.072)\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.23\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   Pct\_white\strut
-  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   0.034\strut
-  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   0.033\strut
   \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
   0.031\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.23\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
   \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\centering\strut
   (0.053)\strut
-  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.050)\strut
   \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
   (0.050)\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.23\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   Pct\_urban\strut
-  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   -0.118\strut
-  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   -0.117\strut
   \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
   -0.119\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.23\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
   \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\centering\strut
   (0.022)**\strut
-  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.021)**\strut
   \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
   (0.021)\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.23\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   typeGeneral\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\centering\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   0.190\strut
   \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
   0.254\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.23\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
   \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\centering\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.070)**\strut
   \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
   (0.065)\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.23\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   typeMidterm\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\centering\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   0.252\strut
   \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
   0.070\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.23\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
   \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\centering\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.068)**\strut
   \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
   (0.063)\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.23\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   typePrimary\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\centering\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   -0.071\strut
   \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
   -0.170\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.23\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
   \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\centering\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.069)\strut
   \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
   (0.062)\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.23\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   typeCoordinated*VBM\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\centering\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   -0.001\strut
   \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
   0.002\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.23\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
   \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\centering\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.067)\strut
   \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
   (0.058)\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.23\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   typeGeneral*VBM\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\centering\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   0.151\strut
   \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
   0.087\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.23\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
   \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\centering\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.073)*\strut
   \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
   (0.037)\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.23\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   typeMidterm*VBM\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\centering\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   -0.058\strut
   \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
   0.109\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.23\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
   \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\centering\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.026)\strut
   \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
   (0.030)\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.23\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   typePrimary*VBM\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\centering\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   -0.089\strut
   \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
   -0.003\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.23\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
   \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\centering\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.028)\strut
   \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
   (0.027)\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+  CV MSE\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  0.041\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  0.040\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  0.004\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  0.006\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+  Obs\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  704\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  704\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  704\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  704\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+  Groups\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  64\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  64\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  64\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  64\strut
   \end{minipage}\tabularnewline
   \bottomrule
   \end{longtable}
@@ -2846,13 +2955,13 @@ future research on the subject.
   
   Where \(w_{l[i], i'}\) is the l-th value of the i'-th variable. For the
   time being I have two different variables that describe individual
-  elections: date and type. I choose to fit a glm with some smoothing
-  spline function for year. This would also include four distinct
-  indicators for election type. I name this final model (including a
-  smoothing spline for year) \textbf{Model 4}. Model 4 would not be a
-  mixed effects model, since all the variability between elections is
-  incorporated in election type and election year--with those two
-  variables I can fully describe each election.
+  elections: date and type. I choose to fit a glm with a natural cubic
+  smoothing spline function for year. This would also include four
+  distinct indicators for election type. I name this final model
+  (including a smoothing spline for year) \textbf{Model 4}. Model 4 would
+  not be a mixed effects model, since all the variability between
+  elections is incorporated in election type and election year--with those
+  two variables I can fully describe each election.
   
   \subsubsection{Ballot Level}\label{ballot-level}
   
@@ -3073,373 +3182,507 @@ future research on the subject.
   at least show that the data does have substantial use for modelling at
   the individual level.
   
-  \clearpage
-  
-  \begin{longtable}[]{@{}cccccccc@{}}
-  \caption{Estimated coefficients for Individual level models
-  \label{tab:model_indiv_coefs}}\tabularnewline
+  \begin{longtable}[]{@{}lccccccc@{}}
+  \caption{Estimated individual level coefficients
+  \label{tab:model_indiv_coef}}\tabularnewline
   \toprule
-  \begin{minipage}[b]{0.12\columnwidth}\centering\strut
+  \begin{minipage}[b]{0.11\columnwidth}\raggedright\strut
   Predictor\strut
-  \end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[b]{0.08\columnwidth}\centering\strut
   Model 1\strut
-  \end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\centering\strut
-  Model 2\strut
-  \end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\centering\strut
-  Model 3\strut
-  \end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\centering\strut
+  Model 2*\strut
+  \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\centering\strut
+  Model 3*\strut
+  \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\centering\strut
   Model 3a\strut
-  \end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\centering\strut
   Model 4\strut
-  \end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\centering\strut
   Model 5\strut
   \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\centering\strut
-  Model 5a\strut
+  Model 5a**\strut
   \end{minipage}\tabularnewline
   \midrule
   \endfirsthead
   \toprule
-  \begin{minipage}[b]{0.12\columnwidth}\centering\strut
+  \begin{minipage}[b]{0.11\columnwidth}\raggedright\strut
   Predictor\strut
-  \end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[b]{0.08\columnwidth}\centering\strut
   Model 1\strut
-  \end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\centering\strut
-  Model 2\strut
-  \end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\centering\strut
-  Model 3\strut
-  \end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\centering\strut
+  Model 2*\strut
+  \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\centering\strut
+  Model 3*\strut
+  \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\centering\strut
   Model 3a\strut
-  \end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\centering\strut
   Model 4\strut
-  \end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\centering\strut
   Model 5\strut
   \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\centering\strut
-  Model 5a\strut
+  Model 5a**\strut
   \end{minipage}\tabularnewline
   \midrule
   \endhead
-  \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
   (Intercept)\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
   -0.175\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   -0.042\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   0.001\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   0.001\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  -0.541\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   -2.478\strut
   \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   -1.888\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
   (0.030)\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   (0.083)\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   (0.060)\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   (0.076)\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
-  \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  (0.009)**\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   (0.015)**\strut
   \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   (0.238)**\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
   Pct\_urban\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   -0.423\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   -0.436\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   -0.424\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
   \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   -0.538\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   (0.055)**\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   (0.059)**\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   (0.062)**\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
   \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   (0.114)**\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
   Pct\_white\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   0.067\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   0.075\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   0.073\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
   \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   -0.151\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   (0.102)\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   (0.073)\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   (0.094)\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
   \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   (0.281)\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
   genderMale\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   -0.097\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   -0.094\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
   \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   0.094\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   (0.007)**\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   (0.007)**\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
   \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   (0.017)**\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
   Republican\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   0.233\strut
   \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   0.208\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   (0.021)**\strut
   \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   (0.073)**\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
   Other\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   -0.085\strut
   \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   -0.124\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   (0.073)\strut
   \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   (0.073)\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
   UAF\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   -0.308\strut
   \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   0.325\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   (0.021)**\strut
   \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   (0.021)**\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
   Mail Vote\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   23.764\strut
   \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   26.502\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   (45.255)**\strut
   \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   (285.774)**\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
   Age\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   0.093\strut
   \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   0.086\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   (0.009)**\strut
   \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   (0.009)**\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.12\columnwidth}\centering\strut
-  AUC\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
-  0.543\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
-  0.543\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+  typeGeneral\strut
+  \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
   \strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  1.537\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  (0.011)**\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+  typeMidterm\strut
+  \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  0.829\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  (0.011)**\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+  typePrimary\strut
+  \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  -0.880\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  (0.010)**\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+  CV AUC\strut
+  \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+  0.543\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  0.543\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  \strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   0.545\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   0.733\strut
-  \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   0.961\strut
   \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   0.963\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+  Obs\strut
+  \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+  370,586\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  370,586\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  370,586\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  370,586\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  370,586\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  370,586\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  370,586\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+  Groups\strut
+  \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
+  64\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  64\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  64\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  64\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  64\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  64\strut
+  \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
+  64\strut
   \end{minipage}\tabularnewline
   \bottomrule
   \end{longtable}

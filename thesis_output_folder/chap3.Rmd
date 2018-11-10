@@ -6,6 +6,8 @@ header-includes:
 - \usepackage{longtable,booktabs,setspace}
 ---
 
+
+
 # Case Selection, Data, Model Parametrization
 
 ## The Centennial State and Its Voters 
@@ -213,6 +215,12 @@ After the conclusion of the wrangling process, the resulting dataset included a 
 * GENDER: Discrete binary variable, Male or Female.
 * AGE: The age of the individual registrant.
 * VOTING_METHOD: The method used by an individual voter to cast their ballot. Is coded as either VBM or In Person, according to Table 3.4:
+
+```{r voting method coding table, results = "asis", echo = FALSE, message=FALSE}
+source("~/Desktop/Reed_Senior_Thesis/tables/voting_methods_coding_table.R")
+pandoc.table(voting_methods, caption = "Voting methods coding table \\label{tab:voting_methods_table}",
+             justify = c("left", "left", "left"), style = "grid")
+```
 
 --------------------------------------------------------------------------------------------------------------------------
 Method            Description                                                                        Designation

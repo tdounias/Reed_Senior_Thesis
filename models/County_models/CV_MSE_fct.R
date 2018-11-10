@@ -3,6 +3,8 @@ library(lubridate)
 library(Matrix)
 library(lme4)
 library(gamm4)
+source("~/Desktop/Reed_Senior_Thesis/riggd/R/utils.R")
+setwd("~/Desktop/Reed_Senior_Thesis/Data_and_results/data")
 
 #DATA
 load("all_turnouts.RData")
@@ -23,6 +25,17 @@ model_dt$county <- as.factor(model_dt$county)
 #Get folds from data
 set.seed(1)
 folds <- split(sample(nrow(model_dt), nrow(model_dt),replace=FALSE), as.factor(1:5))
+
+#Model 1
+mse <- rep(0,5)
+
+for(i in 1:5){
+  md_1.fit <- lmer(data = model_dt, subset = -folds[[i]], turnout ~ (1|county))
+  
+  mse[i] <- mean((model_dt$turnout - predict(md_1.fit, model_dt))[folds[[i]]]^2)
+}
+
+mean(mse)
 
 #Model 2
 mse <- rep(0,5)
