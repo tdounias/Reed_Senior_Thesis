@@ -81,7 +81,7 @@ anova(md_2, md_3)
 model_dt$dates <-  as.integer(model_dt$dates)
 
 md_4 <- gamm4(turnout ~ 1 + types + types +
-               pct_urban + pct_white + pct_vbm*types + s(dates, k = 7), 
+               pct_urban + pct_white + pct_vbm*types + s(dates, k = 7, bs = "cr"), 
              random =~ (1|county), 
              data = model_dt)
 

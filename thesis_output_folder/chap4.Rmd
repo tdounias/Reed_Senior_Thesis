@@ -108,7 +108,7 @@ y^{turnout}_{k,l} = a_{k} + \beta_{1}x_k^{\% white} + \beta_{2}x_k^{\% urban} + 
 \end{equation}
 
 $$a_{k} \sim N(\gamma_0, \sigma_{\alpha}^2)$$
-where $s()$ is a thin plate spline function with seven knots--equal to the number of years.^[I used the `gam.check()` function that is present in the `mgcv` \textit{R} package, whose call determined that the number of knots here may be too low. However, given the data available to me, I was limited to the inclusion of seven years and as such cannot increase the number of knots any further. Setting the number of knots to seven also gave the lowest CV MSE.] A summary of these four models is provided in the following table:  
+where $s()$ is a natural cubic regression spline function with seven knots--equal to the number of years.^[I used the `gam.check()` function that is present in the `mgcv` \textit{R} package, whose call determined that the number of knots here may be too low. However, given the data available to me, I was limited to the inclusion of seven years and as such cannot increase the number of knots any further. Setting the number of knots to seven also gave the lowest CV MSE.] A summary of these four models is provided in the following table:  
   
 -------------------------------------------------------------------------------------------------
   Model No                                    Model Description
@@ -230,7 +230,7 @@ Again, in a similar way to county and individual level data, I add in variables 
 \hat{\mathbb{P}}(y_i = 1) \sim \text{logit}^{-1}(\sum_{l = 1}^{n^{elect}}w_{l}\beta_{l} + \sum_{i'=1}^{n^{\text{election vars}}}w_{l[i], i'}\beta_{i'+n^{elect}})
 \end{equation}
 
-Where $w_{l[i], i'}$ is the l-th value of the i'-th variable. For the time being I have two different variables that describe individual elections: date and type. I choose to fit a glm with some smoothing spline function for year. This would also include four distinct indicators for election type. I name this final model (including a smoothing spline for year) **Model 4**. Model 4 would not be a mixed effects model, since all the variability between elections is incorporated in election type and election year--with those two variables I can fully describe each election.
+Where $w_{l[i], i'}$ is the l-th value of the i'-th variable. For the time being I have two different variables that describe individual elections: date and type. I choose to fit a glm with a natural cubic smoothing spline function for year. This would also include four distinct indicators for election type. I name this final model (including a smoothing spline for year) **Model 4**. Model 4 would not be a mixed effects model, since all the variability between elections is incorporated in election type and election year--with those two variables I can fully describe each election.
 
 #### Ballot Level
    

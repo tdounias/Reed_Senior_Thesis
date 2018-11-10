@@ -237,7 +237,6 @@ country_status <- reg12[!(reg12$VOTER_STATUS %in% c("Active", "Inactive")), ]
 #See the problem!
 head(country_status)[,20:25]
 
-#These voters' records have been a bit mishandled.
 #The variables seem "shifted" to one side
 #However, they again are very few per year, 
 #So I think I can ignore them.
