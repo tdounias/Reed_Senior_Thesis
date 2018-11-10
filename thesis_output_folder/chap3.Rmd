@@ -221,22 +221,3 @@ source("~/Desktop/Reed_Senior_Thesis/tables/voting_methods_coding_table.R")
 pandoc.table(voting_methods, caption = "Voting methods coding table \\label{tab:voting_methods_table}",
              justify = c("left", "left", "left"), style = "grid")
 ```
-
---------------------------------------------------------------------------------------------------------------------------
-Method            Description                                                                        Designation
------------------ ---------------------------------------------------------------------------------- --------------------- 
-Absentee Carry    Voters who carried an absentee ballot from an early voting location                VBM                
-  
-Absentee Mail     Voters who were sent an absentee ballot, and mailed it in                          VBM                
-  
-Early Voting      Voters who physically went to an Early Voting location and voted                   In Person          
-  
-In Person         Voters who physically went to a polling place and voted on paper                   In Person          
-  
-Mail Ballot       Vote By Mail                                                                       VBM                
-  
-Polling Place     Traditional polling place voting, discontinued in 2013                             In Person          
-  
-Vote Center       Voters who cast their ballots at Vote Centers                                      In Person          
------------------ ---------------------------------------------------------------------------------- ---------------------
-Table: Voting method designation table \label{tab:voting_method}

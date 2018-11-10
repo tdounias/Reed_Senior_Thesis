@@ -1,5 +1,5 @@
 variables <- c("(Intercept)", "", "Pct_urban", "", "Pct_white", "", "genderMale", "", "Republican",
-               "", "Other", "", "UAF", "", "Mail Vote", "", "Age", "", "typeGeneral",
+               "", "Other", "", "UAF", "", "VBM", "", "Age", "", "typeGeneral",
                "", "typeMidterm", "", "typePrimary", "", "CV AUC", "", "Obs", "", "Groups", "")
 
 md1coef <- c("-0.175", "(0.030)", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
@@ -27,5 +27,5 @@ md5acoef <- c("-1.888", "(0.238)**", "-0.538", "(0.114)**", "-0.151", "(0.281)",
 
 table_data <- data.frame(variables, md1coef, md2coef, md3coef, md3acoef, md4coef, md5coef, md5acoef)
 
-names(table_data) <- c("Predictor", "Model 1", "Model 2*", "Model 3*", "Model 3a", "Model 4",
-                       "Model 5", "Model 5a**")
+names(table_data) <- c("Predictor", "Model 1", "Model 2", "Model 3", "Model 3a", "Model 4",
+                       "Model 5", "Model 5a")

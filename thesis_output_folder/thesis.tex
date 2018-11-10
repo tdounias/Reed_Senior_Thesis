@@ -2004,82 +2004,6 @@ future research on the subject.
   \bottomrule
   \end{longtable}
   
-  \begin{longtable}[]{@{}lll@{}}
-  \caption{Voting method designation table
-  \label{tab:voting_method}}\tabularnewline
-  \toprule
-  \begin{minipage}[b]{0.13\columnwidth}\raggedright\strut
-  Method\strut
-  \end{minipage} & \begin{minipage}[b]{0.62\columnwidth}\raggedright\strut
-  Description\strut
-  \end{minipage} & \begin{minipage}[b]{0.16\columnwidth}\raggedright\strut
-  Designation\strut
-  \end{minipage}\tabularnewline
-  \midrule
-  \endfirsthead
-  \toprule
-  \begin{minipage}[b]{0.13\columnwidth}\raggedright\strut
-  Method\strut
-  \end{minipage} & \begin{minipage}[b]{0.62\columnwidth}\raggedright\strut
-  Description\strut
-  \end{minipage} & \begin{minipage}[b]{0.16\columnwidth}\raggedright\strut
-  Designation\strut
-  \end{minipage}\tabularnewline
-  \midrule
-  \endhead
-  \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-  Absentee Carry\strut
-  \end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright\strut
-  Voters who carried an absentee ballot from an early voting
-  location\strut
-  \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
-  VBM\strut
-  \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-  Absentee Mail\strut
-  \end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright\strut
-  Voters who were sent an absentee ballot, and mailed it in\strut
-  \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
-  VBM\strut
-  \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-  Early Voting\strut
-  \end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright\strut
-  Voters who physically went to an Early Voting location and voted\strut
-  \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
-  In Person\strut
-  \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-  In Person\strut
-  \end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright\strut
-  Voters who physically went to a polling place and voted on paper\strut
-  \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
-  In Person\strut
-  \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-  Mail Ballot\strut
-  \end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright\strut
-  Vote By Mail\strut
-  \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
-  VBM\strut
-  \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-  Polling Place\strut
-  \end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright\strut
-  Traditional polling place voting, discontinued in 2013\strut
-  \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
-  In Person\strut
-  \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.13\columnwidth}\raggedright\strut
-  Vote Center\strut
-  \end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright\strut
-  Voters who cast their ballots at Vote Centers\strut
-  \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
-  In Person\strut
-  \end{minipage}\tabularnewline
-  \bottomrule
-  \end{longtable}
-  
   \chapter{Model Specification and
   Results}\label{model-specification-and-results}
   
@@ -2117,7 +2041,7 @@ future research on the subject.
   
   \begin{figure}
   
-  {\centering \includegraphics[width=0.6\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/vbm_county_graph} 
+  {\centering \includegraphics[width=0.8\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/vbm_county_graph} 
   
   }
   
@@ -2161,8 +2085,8 @@ future research on the subject.
     studies exist already, with some even tackling VBM in Colorado (Keele
     \& Titiunik, 2017), or how turnout rates are affected by new,
     restrictive registration laws (Burden \& Neiheisel, 2013). This method
-    would allow for more accurracy in both the individual and county level
-    models, and through the existance of a treatment and control group
+    would allow for more accuracy in both the individual and county level
+    models, and through the existence of a treatment and control group
     would guarantee the variability that I am currently lacking.
   \item
     \emph{Synthetic Control Group}: The synthetic control group method is
@@ -2179,20 +2103,20 @@ future research on the subject.
   
   \subsection{Processing Power}\label{processing-power}
   
-  The models are extremelly RAM intensive; particularly the individual
+  The models are extremely RAM intensive; particularly the individual
   level models, for which I have almost 35 million different observations,
   do not run. For now, I compensated for this problem by using stratified
   sampling to sample a subset of my observations\footnote{A long term
     solution to this issue could be the use of a virtual machine, or some
-    RStudio server, ar Amazon Work Spaces (AWS).}.
+    RStudio server, Or Amazon Work Spaces (AWS).}.
   
   The form of stratified sampling I am using is very simple; based on
   county, mail vote, and electoral participation, I use \texttt{dplyr} in
   \textit{R} to draw a sample that contains equal proportions of every
-  combination of values of these variables to those in the poriginal
+  combination of values of these variables to those in the original
   dataset. If, for example, the original dataset had 2\% of entries being
   voters from Jefferson county that participated using a mail ballot, the
-  sampled dataset would have a proportion that is approximatelly equal to
+  sampled dataset would have a proportion that is approximately equal to
   2\% (Chihara \& Hesterberg, 2011). In this way I draw a sample of around
   400,000 observations from my initial ballot dataset, on which I run all
   my individual models. After checking the variable ratios in sampled and
@@ -2411,44 +2335,44 @@ future research on the subject.
     number of knots to seven also gave the lowest CV MSE.} A summary of
   these four models is provided in the following table:
   
-  \begin{longtable}[]{@{}cc@{}}
+  \begin{longtable}[]{@{}ll@{}}
   \caption{County level model descriptions
   \label{tab:model_desc_county}}\tabularnewline
   \toprule
-  \begin{minipage}[b]{0.15\columnwidth}\centering\strut
+  \begin{minipage}[b]{0.15\columnwidth}\raggedright\strut
   Model No\strut
-  \end{minipage} & \begin{minipage}[b]{0.80\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[b]{0.80\columnwidth}\raggedright\strut
   Model Description\strut
   \end{minipage}\tabularnewline
   \midrule
   \endfirsthead
   \toprule
-  \begin{minipage}[b]{0.15\columnwidth}\centering\strut
+  \begin{minipage}[b]{0.15\columnwidth}\raggedright\strut
   Model No\strut
-  \end{minipage} & \begin{minipage}[b]{0.80\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[b]{0.80\columnwidth}\raggedright\strut
   Model Description\strut
   \end{minipage}\tabularnewline
   \midrule
   \endhead
-  \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
   Model 1\strut
-  \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\raggedright\strut
   Naive model with only county specific effects\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
   Model 2\strut
-  \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\raggedright\strut
   Multilevel model; added county level predictors\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
   Model 3\strut
-  \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\raggedright\strut
   Multilevel model; added VBM, interaction terms, and election fixed
   effects\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
   Model 4\strut
-  \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\raggedright\strut
   Multilevel General Additive model; added spline function for election
   year\strut
   \end{minipage}\tabularnewline
@@ -2467,8 +2391,20 @@ future research on the subject.
   effects for county and the measure for time should be considered as
   controls: the first controls for county-specific trends while still
   restricting these to allow for non-independence, and the second makes
-  sure that my results are indicative of a secular trend, independent of
+  sure that my results are indicative of a secular trend, accounting for
   any shifts along time.
+  
+  In terms of goodness-of-fit, I use 5-fold cross-validated Mean Squared
+  Error (MSE) for all of the models. There is a significant drop-off in
+  MSE between models 1,2 and models 3.4 of around \(.35\), which shows
+  that the variables introduced in the later models substantially increase
+  how well the models explain variability in the data. There is also a
+  small increase of CV MSE between models 3 and 4, but the numbers are
+  very comparable\footnote{If I was trying to make a model for predictive
+    purposes I would probably choose Model 3; however, there is still
+    value in comparing models 3 and 4, even if the later doesn't fit the
+    data better than 3. The difference in coefficient values, after
+    controlling for time, is a particularly interesting result.}.
   
   \begin{longtable}[]{@{}lcccc@{}}
   \caption{Estimated county level coefficients
@@ -2760,10 +2696,11 @@ future research on the subject.
   Given that, the first observable result is that the percentage of white
   population and the percentage of urban population are fairly stable
   indicators of a small positive and negative shift in turnout
-  respectively. The lack of variability between models is not surprising;
-  these represent a county-level, time-independent demographic statistic,
-  and there would be no reason to assume that part of their effect would
-  be subsumed by other variables in models 3 and 4.
+  respectively, although only urban population reaches statistical
+  significance at the .05 level. The lack of variability between models is
+  not surprising; these represent a county-level, time-independent
+  demographic statistic, and there would be no reason to assume that part
+  of their effect would be subsumed by other variables in models 3 and 4.
   
   Moving on to election type, the first thing to note is that there is no
   typeCoordinated in the table. This is because of the way \textit{R}
@@ -2772,13 +2709,14 @@ future research on the subject.
   should be read as differences from the ``baseline'' that is
   typeCoordinated. First surprising result here is that the coefficient
   for general presidential elections is substantially lower than that of
-  midterms. Or rather this would be surprising if we did not notice the
-  interaction terms with VBM, which indicate that, after allowing for VBM
+  midterms. Rather, this would be surprising if we did not notice the
+  interaction terms with VBM, which indicate that after allowing for VBM
   effects, presidential elections do actually have higher turnout in my
-  model than midterms do. Other than this, coefficients in model 3 and
-  model 4 \emph{individualy} make sense, in the assumed ordering of
-  turnout in such elections--presidential, then midterm, then coordinated
-  and lastly primary.
+  model than midterms do\footnote{Remember here that due to Figure 4.1
+    most counties will have a proportion of mail ballots close to .9}.
+  Other than this, coefficients in model 3 and model 4 make sense, in the
+  assumed ordering of turnout in such elections: presidential, then
+  midterm, then coordinated and primary.
   
   Next, taking election type and all interaction terms into consideration,
   let's examine what happens when the spline function for time is
@@ -2789,34 +2727,29 @@ future research on the subject.
   estimated are actually time-specific trends, and that there is a
   significant difference if we account for them. In the fourth model, the
   coefficients for election type on their own are still indicative of a
-  common assumption on turnout in such elections\footnote{Also see Figure
+  common assumption for turnout in such elections\footnote{Also see Figure
     3.4}. As for interaction terms with VBM, the effect of VBM on primary
   election turnout is almost wiped out entirely, the interaction with
   general election turnout is depleted but still present at around 8\%,
-  and coordinated election VBM effects remain virtually non-existent.
+  and coordinated election VBM effects remain statistically insignificant.
   Interestingly, the effect of VBM on midterm turnout switches sign from a
-  negative effect of 5\% to a positive effect of around 11\%; making
-  midterm elections the most heavily affected by mail voting.
+  negative effect of 5\% to a positive effect of around 11\%.
   
   Taking my hypotheses one by one, these models present evidence less in
   favor of H1, than against its alternate, H1'. While mail voting does
   seem to affect turnout in a way consistent across time--see the
   coefficients for VBM effects on general and midterm elections--this
   effect is not particularly more strong than the percentage of urban
-  population in each county. This result is ambiguous, and therefore does
-  not present concrete evidence as to the validity of H1. Conversly, if
-  going off of these models my second and third hypotheses can be
-  convincingly rejected. After controlling for time, the effect that VBM
-  has on coordinated or primary elections is marginal at best, compared to
-  more consistent effects on midterm and general elections. The one point
-  in favor of H3 here is that the effect of VBM on midterm elections is
-  slightly higher--about 2\%--than the effect on presidential elections in
-  model 4. However, this difference is not significant enough to rule in
-  favor of H3; if this difference was caused by the lack of presence of
-  national effects, it would be significantly more pronounced in primary
-  and coordinated elections. As such, I would ascribe this difference to
-  some omited variable, or other effect that I do not include in my
-  models.
+  population in each county. Conversely, my second and third hypotheses
+  can be convincingly rejected at the county level. After controlling for
+  time, the effect that VBM has on coordinated or primary elections is not
+  statistically significant, compared to significant, consistent effects
+  on midterm and general elections. The one point in favor of H3 here is
+  that the effect of VBM on midterm elections is slightly higher--about
+  2\%--than the effect on presidential elections in model 4. However, this
+  difference is not enough to rule in favor of H3; if this difference was
+  caused by the lack of presence of national effects, it would be more
+  pronounced in primary and coordinated elections.
   
   \section{Individual Level Models}\label{individual-level-models}
   
@@ -3050,64 +2983,64 @@ future research on the subject.
   section. I add a few models which should be easily understood based on
   the specifications given above.
   
-  \begin{longtable}[]{@{}cc@{}}
+  \begin{longtable}[]{@{}ll@{}}
   \caption{Individual level model descriptions
   \label{tab:model_desc_individual}}\tabularnewline
   \toprule
-  \begin{minipage}[b]{0.15\columnwidth}\centering\strut
+  \begin{minipage}[b]{0.15\columnwidth}\raggedright\strut
   Model No\strut
-  \end{minipage} & \begin{minipage}[b]{0.80\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[b]{0.80\columnwidth}\raggedright\strut
   Model Description\strut
   \end{minipage}\tabularnewline
   \midrule
   \endfirsthead
   \toprule
-  \begin{minipage}[b]{0.15\columnwidth}\centering\strut
+  \begin{minipage}[b]{0.15\columnwidth}\raggedright\strut
   Model No\strut
-  \end{minipage} & \begin{minipage}[b]{0.80\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[b]{0.80\columnwidth}\raggedright\strut
   Model Description\strut
   \end{minipage}\tabularnewline
   \midrule
   \endhead
-  \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
   Model 1\strut
-  \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\raggedright\strut
   Naive model with only county mixed effects\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
   Model 2\strut
-  \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\raggedright\strut
   Multilevel model; added county level predictors\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
   Model 3\strut
-  \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\raggedright\strut
   Multilevel model; individual-level mixed effects and predictors\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
   Model 3a\strut
-  \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\raggedright\strut
   A combination of 2 and 3 without individual-level mixed effects\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
   Model 4\strut
-  \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\raggedright\strut
   General Additive model; election predictors and time smoothing
   splines\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
   Model 5\strut
-  \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\raggedright\strut
   Ballot-level predictors fixed effects model\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.15\columnwidth}\centering\strut
-  Model 5a\strut
-  \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+  Model 5\strut
+  \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\raggedright\strut
   Multilevel model; ballot predictors with county mixed effects\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
   Model 6\strut
-  \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\raggedright\strut
   Multilevel General Additive model; year splines; individual, county
   mixed effects and all predictors\strut
   \end{minipage}\tabularnewline
@@ -3116,19 +3049,16 @@ future research on the subject.
   
   \subsection{Results}\label{results-1}
   
-  To deal with the elephant in the room (page?) right off the bat, I do
-  not recommend trusting these results wholeheartedly at the current
-  stage. While the aforementioned models are all--to some degree--rational
-  parametrizations of individual turnout predictors, the leap from theory
-  to implimentation has proven too much for most. This is a direct result
-  of the first section in this chapter and the problems outlined within.
-  The reason I am still providing the results of these models is twofold:
-  first, to show that the data I have on its own \emph{can} be used to
-  build and run an individual model of turnout regardless of if that model
-  is usefull in responding to my hypotheses; second, to validate that the
-  problems I outline in the beginning of this section are actually the
-  root cause of the issues I'm having, as some results do give insight
-  into this.
+  While the aforementioned models are all rational parametrizations of
+  individual turnout predictors, the leap from theory to implementation
+  has hit a few roadblocks as a direct result of the first section in this
+  chapter and the problems outlined within. The reason I am still
+  providing the results of these models is twofold: first, to show that
+  the data I have on its own \emph{can} be used to build and run an
+  individual model of turnout regardless of if that model is useful in
+  responding to my hypotheses; second, to validate that the problems I
+  outline in the beginning of this section are actually the root cause of
+  the issues I'm having, as some results do give insight into this.
   
   \begin{figure}
   
@@ -3142,45 +3072,65 @@ future research on the subject.
   In terms of trusting these results, I am confident in the results of
   models 1 and 3a, somewhat confident in model 5, and less so for models
   2, 3, and 5a. Models 2, 3 and 5a ``failed to converge''; this means that
-  the numeric approximation process by which \textit{R} impliments maximum
+  the numeric approximation process by which \textit{R} implements maximum
   likelihood estimation\footnote{Estimation of maximum likelihood here
     uses Adaptive Gaussian-Hermitian Quadrature (AGQ) to estimate
     coefficients (Handayani, Notodiputro, Sadik, \& Kurnia, 2017)} for
   coefficients doesn't give stable results, within certain conditions.
   While model 5 did converge, it suffers from lack of variance in the
   predictor for VBM, as explained in the beginning of this chapter; this
-  is the reason why the coefficient for mail vote is so
-  disproportionatelly large and variable. Model 6 simply did not run, even
-  on a re-sampled dataset. While I can't really derive any conclusions
-  from this fact, there is a distinct possibility that this either occured
-  due to a lack of processing power, or lack of sufficient data for the
-  model estimation to even reach close to convergance.
+  is the reason why the coefficient for mail vote is so disproportionately
+  large and variable. Model 6 simply did not run, even on a re-sampled
+  dataset. While I can't really derive any conclusions from this fact,
+  there is a distinct possibility that this either occurred due to a lack
+  of processing power, or lack of sufficient data for the model estimation
+  to even reach close to convergence. It is also important to point out
+  that model non-convergence is not a fatal issue in and of itself, but
+  becomes so if outputted coefficients wildly differ between calls of the
+  model. In this case, while running 5-fold cross validation for AUC, the
+  coefficients remained fairly stable regardless of non-convergence.
+  
+  In terms of model fit, the models neatly fall into three groups based on
+  their cross-validated AUC. The first group, consisting of models 1, 2,
+  and 3a has an AUC of around \(.544\), making them only slightly
+  distinguishable from a coin-toss. This is fairly reasonable, since I am
+  building a model to make predictions at the ballot level while only
+  using county data or gender\footnote{Few counties wildly differ in their
+    turnout percentages, and that the coefficient for male gender results
+    in only around a 2.5\% decrease in voting probability}. The second
+  group based on AUC includes model 4, the only non-multilevel individual
+  model, with an AUC of around \(.733\), significantly outperforming the
+  first three models. Again, this is reasonable considering how wildly
+  different turnout is between election types; it is only natural that
+  these election-level variables would be so informative. The third group,
+  with the highest AUC of around \(.96\) are models 5 and 5a. This is a
+  direct result of the lack of variability in my data: Mail Voting is an
+  almost perfect predictor of the probability of voting.
   
   There are two conclusions that can be derived from these results. None
-  of these conclusions are, sadly, related to my initial hypotheses on
-  VBM. The first is that the lack of variance in the data and a lack of
-  processing power are direct causes of my inability to estimate these
-  models. This is apparent in how model 6 does not run, other models do
-  not converge, and the coefficient for VBM is absurdly large--since it
-  doesn't vary enough even after stratified sampling to account for any
-  variance between mail vote and conventional ballots. The second
-  conclusion here is that, despite these issues, there are some
-  confirmable results on turnout in general that are common between
-  individual and county models. For example, across models 2, 3, 3a the
-  urban population of a county is a substantial, negative factor in
-  probability of voting, while the white population is a very small,
-  positive effect\footnote{This did, however, fail to reach statistical
-    significance in both county and individual level models. This means
-    that the small, positive effect is not that distinguishable from no
-    effect at all.}. Same goes for male gender, which is a very small
-  negative effect in voting probability as compared to female gender.
-  These effects being stable across several models mean that they are
-  independent of the additions to those models; for example, gender, urban
-  population, and white population have effects that are not accounted for
-  when adding individual level mixed effects. Despite not being able to
-  assess VBM as a factor of turnout probability, these models of turnout
-  at least show that the data does have substantial use for modelling at
-  the individual level.
+  of these conclusions are, sadly, related to my hypotheses on VBM. The
+  first is that the lack of variance in the data and a lack of processing
+  power are direct causes of my inability to estimate these models. This
+  is apparent in how model 6 does not run, other models do not converge,
+  and the coefficient for VBM is very large, since it doesn't vary enough
+  even after stratified sampling to account for any variance between mail
+  vote and conventional ballots. The second conclusion here is that,
+  despite these issues, there are some confirmable results on turnout in
+  general that are common between individual and county models. For
+  example, across models 2, 3, 3a the urban population of a county is a
+  substantial, negative factor in probability of voting, while the white
+  population is a very small, positive effect\footnote{This did, however,
+    fail to reach statistical significance in both county and individual
+    level models. This means that the small, positive effect is not that
+    distinguishable from no effect at all.}. Same goes for male gender,
+  which is a very small negative effect in voting probability as compared
+  to female gender. These effects being stable across several models mean
+  that they are independent of the additions to those models; for example,
+  gender, urban population, and white population have effects that are not
+  accounted for when adding individual level mixed effects. Despite not
+  being able to assess VBM as a factor of turnout probability, these
+  models of turnout at least show that the data does have substantial use
+  for modelling at the individual level.
   
   \begin{longtable}[]{@{}lccccccc@{}}
   \caption{Estimated individual level coefficients
@@ -3191,9 +3141,9 @@ future research on the subject.
   \end{minipage} & \begin{minipage}[b]{0.08\columnwidth}\centering\strut
   Model 1\strut
   \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\centering\strut
-  Model 2*\strut
+  Model 2\strut
   \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\centering\strut
-  Model 3*\strut
+  Model 3\strut
   \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\centering\strut
   Model 3a\strut
   \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\centering\strut
@@ -3201,7 +3151,7 @@ future research on the subject.
   \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\centering\strut
   Model 5\strut
   \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\centering\strut
-  Model 5a**\strut
+  Model 5a\strut
   \end{minipage}\tabularnewline
   \midrule
   \endfirsthead
@@ -3211,9 +3161,9 @@ future research on the subject.
   \end{minipage} & \begin{minipage}[b]{0.08\columnwidth}\centering\strut
   Model 1\strut
   \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\centering\strut
-  Model 2*\strut
+  Model 2\strut
   \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\centering\strut
-  Model 3*\strut
+  Model 3\strut
   \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\centering\strut
   Model 3a\strut
   \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\centering\strut
@@ -3221,7 +3171,7 @@ future research on the subject.
   \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\centering\strut
   Model 5\strut
   \end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\centering\strut
-  Model 5a**\strut
+  Model 5a\strut
   \end{minipage}\tabularnewline
   \midrule
   \endhead
@@ -3464,7 +3414,7 @@ future research on the subject.
   (0.021)**\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
-  Mail Vote\strut
+  VBM\strut
   \end{minipage} & \begin{minipage}[t]{0.08\columnwidth}\centering\strut
   \strut
   \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
