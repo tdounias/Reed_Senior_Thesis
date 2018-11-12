@@ -414,8 +414,8 @@ future research on the subject.
   conduct their elections and the enfranchisement and disenfranchisement
   such choices may cause has never ceased to be contentious.
   
-  What quickly becomes apparent, however, is that beyond the soaring
-  rhetoric of democratic power, the setup of our elections systems is not
+  What quickly becomes apparent is that beyond the soaring rhetoric of
+  democratic power, the setup of our elections systems is not
   straightforward in the slightest. Starting from the beginning, there is
   still no consensus on \emph{who} gets to vote. Do felons get the vote?
   Florida (as of 2018) says yes, as does much of Europe, but other states
@@ -423,83 +423,132 @@ future research on the subject.
   pass a basic political knowledge test to vote? Is one informed vote more
   important than a vote from someone who lacks knowledge of current
   affairs and government? Should people be forced to show ID when voting,
-  to protect the franchise, or is this restrictive and undemocratic?
-  \emph{When} people get to vote is similarly contentious. Is early voting
-  something we should support, or does it dilute the effect of election
-  day turnout? Should voting day be a national holiday? How about
-  refferenda? Should the people be directly consulted by their governments
-  on seminal issues? Finally, there is the question of \emph{how} or
-  \emph{where} people vote. How many polling places are enough? Should we
-  use paper ballots or voting machines? Should people be automatically
-  registered to vote? Should they be allowed to register on election day?
-  Do we freeze registrations before election day, and if so how long
-  before? Should we allow voting by mail? Permanent absentee status?
-  All-mail elections? This is all even before making choices on subjects
-  like the allocation of representatives by state or prefecture, or the
-  total number of parliamentarians, or how many chambers congress should
-  have.
+  or is this restrictive and undemocratic? \emph{When} people get to vote
+  is similarly contentious. Is early voting something we should support,
+  or does it dilute the effect of election day turnout? Should voting day
+  be a national holiday? How about refferenda? Should the people be
+  directly consulted by their governments on seminal issues? Finally,
+  there is the question of \emph{how} or \emph{where} people vote. How
+  many polling places are enough? Should we use paper ballots or voting
+  machines? Should people be automatically registered to vote? Should they
+  be allowed to register on election day? Do we freeze registrations
+  before election day, and if so how long before? Should we allow voting
+  by mail? Permanent absentee status? All-mail elections? This is all even
+  before making choices on subjects like the allocation of representatives
+  by state or prefecture, or the total number of parliamentarians, or how
+  many chambers congress should have.
   
   The 2000 Presidential election between Al Gore and George W. Bush was
-  famously decided in Florida by a razor thin margin of votes. Following
-  the final result--which occured in the halls of the United States
-  Supreme Court whose decision in \emph{Bush v. Gore} halted all Florida
-  recounts that were in progress--researchers claimed that the voting
-  machines and ballot cards used were confusing and misleading, or that
-  the results of a manual recount could have shifted the election. Many
-  voters, for example, mistakenly voted for a different candidate because
-  of the confusing layout of outdated punch-card voting machines. 22,000
-  voters in Duval County had their ballots rejected due to ``overvoting'',
-  because they were given ballots telling them to vote on multiple pages
-  for the same candidate: an action that would spoil their ballot(Saltman,
-  2009).
+  decided in Florida by a razor thin margin of ballots. Following the
+  final result, which occurred in the halls of the United States Supreme
+  Court whose decision in \emph{Bush v. Gore} halted all Florida recounts
+  that were in progress, researchers claimed that the voting machines and
+  ballot cards used were confusing and misleading. Many voters, for
+  example, mistakenly voted for a different candidate because of the
+  confusing layout of outdated punch-card voting machines. 22,000 voters
+  in Duval County had their ballots rejected due to ``overvoting'',
+  because they were given ballots that implied the necessity to vote on
+  multiple pages for the same candidate: an action that spoiled their
+  ballot(Saltman, 2009).
   
   A democratic system is based on procedures as much as principles.
   Elections are about translating the vote of the people into political
   power, government action, and fair representation by chosen
-  representatives. It should by now be clear to the reader that the way we
-  vote can often be critical to the outcome. Thus the design and
-  implementation of voting systems is far from being neutral; the
-  decisions made on who votes, and how, when, and where they do so often
-  serves to alter the course of history. Underlying those decisions is a
-  nebulous, inconclusively answered question: are elections fair, and how
-  can we make them more so?
+  representatives. The way we vote can often be critical to the outcome.
+  Thus the design and implementation of voting systems is far from being
+  neutral; the decisions made on who votes, and how, when, and where they
+  do so often serves to alter the course of history. Underlying those
+  decisions is a nebulous, inconclusively answered question: are elections
+  fair, and how can we make them more so?
   
-  The purpose of research into such questions is to both to model and
-  understand the behaviour of the participants, and to formulate an idea
-  on what the optimal policy is. Research conclusions on their own
-  obviously cannot sway policy; such decisions are made, fittingly, with
-  the input of the people or their representatives through processes of
-  policymaking whose study and function is beyond the scope of this
-  thesis. In my thesis, I wish to focus on just one of the multitude of
-  elections policies that are either discussed or enacted in the US at
-  present: Vote By Mail. My purpose is to add to the existing literature
-  of quantitative studies on how Vote By Mail affects voter turnout, and
-  through this process draw conclusions on what behavioural model of voter
-  choice best fits the reality of mail voting.
+  The United States has long grappled with translating this goal into
+  policy. During the Civil War, several states like Virginia pioneered the
+  use of absentee mail ballots to serve military personnel and displaced
+  residents; this same policy was expanded nationwide in 1942, to
+  accommodate for soldiers and factory workers serving US efforts in World
+  War II. In 1871 Congress passed the Enforcement Act, which clearly
+  defined acts like voter impersonation or intimidation as crimes, and set
+  up a clear, federal structure of supervisors and marshals tasked with
+  overseeing all elections. This was the first in what was to become over
+  a century of sweeping federal election reforms, in an attempt to at
+  least partially centralize an election process whose control had been
+  left to localities. The Civil Rights Acts of '57, '60, and '64 along
+  with the Voting Rights Act of '65 collectivelly aimed to prevent
+  discriminatory policies at the local level. They abolished literacy
+  tests, made tampering with voter registration rolls a federal crime, and
+  mandated federal oversight of local authorities with a history of
+  discriminatory voter registration practices.
   
-  The passage of the Help America Vote Act---or HAVA--(Robert Nay, 2002)
-  innovated the way we use data based approaches to answer such question,
-  by mandating states to update and consolidate public voter registration
-  files, and creating the US Elections Assistance Commission that makes
-  county level data available. Public voter files were initially used by
-  private corporations like TargetSmart or Catalyst, which cleaned up the
-  files for use by political campaigns trying to tailor their message as
-  closely as possible to individual voters. Researchers quickly realized
-  the massive potential that such data has, and started partnering with
-  such firms or conducting independent cleaning and structuring of such
-  data themselves. These data provided information at the individual
-  level, with geocoding usually at the precinct level. This in turn meant
-  that, though very complex as a task, it became possible to use such
-  files along with census data at the block level to estimate individual
-  characteristics like race, education, or income at incredible levels of
-  accuracy. Even without the resources of a multi-million dollar private
-  market, such methods along with voter files alowed researchers to make
-  concrete inferences of individual characteristics (E. D. Hersh, 2015).
-  Voting related theories derived from political science are now commonly
-  tested using advanced statistical methods and huge amounts of data; both
+  In 1993 Congress passed the National Voter Registration Act (or NVRA),
+  which increased oversight of local registration policies by mandating
+  by-mail registration and registration at the DMV (otherwise known as the
+  ``motor voter'' program), and by strictly regultaing local registration
+  forms. The NVRA also imposed strict regulations agains the practice of
+  ``purging'' registered voters from the rolls, and mandated that states
+  routinely check their registration data to ensure integrity. After the
+  events of 2000 in Florida, the NVRA was followed by the Help America
+  Vote Act (HAVA) of 2002. HAVA included sweeping changes to how American
+  election administration was conducted. For the first time in history,
+  the federal government started spending money on local election
+  administration. The act also banned certain types of voting machines,
+  mandated that local officials accept provisional ballots, and created
+  the Elections Administration Comission (EAC) to gather information and
+  assist state and national elections. Quite importantly for researchers
+  and voters alike (and for this thesis), HAVA mandated that states
+  compile and maintain voter registration and history data \emph{at the
+  state level}, providing some centralized oversight for elections(Ewald,
+  2009).
+  
+  Apart from serving local election administration, voter files
+  consilidated by HAVA have allowed researchers to make concrete
+  inferences of individual characteristics (E. D. Hersh, 2015). Voting
+  related theories derived from political science are now commonly tested
+  using advanced statistical methods and huge amounts of data; both
   disciplines tackle these data to face joint problems such as quantifying
   the quality of voter registration files (Ansolabehere \& Hersh, 2010),
-  or linking disparate voter records (Ansolabehere \& Hersh, 2017).
+  or linking disparate voter records (Ansolabehere \& Hersh, 2017). In my
+  thesis I take advantage of such centralized files from the state of
+  Colorado.
+  
+  The purpose of research into policies like the ones described above is
+  to both to model and understand the behavior of the voters, and to
+  formulate an idea on what the optimal policy is. Research conclusions on
+  their own obviously cannot sway policy; such decisions are made,
+  fittingly, with the input of the people or their representatives through
+  processes of policy-making, whose study and function is beyond the scope
+  of this thesis. In my thesis, I wish to focus on just one of the
+  multitude of elections policies that are either discussed or enacted in
+  the US at present: Vote By Mail. My purpose is to add to the existing
+  literature of quantitative studies on how Vote By Mail affects voter
+  turnout, and through this process draw conclusions on what behavioral
+  model of voter choice best fits the reality of mail voting.
+  
+  Apart from the data, such research is also dependent on the statistical
+  methods used to draw inferences. In my thesis, I construct both county-
+  and individual-level models of turnout by using methods such as logistic
+  regression, hierarchical modelling, and natural splines. The use of
+  hierarchical modelling here is particularly significant, as the vast
+  majority of previous studies on mail voting have employed fixed effects
+  models. Hierarchical modelling is particularly salient when data exhibit
+  different ``levels'' of grouping, here represented by the counties in
+  which individual voters are registered. While fixed-effects regression
+  would assume independence of effects between counties, hierarchical
+  modeling will allow me to do away with that assumption, thus also vastly
+  increasing the inferencial potential of my models(Gelman \& Hill, 2006).
+  
+  This thesis should be viewed as a combination of three factors:
+  questions, data, and methods. My fundamental question is one of the most
+  common for elections science\footnote{Sometimes reffered to as
+    \emph{psephology}, the study of the \emph{psephos}
+    (\(\psi \acute \eta \phi o \varsigma\)) or ``vote'' in Greek.}: how do
+  we increase electoral participation in the form of turnout, and
+  consequently how do voters choose when to vote? My data comes from
+  Colorado Voter Registration Files: a complete, all-inclusive collection
+  of all current registrants in the State along with their voter
+  histories. To these data, with the purpose of answering the fundamental
+  question I set, I apply hierarchical models; a practice commonly applied
+  in statistical studies but relativelly new and exciting as a development
+  in mail voting research.
   
   \chapter{The State of the Literature}\label{rmd-basics}
   
@@ -4021,6 +4070,10 @@ future research on the subject.
   \emph{Rationality and Society}, \emph{19}(3), 293--314.
   \url{http://doi.org/10.1177/1043463107077384}
   
+  \hypertarget{ref-ewald_way_2009}{}
+  Ewald, A. C. (2009). \emph{The Way We Vote: The Local Dimension of
+  American Suffrage}. Nashville: Vanderbilt University Press.
+  
   \hypertarget{ref-fortier_absentee_2006}{}
   Fortier, J. C. (2006). \emph{Absentee and early voting: Trends,
   promises, and perils}. Washington, DC: AEI Press.
@@ -4137,9 +4190,6 @@ future research on the subject.
   Richey Sean. (2008). Voting by Mail: Turnout and Institutional Reform in
   Oregon*. \emph{Social Science Quarterly}, \emph{89}(4), 902--915.
   \url{http://doi.org/10.1111/j.1540-6237.2008.00590.x}
-  
-  \hypertarget{ref-robert_nay_help_2002}{}
-  Robert Nay. (2002). The Help America Vote Act of 2002.
   
   \hypertarget{ref-rosenstone_mobilization_2003}{}
   Rosenstone, S. J. (2003). \emph{Mobilization, participation, and
