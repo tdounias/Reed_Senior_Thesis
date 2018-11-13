@@ -41,9 +41,7 @@ The models are extremely RAM intensive; particularly the individual level models
   
 The form of stratified sampling I am using is very simple; based on county, mail vote, and electoral participation, I use `dplyr` in \textit{R} to draw a sample that contains equal proportions of every combination of values of these variables to those in the original dataset. If, for example, the original dataset had 2% of entries being voters from Jefferson county that participated using a mail ballot, the sampled dataset would have a proportion that is approximately equal to 2% [@chihara_mathematical_2011]. In this way I draw a sample of around 400,000 observations from my initial ballot dataset, on which I run all my individual models. After checking the variable ratios in sampled and population datasets, I found that the differences between ratios had a mean and standard deviation of less than a hundredth of a percentile. Therefore this sampled dataset could serve as a decent approximation of my population.
 
-## Models
-
-### Variable Specification
+## Variable Specification
 
 I will not go through each individual variable in this section, but will briefly describe my procedure on notation for the following models. I will include more comments whenever they seem necessary under each model. In this thesis I include predictors on a series of variables that can be divided into five categories based on unit of observation: county, election, individual, local result, and ballot. The last two are functions of other units: local result units are equal to the product of elections and counties, while ballot units are equal to the number of unique individuals multiplied by the number of elections each of them was registered in. For notation, I follow this set of rules:  
   
