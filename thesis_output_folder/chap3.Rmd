@@ -122,7 +122,7 @@ Colorado presents such an interesting case for research on Vote By Mail exactly 
    
 On a more general level, Colorado is interesting exactly because it is "typical" but with a wild streak. It is typical rocky mountain country, great planes country, and liberal urban city but all *in one state*. In is libertarian yet increasingly Democratic. It heavily relies on state funding for national parks, yet rebels against federal land use laws. It is a frontier state with traditional values, that overwhelmingly supports marijuana legalization. It is also a consistent purple state, with a Democratic Governor and House, but Republican Attorney General, Secretary of State and senate. This means that Colorado is a combination of distinct national effects, but also local effects that make it significantly different from national trends as a whole. In this environment, predicting results of policy can be difficult, but extremely salient as multiple effects can be tested against each other.  
   
-## Acquiring the Data  
+## The Data  
 
 This thesis relies on county and individual level models to draw conclusions on voting behaviors, and how they are affected by voting method. As such, the data I need will optimally contain the following:
 
@@ -132,7 +132,7 @@ This thesis relies on county and individual level models to draw conclusions on 
   
 * **Information on individual elections**: date, ballots cast, voting methods, county, election descriptions
   
-In the process of my research, I have acquired sufficient data to cover the second and third of these areas. I was unable to procure individual level data on demographic characteristics apart from gender, age, and party registration. However, reasonable conclusions can still be drawn from county or precinct aggregates^[]. 
+In the process of my research, I have acquired sufficient data to cover the second and third of these areas. I was unable to procure individual level data on demographic characteristics apart from gender, age, and party registration. However, reasonable conclusions can still be drawn from county or precinct aggregates. 
   
 ### Sources and first glance
   

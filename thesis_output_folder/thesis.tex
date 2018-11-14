@@ -552,9 +552,7 @@ future research on the subject.
   
   \chapter{The State of the Literature}\label{rmd-basics}
   
-  \section{Deciding to Vote}\label{deciding-to-vote}
-  
-  \subsection{Turnout and Political
+  \section{Turnout and Political
   Participation}\label{turnout-and-political-participation}
   
   In their seminal work \emph{Participation in America}, Verba and Nie
@@ -594,7 +592,25 @@ future research on the subject.
   \subsection{Calculating Turnout}\label{calculating-turnout}
   
   The choice of numerator seems fairly straightforward at first glance,
-  but can become complex. There are two issues to consider. First,
+  but can become complex. There are two issues to consider. In any given
+  election, there can be several candidates and issues on the ballot,
+  ranging from US Senate races to local school-board contests. Therefore a
+  first issue is ``undervoting'', or only completing some parts of a
+  ballot and not voting in every contest(Saltman, 2009). This means that
+  there can be different turnout counts produced by electoral contest for
+  any given election date: one for US Senate, one for state legislative
+  contests, etc. Alternatively, turnout can be calculated for that
+  election day, and not for any particular race, where the numerator is
+  every ballot cast. I use this second conception of turnout, calculating
+  at the election level. A second issue is that a fair amount of voters
+  may turn out (by physically going to a polling place or mailing their
+  ballot), but have their ballot rejected for registration issues, concern
+  for authenticity, or a range of other issues. Since these voters did
+  take action to participate, should a metric of turnout as political
+  participation include them? I would tend to answer yes, but the data I
+  have available do not include information on voters having their ballots
+  rejected; this means that I am only able to include such participants
+  whose ballots were officially counted in my final calculations.
   
   The three main statistics used for the denominator are the total voting
   age population, voting eligible population, and the number of registered
@@ -609,59 +625,60 @@ future research on the subject.
   
   Counts of registered voters are also a useful tool for calculation of
   turnout, as they usually require no estimation. These counts can simply
-  be extracted from voter registration files. Using registered voters,
-  however, also brings with it two problems. First, voter registration
-  files many times can include discrepancies like deceased voters, voters
-  included in multiple counties, or individual voters included multiple
-  times. Furthermore, the total amount of actual voters among registered
-  voters can be misrepresentative of democratic participation; consider
-  that if a certain minority community has historically low registration
-  rates they are not included at all in calculations of the turnout
-  statistic.
+  be extracted from voter registration files. Such a metric, however, is
+  only representative of the electoral political participation level of a
+  group that has already taken a step towards participating: registering
+  to vote. Researchers should be careful to also include registration
+  level by income, race, gender, or other metrics if using this form of
+  turnout calculation to infer levels of participation by social or
+  demographic characteristics.
   
-  The punch line here is that how the turnout statistic is calculated is
-  not a clear choice, and will have an impact on how studies are set up.
-  To give one example, consider Oregon's Motor Voter program, that
-  automatically registers voters when they interact with the DMV. It is
-  conceivable that this reform will \emph{decrease} turnout when measured
-  as a percentage of the total registered voter count, but \emph{increase}
-  turnout when measured against total population. This happens if more
-  people register to vote, but do not actually do so--in other words, both
-  number of registrants and number of ballots cast are increasing, but the
-  former increases at a larger rate than the latter. I will specify how I
-  calculate turnout in the next chapter.
+  The punch line here is that calculation of turnout is not an obvious
+  choice, and will have an impact on what conclusions are drawn. To give
+  one example, consider Oregon's Motor Voter program, that automatically
+  registers voters when they interact with the DMV. It is conceivable that
+  this reform will \emph{decrease} turnout when measured as a percentage
+  of the total registered voter count, but \emph{increase} turnout when
+  measured against total population. This happens if more people register
+  to vote, but do not actually do so--in other words, both number of
+  registrants and number of ballots cast are increasing, but the former
+  increases at a larger rate than the latter. In my thesis I will use
+  registered voter counts as the turnout denominator.
+  
+  \subsection{Turnout and Voting Probability
+  Models}\label{turnout-and-voting-probability-models}
   
   Statistical models of turnout can be constructed at either the
-  individual or community level. At the individual level, a model is built
-  to predict the probability of voting for every member of a group, and
-  then sum over the members to create an estimate for turnout. Probit or
-  Logit models are preferred. At the community level, researchers first
-  choose a geographical level at which to calculate, which then
-  constitutes the individual observation in the data that is used to
-  create the model.
+  individual or group level. At the individual level, a model is built to
+  predict the probability of voting for every member of a group, which
+  then can sum over the members to create an estimate for turnout. This is
+  a classification problem that can be solved with models such as Probit
+  or Logit generalized linear regressions. Turnout can be calculated for
+  several groups: counties, precincts, racial characteristics, etc. The
+  unit of observation is a single group, and a regression model is fit on
+  turnout as a continuous variable. In this thesis, I estimate models at
+  the county level, as well as the individual level.
   
   Both these models include a standard set of societal variables at the
-  individual and aggregate level, policy variables (whether the district
-  does Postal Voting, whether Voter ID requirements are particularly
+  individual and/or group level, policy variables (whether the district
+  uses Postal Voting, whether Voter ID requirements are particularly
   strict), election-specific variables (closeness of election or campaign
   expenditure) and sometimes time-series data, like previous levels of
-  turnout. This type of analysis is not exclusively used to predict
-  turnout but also to, as will be later shown, draw inferences on the
-  effects that certain explanatory variables have on electoral
-  participation.
+  turnout. This type of analysis is used either to predict turnout or draw
+  inferences on the effects that certain explanatory variables have on
+  electoral participation.
   
-  Through meta-analyses on studies of turnout, it is possible to get a
-  clear picture on what variables effect individual and collective choices
-  to turn out. Three such studies are conducted by Geys (2006), Geys and
-  Cancela (2016), and Smets (2013). Geys includes 83 studies of national
-  US elections in his initial meta-analysis (Geys, 2006), later increasing
-  that number to 185 (Geys and Cancela, 2016) and adding local elections.
-  On aggregate-level models for national elections they conclude that
-  competitiveness, campaign financing, and registration policy have the
-  most pronounced effects, while on the sub-national level there are more
-  pronounced effects for societal variables and characteristics of
-  election administration (spending, voting policy, etc.). Smets and Van
-  Ham (2013) examine individual-level predictors for turnout in a similar
+  Meta-analyses conducted by Geys (2006), Geys and Cancela (2016), and
+  Smets (2013) can give a clearer picture on which predictors are relevant
+  to turnout. Geys includes 83 studies of national US elections in his
+  initial meta-analysis (Geys, 2006), later increasing that number to 185
+  (Geys and Cancela, 2016) and adding local elections. On aggregate-level
+  models for national elections they conclude that competitiveness,
+  campaign financing, and registration policy have the most pronounced
+  effects, while on the sub-national level there are more pronounced
+  effects for societal variables and characteristics of election
+  administration (spending, voting policy, etc.). Smets and Van Ham (2013)
+  examine individual-level predictors for turnout in a similar
   meta-analysis, and conclude that ``age and age squared, education,
   residential mobility, region, media exposure, mobilization (partisan and
   nonpartisan), vote in previous election, party identification, political
@@ -670,34 +687,34 @@ future research on the subject.
   race. I will specify the model I will use for turnout in the second
   chapter.
   
-  \subsection{Theories of Voting}\label{theories-of-voting}
+  \subsection{Deciding to Vote}\label{deciding-to-vote}
   
   Here I take one step back from turnout, and examine the theories
   surrounding individual choices to vote or abstain. There are three main
-  theories outlined in the literature on why individuals chose to vote.
-  While there is some overlap, the following are mostly distinct:
+  theories outlined in the literature on why individuals chose to vote:
   
   \begin{itemize}
   \item
     \emph{Decision ``at the margins''}: In his 1993 study, Aldrich posits
-    that voting is a low cost-low benefit behavior. Therefore, he
-    continues, voting is a decision that individuals make ``at the
-    margins''; in most people, the urge to vote is not overwhelmingly
-    strong, and therefore individuals will vote when it is convenient to
-    them, when they are motivated by a competitive race, when policies are
-    put in place to help them, and when they are subjected to GOTV (Get
-    Out the Vote) efforts. For Aldrich, this is corroborated by the fact
-    that most turnout models present consistent, yet weak, relational
-    variables; if decisions are made ``at the margins'', then no single
-    predictor would have an overwhelming result. This is also supported by
-    Matsusaka (1997), and Burden \& Neiheisel (2012). Matsusaka expresses
-    support for a more ``random'' process of voting, where turnout models
-    are ambiguous because of the difficulty that predicting ``at the
-    margins'' entails (Matsusaka \& Palda, 1999). Burden \& Neiheisel
-    (2013) also demonstrate support for Aldrich's thesis by using data
-    from Wisconsin to calculate a net \emph{negative} effect of 2\% on
-    turnout following the expansion of early voting access in the state.
-    (Aldrich, 1993; Neiheisel \& Burden, 2012)
+    that voting is a low cost-low benefit behavior. Voting is a decision
+    that individuals make ``at the margins''; in most people, the urge to
+    vote is not overwhelmingly strong, and therefore individuals will vote
+    when it is convenient to them, when they are motivated by a
+    competitive race, when policies are put in place to help them, and
+    when they are subjected to GOTV (Get-Out-the-Vote) efforts. For
+    Aldrich, this is corroborated by the fact that most turnout models
+    present consistent, yet weak, relational variables; if decisions are
+    made ``at the margins'', then no single predictor would have an
+    overwhelming result. This is also supported by Matsusaka (1997), and
+    Burden \& Neiheisel (2012). Matsusaka expresses support for a more
+    ``random'' process of voting, where turnout models are ambiguous
+    because of the difficulty that predicting ``at the margins'' entails
+    (Matsusaka \& Palda, 1999). Burden \& Neiheisel (2012) use data from
+    Wisconsin to calculate a net \emph{negative} effect of 2\% on turnout
+    following the expansion of early voting access in the state. While
+    this can be read as an Aldrich effect on turnout, the authors claim
+    that their findings should be attributed to a lack of ``election-day
+    effects''(Aldrich, 1993; Neiheisel \& Burden, 2012).
   \item
     \emph{Habitual Voting}: While Aldrich supports that there is no single
     overwhelming predictor of turnout, Fowler (2006) posits that future
@@ -775,34 +792,42 @@ future research on the subject.
   \item
     \emph{In-Person Early Voting}, for which all individuals must vote in
     person at a polling place or vote center, but the timeframe for voting
-    extends for around two weeks, not a single day.
+    extends for around two weeks, not a single day. Again, some leeway is
+    given for absentee or overseas voters, who can vote by mail.
   \item
-    \emph{Vote-By-Mail, Absentee Early Voting}, for which individuals have
-    a clear, no-excuse-necessary option for not being present when they
-    vote, or for filling in a mailed ballot and dropping it off at
-    designated locations.
+    \emph{Mail Voting}, for which individuals have a clear,
+    no-excuse-necessary option for not being present when they vote, or
+    for filling in a mailed ballot and dropping it off at designated
+    locations.
   \end{itemize}
   
-  For the purposes of this thesis I will examine the latter category, and
-  specifically Vote-By-Mail. The reason behind this is that the model of
-  in-person, election day voting is usually seen as the baseline, the
-  ``vanilla'' way of conducting elections if you will. Therefore it has
-  been of interest for researchers to examine if other systems can
-  outperform that baseline. Specifically, it is most interesting to
-  examine voting styles that are heralded for their expansion of turnout,
-  to see whether popular beliefs on their benefits and drawbacks hold; if
-  they are different from the base model of conducting American elections,
-  or if they present new challenges and unique selling points.
-  Vote-By-Mail is particularly interesting because it is quickly taking
-  the form of a trend in state elections, as more and more states are
-  enforcing more open models of VBM. In the next section, I will more
-  closely examine the particulars of Vote-By-Mail.
+  Note that some form of voting via mail ballot exists in all three cases;
+  the distinction between Mail Voting and the other two is that there is
+  no excuse necessary to cast a mail ballot. In such systems mail voting
+  is not an exception, but exists somewhere between a common practice and
+  a universal means of casting a ballot\footnote{It is also commonly
+    argued that full postal voting is a 4th category in and of itself. I
+    don't make this distinction here, but in the following section I break
+    down Mail Voting into different categories, one of which is full
+    postal voting.}.
+  
+  In-person election day voting is, historically speaking, the way the
+  vast majority of democracies have conducted their elections. Therefore
+  it has been of interest for researchers to examine if other systems can
+  outperform that baseline for some metric of participation. Specifically,
+  it is most interesting to examine voting styles that are heralded for
+  their expansion of turnout, to see whether popular beliefs on their
+  benefits and drawbacks hold; if they are different from the base model
+  of conducting American elections, or if they present new challenges and
+  unique selling points. Mail voting is particularly interesting because
+  it is quickly becoming a trend in state-level elections administration.
   
   \subsection{What is VBM?}\label{what-is-vbm}
   
-  Vote-By-Mail is a process by which voters receive a ballot delivered by
-  mail to their homes. Voters then have a variety of options on how to
-  return these ballots, ranging from dropping them off at pre-designated
+  Vote-By-Mail (or as it is commonly referred to by most in the field,
+  VBM) is a process by which voters receive a ballot delivered by mail to
+  their homes. Voters then have a variety of options on how to return
+  these ballots, ranging from dropping them off at pre-designated
   locations, to mailing them in, to bringing them to a polling place. The
   two first options are most commonly implemented, with a very small
   number of states still operating polling places for mail ballots. This
@@ -828,13 +853,13 @@ future research on the subject.
     no-excuse absentee voting states like Utah, California, Montana,
     Arizona, New Jersey, and others.
   \item
-    \emph{Hybrid or Transitionary Systems}: In hybrid systems, voters
-    receive a mail ballot but can choose to disregard it and vote
-    conventionally. This is the case in Colorado. Transitional systems
-    exist in states that have chosen to eventually conduct all elections
-    by postal voting, but have given counties an adjustment period during
-    which this shift is not mandatory, or mandatory only for certain
-    elections. This is the case in California, Utah, and Montana.
+    \emph{Hybrid Systems}: In hybrid systems, voters receive a mail ballot
+    but can choose to disregard it and vote conventionally. This is the
+    case in Colorado. Transitional systems exist in states that have
+    chosen to eventually conduct all elections by postal voting, but have
+    given counties an adjustment period during which this shift is not
+    mandatory, or mandatory only for certain elections. This is the case
+    in California, Utah, and Montana.
   \end{itemize}
   
   Vote-By-Mail is also commonly considered a type of early voting, since
@@ -845,7 +870,7 @@ future research on the subject.
   implemented by state and local governments with the argument that they
   either expand the democratic franchise by bringing in new voters, or by
   making it more likely that current registered voters participate in the
-  electoral process (State Legislatures, n.d.).
+  electoral process (State Legislatures, 2018).
   
   \subsection{How Theories Apply to VBM}\label{how-theories-apply-to-vbm}
   
@@ -885,16 +910,20 @@ future research on the subject.
   rather than early voting or VBM policies (Berinsky, 2005).
   
   Vote-by-Mail is obviously not a welfare or spending program, but it does
-  expand individual resources in terms of voting capacity. A ballot
-  delivered to your home means that less resources need to be expended in
-  the act of voting, which in turn has both a practical effect--building
-  capacity--and a more behavioral effect--a feeling of inclusion, an
-  interaction with the process of voting that comes through a ballot at
-  your doorstep that would not exist if you had not gone to a polling
-  place (Schneider \& Ingram, 1990). Under a resources and organizations
-  framework, both these effects are most likely to be net positive to
-  political participation, and as such would predict a strong, positive
-  effect of VBM on turnout.
+  increase individual resources in terms of voting capacity. Filling out a
+  ballot at your kitchen table does not include spending time to go to a
+  polling center, or standing in line to vote, or factoring in significant
+  changes to your daily schedule for election day. A mail ballot can
+  usually be dropped off at several locations, or can be mailed in along
+  with any other mail a voter may have to send. Less time and effort is
+  spent on casting your vote. This in turn has both a practical
+  effect--building capacity--and a more behavioral effect--a feeling of
+  inclusion, an interaction with the process of voting that comes through
+  a ballot at your doorstep that would not exist if you had chosen not to
+  a polling place (Schneider \& Ingram, 1990). Under a resources and
+  organizations framework, both these effects are most likely to be net
+  positive to political participation, and as such would predict a strong,
+  positive effect of VBM on turnout.
   
   \subsection{General Results on VBM}\label{general-results-on-vbm}
   
@@ -909,7 +938,7 @@ future research on the subject.
   City, which is divided into two different voting districts using
   different voting systems. The conclusion is, again, a 2-4\% drop in
   turnout along the VBM part of the city (Keele \& Titiunik, 2017). Burden
-  et al. (2014) takes a different approach, using country-wide election
+  et al. (2014) take a different approach, using country-wide election
   data from 2004 and 2008 presidential elections, and compares districts
   based on early voting practices. Their results show a significant drop
   in turnout, which can be associated to VBM as well due to its closeness
@@ -935,18 +964,18 @@ future research on the subject.
   but focusing on Oregon's Motor Voter program, find evidence of positive
   association to turnout. I include these effects due to Oregon being an
   exclusively VBM state, and because this paper uses a ``synthetic control
-  group'' model, a particularly interesting statistical technique. Lastly,
+  group'' model, a particularly interesting statistical technique. Lastly
   I include a study conducted by Pantheon Analytics on Colorado, which
   compares actual turnout to predicted levels for VBM counties in
   Colorado. The results show a positive effect of approximately 3.3\% due
   to VBM (Edelman \& Glastris, 2018).
   
-  The conclusion to be drawn from this section is that results on VBM vary
-  significantly. There are multiple studies, using multiple methods, on
-  multiple states, with multiple results. This only adds to the importance
-  of being careful when constructing models and hypotheses to test VBM's
-  effects on turnout, as assumptions made in the process can critically
-  impact the results.
+  The conclusion to be drawn is that results on VBM vary significantly.
+  There are multiple studies, using multiple methods, on multiple states,
+  with multiple results. This only adds to the importance of being careful
+  when constructing models and hypotheses to test VBM's effects on
+  turnout, as assumptions made in the process can critically impact the
+  results.
   
   \section{Voter Registration Files as Data
   Sources}\label{voter-registration-files-as-data-sources}
@@ -4230,9 +4259,9 @@ future research on the subject.
   \emph{Electoral Studies}, \emph{32}(2), 344--359.
   \url{http://doi.org/10.1016/j.electstud.2012.12.006}
   
-  \hypertarget{ref-national_council_of_state_legislatures_absentee_nodate}{}
-  State Legislatures, N. C. of. (n.d.). Absentee and Early Voting.
-  \emph{National Council of State Legislatures}. Retrieved from
+  \hypertarget{ref-national_council_of_state_legislatures_absentee_2018}{}
+  State Legislatures, N. C. of. (2018, October). Absentee and Early
+  Voting. \emph{National Council of State Legislatures}. Retrieved from
   \url{http://www.ncsl.org/research/elections-and-campaigns/absentee-and-early-voting.aspx\#a}
   
   \hypertarget{ref-stein_engaging_2008}{}
