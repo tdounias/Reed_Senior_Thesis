@@ -2277,6 +2277,19 @@ future research on the subject.
   \chapter{Model Specification and
   Results}\label{model-specification-and-results}
   
+  The goal of this chapter is apply inferential statistical modeling to
+  the data. This task can be divided into three steps: specifying the
+  models mathematically, fitting the models, and interpreting the
+  results\footnote{In theory there is also the step of translating the
+    models from their mathematical specification into some sort of
+    algorithmic process that produces estimates of coefficients and error
+    terms. This process is arduous and long, so it is not included in this
+    chapter. Appendix A deals with some of the techniques involved with
+    model estimation}. However, before jumping into this process, it is
+  worth going into some key problems with the models produced. As a
+  consequence of these issues, some of the models are not estimated to the
+  standards of convergence that are commonly set.
+  
   \section{Modelling Issues}\label{modelling-issues}
   
   \subsection{Lack of variability}\label{lack-of-variability}
@@ -2284,29 +2297,34 @@ future research on the subject.
   To put it very simply, it's not enough to have hundreds of thousands of
   observations if they are all almost identical to each other. If, for
   example, my data included a thousand people in Jefferson county, and 63
-  in all other counties of Colorado combined--one in each remaining
-  county--, then I would not be able to leverage my data to draw
+  in all other counties of Colorado combined (one in each remaining
+  county), then I would not be able to leverage my data to draw
   conclusions on county-level effects.
   
-  As previously stated, I have registration files going back to 2012. From
-  these files, I have extracted data for elections going back to
-  2010.\footnote{See section 3.3.1; I extracted data limited to this time
-    period to avoid accuracy issues with migration and removal of
-    inactive/unavailable voters} In order to make inferences on VBM and
-  turnout effects I had to have extensive and varied data. I have
-  extensive data--over 35 million observations at the individual
-  level--but the data substantially lacks variance in voting method. Put
-  simply, the vast majority of registrants in Colorado from 2010 onward
-  either did not vote at all, or voted by mail. If you recall the changes
-  in Colorado election law, in 2008 counties were allowed to conduct all
-  mail elections, and no-excuse permanent absentee voting was implemented
+  As previously stated, the data available includes registration files
+  going back to 2012. From these files, I have extracted data for
+  elections going back to 2010.\footnote{See section 3.3.1; the extracted
+    data is limited to this time period to avoid accuracy issues with
+    migration and removal of inactive/unavailable voters.} In order to
+  make inferences on VBM and turnout effects it is necessary to have
+  extensive and varied data. Specifically, it is necessary to have data
+  that include a large enough sample of the voters in Colorado, with a
+  substantial portion of them using different voting methods, from
+  different counties, or in different election years etc.
+  
+  The data are extensive (over 35 million observations at the individual
+  level) but substantially lack variance in voting method. Put simply, the
+  vast majority of registrants in Colorado from 2010 onward either did not
+  vote at all, or voted by mail. If you recall the changes in Colorado
+  election law, in 2008 counties were allowed to conduct all mail
+  elections, and no-excuse permanent absentee voting was implemented
   state-wide; then in 2013 Colorado transitioned to full VBM for all
   elections. This means that few people were still using traditional
   polling places or vote centers to cast their ballots. Figure 4.1 shows
   how, after 2013, and even before that in 2011--the coordinated, local
   election for which mail ballots were more convenient for counties--over
   95\% of ballots cast were mail ballots. Only in the general elections of
-  2010 and 2012 there is some variance, but mail ballots account for well
+  2010 and 2012 is there some variance, but mail ballots account for well
   over two thirds of total votes.
   
   \begin{figure}
@@ -2318,10 +2336,10 @@ future research on the subject.
   \caption[Percentage of mail ballots over total ballots by year]{Percentage of mail ballots over total ballots by year}\label{fig:vbm png}
   \end{figure}
   
-  This issue is not completely fatal for my county level models. There is
+  This issue is not completely fatal for county level models. There is
   still variance between counties that have 100\% mail ballots and those
-  that are around the 75-85\% margin. For individual level models--where I
-  am estimating voting probability--VBM will be an almost perfect
+  that are around the 75-85\% margin. For individual level models, where I
+  am estimating voting probability, VBM will be an almost perfect
   predictor for voting, and therefore will not present me with any
   substantial analytical result on how it affects voting probability.
   There are some ways to compensate for this issue, which I outline; due
@@ -2333,8 +2351,8 @@ future research on the subject.
     \emph{More (Diverse) Data}: It would be very useful to get snapshot
     data of Colorado voter files from, say, 2004 to today, because it
     would allow for an extensive study on how the 2008 and 2013 election
-    laws re-shaped voting decisions in the state. It would be amazing, but
-    also expensive and very time consuming--involving several purchases of
+    laws re-shaped voting decisions in the state. It would be useful, but
+    also expensive and very time consuming, involving several purchases of
     data from the Secretary of State of Colorado. Voter registration files
     also tend to get messier the further back one goes, which means that
     the process of cleaning up the data would get substantially harder. It
@@ -2343,7 +2361,7 @@ future research on the subject.
     a lot more limited than such an overarching study that would probably
     be conducted by multiple researchers with several assistants. I do
     however present several replicable materials for such a study, through
-    the creation of an \textit{R} package I include on my gitHub page
+    the creation of an \textit{R} package I include on my GitHub page
     along with the final results of this thesis. This thesis does not go
     that far, but it may help similar studies in the future.
   \item
@@ -2364,21 +2382,26 @@ future research on the subject.
     It involves gathering a set of characteristics from the treatment
     group members and then using statistical methods to combine them into
     making the appropriate control (McClelland \& Gault, 2017). I will not
-    go into the particulars of this method--the sources cited here should
-    provide a decent introduction--, but this method has been successful
-    in assessing policy effects such as anti-smoking laws (Barr et al.,
+    go into the particulars of this method (the sources cited should
+    provide a decent introduction), but this method has been successful in
+    assessing policy effects such as anti-smoking laws (Barr et al.,
     2012), or even motor voter laws in Oregon(Gronke, McGhee, Romero, \&
     Griffin, 2017).
   \end{itemize}
   
-  \subsection{Processing Power}\label{processing-power}
+  \subsection{Computational
+  Considerations}\label{computational-considerations}
   
-  The models are extremely RAM intensive; particularly the individual
-  level models, for which I have almost 35 million different observations,
-  do not run. For now, I compensated for this problem by using stratified
-  sampling to sample a subset of my observations\footnote{A long term
-    solution to this issue could be the use of a virtual machine, or some
-    RStudio server, Or Amazon Work Spaces (AWS).}.
+  The process of computing estimates for model coefficients can often be
+  very computationally intensive. This issue was particularly present
+  during estimation of individual level models, which alongside complex
+  hierarhical structure also draw on a huge dataset of 35 million
+  observations. This computationally intensive procedure requires more
+  processing power than I currently have available. For now, I compensated
+  for this problem by using stratified sampling to sample a subset of my
+  observations\footnote{A long term solution to this issue could be the
+    use of a more powerful local RStudio server, or Amazon Web Services
+    (AWS).}.
   
   The form of stratified sampling I am using is very simple; based on
   county, mail vote, and electoral participation, I use \texttt{dplyr} in
@@ -2398,15 +2421,15 @@ future research on the subject.
   \section{Variable Specification}\label{variable-specification}
   
   I will not go through each individual variable in this section, but will
-  briefly describe my procedure on notation for the following models. I
-  will include more comments whenever they seem necessary under each
-  model. In this thesis I include predictors on a series of variables that
-  can be divided into five categories based on unit of observation:
-  county, election, individual, local result, and ballot. The last two are
-  functions of other units: local result units are equal to the product of
-  elections and counties, while ballot units are equal to the number of
-  unique individuals multiplied by the number of elections each of them
-  was registered in. For notation, I follow this set of rules:
+  briefly describe my notation for the following models. I will include
+  more comments whenever they seem necessary under each model. In this
+  thesis I include predictors on a series of variables that can be divided
+  into five categories based on unit of observation: county, election,
+  individual, local result, and ballot. The last two are functions of
+  other units: local result units are equal to the product of elections
+  and counties, while ballot units are equal to the number of unique
+  individuals multiplied by the number of elections each of them was
+  registered in. For notation, I follow this set of rules:
   
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
@@ -2414,13 +2437,13 @@ future research on the subject.
   \item
     If the variable is a response, it is coded \(y\).
   \item
-    If the variable is a predictor, it is coded according to Table 4.1.
+    If the variable is a predictor, it is coded \(x\)
   \item
     The variable's superscript will provide information on what it
     represents, else it will be explained.
   \item
-    All variables represent a single value of that variable unless stated
-    otherwise.
+    All variables represent a single value (scalar) of that variable
+    unless stated otherwise.
   \item
     Unit of observation will also be specified in subscript, according to
     the indices described in Table 4.1. These indices are also used in sum
@@ -2428,79 +2451,59 @@ future research on the subject.
   \item
     All Greek characters represent coefficients to be calculated.
   \item
-    By \(k[j]\) I represent the k-value of the j-observation. In this
-    case, this would be the county that an individual is registered in.
+    By \(k[j]\) I represent the k-value corresponding to the
+    j-observation. In this case, this would be the county that an
+    individual is registered in.
   \item
-    Note that for Local Result level variables, I use \(k,l\) as an
-    indice. This is because there are very few variables at this level, it
-    is a direct multiplicative product of two other units, and this
-    notation avoids confusion with even more indice types.
+    Note that for Local Result level variables, I use \(k,l\) as an index.
+    This is because there are very few variables at this level, it is a
+    direct cartesian product of two other units, and this notation avoids
+    confusion with even more index types.
   \end{enumerate}
   
-  \begin{longtable}[]{@{}ccc@{}}
-  \caption{Variable names and indices per unit of observation
+  \begin{longtable}[]{@{}lc@{}}
+  \caption{Variable indices per unit of observation
   \label{tab:units_vars}}\tabularnewline
   \toprule
-  \begin{minipage}[b]{0.27\columnwidth}\centering\strut
+  \begin{minipage}[b]{0.27\columnwidth}\raggedright\strut
   Units\strut
-  \end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\centering\strut
-  Variable\strut
-  \end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[b]{0.16\columnwidth}\centering\strut
   Index\strut
   \end{minipage}\tabularnewline
   \midrule
   \endfirsthead
   \toprule
-  \begin{minipage}[b]{0.27\columnwidth}\centering\strut
+  \begin{minipage}[b]{0.27\columnwidth}\raggedright\strut
   Units\strut
-  \end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\centering\strut
-  Variable\strut
-  \end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[b]{0.16\columnwidth}\centering\strut
   Index\strut
   \end{minipage}\tabularnewline
   \midrule
   \endhead
-  \begin{minipage}[t]{0.27\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.27\columnwidth}\raggedright\strut
   Ballot\strut
-  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
-  u\strut
-  \end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering\strut
   i\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.27\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.27\columnwidth}\raggedright\strut
   Individual\strut
-  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
-  z\strut
-  \end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering\strut
   j\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.27\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.27\columnwidth}\raggedright\strut
   County\strut
-  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
-  x\strut
-  \end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering\strut
   k\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.27\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.27\columnwidth}\raggedright\strut
   Election\strut
-  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
-  w\strut
-  \end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering\strut
   l\strut
   \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.27\columnwidth}\centering\strut
-  Local Result\strut
-  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
-  v\strut
-  \end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\centering\strut
-  k,l\strut
-  \end{minipage}\tabularnewline
-  \begin{minipage}[t]{0.27\columnwidth}\centering\strut
+  \begin{minipage}[t]{0.27\columnwidth}\raggedright\strut
   General Index\strut
-  \end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\centering\strut
-  -\strut
-  \end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\centering\strut
-  i'\strut
+  \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering\strut
+  v\strut
   \end{minipage}\tabularnewline
   \bottomrule
   \end{longtable}
@@ -2512,14 +2515,14 @@ future research on the subject.
   In this section I will go through a step-by step creation of models at
   the county level. County level models use a series of variables at the
   election, county, and local result levels. The response variable is
-  always turnout as a local result. If this model is considered at its
-  most basic, it could be thought of as an assignment of voting tendencies
-  across counties; each county independent of election has a unique range
-  of turnout results. In this way it is possible to build a naive,
-  baseline model of turnout as follows:
+  always turnout in one county after a particular election. With no other
+  information, this model could be thought of as an assignment of voting
+  tendencies across counties; each county independent of election has a
+  unique range of turnout results. In this way it is possible to build a
+  naive, baseline model of turnout as follows:
   
   \begin{equation} \tag{Model 1}
-  y^{turnout}_{k,l} = \beta_0 + (\sum_{k=1}^{64}\beta_kx_k^{county}),
+  Y^{turnout}_{k,l} = \beta_0 + (\sum_{k=1}^{64}\beta_kx_k^{county}) + \epsilon,\ \epsilon \sim N(0,\sigma^2)
   \end{equation}
   
   where \(x_k^{county}\) is a series of 64 dummy variables for each county
@@ -2531,10 +2534,10 @@ future research on the subject.
   these counties are areas of the same state, in the same country, with
   populations moving between them at regular intervals, and many of them
   covering the same metropolitan area or congressional district.
-  Additionally, this model cannot fully calculate relevant coefficients,
-  since a number of counties can be represented as perfect linear
-  functions of the other variables. This means they will be dropped by
-  \textit{R} when the model is called in the \texttt{lm()} function.
+  Additionally, the model matrix here is rank defficient; there are two
+  county coefficients that are perfect linear combinations of other
+  coefficients. This means they will be dropped by \textit{R} when the
+  model is called in the \texttt{lm()} function.
   
   A way to fix both these issues is to use a multilevel model with mixed
   effects for county. By constraining coefficients at the county level to
@@ -2546,26 +2549,28 @@ future research on the subject.
   written as:
   
   \begin{equation} \tag{Model 2}
-  y^{turnout}_{k,l} = a_{k} + \beta_{1}x_k^{\%white} + \beta_{2}x_k^{\%urban},
+  Y^{turnout}_{k,l} = a_{k} + \beta_{1}x_k^{\%white} + \beta_{2}x_k^{\%urban} + \epsilon,
   \end{equation}
   
-  \[a_{k} \sim N (\gamma_0, \sigma_{\alpha}^2)\] This model provides a
-  more reasonable set of estimates for each county, but still fails at
-  providing any information as to secular trends, time-specific effects,
-  election type effects, or mail voting--the variable of interest. I will
-  amend this by adding a set of variables at the election and local result
-  levels: election type and an interaction term between election type and
-  mail voting. This variable should reflect whether turnout effects of
-  mail voting are more pronounced in a specific type of election. I call
-  this \textbf{Model 3} and it can be specified as follows:
+  \[a_{k} \sim N (\gamma_0, \sigma_{\alpha}^2)\]
+  \[\epsilon \sim N(0, \sigma^2)\] This model provides a more reasonable
+  set of estimates for each county, but still fails to provide any
+  information as to secular trends, time-specific effects, election type
+  effects, or mail voting--the variable of interest. I will amend this by
+  adding a set of variables at the election and local result levels:
+  election type and an interaction term between election type and mail
+  voting. This variable should reflect whether turnout effects of mail
+  voting are more pronounced in a specific type of election. I call this
+  \textbf{Model 3} and it can be specified as follows:
   
-  \begin{equation} \tag{Model 3}
-  y^{turnout}_{k,l} = a_{k} + \beta_{1}x_k^{\% white} + \beta_{2}x_k^{\% urban} + (\sum_{i'=1}^{4}\beta_{i'+3}w_{i'}^{election type})*(\beta_3v_{k,l}^{\% mail~vote} + 1),
-  \end{equation}
+  \begin{multline} \tag{Model 3}
+  Y^{turnout}_{k,l} = a_{k} + \beta_{1}x_k^{\% white} + \beta_{2}x_k^{\% urban} + \overbrace{(\sum_{v=3}^{6}\beta_{v}x_{v}^{election type} x_{k,l}^{\% mail~vote})}^\text{Interaction Effect with Type} + \\ \overbrace{(\sum_{v=7}^{10}\beta_{v}x_{v}^{election type})}^\text{Main Effect of Election Type} + \epsilon,
+  \end{multline}
   
   \[a_{k} \sim N(\gamma_0, \sigma_{\alpha}^2)\]
+  \[\epsilon \sim N(0, \sigma^2)\]
   
-  where \(w_{i'}^{election type}\) is a series of four dummy variables for
+  where \(x_{v}^{election type}\) is a series of four dummy variables for
   each type of election (General, Primary, Coordinated, Midterm). This
   model reflects nearly all the information I have available, apart from
   election date. For the incorporation of election dates there are two
@@ -2589,19 +2594,22 @@ future research on the subject.
   the Wood (2006) textbook. The model, which I call \textbf{Model 4} can
   be written as follows:
   
-  \begin{equation}\tag{Model 4}
-  y^{turnout}_{k,l} = a_{k} + \beta_{1}x_k^{\% white} + \beta_{2}x_k^{\% urban} + (\sum_{i'=1}^{4}\beta_{i'+3}w_{i'}^{election type})*(\beta_3v_{k,l}^{\% mail vote} + 1) + s(w^{year}_{l}),
-  \end{equation}
+  \begin{multline}\tag{Model 4}
+  Y^{turnout}_{k,l} = a_{k} + \beta_{1}x_k^{\% white} + \beta_{2}x_k^{\% urban} + \overbrace{(\sum_{v=3}^{6}\beta_{v}x_{v}^{election type} x_{k,l}^{\% mail~vote})}^\text{Interaction Effect with Type} + \\ \overbrace{(\sum_{v=7}^{10}\beta_{v}x_{v}^{election type})}^\text{Main Effect of Election Type} + s(x^{year}_{l}) + \epsilon,
+  \end{multline}
   
-  \[a_{k} \sim N(\gamma_0, \sigma_{\alpha}^2)\] where \(s()\) is a natural
-  cubic regression spline function with seven knots--equal to the number
-  of years.\footnote{I used the \texttt{gam.check()} function that is
-    present in the \texttt{mgcv} \textit{R} package, whose call determined
-    that the number of knots here may be too low. However, given the data
-    available to me, I was limited to the inclusion of seven years and as
-    such cannot increase the number of knots any further. Setting the
-    number of knots to seven also gave the lowest CV MSE.} A summary of
-  these four models is provided in the following table:
+  \[a_{k} \sim N(\gamma_0, \sigma_{\alpha}^2)\]
+  \[\epsilon \sim N(0, \sigma^2)\]
+  
+  where \(s()\) is a natural cubic regression spline function with seven
+  knots--equal to the number of years.\footnote{I used the
+    \texttt{gam.check()} function that is present in the \texttt{mgcv}
+    \textit{R} package, whose call determined that the number of knots
+    here may be too low. However, given the data available to me, I was
+    limited to the inclusion of seven years and as such cannot increase
+    the number of knots any further. Setting the number of knots to seven
+    also gave the lowest CV MSE.} A summary of these four models is
+  provided in the following table:
   
   \begin{longtable}[]{@{}ll@{}}
   \caption{County level model descriptions
@@ -2664,13 +2672,13 @@ future research on the subject.
   
   In terms of goodness-of-fit, I use 5-fold cross-validated Mean Squared
   Error (MSE) for all of the models. There is a significant drop-off in
-  MSE between models 1,2 and models 3.4 of around \(.35\), which shows
+  MSE between Models 1, 2 and Models 3, 4 of around \(.35\), which shows
   that the variables introduced in the later models substantially increase
   how well the models explain variability in the data. There is also a
   small increase of CV MSE between models 3 and 4, but the numbers are
   very comparable\footnote{If I was trying to make a model for predictive
     purposes I would probably choose Model 3; however, there is still
-    value in comparing models 3 and 4, even if the later doesn't fit the
+    value in comparing Models 3 and 4, even if the later doesn't fit the
     data better than 3. The difference in coefficient values, after
     controlling for time, is a particularly interesting result.}.
   
@@ -2686,7 +2694,7 @@ future research on the subject.
   Model 2\strut
   \end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\centering\strut
   Model 3\strut
-  \end{minipage} & \begin{minipage}[b]{0.11\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\centering\strut
   Model 4\strut
   \end{minipage}\tabularnewline
   \midrule
@@ -2700,7 +2708,7 @@ future research on the subject.
   Model 2\strut
   \end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\centering\strut
   Model 3\strut
-  \end{minipage} & \begin{minipage}[b]{0.11\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\centering\strut
   Model 4\strut
   \end{minipage}\tabularnewline
   \midrule
@@ -2713,7 +2721,7 @@ future research on the subject.
   0.492\strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   0.455\strut
-  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   0.470\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
@@ -2724,8 +2732,8 @@ future research on the subject.
   (0.045)**\strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.078)**\strut
-  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
-  (0.072)\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  (0.072)**\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   Pct\_white\strut
@@ -2735,7 +2743,7 @@ future research on the subject.
   0.034\strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   0.033\strut
-  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   0.031\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
@@ -2746,7 +2754,7 @@ future research on the subject.
   (0.053)\strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.050)\strut
-  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.050)\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
@@ -2757,7 +2765,7 @@ future research on the subject.
   -0.118\strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   -0.117\strut
-  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   -0.119\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
@@ -2768,8 +2776,8 @@ future research on the subject.
   (0.022)**\strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.021)**\strut
-  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
-  (0.021)\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  (0.021)**\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   typeGeneral\strut
@@ -2779,7 +2787,7 @@ future research on the subject.
   \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   0.190\strut
-  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   0.254\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
@@ -2790,8 +2798,8 @@ future research on the subject.
   \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.070)**\strut
-  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
-  (0.065)\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  (0.065)**\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   typeMidterm\strut
@@ -2801,7 +2809,7 @@ future research on the subject.
   \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   0.252\strut
-  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   0.070\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
@@ -2812,7 +2820,7 @@ future research on the subject.
   \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.068)**\strut
-  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.063)\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
@@ -2823,7 +2831,7 @@ future research on the subject.
   \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   -0.071\strut
-  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   -0.170\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
@@ -2834,8 +2842,8 @@ future research on the subject.
   \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.069)\strut
-  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
-  (0.062)\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  (0.062)**\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   typeCoordinated*VBM\strut
@@ -2845,7 +2853,7 @@ future research on the subject.
   \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   -0.001\strut
-  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   0.002\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
@@ -2856,7 +2864,7 @@ future research on the subject.
   \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.067)\strut
-  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.058)\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
@@ -2867,7 +2875,7 @@ future research on the subject.
   \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   0.151\strut
-  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   0.087\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
@@ -2878,7 +2886,7 @@ future research on the subject.
   \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.073)*\strut
-  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.037)\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
@@ -2889,7 +2897,7 @@ future research on the subject.
   \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   -0.058\strut
-  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   0.109\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
@@ -2900,8 +2908,8 @@ future research on the subject.
   \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.026)\strut
-  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
-  (0.030)\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
+  (0.030)*\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   typePrimary*VBM\strut
@@ -2911,7 +2919,7 @@ future research on the subject.
   \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   -0.089\strut
-  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   -0.003\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
@@ -2922,7 +2930,7 @@ future research on the subject.
   \strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.028)\strut
-  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.027)\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
@@ -2933,7 +2941,7 @@ future research on the subject.
   0.040\strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   0.004\strut
-  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   0.006\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
@@ -2944,7 +2952,7 @@ future research on the subject.
   704\strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   704\strut
-  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   704\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
@@ -2955,7 +2963,7 @@ future research on the subject.
   64\strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   64\strut
-  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   64\strut
   \end{minipage}\tabularnewline
   \bottomrule
@@ -2968,7 +2976,7 @@ future research on the subject.
   significance at the .05 level. The lack of variability between models is
   not surprising; these represent a county-level, time-independent
   demographic statistic, and there would be no reason to assume that part
-  of their effect would be subsumed by other variables in models 3 and 4.
+  of their effect would be subsumed by other variables in Models 3 and 4.
   
   Moving on to election type, the first thing to note is that there is no
   typeCoordinated in the table. This is because of the way \textit{R}
@@ -2982,13 +2990,13 @@ future research on the subject.
   effects, presidential elections do actually have higher turnout in my
   model than midterms do\footnote{Remember here that due to Figure 4.1
     most counties will have a proportion of mail ballots close to .9}.
-  Other than this, coefficients in model 3 and model 4 make sense, in the
+  Other than this, coefficients in Model 3 and Model 4 make sense, in the
   assumed ordering of turnout in such elections: presidential, then
   midterm, then coordinated and primary.
   
   Next, taking election type and all interaction terms into consideration,
   let's examine what happens when the spline function for time is
-  introduced between models 3 and 4. Most coefficients shift dramatically,
+  introduced between Models 3 and 4. Most coefficients shift dramatically,
   with the exception of the interaction between coordinated elections and
   VBM. This dramatic shift--between 5 and 15(!) percentage
   points--indicates that several of the effects that the third model
@@ -3094,8 +3102,8 @@ future research on the subject.
   I did for county as described above. This means that the following is
   mostly an exercise in maintaining notation constant. For these purposes,
   let \(n^{ID}\) be the number of total unique voter
-  IDs--individuals--that I have data on, and j an indice that sums over
-  all individuals. Also let \(z_{j}\) be an indicator variable for each
+  IDs--individuals--that I have data on, and j an index that sums over all
+  individuals. Also let \(z_{j}\) be an indicator variable for each
   individual. Then:
   
   \[\hat{\mathbb{P}}(y_i = 1) \sim \text{logit}^{-1}(\sum_{j = 1}^{n^{ID}}z_{j}\beta_{j})\]
