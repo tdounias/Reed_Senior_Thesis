@@ -12,6 +12,7 @@ library(lubridate)
 library(Matrix)
 library(lme4)
 library(gamm4)
+library(pander)
 source("~/Desktop/Reed_Senior_Thesis/riggd/R/utils.R")
 setwd("~/Desktop/Reed_Senior_Thesis/Data_and_results/data")
 
@@ -36,9 +37,51 @@ model_dt$county <- as.factor(model_dt$county)
 cnt_vec <- as.character(unique(model_dt$county))
 ```
 
-## Gibbs Sampler for the County Models
+# MCMC Estimation Processes for Multilevel Models
 
-### Simple County Mixed-Effects Model
+In statistical science a Markov Chain is a sequence of random variables whose value depends on the value of the exact previous random variable. In mathematical terms, this would be a sequence $\theta^{(1)}, \theta^{(2)}, \theta^{(3)}, ..., \theta^{(t)}$ where $\mathbb{P}(\Theta = \theta^{(t)}|\theta^{(n)}) = \mathbb{P}(\Theta = \theta^{(t)})$ for $n \in [1,t-2]$ but $\mathbb{P}(\Theta = \theta^{(t)}|\theta^{(n)})$ is dependent on $\theta^{(n)}$ for $n = t-1$. A Markov Chain Monte Carlo simulation uses Bayesian estimation to update each sequential estimate of $\theta$, leading it to converge to the true value being estimated [@gelman_data_2006].  
+
+Multilevel models can be estimated using MCMC sampling. Indicatively, this appendix presents the construction and coding of two types of MCMC samplers based on the Gibbs algorithm and Metropolis-Hastings algorithm. The code and mathematical derivations are adapted to my models from Gelman and Hill (2006).
+
+## Gibbs Sampler for the County Models
+  
+The Gibbs algorithm works as follows:
+
+\begin{enumerate}
+  \item Choose a number of parallel simulation runs (chains). This number should be relatively low. In this example it is set to 3.
+  \item For each chain do the following:
+  \begin{enumerate}
+    \item Initialize vector of parameters $\Theta^{(0)} = \{\theta^{(0)}_1\, \theta^{(0)}_2\, ..., \theta^{(0)}_n\}$
+    \item Choose a number of iterations. For each iteration update every parameter in vector $\Theta^{(n_{iteration})}$, based on the values of vector $\Theta^{(n_{iteration} - 1)}$.
+  \end{enumerate}
+  \item Evaluate convergence between the chains.
+\end{enumerate}
+
+If convergence is poor, repeat for more iterations, or follow diagnostic procedures. These are not specified here, but Gelman and Hill provide a good overview [@gelman_data_2006; @gelman_bayesian_2003]. Remember that a basic multilevel model with only group-level intercept mixed effects can be written as follows:
+
+$$y_i \ \sim \ N(a_{j[i]}, \sigma^2_y),\ i \in [1, n] \\ a_j \ \sim \ N(\mu_{\alpha}, \sigma^2_{\alpha}), \ j \in [1,J]$$
+In the case of the most basic county-level model estimated in my thesis (County Model 1), $n = 704$ and $J = 64$. Using Maximum Likelihood Estimation, and given that:
+
+\begin{equation}
+  \alpha_j|y, \mu_{\alpha}, \sigma_y, \sigma_{\alpha} \ \sim \ N(\hat{\alpha_j}, V_j)
+\end{equation}
+
+we can obtain estimates:
+
+\begin{equation}
+\hat{\alpha_j} = \frac{\frac{n_{[j]}}{\sigma^2_y}\bar{y}_{[j]} + \frac{1}{\sigma^2{\alpha}}}{\frac{n_{[j]}}{\sigma^2_y} + \frac{1}{\sigma^2{\alpha}}},\ \ \ \ \  V_j = \frac{1}{\frac{n_{[j]}}{\sigma^2_y} + \frac{1}{\sigma^2{\alpha}}},
+\end{equation}
+
+where $n_{[j]}$ is the number of observations for group j, and $\bar{y}_{[j]}$ is the mean response for group j. Using these estimates and the common MLE estimates for variance and mean in a normal distribution, it is possible to construct a Gibbs sampler for model coefficients and errors. Step 2(b) in the Gibbs sampler would then be:  
+  
+\begin{enumerate}
+  \item Estimate $a_j, \ j\in[1,J]$ using equations (1), (2).
+  \item Estimate $\mu_{\alpha}$ by drawing from $N(\frac{1}{J}\sum_{1}^{J}\alpha_j, \sigma_{\alpha}^2/J)$ using the previous values estimated in step 1.
+  \item Estimate $\sigma_y^2$ as $\frac{\frac{1}{n}\sum_{1}^{n}(y_i - \alpha_{j[i]})^2}{X_{n-1}^2}$ where $X_{n-1}^2$ is a draw from a $\chi^2$ distribution with $n-1$ degrees of freedom.
+  \item Estimate $\sigma_{\alpha}^2$ as $\frac{\frac{1}{J}\sum_{1}^{J}(\alpha_j - \mu_{\alpha})^2}{X_{J-1}^2}$ where $X_{n-1}^2$ is a draw from a $\chi^2$ distribution with $J-1$ degrees of freedom.
+\end{enumerate}
+
+While each step here seems relatively intuitive, the derivations behind some of the details (like the chi-aquared distribution) are complex MLE processes and beyond the scope of this thesis. The R code for this algorithm is as follows:
 
 ```{r}
 ## Gibbs sampler in R
@@ -86,11 +129,9 @@ for (m in 1:n.chains){
     sims[t,m,] <- c (a, mu.a, sigma.y, sigma.a)
   }
 }
+```
 
-md_1 <- lmer(data = model_dt, turnout ~ 1 + (1|county))
-
-arm::display(md_1)
-
+```{r, echo = FALSE, results = "asis", message = FALSE}
 #Get Values after convergance
 vals <- data.frame(rep(0,3))
 for(i in 1:67){
@@ -105,10 +146,15 @@ vals <- vals %>%
 names(vals) <- c (paste ("a[", 1:J, "]", sep=""), "mu.a",
    "sigma.y", "sigma.a")
 
-vals[1,65:67]
+
+est_table <- data.frame(c("Sampler", "Model"), rbind(vals[1,65:67], c(0.469, 0.199, 0.039)))
+
+names(est_table)[1] <- "Calculated from..."
+
+pandoc.table(est_table, justify = c("left", "center", "center", "center"), caption = "Gibbs sampler results for County Model 1 \\label{tab:gibbs_1}")
 ```
 
-Note that these values are approximately the same as the ones outputed by the model!
+As is obvious from Table, the Gibbs sampler produces values very similar to the ones given by an \textit{R} call of Model 1.
 
 ```{r}
 # ## Gibbs sampler for a multilevel model w/ predictors

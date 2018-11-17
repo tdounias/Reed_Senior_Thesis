@@ -4032,6 +4032,182 @@ future research on the subject.
   
   \appendix
   
+  \chapter{MCMC Estimation Processes for Multilevel
+  Models}\label{mcmc-estimation-processes-for-multilevel-models}
+  
+  In statistical science a Markov Chain is a sequence of random variables
+  whose value depends on the value of the exact previous random variable.
+  In mathematical terms, this would be a sequence
+  \(\theta^{(1)}, \theta^{(2)}, \theta^{(3)}, ..., \theta^{(t)}\) where
+  \(\mathbb{P}(\Theta = \theta^{(t)}|\theta^{(n)}) = \mathbb{P}(\Theta = \theta^{(t)})\)
+  for \(n \in [1,t-2]\) but
+  \(\mathbb{P}(\Theta = \theta^{(t)}|\theta^{(n)})\) is dependent on
+  \(\theta^{(n)}\) for \(n = t-1\). A Markov Chain Monte Carlo simulation
+  uses Bayesian estimation to update each sequential estimate of
+  \(\theta\), leading it to converge to the true value being estimated
+  (Gelman \& Hill, 2006).
+  
+  Multilevel models can be estimated using MCMC sampling. Indicatively,
+  this appendix presents the construction and coding of two types of MCMC
+  samplers based on the Gibbs algorithm and Metropolis-Hastings algorithm.
+  The code and mathematical derivations are adapted to my models from
+  Gelman and Hill (2006).
+  
+  \section{Gibbs Sampler for County
+  Models}\label{gibbs-sampler-for-county-models}
+  
+  The Gibbs algorithm works as follows:
+  
+  \begin{enumerate}
+    \item Choose a number of parallel simulation runs (chains). This number should be relatively low. In this example it is set to 3.
+    \item For each chain do the following:
+    \begin{enumerate}
+      \item Initialize vector of parameters $\Theta^{(0)} = \{\theta^{(0)}_1\, \theta^{(0)}_2\, ..., \theta^{(0)}_n\}$
+      \item Choose a number of iterations. For each iteration update every parameter in vector $\Theta^{(n_{iteration})}$, based on the values of vector $\Theta^{(n_{iteration} - 1)}$.
+    \end{enumerate}
+    \item Evaluate convergence between the chains.
+  \end{enumerate}
+  
+  If convergence is poor, repeat for more iterations, or follow diagnostic
+  procedures. These are not specified here, but Gelman and Hill provide a
+  good overview (Gelman \& Hill, 2006; Gelman, Carlin, Stern, \& Rubin,
+  2003). Remember that a basic multilevel model with only group-level
+  intercept mixed effects can be written as follows:
+  
+  \[y_i \ \sim \ N(a_{j[i]}, \sigma^2_y),\ i \in [1, n] \\ a_j \ \sim \ N(\mu_{\alpha}, \sigma^2_{\alpha}), \ j \in [1,J]\]
+  In the case of the most basic county-level model estimated in my thesis
+  (County Model 1), \(n = 704\) and \(J = 64\). Using Maximum Likelihood
+  Estimation, and given that:
+  
+  \begin{equation}
+    \alpha_j|y, \mu_{\alpha}, \sigma_y, \sigma_{\alpha} \ \sim \ N(\hat{\alpha_j}, V_j)
+  \end{equation}
+  
+  we can obtain estimates:
+  
+  \begin{equation}
+  \hat{\alpha_j} = \frac{\frac{n_{[j]}}{\sigma^2_y}\bar{y}_{[j]} + \frac{1}{\sigma^2{\alpha}}}{\frac{n_{[j]}}{\sigma^2_y} + \frac{1}{\sigma^2{\alpha}}},\ \ \ \ \  V_j = \frac{1}{\frac{n_{[j]}}{\sigma^2_y} + \frac{1}{\sigma^2{\alpha}}},
+  \end{equation}
+  
+  where \(n_{[j]}\) is the number of observations for group j, and
+  \(\bar{y}_{[j]}\) is the mean response for group j. Using these
+  estimates and the common MLE estimates for variance and mean in a normal
+  distribution, it is possible to construct a Gibbs sampler for model
+  coefficients and errors. Step 2(b) in the Gibbs sampler would then be:
+  
+  \begin{enumerate}
+    \item Estimate $a_j, \ j\in[1,J]$ using equations (1), (2).
+    \item Estimate $\mu_{\alpha}$ by drawing from $N(\frac{1}{J}\sum_{1}^{J}\alpha_j, \sigma_{\alpha}^2/J)$ using the previous values estimated in step 1.
+    \item Estimate $\sigma_y^2$ as $\frac{\frac{1}{n}\sum_{1}^{n}(y_i - \alpha_{j[i]})^2}{X_{n-1}^2}$ where $X_{n-1}^2$ is a draw from a $\chi^2$ distribution with $n-1$ degrees of freedom.
+    \item Estimate $\sigma_{\alpha}^2$ as $\frac{\frac{1}{J}\sum_{1}^{J}(\alpha_j - \mu_{\alpha})^2}{X_{J-1}^2}$ where $X_{n-1}^2$ is a draw from a $\chi^2$ distribution with $J-1$ degrees of freedom.
+  \end{enumerate}
+  
+  While each step here seems relatively intuitive, the derivations behind
+  some of the details (like the chi-aquared distribution) are complex MLE
+  processes and beyond the scope of this thesis. The R code for this
+  algorithm is as follows:
+  
+  \begin{Shaded}
+  \begin{Highlighting}[]
+  \NormalTok{## Gibbs sampler in R}
+  \NormalTok{a.update <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{()\{}
+  \NormalTok{  a.new <-}\StringTok{ }\KeywordTok{rep}\NormalTok{ (}\OtherTok{NA}\NormalTok{, J)}
+    \ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{J)\{}
+  \NormalTok{    n.j <-}\StringTok{ }\KeywordTok{sum}\NormalTok{ (model_dt}\OperatorTok{$}\NormalTok{county}\OperatorTok{==}\NormalTok{cnt_vec[j])}
+  \NormalTok{    y.bar.j <-}\StringTok{ }\KeywordTok{mean}\NormalTok{ (model_dt}\OperatorTok{$}\NormalTok{turnout[model_dt}\OperatorTok{$}\NormalTok{county}\OperatorTok{==}\NormalTok{cnt_vec[j]])}
+  \NormalTok{    a.hat.j <-}\StringTok{ }\NormalTok{((n.j}\OperatorTok{/}\NormalTok{sigma.y}\OperatorTok{^}\DecValTok{2}\NormalTok{)}\OperatorTok{*}\NormalTok{y.bar.j }\OperatorTok{+}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{sigma.a}\OperatorTok{^}\DecValTok{2}\NormalTok{)}\OperatorTok{*}\NormalTok{mu.a)}\OperatorTok{/}
+  \StringTok{               }\NormalTok{(n.j}\OperatorTok{/}\NormalTok{sigma.y}\OperatorTok{^}\DecValTok{2} \OperatorTok{+}\StringTok{ }\DecValTok{1}\OperatorTok{/}\NormalTok{sigma.a}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
+  \NormalTok{    V.a.j <-}\StringTok{ }\DecValTok{1}\OperatorTok{/}\NormalTok{(n.j}\OperatorTok{/}\NormalTok{sigma.y}\OperatorTok{^}\DecValTok{2} \OperatorTok{+}\StringTok{ }\DecValTok{1}\OperatorTok{/}\NormalTok{sigma.a}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
+  \NormalTok{    a.new[j] <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{ (}\DecValTok{1}\NormalTok{, a.hat.j, }\KeywordTok{sqrt}\NormalTok{(V.a.j))}
+  \NormalTok{  \}}
+    \KeywordTok{return}\NormalTok{ (a.new)}
+  \NormalTok{\}}
+  \NormalTok{mu.a.update <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{()\{}
+  \NormalTok{  mu.a.new <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{ (}\DecValTok{1}\NormalTok{, }\KeywordTok{mean}\NormalTok{(a), sigma.a}\OperatorTok{/}\KeywordTok{sqrt}\NormalTok{(J))}
+    \KeywordTok{return}\NormalTok{ (mu.a.new)}
+  \NormalTok{\}}
+  \NormalTok{sigma.y.update <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{()\{}
+  \NormalTok{  sigma.y.new <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{sum}\NormalTok{((model_dt}\OperatorTok{$}\NormalTok{turnout}\OperatorTok{-}\NormalTok{a[model_dt}\OperatorTok{$}\NormalTok{county])}\OperatorTok{^}\DecValTok{2}\NormalTok{)}\OperatorTok{/}\KeywordTok{rchisq}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{703}\NormalTok{))}
+    \KeywordTok{return}\NormalTok{ (sigma.y.new)}
+  \NormalTok{\}}
+  \NormalTok{sigma.a.update <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{()\{}
+  \NormalTok{  sigma.a.new <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{sum}\NormalTok{((a}\OperatorTok{-}\NormalTok{mu.a)}\OperatorTok{^}\DecValTok{2}\NormalTok{)}\OperatorTok{/}\KeywordTok{rchisq}\NormalTok{(}\DecValTok{1}\NormalTok{,J}\OperatorTok{-}\DecValTok{1}\NormalTok{))}
+    \KeywordTok{return}\NormalTok{ (sigma.a.new)}
+  \NormalTok{\}}
+  
+  \NormalTok{J <-}\StringTok{ }\DecValTok{64}
+  \NormalTok{n.chains <-}\StringTok{ }\DecValTok{3}
+  \NormalTok{n.iter <-}\StringTok{ }\DecValTok{1000}
+  \NormalTok{sims <-}\StringTok{ }\KeywordTok{array}\NormalTok{ (}\OtherTok{NA}\NormalTok{, }\KeywordTok{c}\NormalTok{(n.iter, n.chains, J}\OperatorTok{+}\DecValTok{3}\NormalTok{))}
+  \KeywordTok{dimnames}\NormalTok{ (sims) <-}\StringTok{ }\KeywordTok{list}\NormalTok{ (}\OtherTok{NULL}\NormalTok{, }\OtherTok{NULL}\NormalTok{, }\KeywordTok{c}\NormalTok{ (}\KeywordTok{paste}\NormalTok{ (}\StringTok{"a["}\NormalTok{, }\DecValTok{1}\OperatorTok{:}\NormalTok{J, }\StringTok{"]"}\NormalTok{, }\DataTypeTok{sep=}\StringTok{""}\NormalTok{), }\StringTok{"mu.a"}\NormalTok{,}
+     \StringTok{"sigma.y"}\NormalTok{, }\StringTok{"sigma.a"}\NormalTok{))}
+  
+  \ControlFlowTok{for}\NormalTok{ (m }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{n.chains)\{}
+  \NormalTok{  mu.a <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{ (}\DecValTok{1}\NormalTok{, }\KeywordTok{mean}\NormalTok{(model_dt}\OperatorTok{$}\NormalTok{turnout), }\KeywordTok{sd}\NormalTok{(model_dt}\OperatorTok{$}\NormalTok{turnout))}
+  \NormalTok{  sigma.y <-}\StringTok{ }\KeywordTok{runif}\NormalTok{ (}\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\KeywordTok{sd}\NormalTok{(model_dt}\OperatorTok{$}\NormalTok{turnout))}
+  \NormalTok{  sigma.a <-}\StringTok{ }\KeywordTok{runif}\NormalTok{ (}\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\KeywordTok{sd}\NormalTok{(model_dt}\OperatorTok{$}\NormalTok{turnout))}
+    \ControlFlowTok{for}\NormalTok{ (t }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{n.iter)\{}
+  \NormalTok{    a <-}\StringTok{ }\KeywordTok{a.update}\NormalTok{ ()}
+  \NormalTok{    mu.a <-}\StringTok{ }\KeywordTok{mu.a.update}\NormalTok{ ()}
+  \NormalTok{    sigma.y <-}\StringTok{ }\KeywordTok{sigma.y.update}\NormalTok{ ()}
+  \NormalTok{    sigma.a <-}\StringTok{ }\KeywordTok{sigma.a.update}\NormalTok{ ()}
+  \NormalTok{    sims[t,m,] <-}\StringTok{ }\KeywordTok{c}\NormalTok{ (a, mu.a, sigma.y, sigma.a)}
+  \NormalTok{  \}}
+  \NormalTok{\}}
+  \end{Highlighting}
+  \end{Shaded}
+  
+  \begin{longtable}[]{@{}lccc@{}}
+  \caption{Gibbs sampler results for County Model 1
+  \label{tab:gibbs_1}}\tabularnewline
+  \toprule
+  \begin{minipage}[b]{0.26\columnwidth}\raggedright\strut
+  Calculated from\ldots{}\strut
+  \end{minipage} & \begin{minipage}[b]{0.11\columnwidth}\centering\strut
+  mu.a\strut
+  \end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\centering\strut
+  sigma.y\strut
+  \end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\centering\strut
+  sigma.a\strut
+  \end{minipage}\tabularnewline
+  \midrule
+  \endfirsthead
+  \toprule
+  \begin{minipage}[b]{0.26\columnwidth}\raggedright\strut
+  Calculated from\ldots{}\strut
+  \end{minipage} & \begin{minipage}[b]{0.11\columnwidth}\centering\strut
+  mu.a\strut
+  \end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\centering\strut
+  sigma.y\strut
+  \end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\centering\strut
+  sigma.a\strut
+  \end{minipage}\tabularnewline
+  \midrule
+  \endhead
+  \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+  Sampler\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  0.4683\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  0.2003\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  0.03682\strut
+  \end{minipage}\tabularnewline
+  \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+  Model\strut
+  \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
+  0.469\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  0.199\strut
+  \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
+  0.039\strut
+  \end{minipage}\tabularnewline
+  \bottomrule
+  \end{longtable}
+  
+  As is obvious from Table A.1, the Gibbs sampler produces values very
+  similar to the ones given by an \textit{R} call of Model 1.
+  
   \backmatter
   
   \chapter{References}\label{references}
@@ -4155,6 +4331,11 @@ future research on the subject.
   Gelman, A., \& Hill, J. (2006). \emph{Data Analysis Using Regression and
   Multilevel/Hierarchical Models} (1 edition). Cambridge ; New York:
   Cambridge University Press.
+  
+  \hypertarget{ref-gelman_bayesian_2003}{}
+  Gelman, A., Carlin, J. B., Stern, H. S., \& Rubin, D. B. (2003).
+  \emph{Bayesian Data Analysis, Second Edition} (2 edition). Boca Raton,
+  Fla: Chapman; Hall/CRC.
   
   \hypertarget{ref-gerber_identifying_2013}{}
   Gerber, A. S., Huber, G. A., \& Hill, S. J. (2013). Identifying the
