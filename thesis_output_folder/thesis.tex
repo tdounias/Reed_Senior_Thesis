@@ -2887,7 +2887,7 @@ future research on the subject.
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.073)*\strut
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
-  (0.037)\strut
+  (0.037)*\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   typeMidterm*VBM\strut
@@ -3013,7 +3013,7 @@ future research on the subject.
   
   Taking my hypotheses one by one, these models present evidence in favor
   of H1. Mail voting does seem to affect turnout in a way consistent
-  across time--see the coefficients for VBM effects on general and midterm
+  across time--see the coefficients for VBM effects on general
   elections--but this effect is not particularly more strong than the
   percentage of urban population in each county. Conversely, my second and
   third hypotheses can be convincingly rejected at the county level. After
@@ -3025,7 +3025,7 @@ future research on the subject.
   model 4. However, this difference is not enough to rule in favor of H3;
   if this difference was caused by the lack of presence of national
   effects, it would be more pronounced in primary and coordinated
-  elections.
+  elections as well.
   
   \section{Individual Level Models}\label{individual-level-models}
   
@@ -3927,8 +3927,8 @@ future research on the subject.
   small effect on turnout. I reject H2/H3 because that effect is not more
   pronounced for elections that have less strong national influences. In
   fact, my county-level models showed the exact opposite: VBM had a
-  strong, significant positive effect for midterm and presidential
-  elections, but no discernible effect for primary or coordinated races.
+  strong, significant positive effect for presidential elections, but no
+  discernible effect for primary, coordinated races, or midterm races.
   
   This is evidence against voting ``at the margins'', since my hypotheses
   that were most connected to Aldrich's paradigm (H2, H3) were
@@ -3955,23 +3955,23 @@ future research on the subject.
   does not permit any more precise analysis.
   
   The first step towards future research, directly resulting from this
-  problem, would be to get more data. This is very possible, but a task I
-  was unable to accomplish due to time constraints related to this
-  project. More data would allow for a comparative study of Colorado
-  elections before and after all major legislative electoral changes of
-  this century (2008, 2013). Another way to expand on my research would be
-  to look at even lower level elections, like municipal elections, school
-  board elections, or recall elections; voter history files contain data
-  on all of these races. A study with more data could use such races as
-  well for testing the hypotheses I set up in this thesis. Third, it is
-  possible to replicate my research here for other states like Oregon and
-  Washington, or for the specific counties in Arizona, Utah, or California
-  that have all-mail elections. Fourth, elections thankfully do not stop
-  happening; my research here can always be updated with data from the
-  2017 Coordinated Colorado election, or the 2018 Midterm that just took
-  place. I would caution that the same issue with data variability would
-  still exist in this case; there is a much greater need for data going
-  back, rather than new all-mail elections.
+  problem, would be to get more data. This is possible, but a task I was
+  unable to accomplish due to time constraints related to this project.
+  More data would allow for a comparative study of Colorado elections
+  before and after all major legislative electoral changes of this century
+  (2008, 2013). Another way to expand on my research would be to look at
+  even lower level elections, like municipal elections, school board
+  elections, or recall elections; voter history files contain data on all
+  of these races. A study with more data could use such races as well for
+  testing the hypotheses I set up in this thesis. Third, it is possible to
+  replicate my research here for other states like Oregon and Washington,
+  or for the specific counties in Arizona, Utah, or California that have
+  all-mail elections. Fourth, elections thankfully do not stop happening;
+  my research here can always be updated with data from the 2017
+  Coordinated Colorado election, or the 2018 Midterm that just took place.
+  I would caution that the same issue with data variability would still
+  exist in this case; there is a much greater need for data going back,
+  rather than new all-mail elections.
   
   Apart from expanding my research in terms of data, another path would be
   to impliment some of the methods I outline in the beginning of Chapter
@@ -4053,8 +4053,8 @@ future research on the subject.
   The code and mathematical derivations are adapted to my models from
   Gelman and Hill (2006).
   
-  \section{Gibbs Sampler for County
-  Models}\label{gibbs-sampler-for-county-models}
+  \section{Gibbs Sampler for the County
+  Models}\label{gibbs-sampler-for-the-county-models}
   
   The Gibbs algorithm works as follows:
   
@@ -4071,12 +4071,22 @@ future research on the subject.
   If convergence is poor, repeat for more iterations, or follow diagnostic
   procedures. These are not specified here, but Gelman and Hill provide a
   good overview (Gelman \& Hill, 2006; Gelman, Carlin, Stern, \& Rubin,
-  2003). Remember that a basic multilevel model with only group-level
-  intercept mixed effects can be written as follows:
+  2003).
+  
+  \subsection{County Model 1 (Only Random County
+  Effects)}\label{county-model-1-only-random-county-effects}
+  
+  A basic multilevel model with only group-level intercept mixed effects
+  can be written as follows:
   
   \[y_i \ \sim \ N(a_{j[i]}, \sigma^2_y),\ i \in [1, n] \\ a_j \ \sim \ N(\mu_{\alpha}, \sigma^2_{\alpha}), \ j \in [1,J]\]
-  In the case of the most basic county-level model estimated in my thesis
-  (County Model 1), \(n = 704\) and \(J = 64\). Using Maximum Likelihood
+  This specification is slightly different from that presented in Chapter
+  2. Here \(\alpha_{j[i]}\) is the coefficient for the group \(j\) that
+  individual \(i\) belongs to, \(\sigma_y, \sigma_{\alpha}\) the variances
+  of the individual and group level distributions respectively, and
+  \(\mu_{\alpha}\) the mean of the group-level distribution. In the case
+  of the most basic county-level model estimated in my thesis (County
+  Model 1), \(n = 704\) and \(J = 64\). Using Maximum Likelihood
   Estimation, and given that:
   
   \begin{equation}
@@ -4103,7 +4113,7 @@ future research on the subject.
   \end{enumerate}
   
   While each step here seems relatively intuitive, the derivations behind
-  some of the details (like the chi-aquared distribution) are complex MLE
+  some of the details (like the chi-squared distribution) are complex MLE
   processes and beyond the scope of this thesis. The R code for this
   algorithm is as follows:
   
@@ -4187,11 +4197,11 @@ future research on the subject.
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   Sampler\strut
   \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
-  0.4683\strut
+  0.4684\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
-  0.2003\strut
+  0.1999\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
-  0.03682\strut
+  0.03836\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   Model\strut
@@ -4205,8 +4215,78 @@ future research on the subject.
   \bottomrule
   \end{longtable}
   
-  As is obvious from Table A.1, the Gibbs sampler produces values very
-  similar to the ones given by an \textit{R} call of Model 1.
+  As is obvious from Table, the Gibbs sampler produces values very similar
+  to the ones given by an \textit{R} call of Model 1.
+  
+  \subsection{County Model 2 (Random County Effects and County-Level
+  Predictors)}\label{county-model-2-random-county-effects-and-county-level-predictors}
+  
+  With slight changes from the previous model the following is the
+  mathematical expression for a mixed effects model with group-level
+  predictors:
+  
+  \[y_i \ \sim \ N(a_{j[i]}, \sigma^2_y),\ i \in [1, n] \\ a_j \ \sim \ N(U_j\gamma, \sigma^2_{\alpha}), \ j \in [1,J], \]
+  
+  where \(U_j\) is a vector of predictor values for group \(j\), and
+  \(\gamma\) a vector of group-level coefficients, with the rest of the
+  parameters having the same designation as previously. Bear in mind that
+  the second of the previous expressions can also be written as:
+  
+  \begin{equation}
+  \alpha_j = U_j\gamma + \eta_j, \ \ \eta_j \ \sim \ N(0, \sigma_{\alpha}^2)
+  \end{equation}
+  
+  Updating the estimates used previously, it is again possible to
+  construct a Gibbs sampler for model coefficients and errors. Step 2(b)
+  in the Gibbs sampler in this case is:
+  
+  \begin{enumerate}
+    \item Estimate $a_j, \ j\in[1,J]$. Start by calculating $y_i^{temp} = y_i - U_{j[i]}\gamma$. Then calculate an estimate $\hat\eta_j$ and variance matrix $V_j$ from equations (1), (2), by replacing $\hat\alpha_j$ with $\hat\eta_j$ and $y$ with $y^{temp}$. Use $\eta_j \ \sim \ N(\hat\eta_j, V_j)$ to draw errors $\eta_j$ and then use (3) to estimate $\alpha_j$ for $j \in [1,J]$.
+    \item Estimate $\gamma$ by first regressing $\alpha$ by predictor matrix $U$ to obtain $\hat\gamma$ and variance matrix $V_{\gamma}$. Then use distribution $\gamma_j \ \sim \ N(\hat\gamma_j, V_j)$ to obtain estimates for vector $\gamma$.
+    \item Estimate $\sigma_y^2$ as $\frac{\frac{1}{n}\sum_{1}^{n}(y_i - \alpha_{j[i]})^2}{X_{n-1}^2}$ where $X_{n-1}^2$ is a draw from a $\chi^2$ distribution with $n-1$ degrees of freedom.
+    \item Estimate $\sigma_{\alpha}^2$ as $\frac{\frac{1}{J}\sum_{1}^{J}(\alpha_j - U_j\gamma)^2}{X_{J-1}^2}$ where $X_{n-1}^2$ is a draw from a $\chi^2$ distribution with $J-1$ degrees of freedom.
+  \end{enumerate}
+  
+  County Model 2, as presented in Chapter 4, includes two county-level
+  predictors: percentage of white residents and percentage of urban
+  population; this means that \(U = \{x^{\%white}, x^{\%urban}\}\).
+  Keeping this in mind the following code estimates the coefficients and
+  standard errors for Model 2:
+  
+  \begin{Shaded}
+  \begin{Highlighting}[]
+  \NormalTok{## Gibbs sampler for a multilevel model with county predictors}
+  
+  \NormalTok{a.update <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{()\{}
+  \NormalTok{  y.temp <-}\StringTok{ }\NormalTok{y }\OperatorTok{-}\StringTok{ }\NormalTok{U[county]}\OperatorTok{%*%}\NormalTok{g}
+  \NormalTok{  eta.new <-}\StringTok{ }\KeywordTok{rep}\NormalTok{ (}\OtherTok{NA}\NormalTok{, J)}
+    \ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{J)\{}
+  \NormalTok{    n.j <-}\StringTok{ }\KeywordTok{sum}\NormalTok{ (county}\OperatorTok{==}\NormalTok{j)}
+  \NormalTok{    y.bar.j <-}\StringTok{ }\KeywordTok{mean}\NormalTok{ (y.temp[county}\OperatorTok{==}\NormalTok{j])}
+  \NormalTok{    eta.hat.j <-}\StringTok{ }\NormalTok{((n.j}\OperatorTok{/}\NormalTok{sigma.y}\OperatorTok{^}\DecValTok{2}\NormalTok{)}\OperatorTok{*}\NormalTok{y.bar.j}\OperatorTok{/}
+  \StringTok{                 }\NormalTok{(n.j}\OperatorTok{/}\NormalTok{sigma.y}\OperatorTok{^}\DecValTok{2} \OperatorTok{+}\StringTok{ }\DecValTok{1}\OperatorTok{/}\NormalTok{sigma.a}\OperatorTok{^}\DecValTok{2}\NormalTok{))}
+  \NormalTok{    V.eta.j <-}\StringTok{ }\DecValTok{1}\OperatorTok{/}\NormalTok{(n.j}\OperatorTok{/}\NormalTok{sigma.y}\OperatorTok{^}\DecValTok{2} \OperatorTok{+}\StringTok{ }\DecValTok{1}\OperatorTok{/}\NormalTok{sigma.a}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
+  \NormalTok{    eta.new[j] <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{ (}\DecValTok{1}\NormalTok{, eta.hat.j, }\KeywordTok{sqrt}\NormalTok{(V.eta.j))}
+  \NormalTok{  \}}
+  \NormalTok{  a.new <-}\StringTok{ }\NormalTok{U}\OperatorTok{%*%}\NormalTok{g }\OperatorTok{+}\StringTok{ }\NormalTok{eta.new}
+    \KeywordTok{return}\NormalTok{ (a.new)}
+  \NormalTok{\}}
+  
+  \NormalTok{g.update <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{()\{}
+  \NormalTok{  lm.}\DecValTok{0}\NormalTok{ <-}\StringTok{ }\KeywordTok{lm}\NormalTok{ (a }\OperatorTok{~}\StringTok{ }\NormalTok{U)}
+  \NormalTok{  g.new <-}\StringTok{ }\KeywordTok{sim}\NormalTok{ (lm.}\DecValTok{0}\NormalTok{, }\DataTypeTok{n.sims=}\DecValTok{1}\NormalTok{)}
+    \KeywordTok{return}\NormalTok{ (g.new)}
+  \NormalTok{\}}
+  \NormalTok{sigma.y.update <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{()\{}
+  \NormalTok{  sigma.y.new <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{sum}\NormalTok{((y}\OperatorTok{-}\NormalTok{a[county]}\OperatorTok{-}\NormalTok{X}\OperatorTok{%*%}\NormalTok{b)}\OperatorTok{^}\DecValTok{2}\NormalTok{)}\OperatorTok{/}\KeywordTok{rchisq}\NormalTok{(}\DecValTok{1}\NormalTok{,n}\OperatorTok{-}\DecValTok{1}\NormalTok{))}
+    \KeywordTok{return}\NormalTok{ (sigma.y.new)}
+  \NormalTok{\}}
+  \NormalTok{sigma.a.update <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{()\{}
+  \NormalTok{  sigma.a.new <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{sum}\NormalTok{((a}\OperatorTok{-}\NormalTok{U}\OperatorTok{%*%}\NormalTok{g)}\OperatorTok{^}\DecValTok{2}\NormalTok{)}\OperatorTok{/}\KeywordTok{rchisq}\NormalTok{(}\DecValTok{1}\NormalTok{,J}\OperatorTok{-}\DecValTok{1}\NormalTok{))}
+    \KeywordTok{return}\NormalTok{ (sigma.a.new)}
+  \NormalTok{\}}
+  \end{Highlighting}
+  \end{Shaded}
   
   \backmatter
   

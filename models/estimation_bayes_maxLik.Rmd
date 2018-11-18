@@ -57,10 +57,14 @@ The Gibbs algorithm works as follows:
   \item Evaluate convergence between the chains.
 \end{enumerate}
 
-If convergence is poor, repeat for more iterations, or follow diagnostic procedures. These are not specified here, but Gelman and Hill provide a good overview [@gelman_data_2006; @gelman_bayesian_2003]. Remember that a basic multilevel model with only group-level intercept mixed effects can be written as follows:
+If convergence is poor, repeat for more iterations, or follow diagnostic procedures. These are not specified here, but Gelman and Hill provide a good overview [@gelman_data_2006; @gelman_bayesian_2003]. 
+
+### County Model 1 (Only Random County Effects)
+
+A basic multilevel model with only group-level intercept mixed effects can be written as follows:
 
 $$y_i \ \sim \ N(a_{j[i]}, \sigma^2_y),\ i \in [1, n] \\ a_j \ \sim \ N(\mu_{\alpha}, \sigma^2_{\alpha}), \ j \in [1,J]$$
-In the case of the most basic county-level model estimated in my thesis (County Model 1), $n = 704$ and $J = 64$. Using Maximum Likelihood Estimation, and given that:
+This specification is slightly different from that presented in Chapter 2. Here $\alpha_{j[i]}$ is the coefficient for the group $j$ that individual $i$ belongs to, $\sigma_y, \sigma_{\alpha}$ the variances of the individual and group level distributions respectively, and $\mu_{\alpha}$ the mean of the group-level distribution. In the case of the most basic county-level model estimated in my thesis (County Model 1), $n = 704$ and $J = 64$. Using Maximum Likelihood Estimation, and given that:
 
 \begin{equation}
   \alpha_j|y, \mu_{\alpha}, \sigma_y, \sigma_{\alpha} \ \sim \ N(\hat{\alpha_j}, V_j)
@@ -81,7 +85,7 @@ where $n_{[j]}$ is the number of observations for group j, and $\bar{y}_{[j]}$ i
   \item Estimate $\sigma_{\alpha}^2$ as $\frac{\frac{1}{J}\sum_{1}^{J}(\alpha_j - \mu_{\alpha})^2}{X_{J-1}^2}$ where $X_{n-1}^2$ is a draw from a $\chi^2$ distribution with $J-1$ degrees of freedom.
 \end{enumerate}
 
-While each step here seems relatively intuitive, the derivations behind some of the details (like the chi-aquared distribution) are complex MLE processes and beyond the scope of this thesis. The R code for this algorithm is as follows:
+While each step here seems relatively intuitive, the derivations behind some of the details (like the chi-squared distribution) are complex MLE processes and beyond the scope of this thesis. The R code for this algorithm is as follows:
 
 ```{r}
 ## Gibbs sampler in R
@@ -156,45 +160,59 @@ pandoc.table(est_table, justify = c("left", "center", "center", "center"), capti
 
 As is obvious from Table, the Gibbs sampler produces values very similar to the ones given by an \textit{R} call of Model 1.
 
+### County Model 2 (Random County Effects and County-Level Predictors)
+
+With slight changes from the previous model the following is the mathematical expression for a mixed effects model with group-level predictors:
+
+$$y_i \ \sim \ N(a_{j[i]}, \sigma^2_y),\ i \in [1, n] \\ a_j \ \sim \ N(U_j\gamma, \sigma^2_{\alpha}), \ j \in [1,J], $$
+
+where $U_j$ is a vector of predictor values for group $j$, and $\gamma$ a vector of group-level coefficients, with the rest of the parameters having the same designation as previously. Bear in mind that the second of the previous expressions can also be written as: 
+
+\begin{equation}
+\alpha_j = U_j\gamma + \eta_j, \ \ \eta_j \ \sim \ N(0, \sigma_{\alpha}^2)
+\end{equation}
+
+
+Updating the estimates used previously, it is again possible to construct a Gibbs sampler for model coefficients and errors. Step 2(b) in the Gibbs sampler in this case is:
+
+\begin{enumerate}
+  \item Estimate $a_j, \ j\in[1,J]$. Start by calculating $y_i^{temp} = y_i - U_{j[i]}\gamma$. Then calculate an estimate $\hat\eta_j$ and variance matrix $V_j$ from equations (1), (2), by replacing $\hat\alpha_j$ with $\hat\eta_j$ and $y$ with $y^{temp}$. Use $\eta_j \ \sim \ N(\hat\eta_j, V_j)$ to draw errors $\eta_j$ and then use (3) to estimate $\alpha_j$ for $j \in [1,J]$.
+  \item Estimate $\gamma$ by first regressing $\alpha$ by predictor matrix $U$ to obtain $\hat\gamma$ and variance matrix $V_{\gamma}$. Then use distribution $\gamma_j \ \sim \ N(\hat\gamma_j, V_j)$ to obtain estimates for vector $\gamma$.
+  \item Estimate $\sigma_y^2$ as $\frac{\frac{1}{n}\sum_{1}^{n}(y_i - \alpha_{j[i]})^2}{X_{n-1}^2}$ where $X_{n-1}^2$ is a draw from a $\chi^2$ distribution with $n-1$ degrees of freedom.
+  \item Estimate $\sigma_{\alpha}^2$ as $\frac{\frac{1}{J}\sum_{1}^{J}(\alpha_j - U_j\gamma)^2}{X_{J-1}^2}$ where $X_{n-1}^2$ is a draw from a $\chi^2$ distribution with $J-1$ degrees of freedom.
+\end{enumerate}
+
+County Model 2, as presented in Chapter 4, includes two county-level predictors: percentage of white residents and percentage of urban population; this means that $U = \{x^{\%white}, x^{\%urban}\}$. Keeping this in mind the following code estimates the coefficients and standard errors for Model 2:
+
 ```{r}
-# ## Gibbs sampler for a multilevel model w/ predictors
-# a.update <- function(){
-#   y.temp <- y - X%*%b - U[county]%*%g
-#   eta.new <- rep (NA, J)
-#   for (j in 1:J){
-#     n.j <- sum (county==j)
-#     y.bar.j <- mean (y.temp[county==j])
-#     eta.hat.j <- ((n.j/sigma.y^2)*y.bar.j/
-#                  (n.j/sigma.y^2 + 1/sigma.a^2))
-#     V.eta.j <- 1/(n.j/sigma.y^2 + 1/sigma.a^2)
-#     eta.new[j] <- rnorm (1, eta.hat.j, sqrt(V.eta.j))
-#   }
-#   a.new <- U%*%g + eta.new
-#   return (a.new)
-# }
-# b.update <- function(){
-#   y.temp <- y - a[county]
-#   lm.0 <- lm (y.temp ~ X)
-#   b.new <- sim (lm.0, n.sims=1)
-#   return (b.new)
-# }
-# g.update <- function(){
-#   lm.0 <- lm (a ~ U)
-#   g.new <- sim (lm.0, n.sims=1)
-#   return (g.new)
-# }
-# sigma.y.update <- function(){
-#   sigma.y.new <- sqrt(sum((y-a[county]-X%*%b)^2)/rchisq(1,n-1))
-#   return (sigma.y.new)
-# }
-# sigma.a.update <- function(){
-#   sigma.a.new <- sqrt(sum((a-U%*%g)^2)/rchisq(1,J-1))
-#   return (sigma.a.new)
-# }
+## Gibbs sampler for a multilevel model with county predictors
+
+a.update <- function(){
+  y.temp <- y - U[county]%*%g
+  eta.new <- rep (NA, J)
+  for (j in 1:J){
+    n.j <- sum (county==j)
+    y.bar.j <- mean (y.temp[county==j])
+    eta.hat.j <- ((n.j/sigma.y^2)*y.bar.j/
+                 (n.j/sigma.y^2 + 1/sigma.a^2))
+    V.eta.j <- 1/(n.j/sigma.y^2 + 1/sigma.a^2)
+    eta.new[j] <- rnorm (1, eta.hat.j, sqrt(V.eta.j))
+  }
+  a.new <- U%*%g + eta.new
+  return (a.new)
+}
+
+g.update <- function(){
+  lm.0 <- lm (a ~ U)
+  g.new <- sim (lm.0, n.sims=1)
+  return (g.new)
+}
+sigma.y.update <- function(){
+  sigma.y.new <- sqrt(sum((y-a[county]-X%*%b)^2)/rchisq(1,n-1))
+  return (sigma.y.new)
+}
+sigma.a.update <- function(){
+  sigma.a.new <- sqrt(sum((a-U%*%g)^2)/rchisq(1,J-1))
+  return (sigma.a.new)
+}
 ```
-
-
-
-
-## A First Pass at a Simple Logistic Model
-

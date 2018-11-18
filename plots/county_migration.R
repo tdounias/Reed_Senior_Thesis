@@ -1,6 +1,7 @@
 library(tidyverse)
 library(ggplot2)
 library(knitr)
+library(lubridate)
 source("~/Desktop/Reed_Senior_Thesis/riggd/R/utils.R")
 setwd("~/Desktop/Reed_Senior_Thesis/Data_and_results/data")
 
@@ -28,18 +29,23 @@ ggplot(full_reg, aes(x = regsept, y = regSoS)) +
   stat_function(fun = function(x) x, col = "black") +
   coord_cartesian(xlim = c(6, 13.5), ylim = c(6, 13.5)) +
   scale_color_brewer(palette = "Blues") +
+  theme_bw() + 
+  annotate("text", x = 12, y = 10, label = "Data Estimate", col = "red") + 
+  annotate("text", x = 8, y = 10, label = "No Difference", col = "black") + 
   labs(x = "Registration from 2012-2016 Files", y = "Registration Only from 2017 File", 
        col = "Election Year") 
 
 #Further Illustration
 second_graph <- filter(full_reg, regsept > 11) %>%
   filter(county %in% c("Adams", "Arapahoe", "Boulder", "Denver", 
-                       "Douglas", "El Paso"))
+                       "Douglas", "El Paso")) %>%
+  rename("County" = county)
 
 ggplot(second_graph, aes(x = regsept, y = regSoS)) +
-  geom_point(alpha = 1, aes(col = year, shape = county)) +
+  geom_point(alpha = 1, aes(col = year, shape = County)) +
   stat_function(fun = function(x) x, col = "black") +
   scale_color_brewer(palette = "Blues") + 
+  theme_bw() +
   coord_cartesian(xlim = c(12, 13.2), ylim = c(12, 13.2)) +
   labs(x = "Registration from 2012-2016 Files", y = "Registration Only from 2017 File", 
        col = "Election Year") 
