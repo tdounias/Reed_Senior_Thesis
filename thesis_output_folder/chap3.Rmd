@@ -136,7 +136,7 @@ In the process of my research, I have acquired sufficient data to cover the seco
   
 ### Sources and first glance
   
-I used two sources of data: Colorado voter records gathered by the Colorado Secretary of State's office, and demographic data from the 2010 US Census. In the process of procuring these data I was aided by a series of other researchers and professionals with experience in the field of elections administration. Andrew Menger in particular was kind enough to give me access to data files for Colorado for the years of 2012-2016 that he had already collected for his research^[Doctor Menger's website with links to his research can be found at www.andrewmenger.com]. I directly obtained the 2017 from the Colorado Secretary of State's office, with the help of Mr. Judd Choate, Director of Elections.
+I used two sources of data: Colorado voter records gathered by the Colorado Secretary of State's office, and demographic data from the 2010 US Census. In the process of procuring these data I was aided by a series of other researchers and professionals with experience in the field of elections administration. Andrew Menger, Postdoctoral Fellow at the Weidenbaum Center on the Economy, Government, and Public Policy at Washington University, was kind enough to give me access to data files for Colorado for the years of 2012-2016 that he had already collected for his research^[Doctor Menger's website with links to his research can be found at www.andrewmenger.com]. I directly obtained the 2017 from the Colorado Secretary of State's office, with the help of Mr. Judd Choate, Director of Elections.
 
 #### 2010 US Census
    

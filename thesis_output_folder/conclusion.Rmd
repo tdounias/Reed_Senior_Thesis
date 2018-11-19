@@ -10,12 +10,15 @@ library(Matrix)
 library(lme4)
 library(gamm4)
 library(pander)
+library(modelr)
 source("~/Desktop/Reed_Senior_Thesis/riggd/R/utils.R")
 setwd("~/Desktop/Reed_Senior_Thesis/Data_and_results/data")
 
 model_sample <- read_csv("model_indiv_sample.csv")
 
 #DATA
+
+##Model 1 Gibbs
 load("all_turnouts.RData")
 demographics <- read_csv("colorado_demographic_stats_by_county.csv")
 names(demographics) <- tolower(names(demographics))
@@ -32,6 +35,10 @@ model_dt <- left_join(model_dt, demographics, by = "county")
 model_dt$county <- as.factor(model_dt$county)
 
 cnt_vec <- as.character(unique(model_dt$county))
+
+##Model 2 Gibbs
+U <- unique(data.frame(model_dt$pct_urban, model_dt$pct_white))
+names(U) <- c("urban", "white")
 ```
 
 # Conclusion {.unnumbered}
@@ -143,7 +150,8 @@ J <- 64
 n.chains <- 3
 n.iter <- 1000
 sims <- array (NA, c(n.iter, n.chains, J+3))
-dimnames (sims) <- list (NULL, NULL, c (paste ("a[", 1:J, "]", sep=""), "mu.a",
+dimnames (sims) <- list (NULL, NULL, 
+                         c (paste ("a[", 1:J, "]", sep=""), "mu.a",
    "sigma.y", "sigma.a"))
 
 for (m in 1:n.chains){
@@ -176,11 +184,13 @@ names(vals) <- c (paste ("a[", 1:J, "]", sep=""), "mu.a",
    "sigma.y", "sigma.a")
 
 
-est_table <- data.frame(c("Sampler", "Model"), rbind(vals[1,65:67], c(0.469, 0.199, 0.039)))
+est_table <- data.frame(c("Sampler", "Model"), 
+                        rbind(vals[1,65:67], c(0.469, 0.199, 0.039)))
 
 names(est_table)[1] <- "Calculated from..."
 
-pandoc.table(est_table, justify = c("left", "center", "center", "center"), caption = "Gibbs sampler results for County Model 1 \\label{tab:gibbs_1}")
+pandoc.table(est_table, justify = c("left", "center", "center", "center"), 
+             caption = "Gibbs sampler results for County Model 1 \\label{tab:gibbs_1}")
 ```
 
 As is obvious from Table, the Gibbs sampler produces values very similar to the ones given by an \textit{R} call of Model 1.
@@ -211,33 +221,85 @@ County Model 2, as presented in Chapter 4, includes two county-level predictors:
 
 ```{r}
 ## Gibbs sampler for a multilevel model with county predictors
+  
 
 a.update <- function(){
-  y.temp <- y - U[county]%*%g
+  y.temp <- model_dt$turnout - (model_dt$pct_urban*g[1] + model_dt$pct_white*g[2])
   eta.new <- rep (NA, J)
   for (j in 1:J){
-    n.j <- sum (county==j)
-    y.bar.j <- mean (y.temp[county==j])
+    n.j <- sum (model_dt$county==cnt_vec[j])
+    y.bar.j <- mean (y.temp[model_dt$county==cnt_vec[j]])
     eta.hat.j <- ((n.j/sigma.y^2)*y.bar.j/
                  (n.j/sigma.y^2 + 1/sigma.a^2))
     V.eta.j <- 1/(n.j/sigma.y^2 + 1/sigma.a^2)
     eta.new[j] <- rnorm (1, eta.hat.j, sqrt(V.eta.j))
   }
-  a.new <- U%*%g + eta.new
+  a.new <- (U$urban*g[1] + U$white*g[2]) + eta.new
   return (a.new)
 }
 
 g.update <- function(){
-  lm.0 <- lm (a ~ U)
-  g.new <- sim (lm.0, n.sims=1)
+  lm.0 <- lm (a ~ U$urban + U$white)
+  g.new <- coef (lm.0)[2:3]
   return (g.new)
 }
+
 sigma.y.update <- function(){
-  sigma.y.new <- sqrt(sum((y-a[county]-X%*%b)^2)/rchisq(1,n-1))
+  sigma.y.new <- sqrt(sum((model_dt$turnout-
+                             a[model_dt$county])^2)/rchisq(1,703))
   return (sigma.y.new)
 }
+
 sigma.a.update <- function(){
-  sigma.a.new <- sqrt(sum((a-U%*%g)^2)/rchisq(1,J-1))
+  sigma.a.new <- sqrt(sum((a-(model_dt$pct_urban*g[1] + 
+                                model_dt$pct_white*g[2]))^2)/rchisq(1,J-1))
   return (sigma.a.new)
 }
+
+J <- 64
+n.chains <- 3
+n.iter <- 2000
+sims <- array (NA, c(n.iter, n.chains, J+4))
+dimnames (sims) <- list (NULL, NULL, c (paste ("a[", 1:J, "]", sep=""), 
+   c("coef.urban", "coef.white"),
+   "sigma.y", "sigma.a"))
+
+for (m in 1:n.chains){
+  g <- rnorm (2)
+  sigma.y <- runif (1, 0, sd(model_dt$turnout))
+  sigma.a <- runif (1, 0, sd(model_dt$turnout))
+  for (t in 1:n.iter){
+    a <- a.update ()
+    g <- g.update ()
+    sigma.y <- sigma.y.update ()
+    sigma.a <- sigma.a.update ()
+    sims[t,m,] <- c (a, g, sigma.y, sigma.a)
+  }
+}
+```
+
+```{r, echo = FALSE, results = "asis", message = FALSE}
+#Get Values after convergance
+vals <- data.frame(rep(0,3))
+for(i in 1:68){
+  for(j in 1:3){
+    vals[j,i] <- mean(sims[-c(1:500),j,i])
+  }
+}
+
+vals <- vals %>%
+  summarise_all(mean)
+
+names(vals) <- c (paste ("a[", 1:J, "]", sep=""), 
+                  "coef_urban", "coef_white",
+                  "sigma.y", "sigma.a")
+
+
+# est_table <- data.frame(c("Sampler", "Model"), 
+#rbind(vals[1,65:68], c(0.469, 0.199, 0.039)))
+# 
+# names(est_table)[1] <- "Calculated from..."
+# 
+# pandoc.table(est_table, justify = c("left", "center", "center", "center"), 
+#caption = "Gibbs sampler results for County Model 1 \\label{tab:gibbs_1}")
 ```
