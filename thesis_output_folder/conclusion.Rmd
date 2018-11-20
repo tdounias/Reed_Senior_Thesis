@@ -283,7 +283,7 @@ for (m in 1:n.chains){
 vals <- data.frame(rep(0,3))
 for(i in 1:68){
   for(j in 1:3){
-    vals[j,i] <- mean(sims[-c(1:500),j,i])
+    vals[j,i] <- mean(sims[-c(1:1000),j,i])
   }
 }
 
@@ -295,11 +295,13 @@ names(vals) <- c (paste ("a[", 1:J, "]", sep=""),
                   "sigma.y", "sigma.a")
 
 
-# est_table <- data.frame(c("Sampler", "Model"), 
-#rbind(vals[1,65:68], c(0.469, 0.199, 0.039)))
-# 
-# names(est_table)[1] <- "Calculated from..."
-# 
-# pandoc.table(est_table, justify = c("left", "center", "center", "center"), 
-#caption = "Gibbs sampler results for County Model 1 \\label{tab:gibbs_1}")
+est_table <- data.frame(c("Sampler", "Model"),
+rbind(vals[1,65:68], c(-0.118, 0.034, 0.199, 2.631)))
+
+names(est_table)[1] <- "Calculated from..."
+
+pandoc.table(est_table, justify = c("left", "center", "center", "center", "center"),
+caption = "Gibbs sampler results for County Model 2 \\label{tab:gibbs_2}")
 ```
+   
+As previously the values outputted by the Gibbs sampler are very close to those estimated by the model, apart from the group level standard deviation. Some variability in how closely the sampler approximates the model call is to be expected, due to the difference in how the model is estimated in R (much more precise Bayesian processes).
