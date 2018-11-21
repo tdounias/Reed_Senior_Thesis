@@ -146,7 +146,7 @@ I use two datasets from the Census. For both, the unit of observation is one of 
    
 #### Colorado Voter Files
 
-As any state after the passage of HAVA, Colorado maintains a statewide registry of all currently registered voters. This registry is typically under the purview of the Secretary of State--in this case, Wayne W. Williams. Voter Registration Files are constantly updated with new information on existing voters, new voters, or with the removal of inactive or otherwise ineligible voters. Therefore, this file will be different every time it is accessed or shared. Based on when this file is accessed, only a "snapshot" of the file can be obtained. Similarly with VRFs, a Voter History File is maintained and constantly updated by the state. This file is uniquely connected to its VRF: only voters showing up as registrants will have their histories included. I have both Voter Registration and History files for the years between 2012-2017, obtained with the help of Judd Choate and Andrew Menger.
+As mandated by HAVA, Colorado maintains a statewide registry of all currently registered voters. This registry is typically under the purview of the Secretary of State. Voter Registration Files are constantly updated with new information on existing voters, new voters, or with the removal of inactive or otherwise ineligible voters. Therefore, this file will be different every time it is accessed or shared. Based on when this file is accessed, only a "snapshot" of the file can be obtained. Similarly with VRFs, a Voter History File is maintained and constantly updated by the state. This file is uniquely connected to its VRF: only voters showing up as registrants will have their histories included. I have both Voter Registration and History files for the years between 2012-2017, obtained with the help of Judd Choate and Andrew Menger.
 
 In the Voter Registration files, the unit of observation is the individual voter, and all variables are initially coded as character strings. Each voter is assigned a unique voter ID, which serves as a point of reference between the two files. Broadly speaking, data in this file can be divided between three categories: first, personal identification information like address, ZIP code, or phone number; second, demographic information like age and gender; third, information pertinent to elections administration like congressional district, local elections for which the individual should receive a ballot, voter ID, and party registration. I will further elaborate on relevant variables in the wrangling section.
    
@@ -182,7 +182,7 @@ To also further illustrate the in-county migration and dropped voter problem, I 
 knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/county_migration_A.png")
 ```
    
-Two things should be clear from figure 3.5. First, there is significant deviation between the counts using just the 2017 file and all files across years. Specifically, the 2017 count consistently underestimates the total amount of registered voters--this is shown by the red linear model smoothing line. This consistent difference means that it is impossible to generate conclusions on my hypotheses using only the 2017 files. Second, counts get more accurate the closer to 2017 we get. This should be even more apparent in figure 3.6, which limits the scale to only some high registration counties, and adds a shape indicator for county.
+Two things should be clear from figure 3.5. First, there is significant deviation between the counts using just the 2017 file and all files across years. Specifically, the 2017 count consistently underestimates the total amount of registered voters--this is shown by the red linear model smoothing line. This consistent difference means that it is close to impossible to generate safe conclusions on my hypotheses using only the 2017 files and the methods I have outlined in Chapter 2. Second, counts get more accurate the closer to 2017 we get. This should be even more apparent in figure 3.6, which limits the scale to only some high registration counties, and adds a shape indicator for county.
 
 ```{r county migration B, echo=FALSE, fig.cap="Comparison of registration count methods only for a few counties, 2012-2016", out.width = '80%', fig.align='center'}
 knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/county_migration_B.png")
@@ -194,9 +194,9 @@ Here the structure of the data becomes clear: for each county, there are a serie
 knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/Calc_vs_rep_turnout.png")
 ```
   
-The differences are insignificant. They exist because of "noise" added on because of errors in the data, misreporting, private voter registration files, voters dropped before the "snapshot" occurred, and other similar factors.  
+The differences are insignificant. They exist because of "noise" added on because of errors in the data, misreporting, registration records redacted due to privacy concerns, voters dropped before the "snapshot" occurred, and other similar factors.  
    
-### Other Wrangling Issues Faced
+### Other Wrangling Issues
 
 Wrangling the data was the majority of the work that went into this thesis. As will become clear in this section, apart from accurately processing, diagnosing, and merging the data, the process of wrangling includes several non-trivial decisions about how to treat missing values and variable specification. Doing a full account would probably read like the world's most cliche crime novel: a series of elusive final datasets, a plucky yet occasionally naive young detective, two wisened mentors, clues, dead ends, frustration, compromise, and...spreadsheets. I will spare the reader the whole story, but I will include a non-comprehensive list of some of the difficulties associated with wrangling voter files, as it was a crucial part of the learning process I underwent while doing my research.
   

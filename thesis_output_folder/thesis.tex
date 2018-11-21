@@ -1902,19 +1902,19 @@ aid future research on the subject.
   
   \subsubsection{Colorado Voter Files}\label{colorado-voter-files}
   
-  As any state after the passage of HAVA, Colorado maintains a statewide
-  registry of all currently registered voters. This registry is typically
-  under the purview of the Secretary of State--in this case, Wayne W.
-  Williams. Voter Registration Files are constantly updated with new
-  information on existing voters, new voters, or with the removal of
-  inactive or otherwise ineligible voters. Therefore, this file will be
-  different every time it is accessed or shared. Based on when this file
-  is accessed, only a ``snapshot'' of the file can be obtained. Similarly
-  with VRFs, a Voter History File is maintained and constantly updated by
-  the state. This file is uniquely connected to its VRF: only voters
-  showing up as registrants will have their histories included. I have
-  both Voter Registration and History files for the years between
-  2012-2017, obtained with the help of Judd Choate and Andrew Menger.
+  As mandated by HAVA, Colorado maintains a statewide registry of all
+  currently registered voters. This registry is typically under the
+  purview of the Secretary of State. Voter Registration Files are
+  constantly updated with new information on existing voters, new voters,
+  or with the removal of inactive or otherwise ineligible voters.
+  Therefore, this file will be different every time it is accessed or
+  shared. Based on when this file is accessed, only a ``snapshot'' of the
+  file can be obtained. Similarly with VRFs, a Voter History File is
+  maintained and constantly updated by the state. This file is uniquely
+  connected to its VRF: only voters showing up as registrants will have
+  their histories included. I have both Voter Registration and History
+  files for the years between 2012-2017, obtained with the help of Judd
+  Choate and Andrew Menger.
   
   In the Voter Registration files, the unit of observation is the
   individual voter, and all variables are initially coded as character
@@ -2059,12 +2059,12 @@ aid future research on the subject.
   deviation between the counts using just the 2017 file and all files
   across years. Specifically, the 2017 count consistently underestimates
   the total amount of registered voters--this is shown by the red linear
-  model smoothing line. This consistent difference means that it is
-  impossible to generate conclusions on my hypotheses using only the 2017
-  files. Second, counts get more accurate the closer to 2017 we get. This
-  should be even more apparent in figure 3.6, which limits the scale to
-  only some high registration counties, and adds a shape indicator for
-  county.
+  model smoothing line. This consistent difference means that it is close
+  to impossible to generate safe conclusions on my hypotheses using only
+  the 2017 files and the methods I have outlined in Chapter 2. Second,
+  counts get more accurate the closer to 2017 we get. This should be even
+  more apparent in figure 3.6, which limits the scale to only some high
+  registration counties, and adds a shape indicator for county.
   
   \begin{figure}
   
@@ -2095,12 +2095,11 @@ aid future research on the subject.
   \end{figure}
   
   The differences are insignificant. They exist because of ``noise'' added
-  on because of errors in the data, misreporting, private voter
-  registration files, voters dropped before the ``snapshot'' occurred, and
-  other similar factors.
+  on because of errors in the data, misreporting, registration records
+  redacted due to privacy concerns, voters dropped before the ``snapshot''
+  occurred, and other similar factors.
   
-  \subsection{Other Wrangling Issues
-  Faced}\label{other-wrangling-issues-faced}
+  \subsection{Other Wrangling Issues}\label{other-wrangling-issues}
   
   Wrangling the data was the majority of the work that went into this
   thesis. As will become clear in this section, apart from accurately
@@ -2542,16 +2541,16 @@ aid future research on the subject.
   where \(x_k^{county}\) is a series of 64 dummy variables for each county
   of Colorado. Here differences between elections come from normally
   distributed error terms, rather than predictors. I name this
-  \textbf{Model 1}, and it does not reflect the data particularly well.
-  First off, this model includes the assumption that counties are
-  independent of one another, which is probably false; just consider that
-  these counties are areas of the same state, in the same country, with
-  populations moving between them at regular intervals, and many of them
-  covering the same metropolitan area or congressional district.
-  Additionally, the model matrix here is rank deficient; there are two
-  county coefficients that are perfect linear combinations of other
-  coefficients. This means they will be dropped by \textit{R} when the
-  model is called in the \texttt{lm()} function.
+  \textbf{Model 1}, and it does not fit the data particularly well. First
+  off, this model includes the assumption that counties are independent of
+  one another, which is probably false; just consider that these counties
+  are areas of the same state, in the same country, with populations
+  moving between them at regular intervals, and many of them covering the
+  same metropolitan area or congressional district. Additionally, the
+  model matrix here is rank deficient; there are two county coefficients
+  that are perfect linear combinations of other coefficients. This means
+  they will be dropped by \textit{R} when the model is called in the
+  \texttt{lm()} function.
   
   A way to fix both these issues is to use a multilevel model with mixed
   effects for county. By constraining coefficients at the county level to
@@ -2647,7 +2646,7 @@ aid future research on the subject.
   \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
   Model 1\strut
   \end{minipage} & \begin{minipage}[t]{0.80\columnwidth}\raggedright\strut
-  Naive model with only county specific effects\strut
+  Baseline model with only county specific effects\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
   Model 2\strut
@@ -2985,18 +2984,15 @@ aid future research on the subject.
   
   Given that, the first observable result is that the percentage of white
   population and the percentage of urban population are fairly stable
-  indicators of a small positive and negative shift in turnout
-  respectively, although only urban population reaches statistical
-  significance at the .05 level. The lack of variability between models is
-  not surprising; these represent a county-level, time-independent
-  demographic statistic, and there would be no reason to assume that part
-  of their effect would be subsumed by other variables in Models 3 and 4.
+  indicators of slightly higher and lower levels of turnout respectively,
+  although only urban population reaches statistical significance at the
+  .05 level. The lack of variability between models is not surprising;
+  these represent a county-level, time-independent demographic statistic,
+  and there would be no reason to assume that part of their effect would
+  be subsumed by other variables in Models 3 and 4.
   
-  Moving on to election type, the first thing to note is that there is no
-  typeCoordinated in the table. This is because of the way \textit{R}
-  displays and calculates models for discrete variables, when they are
-  coded as indicators. The coefficients for the different election types
-  should be read as differences from the ``baseline'' that is
+  Moving on to election type, the coefficients for the different election
+  types should be read as differences from the ``baseline'' that is
   typeCoordinated. First surprising result here is that the coefficient
   for general presidential elections is substantially lower than that of
   midterms. Rather, this would be surprising if we did not notice the
@@ -3339,17 +3335,14 @@ aid future research on the subject.
   
   \subsection{Results}\label{results-1}
   
-  While the aforementioned models are all rational parametrizations of
-  individual turnout predictors, the leap from theory to implementation
-  hit a few roadblocks as a direct result of the first section in this
-  chapter and the problems outlined within. The reason I am still
-  providing the results of these models is twofold: first, to show that
-  the data I have on their own \emph{can} be used to build and run an
-  individual model of turnout regardless of if that model is useful in
-  responding to my hypotheses on VBM; second, to validate that the
-  problems I outline in the beginning of this section are actually the
-  root cause of the issues I am having, as some results do give insight
-  into this.
+  While the aforementioned models are sound in their construction, the
+  leap from theory to implementation hit a few roadblocks as a direct
+  result of the first section in this chapter and the problems outlined
+  within. However, there are still valid reasons to include whatever
+  results were possible to estimate. The results indicate that the data I
+  have on their own \emph{can} be used to build and run an individual
+  model of turnout regardless of if that model is useful in responding to
+  my hypotheses on VBM.
   
   \begin{figure}
   
@@ -3360,19 +3353,18 @@ aid future research on the subject.
   \caption[ROC Curve for all individual models]{ROC Curve for all individual models}\label{fig:roc the curves}
   \end{figure}
   
-  In terms of trusting these results, I am confident in the results of
-  models 1, 3a, and 4, somewhat confident in model 5, and less so for
-  models 2, 3, and 5a. Models 2, 3 and 5a ``failed to converge''; this
-  means that the numeric approximation process by which \textit{R}
-  implements maximum likelihood estimation\footnote{Estimation of maximum
-    likelihood here uses Adaptive Gaussian-Hermitian Quadrature (AGQ) to
-    estimate coefficients (Handayani, Notodiputro, Sadik, \& Kurnia, 2017)}
-  for coefficients doesn't give stable results, within certain conditions.
-  While model 5 did converge, it suffers from lack of variance in the
-  predictor for VBM, as explained in the beginning of this chapter; this
-  is the reason why the coefficient for mail vote is so disproportionately
-  large and variable. Model 6 simply did not run, even on a sub-sampled
-  dataset.
+  I am confident in the results of models 1, 3a, and 4, somewhat confident
+  in model 5, and less so for models 2, 3, and 5a. Models 2, 3 and 5a
+  ``failed to converge''; this means that the numeric approximation
+  process by which \textit{R} implements maximum likelihood
+  estimation\footnote{Estimation of maximum likelihood here uses Adaptive
+    Gaussian-Hermitian Quadrature (AGQ) to estimate coefficients
+    (Handayani, Notodiputro, Sadik, \& Kurnia, 2017)} for coefficients
+  doesn't give stable results, within certain conditions. While model 5
+  did converge, it suffers from lack of variance in the predictor for VBM,
+  as explained in the beginning of this chapter; this is the reason why
+  the coefficient for mail vote is so disproportionately large and
+  variable. Model 6 simply did not run, even on a sub-sampled dataset.
   
   While I can't really derive any conclusions from this fact, there is a
   distinct possibility that this either occurred due to a lack of
@@ -3403,7 +3395,7 @@ aid future research on the subject.
   direct result of the lack of variability in my data: Mail Voting is an
   almost perfect predictor of the probability of voting.
   
-  There are two conclusions that can be derived from these results. None
+  There are two conclusions that can be reached from these results. None
   of these conclusions are, sadly, related to my hypotheses on VBM. The
   first is that the lack of variance in the data and a lack of processing
   power are direct causes of my inability to estimate these models. This
@@ -3969,11 +3961,11 @@ aid future research on the subject.
   discernible effect for primary, coordinated races, or midterm races.
   
   This is evidence against voting ``at the margins'', since my hypotheses
-  that were most connected to Aldrich's paradigm (H2, H3) were
-  convincingly rejected. I find evidence against a hypothesis of habitual
-  voting as well, since in my county models Mail Voting has a significant,
-  positive effect. This means that the absence of election-day effects or
-  the strong presence of habitual voting did not override the effect on
+  that were most connected to Aldrich's model (H2, H3) were convincingly
+  rejected. I find evidence against a hypothesis of habitual voting as
+  well, since in my county models Mail Voting has a significant, positive
+  effect. This means that the absence of election-day effects or the
+  strong presence of habitual voting did not override the effect on
   turnout that mail voting has. The same conclusion can be drawn for a
   social theory of voting, which predicts no effect.
   
@@ -4237,11 +4229,11 @@ aid future research on the subject.
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   Sampler\strut
   \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
-  0.4694\strut
+  0.4686\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
   0.2\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
-  0.04246\strut
+  0.03929\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   Model\strut
@@ -4389,13 +4381,13 @@ aid future research on the subject.
   \begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
   Sampler\strut
   \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering\strut
-  -0.1178\strut
+  -0.1183\strut
   \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering\strut
-  0.03386\strut
+  0.03325\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
-  0.1997\strut
+  0.1995\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
-  1.68\strut
+  1.689\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
   Model\strut
