@@ -3,6 +3,7 @@ library(lubridate)
 library(Matrix)
 library(lme4)
 library(pROC)
+library(gam)
 source("~/Desktop/Reed_Senior_Thesis/riggd/R/utils.R")
 setwd("~/Desktop/Reed_Senior_Thesis/Data_and_results/data")
 
@@ -25,6 +26,7 @@ get_true <- function(probs){
 
 #Model 1
 auc_1 <- rep(0,5)
+allvote_1 <- rep(0,5)
 
 for(i in 1:5){
   md_1.fit <- glmer(family = "binomial", data = model_sample, 
@@ -38,12 +40,15 @@ for(i in 1:5){
   g <- roc(voted ~ prob, data = temp_data)
   plot(g)   
   auc_1[i] <- auc(g)
+  allvote_1[i] <- test_allvote(md_1.fit, temp_data)
 }
 
 mean(auc_1)
+mean(allvote_1)
 
 #Model 2
 auc_2 <- rep(0,5)
+allvote_2 <- rep(0,5)
 
 for(i in 1:5){
   md_2.fit <- glmer(family = "binomial", data = model_sample, 
@@ -58,9 +63,11 @@ for(i in 1:5){
   g <- roc(voted ~ prob, data = temp_data)
   plot(g)   
   auc_2[i] <- auc(g)
+  allvote_2[i] <- test_allvote(md_2.fit, temp_data)
 }
 
 mean(auc_2)
+mean(allvote_2)
 
 #Model 3
 # auc_3 <- rep(0,5)
@@ -82,6 +89,7 @@ mean(auc_2)
 
 #Model 3a
 auc_3a <- rep(0,5)
+allvote_3a <- rep(0,5)
 
 for(i in 1:5){
   md_3a.fit <- glmer(family = "binomial", data = model_sample, 
@@ -96,12 +104,15 @@ for(i in 1:5){
   g <- roc(voted ~ prob, data = temp_data)
   plot(g)   
   auc_3a[i] <- auc(g)
+  allvote_3a[i] <- test_allvote(md_3a.fit, temp_data)
 }
 
 mean(auc_3a)
+mean(allvote_3a)
 
 #Model 4
 auc_4 <- rep(0,5)
+allvote_4 <- rep(0,5)
 
 for(i in 1:5){
   md_4.fit <- gam(family = "binomial", data = model_sample, 
@@ -116,12 +127,15 @@ for(i in 1:5){
   g <- roc(voted ~ prob, data = temp_data)
   plot(g)   
   auc_4[i] <- auc(g)
+  allvote_4[i] <- test_allvote(md_4.fit, temp_data)
 }
 
 mean(auc_4)
+mean(allvote_4)
 
 #Model 5
 auc_5 <- rep(0,5)
+allvote_5 <- rep(0,5)
 
 for(i in 1:5){
   md_5.fit <- glm(data = model_sample, family= "binomial", 
@@ -135,12 +149,15 @@ for(i in 1:5){
   g <- roc(voted ~ prob, data = temp_data)
   plot(g)   
   auc_5[i] <- auc(g)
+  allvote_5[i] <- test_allvote(md_5.fit, temp_data)
 }
 
 mean(auc_5)
+mean(allvote_5)
 
 #Model 5a
 auc_5a <- rep(0,5)
+allvote_5a <- rep(0,5)
 
 for(i in 1:5){
   md_5a.fit <- glmer(data = model_sample, family= "binomial", 
@@ -158,3 +175,4 @@ for(i in 1:5){
 }
 
 mean(auc_5a)
+mean(allvote_5a)

@@ -429,3 +429,32 @@ get_rocs <- function(model, vote_data){
   g <- roc(voted ~ prob, data = temp_data)
   g
 }
+
+
+#' Get performance of classification as comnpared to "everyone voted" baseline in CV form 
+#'
+#' @param model A classification statistical model
+#' @param vote_data A dataset containing a discrete variable of whether an individual voted or not
+#' @return Difference in accurracy %
+#' @examples test_allvote(logistic_model, vote_data)
+
+test_allvote <- function(md, vote_data){
+    
+  test_mat <- data.frame(vote_data$prob >= .5, vote_data$voted)
+  names(test_mat) <- c("pred", "true")
+  
+  test_mat <- test_mat %>%
+    group_by(pred, true) %>%
+    summarise(n())
+  
+  test_mat <- cbind(test_mat, type = c("tn", "fn", "fp", "tp")) %>%
+    ungroup() %>%
+    select(3,4) %>%
+    spread(key = "type", value = "n()")
+  
+  vs_naive <- c((test_mat$fn + test_mat$tp)/sum(test_mat), (test_mat$tn + test_mat$tp)/sum(test_mat))
+  
+  a <- vs_naive[2] - vs_naive[1]
+  
+  a
+} 

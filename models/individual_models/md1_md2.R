@@ -12,6 +12,7 @@ demographics <- read_csv("colorado_demographic_stats_by_county.csv")
 md_1 <- glmer(family = "binomial", data = model_sample, 
               voted ~ (1|COUNTY) + PCT_URBAN + PCT_WHITE)
 
+
 #Display results
 arm::display(md_1)
 
