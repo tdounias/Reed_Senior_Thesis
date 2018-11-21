@@ -138,7 +138,8 @@ mu.a.update <- function(){
   return (mu.a.new)
 }
 sigma.y.update <- function(){
-  sigma.y.new <- sqrt(sum((model_dt$turnout-a[model_dt$county])^2)/rchisq(1,703))
+  sigma.y.new <- sqrt(sum((model_dt$turnout-
+                             a[model_dt$county])^2)/rchisq(1,703))
   return (sigma.y.new)
 }
 sigma.a.update <- function(){
@@ -190,7 +191,7 @@ est_table <- data.frame(c("Sampler", "Model"),
 names(est_table)[1] <- "Calculated from..."
 
 pandoc.table(est_table, justify = c("left", "center", "center", "center"), 
-             caption = "Gibbs sampler results for County Model 1 \\label{tab:gibbs_1}")
+  caption = "Gibbs sampler results for County Model 1 \\label{tab:gibbs_1}")
 ```
 
 As is obvious from Table, the Gibbs sampler produces values very similar to the ones given by an \textit{R} call of Model 1.
@@ -224,7 +225,8 @@ County Model 2, as presented in Chapter 4, includes two county-level predictors:
   
 
 a.update <- function(){
-  y.temp <- model_dt$turnout - (model_dt$pct_urban*g[1] + model_dt$pct_white*g[2])
+  y.temp <- model_dt$turnout - 
+    (model_dt$pct_urban*g[1] + model_dt$pct_white*g[2])
   eta.new <- rep (NA, J)
   for (j in 1:J){
     n.j <- sum (model_dt$county==cnt_vec[j])
@@ -246,13 +248,13 @@ g.update <- function(){
 
 sigma.y.update <- function(){
   sigma.y.new <- sqrt(sum((model_dt$turnout-
-                             a[model_dt$county])^2)/rchisq(1,703))
+                a[model_dt$county])^2)/rchisq(1,703))
   return (sigma.y.new)
 }
 
 sigma.a.update <- function(){
   sigma.a.new <- sqrt(sum((a-(model_dt$pct_urban*g[1] + 
-                                model_dt$pct_white*g[2]))^2)/rchisq(1,J-1))
+                model_dt$pct_white*g[2]))^2)/rchisq(1,J-1))
   return (sigma.a.new)
 }
 
@@ -300,8 +302,9 @@ rbind(vals[1,65:68], c(-0.118, 0.034, 0.199, 2.631)))
 
 names(est_table)[1] <- "Calculated from..."
 
-pandoc.table(est_table, justify = c("left", "center", "center", "center", "center"),
-caption = "Gibbs sampler results for County Model 2 \\label{tab:gibbs_2}")
+pandoc.table(est_table, 
+      justify = c("left", "center", "center", "center", "center"),
+      caption = "Gibbs sampler results for County Model 2 \\label{tab:gibbs_2}")
 ```
    
 As previously the values outputted by the Gibbs sampler are very close to those estimated by the model, apart from the group level standard deviation. Some variability in how closely the sampler approximates the model call is to be expected, due to the difference in how the model is estimated in R (much more precise Bayesian processes).

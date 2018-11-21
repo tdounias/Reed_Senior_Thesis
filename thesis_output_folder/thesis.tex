@@ -3246,20 +3246,18 @@ future research on the subject.
   expression.
   
   The mixed effects model will again operate on two ``levels'' of
-  hierarchy, but the second level will now include three distinct
+  hierarchy, but the second level will now include two distinct
   regressions. Caveats for variables like age and date should be noted
   from previous sections. This, the most complex model, will be
   \textbf{Model 6}
   
   \begin{equation} \tag{Model 6}
-  \hat{p\_vote} \sim \text{logit}^{-1}(\sum_{v = 1}^{n^{\text{ballot vars}}}x_{i,v}\beta_{v} +\delta_{j[i]} + \alpha_{k[i]} + \eta_{l[i]}),
+  \hat{p\_vote} \sim \text{logit}^{-1}(\sum_{v = 1}^{n^{\text{ballot vars}}}x_{i,v}\beta_{v} +\delta_{j[i]} + \alpha_{k[i]}),
   \end{equation}
   
   \[\alpha_{k} \sim \text{N}(\gamma_0 + \sum_{v=1}^{n^{\text{county vars}}}x_{k[i], v}\gamma_{v}, \sigma_{\alpha}^2)\]
   
-  \[\delta_{j} \sim \text{N}(\zeta_0 + \sum_{v=1}^{n^{\text{indiv vars}}}z_{j[i], v}\delta_{v}, \sigma_{\delta}^2)\]
-  
-  \[\eta_{l} \sim \text{N}(\nu_0 + \sum_{v=1}^{n^{\text{election vars}}}w_{l[i], v}\nu_{v}, \sigma_{\nu}^2)\]
+  \[\delta_{j} \sim \text{N}(\zeta_0 + \sum_{v=1}^{n^{\text{indiv vars}}}x_{j[i], v}\delta_{v}, \sigma_{\delta}^2)\]
   
   In summary, Table 4.3 includes all noteworthy models from the previous
   section. I add a few models which should be easily understood based on
@@ -4150,7 +4148,8 @@ future research on the subject.
     \KeywordTok{return}\NormalTok{ (mu.a.new)}
   \NormalTok{\}}
   \NormalTok{sigma.y.update <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{()\{}
-  \NormalTok{  sigma.y.new <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{sum}\NormalTok{((model_dt}\OperatorTok{$}\NormalTok{turnout}\OperatorTok{-}\NormalTok{a[model_dt}\OperatorTok{$}\NormalTok{county])}\OperatorTok{^}\DecValTok{2}\NormalTok{)}\OperatorTok{/}\KeywordTok{rchisq}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{703}\NormalTok{))}
+  \NormalTok{  sigma.y.new <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{sum}\NormalTok{((model_dt}\OperatorTok{$}\NormalTok{turnout}\OperatorTok{-}
+  \StringTok{                             }\NormalTok{a[model_dt}\OperatorTok{$}\NormalTok{county])}\OperatorTok{^}\DecValTok{2}\NormalTok{)}\OperatorTok{/}\KeywordTok{rchisq}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{703}\NormalTok{))}
     \KeywordTok{return}\NormalTok{ (sigma.y.new)}
   \NormalTok{\}}
   \NormalTok{sigma.a.update <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{()\{}
@@ -4211,11 +4210,11 @@ future research on the subject.
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   Sampler\strut
   \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
-  0.4684\strut
+  0.4696\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
-  0.2004\strut
+  0.1999\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
-  0.03697\strut
+  0.04108\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   Model\strut
@@ -4273,7 +4272,8 @@ future research on the subject.
     
   
   \NormalTok{a.update <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{()\{}
-  \NormalTok{  y.temp <-}\StringTok{ }\NormalTok{model_dt}\OperatorTok{$}\NormalTok{turnout }\OperatorTok{-}\StringTok{ }\NormalTok{(model_dt}\OperatorTok{$}\NormalTok{pct_urban}\OperatorTok{*}\NormalTok{g[}\DecValTok{1}\NormalTok{] }\OperatorTok{+}\StringTok{ }\NormalTok{model_dt}\OperatorTok{$}\NormalTok{pct_white}\OperatorTok{*}\NormalTok{g[}\DecValTok{2}\NormalTok{])}
+  \NormalTok{  y.temp <-}\StringTok{ }\NormalTok{model_dt}\OperatorTok{$}\NormalTok{turnout }\OperatorTok{-}\StringTok{ }
+  \StringTok{    }\NormalTok{(model_dt}\OperatorTok{$}\NormalTok{pct_urban}\OperatorTok{*}\NormalTok{g[}\DecValTok{1}\NormalTok{] }\OperatorTok{+}\StringTok{ }\NormalTok{model_dt}\OperatorTok{$}\NormalTok{pct_white}\OperatorTok{*}\NormalTok{g[}\DecValTok{2}\NormalTok{])}
   \NormalTok{  eta.new <-}\StringTok{ }\KeywordTok{rep}\NormalTok{ (}\OtherTok{NA}\NormalTok{, J)}
     \ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{J)\{}
   \NormalTok{    n.j <-}\StringTok{ }\KeywordTok{sum}\NormalTok{ (model_dt}\OperatorTok{$}\NormalTok{county}\OperatorTok{==}\NormalTok{cnt_vec[j])}
@@ -4295,13 +4295,13 @@ future research on the subject.
   
   \NormalTok{sigma.y.update <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{()\{}
   \NormalTok{  sigma.y.new <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{sum}\NormalTok{((model_dt}\OperatorTok{$}\NormalTok{turnout}\OperatorTok{-}
-  \StringTok{                             }\NormalTok{a[model_dt}\OperatorTok{$}\NormalTok{county])}\OperatorTok{^}\DecValTok{2}\NormalTok{)}\OperatorTok{/}\KeywordTok{rchisq}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{703}\NormalTok{))}
+  \StringTok{                }\NormalTok{a[model_dt}\OperatorTok{$}\NormalTok{county])}\OperatorTok{^}\DecValTok{2}\NormalTok{)}\OperatorTok{/}\KeywordTok{rchisq}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{703}\NormalTok{))}
     \KeywordTok{return}\NormalTok{ (sigma.y.new)}
   \NormalTok{\}}
   
   \NormalTok{sigma.a.update <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{()\{}
   \NormalTok{  sigma.a.new <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{sum}\NormalTok{((a}\OperatorTok{-}\NormalTok{(model_dt}\OperatorTok{$}\NormalTok{pct_urban}\OperatorTok{*}\NormalTok{g[}\DecValTok{1}\NormalTok{] }\OperatorTok{+}\StringTok{ }
-  \StringTok{                                }\NormalTok{model_dt}\OperatorTok{$}\NormalTok{pct_white}\OperatorTok{*}\NormalTok{g[}\DecValTok{2}\NormalTok{]))}\OperatorTok{^}\DecValTok{2}\NormalTok{)}\OperatorTok{/}\KeywordTok{rchisq}\NormalTok{(}\DecValTok{1}\NormalTok{,J}\OperatorTok{-}\DecValTok{1}\NormalTok{))}
+  \StringTok{                }\NormalTok{model_dt}\OperatorTok{$}\NormalTok{pct_white}\OperatorTok{*}\NormalTok{g[}\DecValTok{2}\NormalTok{]))}\OperatorTok{^}\DecValTok{2}\NormalTok{)}\OperatorTok{/}\KeywordTok{rchisq}\NormalTok{(}\DecValTok{1}\NormalTok{,J}\OperatorTok{-}\DecValTok{1}\NormalTok{))}
     \KeywordTok{return}\NormalTok{ (sigma.a.new)}
   \NormalTok{\}}
   
@@ -4362,13 +4362,13 @@ future research on the subject.
   \begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
   Sampler\strut
   \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering\strut
-  -0.1191\strut
+  -0.119\strut
   \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering\strut
-  0.03227\strut
+  0.03478\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
-  0.2\strut
+  0.1997\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
-  1.689\strut
+  1.687\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
   Model\strut

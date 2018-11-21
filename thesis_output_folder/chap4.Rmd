@@ -225,7 +225,7 @@ $$\delta_{j} \sim \text{N}(\zeta_0 + \sum_{v=1}^{n^{\text{indiv vars}}}z_{j[i], 
   
 In the case of my specific data, for the time being I have individual-level data for gender, so $n^{\text{indiv vars}} = 1$. I name the combination of this model and Model 2: **Model 3**. Model 3 can be written as follows:
 
-\begin{equation} \label{Model 3}
+\begin{equation} \tag{Model 3}
 \hat{\mathbb{P}}(y_i = 1) \sim \text{logit}^{-1}(\delta_{j[i]} + a_{k[i]}), 
 \end{equation}
 
@@ -272,17 +272,16 @@ I now proceed to include variables from all units of observation into one model.
 
 You will notice that I have omitted the subscript for all beta coefficients. This is because after two or three parameters the subscript becomes increasingly large. For simplicity, assume increasing indexes for different beta coefficients from left to right in this expression.
 
-The mixed effects model will again operate on two "levels" of hierarchy, but the second level will now include three distinct regressions. Caveats for variables like age and date should be noted from previous sections. This, the most complex model, will be **Model 6**
+The mixed effects model will again operate on two "levels" of hierarchy, but the second level will now include two distinct regressions. Caveats for variables like age and date should be noted from previous sections. This, the most complex model, will be **Model 6**
 
 \begin{equation} \tag{Model 6}
-\hat{p\_vote} \sim \text{logit}^{-1}(\sum_{v = 1}^{n^{\text{ballot vars}}}x_{i,v}\beta_{v} +\delta_{j[i]} + \alpha_{k[i]} + \eta_{l[i]}),
+\hat{p\_vote} \sim \text{logit}^{-1}(\sum_{v = 1}^{n^{\text{ballot vars}}}x_{i,v}\beta_{v} +\delta_{j[i]} + \alpha_{k[i]}),
 \end{equation}
 
 $$\alpha_{k} \sim \text{N}(\gamma_0 + \sum_{v=1}^{n^{\text{county vars}}}x_{k[i], v}\gamma_{v}, \sigma_{\alpha}^2)$$
 
-$$\delta_{j} \sim \text{N}(\zeta_0 + \sum_{v=1}^{n^{\text{indiv vars}}}z_{j[i], v}\delta_{v}, \sigma_{\delta}^2)$$
+$$\delta_{j} \sim \text{N}(\zeta_0 + \sum_{v=1}^{n^{\text{indiv vars}}}x_{j[i], v}\delta_{v}, \sigma_{\delta}^2)$$
 
-$$\eta_{l} \sim \text{N}(\nu_0 + \sum_{v=1}^{n^{\text{election vars}}}w_{l[i], v}\nu_{v}, \sigma_{\nu}^2)$$
 
 In summary, Table 4.3 includes all noteworthy models from the previous section. I add a few models which should be easily understood based on the specifications given above.  
 
