@@ -90,3 +90,5 @@ summary(md_4$mer)
 plot(fitted(md_4$mer), residuals(md_4$mer))
 
 qqnorm(residuals(md_4$mer))
+
+plot(md_4$gam, xlab = "Years 2010-2016 (by spline knots)", ylab = "Turnout Effect")

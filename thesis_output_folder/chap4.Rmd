@@ -135,7 +135,7 @@ In terms of goodness-of-fit, I use 5-fold cross-validated Mean Squared Error (MS
 
 ```{r county coef table, results = "asis", echo = FALSE, message=FALSE}
 source("~/Desktop/Reed_Senior_Thesis/tables/county_coef_table.R")
-pandoc.table(table_data, caption = "Estimated county level coefficients \\label{tab:county_coef}", 
+pandoc.table(table_data, caption = "Estimated county level coefficients (**Significant at the .01 level *at the .05 level) \\label{tab:county_coef}", 
              justify = c("left", "center", "center", "center", "center"))
 ```
 
@@ -324,7 +324,7 @@ There are two conclusions that can be derived from these results. None of these 
 
 ```{r indiv coef table, results = "asis", echo = FALSE, message=FALSE}
 source("~/Desktop/Reed_Senior_Thesis/tables/indiv_coef_table.R")
-pandoc.table(table_data, caption = "Estimated individual level coefficients \\label{tab:model_indiv_coef}",
+pandoc.table(table_data, caption = "Estimated individual level coefficients (**Significant at the .01 level *at the .05 level) \\label{tab:model_indiv_coef}", 
              justify = c("left", "center", "center", "center", "center", "center", "center", "center"),
              keep.line.breaks = TRUE, split.tables = Inf)
 ```
