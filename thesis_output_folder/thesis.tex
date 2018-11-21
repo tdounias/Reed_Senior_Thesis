@@ -236,15 +236,18 @@ Washington, parts of California, and Colorado have failed to show
 consistent results, disagreeing both on the scale and the direction
 (positive or negative) that this effect has. This thesis aims at
 following this series of studies by examining Colorado voter
-registration files for recent elections (2010-2016) and describing,
-fitting, and interpreting multilevel general additive regression models
-of voter turnout based on these data. I show that there is a small
-positive effect of mail voting on turnout in national elections at the
-county level. This thesis also contributes to the literature by
-presenting a description of modeling and data wrangling difficulties
-associated with voter registration files, and giving a series of
-potential solutions, as well as an extensive coding library to aid
-future research on the subject.
+registration files for recent elections (2010-2016). These files consist
+of a registration file with voter information and a history file with
+voter participation data in Colorado elections, and provide all
+information necessary for a comprehensive study of turnout. By
+describing, fitting, and interpreting multilevel general additive
+regression models of voter turnout based on these data, I show that
+there is a small positive effect of mail voting on turnout in national
+elections at the county level. This thesis also contributes to the
+literature by presenting a description of modeling and data wrangling
+difficulties associated with voter registration files, and giving a
+series of potential solutions, as well as an extensive coding library to
+aid future research on the subject.
 }
 
 % End of CII addition
@@ -384,15 +387,18 @@ future research on the subject.
       consistent results, disagreeing both on the scale and the direction
       (positive or negative) that this effect has. This thesis aims at
       following this series of studies by examining Colorado voter
-      registration files for recent elections (2010-2016) and describing,
-      fitting, and interpreting multilevel general additive regression models
-      of voter turnout based on these data. I show that there is a small
-      positive effect of mail voting on turnout in national elections at the
-      county level. This thesis also contributes to the literature by
-      presenting a description of modeling and data wrangling difficulties
-      associated with voter registration files, and giving a series of
-      potential solutions, as well as an extensive coding library to aid
-      future research on the subject.
+      registration files for recent elections (2010-2016). These files consist
+      of a registration file with voter information and a history file with
+      voter participation data in Colorado elections, and provide all
+      information necessary for a comprehensive study of turnout. By
+      describing, fitting, and interpreting multilevel general additive
+      regression models of voter turnout based on these data, I show that
+      there is a small positive effect of mail voting on turnout in national
+      elections at the county level. This thesis also contributes to the
+      literature by presenting a description of modeling and data wrangling
+      difficulties associated with voter registration files, and giving a
+      series of potential solutions, as well as an extensive coding library to
+      aid future research on the subject.
     \end{abstract}
   
   
@@ -447,13 +453,13 @@ future research on the subject.
   that were in progress, researchers claimed that the voting machines and
   ballot cards used were confusing and misleading. Many voters, for
   example, mistakenly voted for a different candidate because of the
-  confusing layout of outdated punch-card voting machines. 22,000 voters
-  in Duval County had their ballots rejected due to ``overvoting'',
-  because they were given ballots that implied the necessity to vote on
-  multiple pages for the same candidate: an action that spoiled their
-  ballot(Saltman, 2009).
+  confusing layout of outdated punch-card voting machines(Wand et al.,
+  2001). 22,000 voters in Duval County had their ballots rejected due to
+  ``over-voting'', because they were given ballots that implied the
+  necessity to vote on multiple pages for the same candidate: an action
+  that spoiled their ballot(Saltman, 2009).
   
-  A democratic system is based on procedures as much as principles.
+  A democratic system is based on procedures as much as on principles.
   Elections are about translating the vote of the people into political
   power, government action, and fair representation by chosen
   representatives. The way we vote can often be critical to the outcome.
@@ -475,7 +481,7 @@ future research on the subject.
   a century of sweeping federal election reforms, in an attempt to at
   least partially centralize an election process whose control had been
   left to localities. The Civil Rights Acts of '57, '60, and '64 along
-  with the Voting Rights Act of '65 collectivelly aimed to prevent
+  with the Voting Rights Act of '65 collectively aimed to prevent
   discriminatory policies at the local level. They abolished literacy
   tests, made tampering with voter registration rolls a federal crime, and
   mandated federal oversight of local authorities with a history of
@@ -484,8 +490,8 @@ future research on the subject.
   In 1993 Congress passed the National Voter Registration Act (or NVRA),
   which increased oversight of local registration policies by mandating
   by-mail registration and registration at the DMV (otherwise known as the
-  ``motor voter'' program), and by strictly regultaing local registration
-  forms. The NVRA also imposed strict regulations agains the practice of
+  ``motor voter'' program), and by strictly regulating local registration
+  forms. The NVRA also imposed strict regulations against the practice of
   ``purging'' registered voters from the rolls, and mandated that states
   routinely check their registration data to ensure integrity. After the
   events of 2000 in Florida, the NVRA was followed by the Help America
@@ -494,7 +500,7 @@ future research on the subject.
   the federal government started spending money on local election
   administration. The act also banned certain types of voting machines,
   mandated that local officials accept provisional ballots, and created
-  the Elections Administration Comission (EAC) to gather information and
+  the Elections Administration Commission (EAC) to gather information and
   assist state and national elections. Quite importantly for researchers
   and voters alike (and for this thesis), HAVA mandated that states
   compile and maintain voter registration and history data \emph{at the
@@ -502,7 +508,7 @@ future research on the subject.
   2009).
   
   Apart from serving local election administration, voter files
-  consilidated by HAVA have allowed researchers to make concrete
+  consolidated by HAVA have allowed researchers to make concrete
   inferences of individual characteristics (E. D. Hersh, 2015). Voting
   related theories derived from political science are now commonly tested
   using advanced statistical methods and huge amounts of data; both
@@ -510,7 +516,15 @@ future research on the subject.
   the quality of voter registration files (Ansolabehere \& Hersh, 2010),
   or linking disparate voter records (Ansolabehere \& Hersh, 2017). In my
   thesis I take advantage of such centralized files from the state of
-  Colorado.
+  Colorado\footnote{Voter files commonly include two distinct parts: Voter
+    Registration Files (VRF) and Voter History Files. The former contain
+    an entry for each registered individual with all necessary demographic
+    and personal data needed to correctly identify which ballots they
+    should complete, like where they live, their party registration, their
+    local legislative district, precinct, school board etc. The later
+    contain information on each \emph{ballot} cast, including who cast it,
+    what election it was cast in, how it was cast (mail vote, absentee,
+    etc.), and what county it was cast in.}.
   
   The purpose of research into policies like the ones described above is
   to both to model and understand the behavior of the voters, and to
@@ -536,11 +550,11 @@ future research on the subject.
   which individual voters are registered. While fixed-effects regression
   would assume independence of effects between counties, hierarchical
   modeling will allow me to do away with that assumption, thus also vastly
-  increasing the inferencial potential of my models(Gelman \& Hill, 2006).
+  increasing the inferential potential of my models(Gelman \& Hill, 2006).
   
   This thesis should be viewed as a combination of three factors:
   questions, data, and methods. My fundamental question is one of the most
-  common for elections science\footnote{Sometimes reffered to as
+  common for elections science\footnote{Sometimes referred to as
     \emph{psephology}, the study of the \emph{psephos}
     (\(\psi \acute \eta \phi o \varsigma\)) or ``vote'' in Greek.}: how do
   we increase electoral participation in the form of turnout, and
@@ -549,7 +563,7 @@ future research on the subject.
   of all current registrants in the State along with their voter
   histories. To these data, with the purpose of answering the fundamental
   question I set, I apply hierarchical models; a practice commonly applied
-  in statistical studies but relativelly new and exciting as a development
+  in statistical studies but relatively new and exciting as a development
   in mail voting research.
   
   \chapter{The State of the Literature}\label{rmd-basics}
@@ -2688,9 +2702,8 @@ future research on the subject.
     controlling for time, is a particularly interesting result.}.
   
   \begin{longtable}[]{@{}lcccc@{}}
-  \caption[Estimated county level coefficients] {Estimated county level coefficients (**Significant
-  at the .01 level *at the .05 level)
-  \label{tab:model_county_coef}}\tabularnewline
+  \caption{Estimated county level coefficients (**Significant at the .01
+  level *at the .05 level) \label{tab:county_coef}}\tabularnewline
   \toprule
   \begin{minipage}[b]{0.26\columnwidth}\raggedright\strut
   Variables\strut
@@ -3421,8 +3434,8 @@ future research on the subject.
   data does have substantial use for modelling at the individual level.
   
   \begin{longtable}[]{@{}lccccccc@{}}
-  \caption[Estimated individual level coefficients] {Estimated individual level coefficients (**Significant
-  at the .01 level *at the .05 level)
+  \caption{Estimated individual level coefficients (**Significant at the
+  .01 level *at the .05 level)
   \label{tab:model_indiv_coef}}\tabularnewline
   \toprule
   \begin{minipage}[b]{0.12\columnwidth}\raggedright\strut
@@ -4212,11 +4225,11 @@ future research on the subject.
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   Sampler\strut
   \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
-  0.4694\strut
+  0.4677\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
-  0.2008\strut
+  0.201\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
-  0.03174\strut
+  0.02882\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   Model\strut
@@ -4364,13 +4377,13 @@ future research on the subject.
   \begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
   Sampler\strut
   \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering\strut
-  -0.1185\strut
+  -0.1191\strut
   \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering\strut
-  0.0337\strut
+  0.03227\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
-  0.1998\strut
+  0.1999\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
-  1.684\strut
+  1.689\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
   Model\strut
@@ -4662,6 +4675,13 @@ future research on the subject.
   \hypertarget{ref-verba_participation_1972}{}
   Verba, S., \& Nie, N. H. (1972). \emph{Participation in America:
   Political democracy and social equality}. New York: Harper \& Row.
+  
+  \hypertarget{ref-wand_butterfly_2001}{}
+  Wand, J. N., Shotts, K. W., Sekhon, J. S., Mebane, W. R., Herron, M. C.,
+  \& Brady, H. E. (2001). The Butterfly Did It: The Aberrant Vote for
+  Buchanan in Palm Beach County, Florida. \emph{American Political Science
+  Review}, \emph{95}(4), 793--810.
+  \url{http://doi.org/10.1017/S000305540040002X}
   
   \hypertarget{ref-wood_generalized_2006}{}
   Wood, S. N. (2006). \emph{Generalized Additive Models: An Introduction
