@@ -568,6 +568,25 @@ aid future research on the subject.
   
   \chapter{The State of the Literature}\label{rmd-basics}
   
+  I start my thesis with an examination of the literature on turnout,
+  deciding to vote, and mail voting. I begin with an examination of
+  turnout: what it is, its use as a metric of participation, and how it is
+  estimated. I continue by presenting a comprehensive list of current
+  theories on voter decision and participation; these offer conflicting
+  descriptions as to what variables are important when trying to predict
+  the turnout effects of elections policy. I then provide a run-down of
+  current voting methods in the US, with a particular focus on mail
+  voting. I then make a series of predictions on what the expected effect
+  of mail voting on turnout is, based on each of the aforementioned
+  theories. I end on a presentation of past studies that have tried to
+  statistically estimate this effect.
+  
+  The most basic form of regression is \(y\sim x\), where \(y\) is the
+  response and \(x\) is the predictor. By the end of this chapter, I aim
+  to clarify the theoretical framework behind turnout (response), mail
+  voting (main predictor), and the predicted correlation between the two
+  (value of regression coefficients).
+  
   \section{Turnout and Political
   Participation}\label{turnout-and-political-participation}
   
@@ -637,7 +656,7 @@ aid future research on the subject.
   people with severe mental illnesses or felons, and does not count
   oversees voters or military personnel. Michael McDonald offers an
   alternative to VAP he calls ``voting eligible population'', which
-  corrects for such individuals (Mcdonald, 2007).
+  corrects for such individuals (McDonald, 2007).
   
   Counts of registered voters are also a useful tool for calculation of
   turnout, as they usually require no estimation. These counts can simply
@@ -882,7 +901,7 @@ aid future research on the subject.
   implemented by state and local governments with the argument that they
   either expand the democratic franchise by bringing in new voters, or by
   making it more likely that current registered voters participate in the
-  electoral process (State Legislatures, 2018).
+  electoral process (``Absentee and Early Voting,'' 2018).
   
   \subsection{How Theories Apply to VBM}\label{how-theories-apply-to-vbm}
   
@@ -980,7 +999,7 @@ aid future research on the subject.
   I include a study conducted by Pantheon Analytics on Colorado, which
   compares actual turnout to predicted levels for VBM counties in
   Colorado. The results show a positive effect of approximately 3.3\% due
-  to VBM (Edelman \& Glastris, 2018).
+  to VBM ({\textbf{???}}).
   
   The conclusion to be drawn is that results on VBM vary significantly.
   There are multiple studies, using multiple methods, on multiple states,
@@ -1261,7 +1280,7 @@ aid future research on the subject.
   
   Multilevel models can be fit using the \texttt{lme4} \textit{R} package
   that uses restricted maximum likelihood calculations for estimating
-  coefficients (Bates, Mächler, Bolker, \& Walker, 2014). Multilevel
+  coefficients (Bates, Mächler, Bolker, \& Walker, 2015). Multilevel
   modelling also works perfectly well with general additive models! In
   \textit{R} this can be accomplished with the \texttt{gamm4} package (S.
   Wood \& Scheipl, 2017).
@@ -1408,12 +1427,12 @@ aid future research on the subject.
   Colorado has a median age of 34.3 and median household income of
   \$65,685. Colorado's population is mostly white, with a higher minority
   group population density in its Southern regions, as shown in figure
-  3.1. (Bureau, 2010) The conclusion here is that Colorado is a relatively
-  young, mostly white, and fairly well-off state that is increasingly
-  getting more diverse, particularly in the South. These factors are
-  important as they serve to associate Colorado with other states; such
-  associations are useful for the replication of this study or the
-  generalization of my results.
+  3.1. (``U.S. Census Bureau QuickFacts,'' 2010) The conclusion here is
+  that Colorado is a relatively young, mostly white, and fairly well-off
+  state that is increasingly getting more diverse, particularly in the
+  South. These factors are important as they serve to associate Colorado
+  with other states; such associations are useful for the replication of
+  this study or the generalization of my results.
   
   The State Capital is Denver; Colorado is split into 64 Counties, of
   which the most populous are, in no particular order, the following: El
@@ -1564,7 +1583,7 @@ aid future research on the subject.
   taxes, and caped government spending. TABOR was passed by referendum in
   1992, and later amended in 2005 after the dot com economic crisis
   exposed the fact that inability to spend is very bad for a state
-  government trying to jump start its economy. (Assembly, n.d.)
+  government trying to jump start its economy. (Staff, 2009)
   
   Similarly, Amendment 64 passed in 2012 made Colorado one of the first
   states to legalize the selling, possession, and consumption of
@@ -3948,6 +3967,24 @@ aid future research on the subject.
   
   \setcounter{chapter}{5} \setcounter{section}{0}
   
+  This thesis started off with the prospect of testing three hypotheses,
+  on the impact of VBM on turnout (H1) and how that impact may differ
+  based on how prominent national effects are during election time (H2),
+  specifically using the metric of election type between Midterm, General,
+  Primary, and Coordinated elections (H3). These hypotheses derived from a
+  theory of voting ``at the margins'', first developed by Aldrich (1993),
+  which stated that the decision on whether to turn out or not is based on
+  a rational calculus made by individual voters. This calculus is affected
+  by a wide range of effects, from small local ones to large, national
+  variables. In my first Chapter I identified how this theory fits in the
+  general literature on voter behavior, and made a series of observations
+  on how each theory views the impact of VBM. The hypotheses were then
+  tested on Voter Files from Colorado, which described registration and
+  voter history for elections ranging from 2010-2016. The process of data
+  wrangling, modeling, and estimations revealed that the data I used was
+  not ideal for the purposes I intended, particularly for fitting
+  individual-level models.
+  
   At the end of my thesis I am able to confirm H1, but reject H2 and H3.
   These results come from my County level models. Despite non-convergence
   my individual level models have some inferential potential, but they are
@@ -4004,7 +4041,7 @@ aid future research on the subject.
   rather than new all-mail elections.
   
   Apart from expanding my research in terms of data, another path would be
-  to impliment some of the methods I outline in the beginning of Chapter
+  to implement some of the methods I outline in the beginning of Chapter
   4, like the Synthetic Control Group. Such methods would allow for
   inferences to be made despite the data issues I encountered. Lastly, it
   should be noted that VBM is just one of a series of electoral reforms
@@ -4069,19 +4106,15 @@ aid future research on the subject.
   whose value depends on the value of the exact previous random variable.
   In mathematical terms, this would be a sequence
   \(\theta^{(1)}, \theta^{(2)}, \theta^{(3)}, ..., \theta^{(t)}\) where
-  \(\mathbb{P}(\Theta = \theta^{(t)}|\theta^{(n)}) = \mathbb{P}(\Theta = \theta^{(t)})\)
-  for \(n \in [1,t-2]\) but
-  \(\mathbb{P}(\Theta = \theta^{(t)}|\theta^{(n)})\) is dependent on
-  \(\theta^{(n)}\) for \(n = t-1\). A Markov Chain Monte Carlo simulation
-  uses Bayesian estimation to update each sequential estimate of
-  \(\theta\), leading it to converge to the true value being estimated
-  (Gelman \& Hill, 2006).
+  \(\mathbb{P}(\theta^{(t)} = y|\theta^{(n)}, n<t) = \mathbb{P}(\theta^{(t)} = y|\theta^{(t-1)})\).
+  A Markov Chain Monte Carlo simulation uses Bayesian estimation to update
+  each sequential estimate of \(\theta\), leading it to converge to the
+  true value being estimated (Gelman \& Hill, 2006; Jackman, 2009).
   
   Multilevel models can be estimated using MCMC sampling. Indicatively,
   this appendix presents the construction and coding of two types of MCMC
-  samplers based on the Gibbs algorithm and Metropolis-Hastings algorithm.
-  The code and mathematical derivations are adapted to my models from
-  Gelman and Hill (2006).
+  samplers based on the Gibbs algorithm. The code and mathematical
+  derivations are adapted to my models from Gelman and Hill (2006).
   
   \section{Gibbs Sampler for the County
   Models}\label{gibbs-sampler-for-the-county-models}
@@ -4229,7 +4262,7 @@ aid future research on the subject.
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   Sampler\strut
   \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
-  0.4686\strut
+  0.4687\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
   0.2\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
@@ -4381,13 +4414,13 @@ aid future research on the subject.
   \begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
   Sampler\strut
   \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering\strut
-  -0.1183\strut
+  -0.1184\strut
   \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering\strut
-  0.03325\strut
+  0.03217\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
-  0.1995\strut
+  0.1997\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
-  1.689\strut
+  1.686\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
   Model\strut
@@ -4419,6 +4452,11 @@ aid future research on the subject.
   \setlength{\parskip}{8pt}
   
   \hypertarget{refs}{}
+  \hypertarget{ref-national_council_of_state_legislatures_absentee_2018}{}
+  Absentee and Early Voting. (2018, October). \emph{National Council of
+  State Legislatures}. Retrieved from
+  \url{http://www.ncsl.org/research/elections-and-campaigns/absentee-and-early-voting.aspx\#a}
+  
   \hypertarget{ref-aldrich_rational_1993}{}
   Aldrich, J. H. (1993). Rational Choice and Turnout. \emph{American
   Journal of Political Science}, \emph{37}(1), 246--278.
@@ -4437,11 +4475,6 @@ aid future research on the subject.
   and Public Policy}, \emph{4}(1), 1--10.
   \url{http://doi.org/10.1080/2330443X.2017.1389620}
   
-  \hypertarget{ref-colorado_general_assembly_tabor_nodate}{}
-  Assembly, C. G. (n.d.). TABOR. \emph{Colorado General Assembly}.
-  Retrieved from
-  \url{https://public.tableau.com/views/TABOR/TABORDash?:showVizHome=no:embed=y\&:display_count=no}
-  
   \hypertarget{ref-barr_comprehensive_2012}{}
   Barr, C. D., Diez, D. M., Wang, Y., Dominici, F., \& Samet, J. M.
   (2012). Comprehensive Smoking Bans and Acute Myocardial Infarction Among
@@ -4449,10 +4482,10 @@ aid future research on the subject.
   Journal of Epidemiology}, \emph{176}(7), 642--648.
   \url{http://doi.org/10.1093/aje/kws267}
   
-  \hypertarget{ref-bates_fitting_2014}{}
-  Bates, D., Mächler, M., Bolker, B., \& Walker, S. (2014). Fitting Linear
-  Mixed-Effects Models using lme4. \emph{arXiv:1406.5823 {[}Stat{]}}.
-  Retrieved from \url{http://arxiv.org/abs/1406.5823}
+  \hypertarget{ref-bates_fitting_2015}{}
+  Bates, D., Mächler, M., Bolker, B., \& Walker, S. (2015). Fitting Linear
+  Mixed-Effects Models using lme4. \emph{Journal of Statistical Software},
+  \emph{67}(1). Retrieved from \url{http://arxiv.org/abs/1406.5823}
   
   \hypertarget{ref-bergman_changing_2011}{}
   Bergman, E., \& Yates, P. A. (2011). Changing Election Methods: How Does
@@ -4482,10 +4515,6 @@ aid future research on the subject.
   of Election Reform. \emph{American Journal of Political Science},
   \emph{58}(1), 95--109. \url{http://doi.org/10.1111/ajps.12063}
   
-  \hypertarget{ref-us_census_bureau_us_2010}{}
-  Bureau, U. C. (2010). US Census Bureau QuickFacts: Colorado. Retrieved
-  from \url{https://www.census.gov/quickfacts/co}
-  
   \hypertarget{ref-campbell_self-interest_2002}{}
   Campbell, A. L. (2002). Self-Interest, Social Security, and the
   Distinctive Participation Patterns of Senior Citizens. \emph{American
@@ -4504,15 +4533,9 @@ aid future research on the subject.
   
   \hypertarget{ref-cronin_colorado_2012}{}
   Cronin, T. E., \& Loevy, R. D. (2012). \emph{Colorado Politics and
-  Policy: Governing a Purple State}. Lincoln, UNITED STATES: UNP -
-  Nebraska Paperback. Retrieved from
+  Policy: Governing a Purple State}. Lincoln: University of Nebraska
+  Press. Retrieved from
   \url{http://ebookcentral.proquest.com/lib/reed/detail.action?docID=1034959}
-  
-  \hypertarget{ref-edelman_analysis_2018}{}
-  Edelman, G., \& Glastris, P. (2018). Analysis Letting people vote at
-  home increases voter turnout. Here's proof. \emph{Washington Post}.
-  Retrieved from
-  \url{https://www.washingtonpost.com/outlook/letting-people-vote-at-home-increases-voter-turnout-heres-proof/2018/01/26/d637b9d2-017a-11e8-bb03-722769454f82_story.html}
   
   \hypertarget{ref-edlin_voting_2007}{}
   Edlin, A., Gelman, A., \& Kaplan, N. (2007). Voting as a Rational
@@ -4535,21 +4558,19 @@ aid future research on the subject.
   
   \hypertarget{ref-gelman_data_2006}{}
   Gelman, A., \& Hill, J. (2006). \emph{Data Analysis Using Regression and
-  Multilevel/Hierarchical Models} (1 edition). Cambridge ; New York:
-  Cambridge University Press.
+  Multilevel/Hierarchical Models} (1st Edition). Cambridge, NY: Cambridge
+  University Press.
   
   \hypertarget{ref-gelman_bayesian_2003}{}
   Gelman, A., Carlin, J. B., Stern, H. S., \& Rubin, D. B. (2003).
-  \emph{Bayesian Data Analysis, Second Edition} (2 edition). Boca Raton,
-  Fla: Chapman; Hall/CRC.
+  \emph{Bayesian Data Analysis, Second Edition} (2nd Edition). Boca Raton,
+  Fla: Chapman Hall.
   
   \hypertarget{ref-gerber_identifying_2013}{}
   Gerber, A. S., Huber, G. A., \& Hill, S. J. (2013). Identifying the
   Effect of All-Mail Elections on Turnout: Staggered Reform in the
-  Evergreen State\textless{}a
-  href=``\#fn2606''\textgreater{}*\textless{}/a\textgreater{}.
-  \emph{Political Science Research and Methods}, \emph{1}(1), 91--116.
-  \url{http://doi.org/10.1017/psrm.2013.5}
+  Evergreen State. \emph{Political Science Research and Methods},
+  \emph{1}(1), 91--116. \url{http://doi.org/10.1017/psrm.2013.5}
   
   \hypertarget{ref-geys_explaining_2006}{}
   Geys, B. (2006). Explaining voter turnout: A review of aggregate-level
@@ -4570,8 +4591,7 @@ aid future research on the subject.
   \hypertarget{ref-gronke_voter_2017}{}
   Gronke, P., McGhee, E., Romero, M., \& Griffin, R. (2017).
   Voter~~Registration~~and~~Turnout~~under
-  ``Oregon~~Motor~~Voter'':~~A~~Second~~Look. In. Portland, OR. Retrieved
-  from
+  ``Oregon~~Motor~~Voter'':~~A~~Second~~Look. In. Portland. Retrieved from
   \url{https://dl.dropboxusercontent.com/nativeprint?file=https\%3A\%2F\%2Fwww.dropbox.com\%2Fs\%2Fo63a0zi7j8plhgl\%2FOMV_and_Turnout_McGhee_Gronke_Romero_Griffin_July2017.pdf\%3Fdisable_range\%3D1\%26from_native_print\%3D1\%26preview\%3D1}
   
   \hypertarget{ref-hamm_how_2017}{}
@@ -4583,8 +4603,8 @@ aid future research on the subject.
   \hypertarget{ref-handayani_comparative_2017}{}
   Handayani, D., Notodiputro, K. A., Sadik, K., \& Kurnia, A. (2017). A
   comparative study of approximation methods for maximum likelihood
-  estimation in generalized linear mixed models (GLMM). In (p. 020033).
-  Jawa Barat, Indonesia. \url{http://doi.org/10.1063/1.4979449}
+  estimation in generalized linear mixed models (GLMM). In. Jawa Barat,
+  Indonesia. \url{http://doi.org/10.1063/1.4979449}
   
   \hypertarget{ref-hersh_hacking_2015}{}
   Hersh, E. D. (2015). \emph{Hacking the Electorate: How Campaigns
@@ -4593,6 +4613,10 @@ aid future research on the subject.
   \hypertarget{ref-hullinghorst_voter_2013}{}
   Hullinghorst, D. L., \& Pabon, D. (2013, May). Voter Access and
   Moderninzed Elections Act.
+  
+  \hypertarget{ref-jackman_bayesian_2009}{}
+  Jackman, S. (2009). \emph{Bayesian Analysis for the Social Sciences}
+  (1st edition). Chichester, U.K: Wiley.
   
   \hypertarget{ref-james_introduction_2017}{}
   James, G., Witten, D., Hastie, T., \& Tibshirani, R. (2017). \emph{An
@@ -4604,8 +4628,8 @@ aid future research on the subject.
   Interference: The Effect of All-Mail Voting on Turnout in Colorado.
   
   \hypertarget{ref-martin_colorado_1962}{}
-  Martin, C. (1962). \emph{Colorado politics} (2ond ed.). Denver,
-  Colorado: Big Mountain Press. Retrieved from
+  Martin, C. (1962). \emph{Colorado politics} (2nd ed.). Denver, Colorado:
+  Big Mountain Press. Retrieved from
   \url{http://hdl.handle.net/2027/mdp.39015024371158}
   
   \hypertarget{ref-matsusaka_voter_1999}{}
@@ -4619,14 +4643,14 @@ aid future research on the subject.
   Tax Policy Center}.
   
   \hypertarget{ref-mcdonald_true_2007}{}
-  Mcdonald, M. P. (2007). The True ElectorateA Cross-Validation of Voter
+  McDonald, M. P. (2007). The True Electorate: A Cross-Validation of Voter
   Registration Files and Election Survey Demographics. \emph{Public
   Opinion Quarterly}, \emph{71}(4), 588--602.
   \url{http://doi.org/10.1093/poq/nfm046}
   
   \hypertarget{ref-mettler_government_2008}{}
   Mettler, S., \& Stonecash, J. M. (2008). Government Program Usage and
-  Political Voice*. \emph{Social Science Quarterly}, \emph{89}(2),
+  Political Voice. \emph{Social Science Quarterly}, \emph{89}(2),
   273--293. \url{http://doi.org/10.1111/j.1540-6237.2008.00532.x}
   
   \hypertarget{ref-neiheisel_impact_2012}{}
@@ -4643,7 +4667,7 @@ aid future research on the subject.
   
   \hypertarget{ref-richey_sean_voting_2008}{}
   Richey Sean. (2008). Voting by Mail: Turnout and Institutional Reform in
-  Oregon*. \emph{Social Science Quarterly}, \emph{89}(4), 902--915.
+  Oregon. \emph{Social Science Quarterly}, \emph{89}(4), 902--915.
   \url{http://doi.org/10.1111/j.1540-6237.2008.00590.x}
   
   \hypertarget{ref-rosenstone_mobilization_2003}{}
@@ -4666,10 +4690,10 @@ aid future research on the subject.
   \emph{Electoral Studies}, \emph{32}(2), 344--359.
   \url{http://doi.org/10.1016/j.electstud.2012.12.006}
   
-  \hypertarget{ref-national_council_of_state_legislatures_absentee_2018}{}
-  State Legislatures, N. C. of. (2018, October). Absentee and Early
-  Voting. \emph{National Council of State Legislatures}. Retrieved from
-  \url{http://www.ncsl.org/research/elections-and-campaigns/absentee-and-early-voting.aspx\#a}
+  \hypertarget{ref-legislative_council_staff_tabor_2009}{}
+  Staff, L. C. (2009, July). TABOR and Referendum C. \emph{Colorado
+  General Assembly}. Retrieved from
+  \url{https://leg.colorado.gov/publications/tabor-and-referendum-c-2009}
   
   \hypertarget{ref-stein_engaging_2008}{}
   Stein, R. M., \& Vonnahme, G. (2008). Engaging the Unengaged Voter: Vote
@@ -4680,6 +4704,10 @@ aid future research on the subject.
   Thompson, J. (2016). The first Sagebrush Rebellion: What sparked it and
   how it ended. Retrieved from
   \url{https://www.hcn.org/articles/a-look-back-at-the-first-sagebrush-rebellion}
+  
+  \hypertarget{ref-us_census_bureau_us_2010}{}
+  US Census Bureau QuickFacts: Colorado. (2010). \emph{US Census Bureau
+  Quickfacts}. Retrieved from \url{https://www.census.gov/quickfacts/co}
   
   \hypertarget{ref-verba_participation_1972}{}
   Verba, S., \& Nie, N. H. (1972). \emph{Participation in America:
@@ -4694,7 +4722,7 @@ aid future research on the subject.
   
   \hypertarget{ref-wood_generalized_2006}{}
   Wood, S. N. (2006). \emph{Generalized Additive Models: An Introduction
-  with R} (1 edition). Boca Raton, FL: Chapman; Hall/CRC.
+  with R} (1st edition). Boca Raton, FL: Chapman; Hall/CRC.
   
   \hypertarget{ref-wood_gamm4:_2017}{}
   Wood, S., \& Scheipl, F. (2017, July). Gamm4: Generalized Additive Mixed

@@ -119,7 +119,7 @@ To consider what this model looks like, let's assume a dataset comprising of a v
 
 $$Y_i = \alpha_{[i], j} + X_iB~,~~~~\alpha_{[i], j} \sim N(U_{j[i]}\Gamma, \sigma_{\alpha}^2)$$   
 
-Multilevel models can be fit using the `lme4` \textit{R} package that uses restricted maximum likelihood calculations for estimating coefficients [@bates_fitting_2014]. Multilevel modelling also works perfectly well with general additive models! In \textit{R} this can be accomplished with the `gamm4` package [@wood_gamm4:_2017].
+Multilevel models can be fit using the `lme4` \textit{R} package that uses restricted maximum likelihood calculations for estimating coefficients [@bates_fitting_2015]. Multilevel modelling also works perfectly well with general additive models! In \textit{R} this can be accomplished with the `gamm4` package [@wood_gamm4:_2017].
 
 ### Model Accurracy and Quality of Fit
 
