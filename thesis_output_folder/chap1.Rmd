@@ -77,7 +77,13 @@ Vote-By-Mail (or as it is commonly referred to by most in the field, VBM) is a p
 
 * *Hybrid Systems*: In hybrid systems, voters receive a mail ballot but can choose to disregard it and vote conventionally. This is the case in Colorado. In other states postal voting is not mandatory for all counties, as some are still allowed to conduct their elections conventionally; these states keep an in-person option open as a part of their elections administration system. This is the case in California, Utah, and Montana.  
   
-Vote-By-Mail is also commonly considered a type of early voting, since voters receive their ballots around two weeks in advance of election day; they are also able to return that ballot whenever they wish within that time-frame. This means that Vote-By-Mail can be counted as a "convenience voting" reform [@gronke_convenience_2008]. These are usually implemented by state and local governments with the argument that they either expand the democratic franchise by bringing in new voters, or by making it more likely that current registered voters participate in the electoral process [@national_council_of_state_legislatures_absentee_2018].
+Vote-By-Mail is also commonly considered a type of early voting, since voters receive their ballots around two weeks in advance of election day; they are also able to return that ballot whenever they wish within that time-frame. This means that Vote-By-Mail can be counted as a "convenience voting" reform [@gronke_convenience_2008]. These are usually implemented by state and local governments with the argument that they either expand the democratic franchise by bringing in new voters, or by making it more likely that current registered voters participate in the electoral process [@national_council_of_state_legislatures_absentee_2018].  
+  
+Figure 1.1 presents current mail voting status by state. Not included in this map is the fact that several states have provisions for all-mail elections to be conducted under certain circumstances; what these circumstances are varies by state. Such states are: Alaska, Arizona, Arkansas, California, Florida, Hawai, Idaho, Kansas, Maryland, Minnesota, Missouri, Montana, Nebraska, Nevada, New Jersey, New Mexico, North Dakota, and Utah[@national_council_of_state_legislatures_absentee_2018]. 
+
+```{r vbm us, echo=FALSE, fig.cap="Mail Voting Status by State", out.width = '100%', fig.align='center'}
+knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/us_vbm_status.png")
+```
 
 ### How Theories Apply to VBM  
   
