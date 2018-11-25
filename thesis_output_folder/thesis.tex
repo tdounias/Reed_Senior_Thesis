@@ -1936,6 +1936,12 @@ aid future research on the subject.
   election like county, date, description, and type; second, identifiers
   for the individual vote including voter ID and voting method.
   
+  Samples of what a Voter Registration File (3.5) and Voter History File
+  (3.6) can be found at the end of this chapter. For the purpose of
+  privacy, I have randomly generated IDs and included random names in
+  place of the original entries. I have also selected only specific fields
+  to display, based on the data I use in this thesis.
+  
   \subsection{Why Voter Registration
   Files?}\label{why-voter-registration-files}
   
@@ -2161,7 +2167,7 @@ aid future research on the subject.
   \subsection{Final Variable
   Specifications}\label{final-variable-specifications}
   
-  After the conclusion of the wrangling process, the resulting dataset
+  After the conclusion of the wrangling process, the resulting datasets
   included a series of discrete and continuous variables. I will briefly
   outline them here, along with their range and values.
   
@@ -2202,7 +2208,7 @@ aid future research on the subject.
     AGE: The age of the individual registrant.
   \item
     VOTING\_METHOD: The method used by an individual voter to cast their
-    ballot. Is coded as either VBM or In Person, according to Table 3.4:
+    ballot. Is coded as either VBM or In Person, according to Table 3.4.
   \end{itemize}
   
   \begin{longtable}[]{@{}lll@{}}
@@ -2280,6 +2286,46 @@ aid future research on the subject.
   \end{minipage}\tabularnewline
   \bottomrule
   \end{longtable}
+  
+  \begin{sidewaystable}[ht]
+  \centering
+  \begin{tabular}{rrllllll}
+    \toprule
+   & VOTER\_ID & COUNTY & LAST\_NAME & RESIDENTIAL\_CITY & VOTER\_STATUS & PARTY & GENDER \\ 
+    \midrule
+  1 & 318090 & Denver & Jefferies & DENVER & Active & DEM & Male \\ 
+    2 & 1224557 & La Plata & Simmons & BAYFIELD & Inactive & REP & Female \\ 
+    3 & 833164 & Arapahoe & Jenkins & CENTENNIAL & Active & UAF & Female \\ 
+    4 & 654070 & Boulder & Giroux & LAFAYETTE & Active & UAF & Female \\ 
+    5 & 506568 & Alamosa & Provorov & ALAMOSA & Inactive & UAF & Male \\ 
+    6 & 1467732 & Mesa & Hoskins & GRAND JUNCTION & Active & DEM & Female \\ 
+    7 & 1061624 & Boulder & Nola & BOULDER & Active & DEM & Male \\ 
+    8 & 1896894 & Denver & Arrieta & DENVER & Active & DEM & Male \\ 
+    9 & 649632 & Arapahoe & Butler & LITTLETON & Inactive & DEM & Female \\ 
+    10 & 1144545 & Montrose & Clement & OLATHE & Active & DEM & Male \\ 
+     \bottomrule
+  \end{tabular}
+  \caption{Sample of a Voter Registration File \label{tab:vrf_sample}} 
+  \end{sidewaystable}\begin{sidewaystable}[ht]
+  \centering
+  \begin{tabular}{rrlllll}
+    \toprule
+   & VOTER\_ID & ELECTION\_TYPE & ELECTION\_DATE & VOTING\_METHOD & PARTY & COUNTY\_NAME \\ 
+    \midrule
+  1 & 318090 & General & 11/03/1998 & Absentee Mail & REP & Gunnison \\ 
+    2 & 1224557 & Coordinated & 11/05/2013 & Absentee Mail & DEM & El Paso \\ 
+    3 & 833164 & General & 11/07/2000 & Absentee Mail & UAF & Arapahoe \\ 
+    4 & 654070 & General & 11/08/2016 & Mail Ballot & CDP & Arapahoe \\ 
+    5 & 506568 & Coordinated & 11/02/1999 & Absentee Mail & REP & Arapahoe \\ 
+    6 & 1467732 & General & 11/08/2016 & Mail Ballot & REP & Pueblo \\ 
+    7 & 1061624 & Coordinated & 11/07/1995 & Absentee Carry & REP & Larimer \\ 
+    8 & 1896894 & General & 11/03/1998 & Polling Place & DEM & Larimer \\ 
+    9 & 649632 & General & 11/03/1992 & Polling Place & UAF & Arapahoe \\ 
+    10 & 1144545 & Coordinated & 11/03/2015 & Mail Ballot & DEM & Jefferson \\ 
+     \bottomrule
+  \end{tabular}
+  \caption{Sample of a Voter History File \label{tab:vrf_sample}} 
+  \end{sidewaystable}
   
   \chapter{Model Specification and
   Results}\label{model-specification-and-results}
@@ -4238,11 +4284,11 @@ aid future research on the subject.
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   Sampler\strut
   \end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering\strut
-  0.4687\strut
+  0.4697\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
-  0.2007\strut
+  0.2002\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
-  0.0346\strut
+  0.03899\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   Model\strut
@@ -4390,13 +4436,13 @@ aid future research on the subject.
   \begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
   Sampler\strut
   \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering\strut
-  -0.1181\strut
+  -0.118\strut
   \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering\strut
-  0.03373\strut
+  0.03321\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
-  0.1995\strut
+  0.1997\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
-  1.684\strut
+  1.682\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
   Model\strut

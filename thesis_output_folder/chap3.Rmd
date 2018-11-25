@@ -3,7 +3,7 @@ output: pdf_document
 header-includes:
 - \usepackage{graphicx,latexsym}
 - \usepackage{amssymb,amsthm,amsmath}
-- \usepackage{longtable,booktabs,setspace}
+- \usepackage{longtable,booktabs,setspace, rotating}
 ---
 
 
@@ -148,6 +148,8 @@ In the Voter Registration files, the unit of observation is the individual voter
    
 In the Voter History files, the unit of observation here is a single ballot cast, and all variables are initially coded as character strings. This means that for each voter registered--and so included in the VRF--the history file should contain an observation for each time they voted. This file includes two types of data: first, identifiers for the election like county, date, description, and type; second, identifiers for the individual vote including voter ID and voting method.
 
+Samples of what a Voter Registration File (3.5) and Voter History File (3.6) can be found at the end of this chapter. For the purpose of privacy, I have randomly generated IDs and included random names in place of the original entries. I have also selected only specific fields to display, based on the data I use in this thesis.
+
 ### Why Voter Registration Files?
   
 Voter Registration and History files are suitable sources for my analysis because they contain all the data that is necessary for a first pass at testing my hypotheses: voting method, county, election level, active registration, registration dates, and a series of individual characteristics like party registration, age, or gender. These data, and the demographic data in particular, are also in the most basic unit of observation: the ballot level^[A good heuristic for what "ballot" level means is a specific individual at the time when they cast a specific ballot. Between ballots all characteristics may change: age, gender, party registration etc., which is why the "ballot" level is distinct from the individual level.]. This means that I do not need to establish any process to infer individual characteristics from population-wide statistics.
@@ -206,7 +208,7 @@ Wrangling the data was the majority of the work that went into this thesis. As w
 
 ### Final Variable Specifications
    
-After the conclusion of the wrangling process, the resulting dataset included a series of discrete and continuous variables. I will briefly outline them here, along with their range and values.
+After the conclusion of the wrangling process, the resulting datasets included a series of discrete and continuous variables. I will briefly outline them here, along with their range and values.
 
 * VOTER_ID: Discrete variable, unique value given to each individual voter. Useful for merging.
 * COUNTY: Discrete variable, the 64 counties of Colorado.
@@ -220,10 +222,30 @@ After the conclusion of the wrangling process, the resulting dataset included a 
 * PARTY: Discrete variable. For each voter, the party they are registered with. Can be: Republican, Democrat, Other, or Unaffiliated.
 * GENDER: Discrete binary variable, Male or Female.
 * AGE: The age of the individual registrant.
-* VOTING_METHOD: The method used by an individual voter to cast their ballot. Is coded as either VBM or In Person, according to Table 3.4:
+* VOTING_METHOD: The method used by an individual voter to cast their ballot. Is coded as either VBM or In Person, according to Table 3.4.
+
+
 
 ```{r voting method coding table, results = "asis", echo = FALSE, message=FALSE}
 source("~/Desktop/Reed_Senior_Thesis/tables/voting_methods_coding_table.R")
 pandoc.table(voting_methods, caption = "Voting methods coding table \\label{tab:voting_methods_table}",
              justify = c("left", "left", "left"), style = "grid")
+```
+
+```{r sample table, results = "asis", echo = FALSE, message=FALSE}
+library(xtable)
+options(xtable.comment = FALSE)
+load("~/Desktop/Reed_Senior_Thesis/Data_and_results/data/table_sample.RData")
+tb1 <- xtable(table_sample[[1]][,c(1:3, 5:8)], caption = "Sample of a Voter Registration File \\label{tab:vrf_sample}", 
+             justify = c("left", "left", "left", "left", "left", 
+                                             "left", "left", "left"))
+
+print(tb1, floating.environment = "sidewaystable", booktabs = TRUE)
+
+
+tb2 <- xtable(table_sample[[2]][,-4], caption = "Sample of a Voter History File \\label{tab:vrf_sample}", 
+             split.tables = Inf, justify = c("left", "left", "left", "left", "left", 
+                                             "left"))
+
+print(tb2, floating.environment = "sidewaystable", booktabs = TRUE)
 ```
