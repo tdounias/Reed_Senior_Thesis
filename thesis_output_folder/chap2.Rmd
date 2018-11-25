@@ -69,7 +69,21 @@ Moving on to the second hypothesis. It is extremely hard to correctly operationa
 H3: \textit{The  effect  of  VBM  on  turnout  is  more  pronounced  in  local  or  off year elections}
 \end{center}
 
-I will confirm this hypothesis if mail voting has substantially larger positive effects on turnout in smaller, local elections.
+I will confirm this hypothesis if mail voting has substantially larger positive effects on turnout in smaller, local elections. Based on Section 1.2.3, Table 2.1 presents what each theory predicts for the hypotheses. 
+
+------------------------------------------------------------
+                               H1   H2  Effect on Turnout  
+----------------------------- ---- ---- --------------------
+Decision at the margins        Y    Y   Marginal      
+
+Habitual Voting                ?    N   No Effect/Decrease 
+
+Social/Structural Voting       Y    N   No Effect      
+
+Resources and Organizations    N    N   Increase      
+------------------------------------------------------------
+
+Table: Predicted Outcomes from Hypotheses
   
 ### Importance of Hypotheses
    
