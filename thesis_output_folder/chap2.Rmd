@@ -8,11 +8,13 @@ header-includes:
 
 # Hypotheses and Methods
    
+The previous chapter served as an introduction to the literature surrounding turnout, mail voting, and voter participation. Based on the conclusions of past researchers and the frameworks they have presented, I move to outlining the hypotheses that motivate my own study. I conclude this chapter with a brief presentation of the statistical methods employed.
+   
 ## Hypotheses
   
 ### Questions
   
-Before moving in to outlining hypotheses, the first step necessary is to frame a series of questions which the hypotheses will flow from. Based on relevant research, the most obvious first question to ask would be:
+Before outlining my hypotheses, the first step necessary is to frame a series of questions which the hypotheses will flow from. Based on Chapter 1, the most obvious first question to ask is:
 
 \begin{quotation}
 Q1: \textit{What is the effect of mail voting on turnout?}

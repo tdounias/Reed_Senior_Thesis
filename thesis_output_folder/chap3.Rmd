@@ -8,7 +8,9 @@ header-includes:
 
 
 
-# Case Selection, Data, Model Parametrization
+# Case Selection and Data
+
+After operationalizing my Hypotheses and providing an introduction to the methods of my thesis, the natural next step is to introduce the data. In turn, the first step to this process is to introduce the *source* of the data: the State of Colorado. This chapter begins with a presentation on the demographics, politics, and electoral policy of the Centennial State, which transitions into a justification for th selection of Colorado as a case for my research. I then introduce the data itself, going through basic descriptions like unit of observation and variable specifications. I conclude by presenting some problems faced with the wrangling that was necessary to get the data into a usable form. These problems are not negligible, but are a key part of the work that is necessary to conduct elections science research with voter records. 
 
 ## The Centennial State and Its Voters 
 
@@ -128,7 +130,7 @@ This thesis relies on county and individual level models to draw conclusions on 
   
 * **Information on individual elections**: date, ballots cast, voting methods, county, election descriptions
   
-In the process of my research, I have acquired sufficient data to cover the second and third of these areas. I was unable to procure individual level data on demographic characteristics apart from gender, age, and party registration^[Data this specific are commonly purchased from companies such as TargetSmart or Catalyst, obtained through record linkage, or infered from characteristics such as last name (as accomplished with the `wru` \textit{R} package).]. Reasonable conclusions can still be drawn from county or precinct aggregates. 
+In the process of my research, I have acquired sufficient data to cover the second and third of these areas. I was unable to procure individual level data on demographic characteristics apart from gender, age, and party registration^[Data this specific are commonly purchased from companies such as TargetSmart or Catalyst, obtained through record linkage, or inferred from characteristics such as last name (as accomplished with the `wru` \textit{R} package).]. Reasonable conclusions can still be drawn from county or precinct aggregates. 
   
 ### Sources and first glance
   

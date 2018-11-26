@@ -3,10 +3,10 @@ output: pdf_document
 ---
 
 # The State of the Literature {#rmd-basics}
-  
-I begin my thesis with an examination of turnout: what it is, its use as a metric of participation, and how it is estimated. I continue by presenting a comprehensive list of current theories on voter decision and participation; these offer conflicting descriptions as to what variables are important when trying to predict the turnout effects of elections policy. I then provide a run-down of current voting methods in the US, with a particular focus on mail voting. I make a series of predictions on what the expected effect of mail voting on turnout is, based on each of the aforementioned theories. I end on a presentation of past studies that have tried to statistically estimate this effect.   
-  
+
 The most basic form of regression is $y\sim x$, where $y$ is the response and $x$ is the predictor. By the end of this chapter, I aim to clarify the theoretical framework behind turnout (response), mail voting (main predictor), and the predicted correlation between the two (value of regression coefficients). 
+  
+The chapter starts with an examination of turnout: what it is, its use as a metric of participation, and how it is estimated. I then turn to presenting a comprehensive list of current theories on voter decision and participation; these offer conflicting descriptions as to what variables are important when trying to predict the turnout effects of elections policy. I provide a run-down of current voting methods in the US, with a particular focus on mail voting. I make a series of predictions on what the expected effect of mail voting on turnout is, based on each of the aforementioned theories. Finally, the chapter ends on a presentation of past studies that have tried to statistically estimate this effect.   
 
 ## Turnout and Political Participation  
 
