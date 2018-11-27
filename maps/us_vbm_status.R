@@ -34,5 +34,6 @@ ggplot() +
   theme(axis.text = element_blank()) +
   theme(legend.position="bottom") +
   theme(legend.title=element_blank()) +
-  theme(legend.text=element_text(size=6.5))
+  theme(legend.text=element_text(size=6.5)) +
+  ggsave("us_vbm_status.png", width = 5.00, height = 4.20)
 

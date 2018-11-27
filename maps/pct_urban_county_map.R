@@ -30,7 +30,15 @@ ggplot(col_pct_urban, mapping = aes(long, lat, group = group, fill = PCT_URBAN))
   theme(legend.title = element_text(),
         legend.key.width = unit(.5, "in")) +
   labs(fill = "% Urban") + 
-  theme(panel.grid = element_blank(),
-        axis.title = element_blank(),
-        axis.text = element_blank(),
-        axis.ticks.y = element_blank())
+  theme(axis.line=element_blank(),
+        axis.text.x=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks=element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(),
+        panel.background=element_blank(),
+        panel.border=element_blank(),
+        panel.grid.major=element_blank(),
+        panel.grid.minor=element_blank(),
+        plot.background=element_blank()) +
+  ggsave("pct_urban_county_map.png", width = 5.00, height = 4.20) 

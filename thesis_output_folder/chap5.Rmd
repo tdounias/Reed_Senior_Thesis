@@ -1,5 +1,0 @@
----
-output: pdf_document
----
-
-# Expanding on the Previous Models

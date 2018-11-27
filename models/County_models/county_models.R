@@ -91,4 +91,5 @@ plot(fitted(md_4$mer), residuals(md_4$mer))
 
 qqnorm(residuals(md_4$mer))
 
-plot(md_4$gam, xlab = "Years 2010-2016 (by spline knots)", ylab = "Turnout Effect")
+a <- plot(md_4$gam, xlab = "Years 2010-2016 (by spline knots)", ylab = "Turnout Effect", xaxt='n')
+axis(1, at=1:7, labels=c(2010:2016))

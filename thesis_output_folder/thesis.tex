@@ -1704,7 +1704,7 @@ aid future research on the subject.
   inefficient. However--again indicating a libertarian, independent
   streak--most Coloradoans from 1988 to today consistently believe that
   their state is ``on the right track''.\footnote{Colorado College
-    Citizens Polls, taken from Cronin et al. (Cronin \& Loevy, 2012)}
+    Citizens Polls, taken from Cronin et al. (Cronin \& Loevy, 2012).}
   
   \subsection{Voting in Colorado}\label{voting-in-colorado}
   
@@ -1988,9 +1988,9 @@ aid future research on the subject.
   Washington University, was kind enough to give me access to data files
   for Colorado for the years of 2012-2016 that he had already collected
   for his research.\footnote{Doctor Menger's website with links to his
-    research can be found at www.andrewmenger.com} I directly obtained the
-  2017 data from the Colorado Secretary of State's office, with the help
-  of Mr.~Judd Choate, Director of Elections.
+    research can be found at www.andrewmenger.com .} I directly obtained
+  the 2017 data from the Colorado Secretary of State's office, with the
+  help of Mr.~Judd Choate, Director of Elections.
   
   \subsubsection{2010 US Census}\label{us-census}
   
@@ -2192,8 +2192,8 @@ aid future research on the subject.
   of tests, it became clear that using multiple years of data was
   necessary in order to conduct an accurate test of my hypotheses. My
   selection was later vindicated, when looking at comparisons between
-  reported rates of turnout\footnote{Turnout is calculated over all
-    registered voters} and turnout calculated through my dataset for the
+  reported rates of turnout\^{}{[}Turnout is calculated over all
+  registered voters. and turnout calculated through my dataset for the
   2014 midterm election (see fig. 3.7).
   
   \begin{figure}
@@ -2449,7 +2449,7 @@ aid future research on the subject.
     algorithmic process that produces estimates of coefficients and error
     terms. This process is arduous and long, so it is not included in this
     chapter. Appendix A deals with some of the techniques involved with
-    model estimation} However, before jumping into this process, it is
+    model estimation.} However, before jumping into this process, it is
   worth going into some key problems with the models produced. As a
   consequence of these issues, some of the models are not estimated to the
   standards of convergence that are commonly set.
@@ -2861,7 +2861,7 @@ aid future research on the subject.
   interaction terms with VBM, which indicate that after allowing for VBM
   effects, presidential elections do actually have higher turnout in my
   model than midterms do.\footnote{Remember here that due to Figure 4.1
-    most counties will have a proportion of mail ballots close to .9}
+    most counties will have a proportion of mail ballots close to \(.9\).}
   Other than this, coefficients in Model 3 and Model 4 make sense, in the
   assumed ordering of turnout in such elections: presidential, then
   midterm, then coordinated and primary.
@@ -3163,7 +3163,7 @@ aid future research on the subject.
   significant difference if we account for them. In the fourth model, the
   coefficients for election type on their own are still indicative of a
   common assumption for turnout in such elections.\footnote{Also see
-    Figure 3.4} As for interaction terms with VBM, the effect of VBM on
+    Figure 3.4.} As for interaction terms with VBM, the effect of VBM on
   primary election turnout is almost wiped out entirely, the interaction
   with general election turnout is depleted but still present at around
   8\%, and coordinated election VBM effects remain statistically
@@ -3173,7 +3173,7 @@ aid future research on the subject.
   
   \begin{figure}
   
-  {\centering \includegraphics[width=0.8\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/spline_plot} 
+  {\centering \includegraphics[width=0.8\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/Spline_plot} 
   
   }
   
@@ -3409,7 +3409,7 @@ aid future research on the subject.
   \textbf{Model 6}
   
   \begin{equation} \tag{Model 6}
-  \hat{p\_vote} \sim \text{logit}^{-1}(\sum_{v = 1}^{n^{\text{ballot vars}}}x_{i,v}\beta_{v} + \sum_{v=1}^{n^{\text{election vars}}}x_{l[i], v}\beta_{v+n^{ballot}} + ns(x^{\text{year}}) +\delta_{j[i]} + \alpha_{k[i]}),
+  \hat{\mathbb{P}}(y_i = 1) \sim \text{logit}^{-1}(\sum_{v = 1}^{n^{\text{ballot vars}}}x_{i,v}\beta_{v} + \sum_{v=1}^{n^{\text{election vars}}}x_{l[i], v}\beta_{v+n^{ballot}} + ns(x^{\text{year}}) +\delta_{j[i]} + \alpha_{k[i]}),
   \end{equation}
   
   \[\alpha_{k} \sim \text{N}(\gamma_0 + \sum_{v=1}^{n^{\text{county vars}}}x_{k[i], v}\gamma_{v}, \sigma_{\alpha}^2)\]
@@ -3495,6 +3495,69 @@ aid future research on the subject.
   have on their own \emph{can} be used to build and run an individual
   model of turnout regardless of if that model is useful in responding to
   my hypotheses on VBM.
+  
+  I am confident in the results of models 1, 3a, and 4, somewhat confident
+  in model 5, and less so for models 2, 3, and 5a. Models 2, 3 and 5a
+  ``failed to converge''; this means that the numeric approximation
+  process by which \textit{R} implements maximum likelihood
+  estimation\footnote{Estimation of maximum likelihood here uses Adaptive
+    Gaussian-Hermitian Quadrature (AGQ) to estimate coefficients
+    (Handayani, Notodiputro, Sadik, \& Kurnia, 2017).} for coefficients
+  doesn't give stable results, within certain conditions. While model 5
+  did converge, it suffers from lack of variance in the predictor for VBM,
+  as explained in the beginning of this chapter; this is the reason why
+  the coefficient for mail vote is so disproportionately large and
+  variable. Model 6 simply did not run, even on a sub-sampled dataset.
+  
+  \begin{figure}
+  
+  {\centering \includegraphics[width=0.6\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/roc_curves_indiv} 
+  
+  }
+  
+  \caption[ROC Curve for all individual models]{ROC Curve for all individual models}\label{fig:roc the curves}
+  \end{figure}
+  
+  While I can't really derive any conclusions from this fact, there is a
+  distinct possibility that this either occurred due to a lack of
+  processing power, or lack of sufficient data for the model estimation to
+  even reach close to convergence. It is also important to point out that
+  model non-convergence is not a fatal issue in and of itself, but becomes
+  so if outputted coefficients wildly differ between calls of the model.
+  Running code to output 5-fold CV AUC involves estimating each model 5
+  times on different ``folds'', or sub-samples, of the dataset. During
+  this process the coefficients and AUC values remained fairly stable
+  between runs of the model, despite non-convergence. This leads me to
+  assume that the problem is significant, but not fatal for my models.
+  
+  In terms of model fit, the models neatly fall into three groups based on
+  their cross-validated AUC. The first group, consisting of models 1, 2,
+  and 3a has an AUC of around \(.544\), making them only slightly
+  distinguishable from a coin-toss. This is fairly reasonable, since I am
+  building a model to make predictions at the ballot level while only
+  using county data or gender.\footnote{Few counties wildly differ in
+    their turnout percentages, and that the coefficient for male gender
+    results in only around a 2.5\% decrease in voting probability.} The
+  second group based on AUC includes model 4, the only non-multilevel
+  individual model, with an AUC of around \(.733\), significantly
+  outperforming the first three models. Again, this is reasonable
+  considering how wildly different turnout is between election types; it
+  is only natural that these election-level variables would be so
+  informative. The third group, with the highest AUC of around \(.96\) are
+  models 5 and 5a. This is a direct result of the lack of variability in
+  my data: Mail Voting is an almost perfect predictor of the probability
+  of voting.
+  
+  I also include another metric under AUC, which I name ``Baseline''. This
+  is the 5-fold CV difference in predictive power between the model fit
+  and a baseline model that predicts everyone voted. For example, Model 1
+  has a percentage of true positive and true negative predictions that is
+  \(17.8\%\) higher the baseline that everyone voted. The values of the
+  ``Baseline'' metric fully corroborate what I mention above for AUC. I
+  include it here because it is common practice in elections sciences to
+  compare classification models of participation to the baseline that
+  everyone participated, rather than the baseline of an uninformed
+  ``coin-toss'' used by the ROC.
   
   \begin{longtable}[]{@{}lccccccc@{}}
   \caption{Estimated individual level coefficients (**Significant at the
@@ -4019,68 +4082,6 @@ aid future research on the subject.
   \bottomrule
   \end{longtable}
   
-  I am confident in the results of models 1, 3a, and 4, somewhat confident
-  in model 5, and less so for models 2, 3, and 5a. Models 2, 3 and 5a
-  ``failed to converge''; this means that the numeric approximation
-  process by which \textit{R} implements maximum likelihood
-  estimation\footnote{Estimation of maximum likelihood here uses Adaptive
-    Gaussian-Hermitian Quadrature (AGQ) to estimate coefficients
-    (Handayani, Notodiputro, Sadik, \& Kurnia, 2017)} for coefficients
-  doesn't give stable results, within certain conditions. While model 5
-  did converge, it suffers from lack of variance in the predictor for VBM,
-  as explained in the beginning of this chapter; this is the reason why
-  the coefficient for mail vote is so disproportionately large and
-  variable. Model 6 simply did not run, even on a sub-sampled dataset.
-  
-  \begin{figure}
-  
-  {\centering \includegraphics[width=0.6\linewidth]{/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/roc_curves_indiv} 
-  
-  }
-  
-  \caption[ROC Curve for all individual models]{ROC Curve for all individual models}\label{fig:roc the curves}
-  \end{figure}
-  
-  While I can't really derive any conclusions from this fact, there is a
-  distinct possibility that this either occurred due to a lack of
-  processing power, or lack of sufficient data for the model estimation to
-  even reach close to convergence. It is also important to point out that
-  model non-convergence is not a fatal issue in and of itself, but becomes
-  so if outputted coefficients wildly differ between calls of the model.
-  Running code to output 5-fold CV AUC involves estimating each model 5
-  times on different ``folds'', or sub-samples, of the dataset. During
-  this process the coefficients and AUC values remained fairly stable
-  between runs of the model, despite non-convergence. This leads me to
-  assume that the problem is significant, but not fatal for my models.
-  
-  In terms of model fit, the models neatly fall into three groups based on
-  their cross-validated AUC. The first group, consisting of models 1, 2,
-  and 3a has an AUC of around \(.544\), making them only slightly
-  distinguishable from a coin-toss. This is fairly reasonable, since I am
-  building a model to make predictions at the ballot level while only
-  using county data or gender.\footnote{Few counties wildly differ in
-    their turnout percentages, and that the coefficient for male gender
-    results in only around a 2.5\% decrease in voting probability} The
-  second group based on AUC includes model 4, the only non-multilevel
-  individual model, with an AUC of around \(.733\), significantly
-  outperforming the first three models. Again, this is reasonable
-  considering how wildly different turnout is between election types; it
-  is only natural that these election-level variables would be so
-  informative. The third group, with the highest AUC of around \(.96\) are
-  models 5 and 5a. This is a direct result of the lack of variability in
-  my data: Mail Voting is an almost perfect predictor of the probability
-  of voting.\\
-  I also include another metric under AUC, which I name ``Baseline''. This
-  is the 5-fold CV difference in predictive power between the model fit
-  and a baseline model that predicts everyone voted. For example, Model 1
-  has a percentage of true positive and true negative predictions that is
-  \(17.8\%\) higher the baseline that everyone voted. The values of the
-  ``Baseline'' metric fully corroborate what I mention above for AUC. I
-  include it here because it is common practice in elections sciences to
-  compare classification models of participation to the baseline that
-  everyone participated, rather than the baseline of an uninformed
-  ``coin-toss'' used by the ROC.
-  
   There are two conclusions that can be reached from these results. None
   of these conclusions are, sadly, related to my hypotheses on VBM. The
   first is that the lack of variance in the data and a lack of processing
@@ -4409,11 +4410,11 @@ aid future research on the subject.
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   Sampler\strut
   \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
-  0.466\strut
+  0.469\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
-  0.201\strut
+  0.2\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
-  0.0335\strut
+  0.0403\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   Model\strut
@@ -4561,9 +4562,9 @@ aid future research on the subject.
   \begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
   Sampler\strut
   \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering\strut
-  -0.119\strut
+  -0.118\strut
   \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering\strut
-  0.0326\strut
+  0.0319\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
   0.2\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut

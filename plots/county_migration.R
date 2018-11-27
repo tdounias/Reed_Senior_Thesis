@@ -33,7 +33,8 @@ ggplot(full_reg, aes(x = regsept, y = regSoS)) +
   annotate("text", x = 12, y = 10, label = "Data Estimate", col = "red") + 
   annotate("text", x = 8, y = 10, label = "No Difference", col = "black") + 
   labs(x = "Registration from 2012-2016 Files", y = "Registration Only from 2017 File", 
-       col = "Election Year") 
+       col = "Election Year") +
+  ggsave("county_migration_A.png", width = 5.00, height = 4.20)
 
 #Further Illustration
 second_graph <- filter(full_reg, regsept > 11) %>%
@@ -48,4 +49,5 @@ ggplot(second_graph, aes(x = regsept, y = regSoS)) +
   theme_bw() +
   coord_cartesian(xlim = c(12, 13.2), ylim = c(12, 13.2)) +
   labs(x = "Registration from 2012-2016 Files", y = "Registration Only from 2017 File", 
-       col = "Election Year") 
+       col = "Election Year") +
+  ggsave("county_migration_B.png", width = 5.00, height = 4.20)
