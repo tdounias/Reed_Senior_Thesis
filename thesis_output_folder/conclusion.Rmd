@@ -121,7 +121,7 @@ where $n_{[j]}$ is the number of observations for group j, and $\bar{y}_{[j]}$ i
 
 While each step here seems relatively intuitive, the derivations behind some of the details (like the chi-squared distribution) are complex MLE processes and beyond the scope of this thesis. The R code for this algorithm is as follows:
 
-```{r}
+```{r gibbs model 1}
 ## Gibbs sampler in R
 a.update <- function(){
   a.new <- rep (NA, J)
@@ -171,7 +171,7 @@ for (m in 1:n.chains){
 }
 ```
 
-```{r, echo = FALSE, results = "asis", message = FALSE}
+```{r out table model 1, echo = FALSE, results = "asis", message = FALSE}
 #Get Values after convergance
 vals <- data.frame(rep(0,3))
 for(i in 1:67){
@@ -188,7 +188,7 @@ names(vals) <- c (paste ("a[", 1:J, "]", sep=""), "mu.a",
 
 
 est_table <- data.frame(c("Sampler", "Model"), 
-                        rbind(vals[1,65:67], c(0.469, 0.199, 0.039)))
+                        rbind(signif(vals[1,65:67], 3), c(0.469, 0.199, 0.039)))
 
 names(est_table)[1] <- "Calculated from..."
 
@@ -222,7 +222,7 @@ Updating the estimates used previously, it is again possible to construct a Gibb
 
 County Model 2, as presented in Chapter 4, includes two county-level predictors: percentage of white residents and percentage of urban population; this means that $U = \{x^{\%white}, x^{\%urban}\}$. Keeping this in mind the following code estimates the coefficients and standard errors for Model 2:
 
-```{r}
+```{r gibbs model 2}
 ## Gibbs sampler for a multilevel model with county predictors
   
 
@@ -282,7 +282,7 @@ for (m in 1:n.chains){
 }
 ```
 
-```{r, echo = FALSE, results = "asis", message = FALSE}
+```{r out table model 2, echo = FALSE, results = "asis", message = FALSE}
 #Get Values after convergance
 vals <- data.frame(rep(0,3))
 for(i in 1:68){
@@ -300,7 +300,7 @@ names(vals) <- c (paste ("a[", 1:J, "]", sep=""),
 
 
 est_table <- data.frame(c("Sampler", "Model"),
-rbind(vals[1,65:68], c(-0.118, 0.034, 0.199, 2.631)))
+rbind(signif(vals[1,65:68], 3), c(-0.118, 0.034, 0.199, 2.63)))
 
 names(est_table)[1] <- "Calculated from..."
 

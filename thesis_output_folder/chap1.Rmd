@@ -61,7 +61,7 @@ In trying to respond to the issues set up by theoretical paradigms, different st
 
 * *Mail Voting*, for which individuals have a no-excuse-necessary^[Individuals do not need to present proof that they will be out of state or unable to physically be present at a polling place, but can just ask to be mailed their ballot.] option for not being present when they vote, or for filling in a mailed ballot and dropping it off at designated locations.
 
-Note that some form of voting via mail ballot exists in all three cases; the distinction between Mail Voting and the other two is that there is no excuse necessary to cast a mail ballot. In such systems mail voting is not an exception, but exists as something between a common practice and a universal means of casting a ballot.^[It is also commonly argued that full postal voting is a 4th category in and of itself. I don't make this distinction here, but in the following section I break down Mail Voting into different categories, one of which is full postal voting.]
+Note that some form of voting via mail ballot exists in all three cases; the distinction between Mail Voting and the other two is that there is no excuse necessary to cast a mail ballot. In such systems mail voting is not an exception, but exists as something between a common practice and a universal means of casting a ballot. ^[It is also commonly argued that full postal voting is a 4th category in and of itself. I don't make this distinction here, but in the following section I break down Mail Voting into different categories, one of which is full postal voting.]
 
 In-person election day voting is, historically speaking, the way the vast majority of democracies have conducted their elections. Therefore it has been of interest for researchers to examine if other systems can outperform that baseline for some metric of participation. Specifically, it is most interesting to examine voting styles that are heralded for their expansion of turnout, to see whether popular beliefs on their benefits and drawbacks hold: are such policies different from the base model of conducting American elections? Do they present new challenges and unique selling points? In this context, mail voting is particularly interesting because it is quickly becoming a trend in state-level elections administration.
   
@@ -82,7 +82,7 @@ Vote-By-Mail is also commonly considered a type of early voting, since voters re
 Figure 1.1 presents current mail voting status by state. Not included in this map is the fact that several states have provisions for all-mail elections to be conducted under certain circumstances; what these circumstances are varies by state. Such states are: Alaska, Arizona, Arkansas, California, Florida, Hawai, Idaho, Kansas, Maryland, Minnesota, Missouri, Montana, Nebraska, Nevada, New Jersey, New Mexico, North Dakota, and Utah [@national_council_of_state_legislatures_absentee_2018]. 
 
 ```{r vbm us, echo=FALSE, fig.cap="Mail Voting Status by State", out.width = '100%', fig.align='center'}
-knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/us_vbm_status.png")
+knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/maps/us_vbm_status.png")
 ```
 
 ### How Theories Apply to VBM  
