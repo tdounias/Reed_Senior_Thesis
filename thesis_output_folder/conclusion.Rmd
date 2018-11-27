@@ -61,7 +61,7 @@ Another contribution of my thesis is my analysis of data wrangling, the construc
    
 Additionally, I have meticulously gone through the creation of multilevel general additive models of individual and county level turnout. While due to data and processing power limitations I am unable to run all these models to typical standards of convergence. This does not mean that they present no value to future research. Quite the contrary, future researchers just have to go through the data clean-up stage, and then implement my models without having to construct them from scratch. In particular, mixed effects and general additive models are not widely used in such studies, making their presentation and specification rather unique regardless of their application in this piece of research.  
   
-Lastly, I provide an extensive library of code used to create this document and the research I conduct. I have made an \textit{R} package--which I named `riggd`--that includes more than a dozen different functions that serve data wrangling and presentation purposes. These functions are made for use on Colorado files, but require relatively small amounts of changes to be applied to voter files from around the US. I also provide code for all tables and graphics that are included in this thesis on gitHub, which is a testament to the reproducibility and future value of the research I conducted.  
+Lastly, I provide an extensive library of code used to create this document and the research I conduct. I have made an \textit{R} package--which I named `riggd`--that includes more than a dozen different functions that serve data wrangling and presentation purposes. These functions are made for use on Colorado files, but require relatively small amounts of changes to be applied to voter files from around the US. I also provide code for all tables and graphics that are included in this thesis on GitHub, which is a testament to the reproducibility and future value of the research I conducted.  
 
 I recognize that, despite many obstacles in terms of data or computing power, the outcome of this thesis being more constructive rather than conclusive is to some extent my fault. There were many problems in this thesis that I should have been aware of earlier in the process, which may have allowed me to present more concrete results rather than a series of tools and methods. However, in the combination of my existing conclusions and the materials I have created through this process, it is my belief that this thesis does in fact present a step forward in the literature, and that it adds to existing quantitative elections studies works. This is a small step, but it helps in our understanding of how voters behave, what the actual results of election policy are, and how to expand participation.
 
@@ -86,7 +86,7 @@ The Gibbs algorithm works as follows:
   \item For each chain do the following:
   \begin{enumerate}
     \item Initialize vector of parameters $\Theta^{(0)} = \{\theta^{(0)}_1\, \theta^{(0)}_2\, ..., \theta^{(0)}_n\}$
-    \item Choose a number of iterations. For each iteration update every parameter in vector $\Theta^{(n_{iteration})}$, based on the values of vector $\Theta^{(n_{iteration} - 1)}$.
+    \item Choose a number of iterations. For each iteration sequentialy update every parameter in vector $\Theta^{(n_{iteration})}$, based on the values of vector $\Theta^{(n_{iteration} - 1)}$ and the values of each parameter. To execute this step, it is necessary to know the conditional distributions of each parameter based on the other parameters ($\mathbb{P}(\theta_1|\theta_2,... \theta_n)$ etc.). This is the main challenge when constructing a Gibbs sampler.
   \end{enumerate}
   \item Evaluate convergence between the chains.
 \end{enumerate}
@@ -97,7 +97,7 @@ If convergence is poor, repeat for more iterations, or follow diagnostic procedu
 
 A basic multilevel model with only group-level intercept mixed effects can be written as follows:
 
-$$y_i \ \sim \ N(a_{j[i]}, \sigma^2_y),\ i \in [1, n] \\ a_j \ \sim \ N(\mu_{\alpha}, \sigma^2_{\alpha}), \ j \in [1,J]$$
+$$y_i \ \sim \ N(a_{j[i]}, \sigma^2_y),\ i \in [1, n],\ a_j \ \sim \ N(\mu_{\alpha}, \sigma^2_{\alpha}), \ j \in [1,J]$$
 This specification is slightly different from that presented in Chapter 2. Here $\alpha_{j[i]}$ is the coefficient for the group $j$ that individual $i$ belongs to, $\sigma_y, \sigma_{\alpha}$ the variances of the individual and group level distributions respectively, and $\mu_{\alpha}$ the mean of the group-level distribution. In the case of the most basic county-level model estimated in my thesis (County Model 1), $n = 704$ and $J = 64$. Using Maximum Likelihood Estimation, and given that:
 
 \begin{equation}
@@ -202,7 +202,7 @@ As is obvious from Table, the Gibbs sampler produces values very similar to the 
 
 With slight changes from the previous model the following is the mathematical expression for a mixed effects model with group-level predictors:
 
-$$y_i \ \sim \ N(a_{j[i]}, \sigma^2_y),\ i \in [1, n] \\ a_j \ \sim \ N(U_j\gamma, \sigma^2_{\alpha}), \ j \in [1,J], $$
+$$y_i \ \sim \ N(a_{j[i]}, \sigma^2_y),\ i \in [1, n], \ a_j \ \sim \ N(U_j\gamma, \sigma^2_{\alpha}), \ j \in [1,J], $$
 
 where $U_j$ is a vector of predictor values for group $j$, and $\gamma$ a vector of group-level coefficients, with the rest of the parameters having the same designation as previously. Bear in mind that the second of the previous expressions can also be written as: 
 

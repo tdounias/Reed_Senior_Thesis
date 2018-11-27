@@ -80,7 +80,7 @@ Table: Variable indices per unit of observation \label{tab:units_vars}
 In this section I will go through a step-by step creation of models at the county level. County level models use a series of variables at the election, county, and local result levels. The response variable is always turnout in one county after a particular election. With no other information, this model could be thought of as an assignment of voting tendencies across counties; each county independent of election has a unique range of turnout results. In this way it is possible to build a naive, baseline model of turnout as follows:
 
 \begin{equation} \tag{Model 1}
-Y^{turnout}_{k,l} = \beta_0 + (\sum_{k=1}^{64}\beta_kx_k^{county}) + \epsilon,\ \epsilon \sim N(0,\sigma^2)
+Y^{turnout}_{k,l} = \beta_0 + (\sum_{k=1}^{64}\beta_kx_k^{county}) + \epsilon_{k,l},\ \epsilon_{k,l} \sim N(0,\sigma^2)
 \end{equation}
 
 where $x_k^{county}$ is a series of 64 dummy variables for each county of Colorado. Here differences between elections come from normally distributed error terms, rather than predictors. I name this **Model 1**, and it does not fit the data particularly well. First off, this model includes the assumption that counties are independent of one another, which is probably false; just consider that these counties are areas of the same state, in the same country, with populations moving between them at regular intervals, and many of them covering the same metropolitan area or congressional district. Additionally, the model matrix here is rank deficient: there are two county coefficients that are perfect linear combinations of other coefficients. This means they will be dropped by \textit{R} when the model is called in the `lm()` function.  
@@ -88,29 +88,29 @@ where $x_k^{county}$ is a series of 64 dummy variables for each county of Colora
 A way to fix both these issues is to use a multilevel model with mixed effects for county. By constraining coefficients at the county level to a set distribution, this model does away with the assumption of independence. The other county level predictors help to explain some of the unexplained group level variation, which reduces the standard deviation of county coefficients and helps provide more exact estimates [@gelman_data_2006]. I call this **Model 2**, which can be written as:
 
 \begin{equation} \tag{Model 2}
-Y^{turnout}_{k,l} = a_{k} + \beta_{1}x_k^{\%white} + \beta_{2}x_k^{\%urban} + \epsilon,
+Y^{turnout}_{k,l} = a_{k} + \beta_{1}x_k^{\%white} + \beta_{2}x_k^{\%urban} + \epsilon_{k,l},
 \end{equation}
 $$a_{k} \sim N (\gamma_0, \sigma_{\alpha}^2)$$
-$$\epsilon \sim N(0, \sigma^2)$$
+$$\epsilon_{k,l} \sim N(0, \sigma^2)$$
 This model provides a more reasonable set of estimates for each county, but still fails to provide any information as to secular trends, time-specific effects, election type effects, or mail voting. I will amend this by adding a set of variables at the election and local result levels: election type and an interaction term between election type and mail voting. This variable should reflect whether turnout effects of mail voting are more pronounced in a specific type of election. I call this **Model 3** and it can be specified as follows:
 
 \begin{multline} \tag{Model 3}
-Y^{turnout}_{k,l} = a_{k} + \beta_{1}x_k^{\% white} + \beta_{2}x_k^{\% urban} + \overbrace{(\sum_{v=3}^{6}\beta_{v}x_{v}^{election type} x_{k,l}^{\% mail~vote})}^\text{Interaction Effect with Type} + \\ \overbrace{(\sum_{v=7}^{10}\beta_{v}x_{v}^{election type})}^\text{Main Effect of Election Type} + \epsilon,
+Y^{turnout}_{k,l} = a_{k} + \beta_{1}x_k^{\% white} + \beta_{2}x_k^{\% urban} + \overbrace{(\sum_{v=3}^{6}\beta_{v}x_{v}^{election type} x_{k,l}^{\% mail~vote})}^\text{Interaction Effect with Type} + \\ \overbrace{(\sum_{v=7}^{10}\beta_{v}x_{v}^{election type})}^\text{Main Effect of Election Type} + \epsilon_{k,l},
 \end{multline}
 
 $$a_{k} \sim N(\gamma_0, \sigma_{\alpha}^2)$$
-$$\epsilon \sim N(0, \sigma^2)$$
+$$\epsilon_{k,l} \sim N(0, \sigma^2)$$
 
 where $x_{v}^{election type}$ is a series of four dummy variables for each type of election (General, Primary, Coordinated, Midterm). This model reflects nearly all the information I have available, apart from election date. For the incorporation of election dates there are two possible alternatives. First, I can simply add a dummy variable for each year. This would assume independence between each year, as it would specify different, independent "slopes" for the seven years I have data for--this is like calculating seven different models, one for each year. This is not particularly elegant as a solution nor does it reflect the fact that years actually are interconnected; of course there can be massive shifts in national or regional political climates, but those shifts happened _from some baseline_, which is reflected in previous years.   
   
 These elections can be thought of as systems for which prior condition affects future outcomes, and therefore time cannot be modeled as a series of independent effects. The solution here is adding a spline function for time, using a general additive multilevel model. I use a natural cubic spline function for the purposes of this model [@wood_generalized_2006]. More on the subject of splines can be found in the Wood (2006) textbook. The model, which I call **Model 4** can be written as follows:  
   
 \begin{multline}\tag{Model 4}
-Y^{turnout}_{k,l} = a_{k} + \beta_{1}x_k^{\% white} + \beta_{2}x_k^{\% urban} + \overbrace{(\sum_{v=3}^{6}\beta_{v}x_{v}^{election type} x_{k,l}^{\% mail~vote})}^\text{Interaction Effect with Type} + \\ \overbrace{(\sum_{v=7}^{10}\beta_{v}x_{v}^{election type})}^\text{Main Effect of Election Type} + s(x^{year}_{l}) + \epsilon,
+Y^{turnout}_{k,l} = a_{k} + \beta_{1}x_k^{\% white} + \beta_{2}x_k^{\% urban} + \overbrace{(\sum_{v=3}^{6}\beta_{v}x_{v}^{election type} x_{k,l}^{\% mail~vote})}^\text{Interaction Effect with Type} + \\ \overbrace{(\sum_{v=7}^{10}\beta_{v}x_{v}^{election type})}^\text{Main Effect of Election Type} + s(x^{year}_{l}) + \epsilon_{k,l},
 \end{multline}
 
 $$a_{k} \sim N(\gamma_0, \sigma_{\alpha}^2)$$
-$$\epsilon \sim N(0, \sigma^2)$$
+$$\epsilon_{k,l} \sim N(0, \sigma^2)$$
 
 where $s()$ is a natural cubic regression spline function with seven knots--equal to the number of years.^[I used the `gam.check()` function that is present in the `mgcv` \textit{R} package, whose call determined that the number of knots here may be too low. However, given the data available to me, I was limited to the inclusion of seven years and as such cannot increase the number of knots any further. Setting the number of knots to seven also gave the lowest CV MSE.] A summary of these four models is provided in the following table:  
   

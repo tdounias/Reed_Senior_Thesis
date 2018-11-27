@@ -1,0 +1,63 @@
+\contentsline {chapter}{Introduction}{1}{chapter*.6}
+\contentsline {chapter}{Chapter 1: The State of the Literature}{5}{chapter.1}
+\contentsline {section}{\numberline {1.1}Turnout and Political Participation}{5}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}Calculating Turnout}{6}{subsection.1.1.1}
+\contentsline {subsection}{\numberline {1.1.2}Turnout and Voting Probability Models}{7}{subsection.1.1.2}
+\contentsline {subsection}{\numberline {1.1.3}Deciding to Vote}{8}{subsection.1.1.3}
+\contentsline {section}{\numberline {1.2}From Theory to Policy}{9}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Voting Methods}{9}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}What is VBM?}{10}{subsection.1.2.2}
+\contentsline {subsection}{\numberline {1.2.3}How Theories Apply to VBM}{12}{subsection.1.2.3}
+\contentsline {subsection}{\numberline {1.2.4}General Results on VBM}{12}{subsection.1.2.4}
+\contentsline {chapter}{Chapter 2: Hypotheses and Methods}{15}{chapter.2}
+\contentsline {section}{\numberline {2.1}Hypotheses}{15}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Questions}{15}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Hypotheses}{16}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}Criteria}{16}{subsection.2.1.3}
+\contentsline {subsection}{\numberline {2.1.4}Importance of Hypotheses}{17}{subsection.2.1.4}
+\contentsline {section}{\numberline {2.2}Methodology}{18}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Logistic Regression}{18}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Generalized Additive Models}{19}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Multilevel Models}{20}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}Model Accurracy and Quality of Fit}{20}{subsection.2.2.4}
+\contentsline {subsubsection}{Mean Squared Error (MSE)}{20}{section*.8}
+\contentsline {subsubsection}{Area Under the Curve (AUC)}{21}{section*.9}
+\contentsline {subsubsection}{k-Folds Cross Validation}{21}{section*.11}
+\contentsline {chapter}{Chapter 3: Case Selection and Data}{23}{chapter.3}
+\contentsline {section}{\numberline {3.1}The Centennial State and Its Voters}{23}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Demographics}{23}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}The Politics of Colorado}{25}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}Voting in Colorado}{25}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.4}Colorado as a Case for this Thesis}{28}{subsection.3.1.4}
+\contentsline {section}{\numberline {3.2}The Data}{28}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Sources and first glance}{29}{subsection.3.2.1}
+\contentsline {subsubsection}{2010 US Census}{29}{section*.15}
+\contentsline {subsubsection}{Colorado Voter Files}{29}{section*.16}
+\contentsline {subsection}{\numberline {3.2.2}Why Voter Registration Files?}{30}{subsection.3.2.2}
+\contentsline {section}{\numberline {3.3}Wrangling the Data}{31}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Initial Problems with the 2017 Voter File and Solution}{31}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Other Wrangling Issues}{33}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Final Variable Specifications}{36}{subsection.3.3.3}
+\contentsline {chapter}{Chapter 4: Model Specification and Results}{41}{chapter.4}
+\contentsline {section}{\numberline {4.1}Modelling Issues}{41}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Lack of variability}{41}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Computational Considerations}{43}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.2}Variable Specification}{44}{section.4.2}
+\contentsline {section}{\numberline {4.3}County Level Models}{45}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Specifications}{45}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Results}{47}{subsection.4.3.2}
+\contentsline {section}{\numberline {4.4}Individual Level Models}{50}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Specifications}{50}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Estimation with only one type of data}{50}{subsection.4.4.2}
+\contentsline {subsubsection}{County Level}{50}{section*.31}
+\contentsline {subsubsection}{Individual Level}{51}{section*.34}
+\contentsline {subsubsection}{Election Level}{52}{section*.36}
+\contentsline {subsubsection}{Ballot Level}{53}{section*.38}
+\contentsline {subsection}{\numberline {4.4.3}Estimation with the full dataset}{53}{subsection.4.4.3}
+\contentsline {subsection}{\numberline {4.4.4}Results}{54}{subsection.4.4.4}
+\contentsline {chapter}{Conclusion}{59}{chapter*.42}
+\contentsline {chapter}{Appendix A: MCMC Estimation Processes for Multilevel Models}{63}{appendix.A}
+\contentsline {section}{\numberline {A.1}Gibbs Sampler for the County Models}{63}{section.A.1}
+\contentsline {subsection}{\numberline {A.1.1}County Model 1 (Only Random County Effects)}{64}{subsection.A.1.1}
+\contentsline {subsection}{\numberline {A.1.2}County Model 2 (Random County Effects and County-Level Predictors)}{66}{subsection.A.1.2}
+\contentsline {chapter}{References}{69}{appendix*.43}

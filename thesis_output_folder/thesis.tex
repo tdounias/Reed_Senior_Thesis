@@ -2685,7 +2685,7 @@ aid future research on the subject.
   naive, baseline model of turnout as follows:
   
   \begin{equation} \tag{Model 1}
-  Y^{turnout}_{k,l} = \beta_0 + (\sum_{k=1}^{64}\beta_kx_k^{county}) + \epsilon,\ \epsilon \sim N(0,\sigma^2)
+  Y^{turnout}_{k,l} = \beta_0 + (\sum_{k=1}^{64}\beta_kx_k^{county}) + \epsilon_{k,l},\ \epsilon_{k,l} \sim N(0,\sigma^2)
   \end{equation}
   
   where \(x_k^{county}\) is a series of 64 dummy variables for each county
@@ -2712,26 +2712,26 @@ aid future research on the subject.
   written as:
   
   \begin{equation} \tag{Model 2}
-  Y^{turnout}_{k,l} = a_{k} + \beta_{1}x_k^{\%white} + \beta_{2}x_k^{\%urban} + \epsilon,
+  Y^{turnout}_{k,l} = a_{k} + \beta_{1}x_k^{\%white} + \beta_{2}x_k^{\%urban} + \epsilon_{k,l},
   \end{equation}
   
   \[a_{k} \sim N (\gamma_0, \sigma_{\alpha}^2)\]
-  \[\epsilon \sim N(0, \sigma^2)\] This model provides a more reasonable
-  set of estimates for each county, but still fails to provide any
-  information as to secular trends, time-specific effects, election type
-  effects, or mail voting. I will amend this by adding a set of variables
-  at the election and local result levels: election type and an
+  \[\epsilon_{k,l} \sim N(0, \sigma^2)\] This model provides a more
+  reasonable set of estimates for each county, but still fails to provide
+  any information as to secular trends, time-specific effects, election
+  type effects, or mail voting. I will amend this by adding a set of
+  variables at the election and local result levels: election type and an
   interaction term between election type and mail voting. This variable
   should reflect whether turnout effects of mail voting are more
   pronounced in a specific type of election. I call this \textbf{Model 3}
   and it can be specified as follows:
   
   \begin{multline} \tag{Model 3}
-  Y^{turnout}_{k,l} = a_{k} + \beta_{1}x_k^{\% white} + \beta_{2}x_k^{\% urban} + \overbrace{(\sum_{v=3}^{6}\beta_{v}x_{v}^{election type} x_{k,l}^{\% mail~vote})}^\text{Interaction Effect with Type} + \\ \overbrace{(\sum_{v=7}^{10}\beta_{v}x_{v}^{election type})}^\text{Main Effect of Election Type} + \epsilon,
+  Y^{turnout}_{k,l} = a_{k} + \beta_{1}x_k^{\% white} + \beta_{2}x_k^{\% urban} + \overbrace{(\sum_{v=3}^{6}\beta_{v}x_{v}^{election type} x_{k,l}^{\% mail~vote})}^\text{Interaction Effect with Type} + \\ \overbrace{(\sum_{v=7}^{10}\beta_{v}x_{v}^{election type})}^\text{Main Effect of Election Type} + \epsilon_{k,l},
   \end{multline}
   
   \[a_{k} \sim N(\gamma_0, \sigma_{\alpha}^2)\]
-  \[\epsilon \sim N(0, \sigma^2)\]
+  \[\epsilon_{k,l} \sim N(0, \sigma^2)\]
   
   where \(x_{v}^{election type}\) is a series of four dummy variables for
   each type of election (General, Primary, Coordinated, Midterm). This
@@ -2757,11 +2757,11 @@ aid future research on the subject.
   as follows:
   
   \begin{multline}\tag{Model 4}
-  Y^{turnout}_{k,l} = a_{k} + \beta_{1}x_k^{\% white} + \beta_{2}x_k^{\% urban} + \overbrace{(\sum_{v=3}^{6}\beta_{v}x_{v}^{election type} x_{k,l}^{\% mail~vote})}^\text{Interaction Effect with Type} + \\ \overbrace{(\sum_{v=7}^{10}\beta_{v}x_{v}^{election type})}^\text{Main Effect of Election Type} + s(x^{year}_{l}) + \epsilon,
+  Y^{turnout}_{k,l} = a_{k} + \beta_{1}x_k^{\% white} + \beta_{2}x_k^{\% urban} + \overbrace{(\sum_{v=3}^{6}\beta_{v}x_{v}^{election type} x_{k,l}^{\% mail~vote})}^\text{Interaction Effect with Type} + \\ \overbrace{(\sum_{v=7}^{10}\beta_{v}x_{v}^{election type})}^\text{Main Effect of Election Type} + s(x^{year}_{l}) + \epsilon_{k,l},
   \end{multline}
   
   \[a_{k} \sim N(\gamma_0, \sigma_{\alpha}^2)\]
-  \[\epsilon \sim N(0, \sigma^2)\]
+  \[\epsilon_{k,l} \sim N(0, \sigma^2)\]
   
   where \(s()\) is a natural cubic regression spline function with seven
   knots--equal to the number of years.\footnote{I used the
@@ -2867,8 +2867,7 @@ aid future research on the subject.
   midterm, then coordinated and primary.
   
   \begin{longtable}[]{@{}lcccc@{}}
-  \caption{Estimated county level coefficients (**Significant at the .01
-  level *at the .05 level) \label{tab:county_coef}}\tabularnewline
+  \caption{Estimated county level coefficients \label{tab:county_coef}}\tabularnewline
   \toprule
   \begin{minipage}[b]{0.26\columnwidth}\raggedright\strut
   Variables\strut
@@ -3117,6 +3116,7 @@ aid future research on the subject.
   \end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering\strut
   (0.027)\strut
   \end{minipage}\tabularnewline
+  \midrule
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   CV MSE\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
@@ -3151,6 +3151,8 @@ aid future research on the subject.
   64\strut
   \end{minipage}\tabularnewline
   \bottomrule
+  \addlinespace
+  \multicolumn{5}{c}{** $ p<0.01 $; * $ p<0.05 $} \\
   \end{longtable}
   
   Next, taking election type and all interaction terms into consideration,
@@ -3560,8 +3562,7 @@ aid future research on the subject.
   ``coin-toss'' used by the ROC.
   
   \begin{longtable}[]{@{}lccccccc@{}}
-  \caption{Estimated individual level coefficients (**Significant at the
-  .01 level *at the .05 level)
+  \caption{Estimated individual level coefficients 
   \label{tab:model_indiv_coef}}\tabularnewline
   \toprule
   \begin{minipage}[b]{0.12\columnwidth}\raggedright\strut
@@ -4011,6 +4012,7 @@ aid future research on the subject.
   \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
   \strut
   \end{minipage}\tabularnewline
+  \midrule
   \begin{minipage}[t]{0.12\columnwidth}\raggedright\strut
   CV AUC\strut
   \end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\centering\strut
@@ -4080,6 +4082,8 @@ aid future research on the subject.
   64\strut
   \end{minipage}\tabularnewline
   \bottomrule
+  \addlinespace
+  \multicolumn{5}{c}{** $ p<0.01 $; * $ p<0.05 $} \\
   \end{longtable}
   
   There are two conclusions that can be reached from these results. None
@@ -4229,7 +4233,7 @@ aid future research on the subject.
   These functions are made for use on Colorado files, but require
   relatively small amounts of changes to be applied to voter files from
   around the US. I also provide code for all tables and graphics that are
-  included in this thesis on gitHub, which is a testament to the
+  included in this thesis on GitHub, which is a testament to the
   reproducibility and future value of the research I conducted.
   
   I recognize that, despite many obstacles in terms of data or computing
@@ -4274,7 +4278,7 @@ aid future research on the subject.
     \item For each chain do the following:
     \begin{enumerate}
       \item Initialize vector of parameters $\Theta^{(0)} = \{\theta^{(0)}_1\, \theta^{(0)}_2\, ..., \theta^{(0)}_n\}$
-      \item Choose a number of iterations. For each iteration update every parameter in vector $\Theta^{(n_{iteration})}$, based on the values of vector $\Theta^{(n_{iteration} - 1)}$.
+      \item Choose a number of iterations. For each iteration sequentialy update every parameter in vector $\Theta^{(n_{iteration})}$, based on the values of vector $\Theta^{(n_{iteration} - 1)}$ and the values of each parameter. To execute this step, it is necessary to know the conditional distributions of each parameter based on the other parameters ($\mathbb{P}(\theta_1|\theta_2,... \theta_n)$ etc.). This is the main challenge when constructing a Gibbs sampler.
     \end{enumerate}
     \item Evaluate convergence between the chains.
   \end{enumerate}
@@ -4290,7 +4294,7 @@ aid future research on the subject.
   A basic multilevel model with only group-level intercept mixed effects
   can be written as follows:
   
-  \[y_i \ \sim \ N(a_{j[i]}, \sigma^2_y),\ i \in [1, n] \\ a_j \ \sim \ N(\mu_{\alpha}, \sigma^2_{\alpha}), \ j \in [1,J]\]
+  \[y_i \ \sim \ N(a_{j[i]}, \sigma^2_y),\ i \in [1, n],\ a_j \ \sim \ N(\mu_{\alpha}, \sigma^2_{\alpha}), \ j \in [1,J]\]
   This specification is slightly different from that presented in Chapter
   2. Here \(\alpha_{j[i]}\) is the coefficient for the group \(j\) that
   individual \(i\) belongs to, \(\sigma_y, \sigma_{\alpha}\) the variances
@@ -4410,11 +4414,11 @@ aid future research on the subject.
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   Sampler\strut
   \end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\centering\strut
-  0.469\strut
+  0.468\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
   0.2\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
-  0.0403\strut
+  0.0413\strut
   \end{minipage}\tabularnewline
   \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
   Model\strut
@@ -4438,7 +4442,7 @@ aid future research on the subject.
   mathematical expression for a mixed effects model with group-level
   predictors:
   
-  \[y_i \ \sim \ N(a_{j[i]}, \sigma^2_y),\ i \in [1, n] \\ a_j \ \sim \ N(U_j\gamma, \sigma^2_{\alpha}), \ j \in [1,J], \]
+  \[y_i \ \sim \ N(a_{j[i]}, \sigma^2_y),\ i \in [1, n], \ a_j \ \sim \ N(U_j\gamma, \sigma^2_{\alpha}), \ j \in [1,J], \]
   
   where \(U_j\) is a vector of predictor values for group \(j\), and
   \(\gamma\) a vector of group-level coefficients, with the rest of the
@@ -4562,9 +4566,9 @@ aid future research on the subject.
   \begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
   Sampler\strut
   \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering\strut
-  -0.118\strut
+  -0.119\strut
   \end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering\strut
-  0.0319\strut
+  0.0329\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
   0.2\strut
   \end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering\strut
