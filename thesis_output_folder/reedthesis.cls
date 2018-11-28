@@ -301,9 +301,7 @@
     \vfil
     A Thesis \\
     Presented to \\
-    the Interdivisional Committee for Mathematics and Natural Sciences, \\
-    History and Social Sciences \\
-    \textit{(Mathematics and Political Science)} \\
+    the Interdivisional Committee for Mathematics and Political Science \\
     Reed College
     \vfil
     \centerline{\hbox to \wd0 {\hbox{}\hrulefill\hbox{}}}
