@@ -145,7 +145,7 @@ pandoc.table(table_data, caption = "Estimated county level coefficients (**Signi
 
 Next, taking election type and all interaction terms into consideration, let's examine what happens when the spline function for time is introduced between Models 3 and 4. Most coefficients shift dramatically, with the exception of the interaction between coordinated elections and VBM. This dramatic shift--between 5 and 15(!) percentage points--indicates that several of the effects that the third model estimated are actually time-specific trends, and that there is a significant difference if we account for them. In the fourth model, the coefficients for election type on their own are still indicative of a common assumption for turnout in such elections.^[Also see Figure 3.4.] As for interaction terms with VBM, the effect of VBM on primary election turnout is almost wiped out entirely, the interaction with general election turnout is depleted but still present at around 8%, and coordinated election VBM effects remain statistically insignificant. Interestingly, the effect of VBM on midterm turnout switches sign from a negative effect of 5% to a positive effect of around 11%.
 
-```{r time splines, echo=FALSE, fig.cap="Model 4 Turnout Coefficient for Time Over Spline Knots", out.width = '80%', fig.align='center'}
+```{r time splines, echo=FALSE, fig.cap="Model 4 Turnout Coefficient for Time", out.width = '80%', fig.align='center'}
 knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/Spline_plot.pdf")
 ```
   
@@ -270,7 +270,7 @@ I now proceed to include variables from all units of observation into one model.
 
 You will notice that I have omitted the subscript for all beta coefficients. This is because after two or three parameters the subscript becomes increasingly large. For simplicity, assume increasing indexes for different beta coefficients from left to right in this expression.
 
-The mixed effects model will again operate on two "levels" of hierarchy, but the second level will now include two distinct regressions. Caveats for variables like age and date should be noted from previous sections. This, the most complex model, will be **Model 6**
+The mixed effects model will again operate on two "levels" of hierarchy, but the second level will now include two distinct regressions. Caveats for variables like age and date should be noted from previous sections. This, the most complex model, will be **Model 6**.
 
 \begin{equation} \tag{Model 6}
 \hat{\mathbb{P}}(y_i = 1) \sim \text{logit}^{-1}(\sum_{v = 1}^{n^{\text{ballot vars}}}x_{i,v}\beta_{v} + \sum_{v=1}^{n^{\text{election vars}}}x_{l[i], v}\beta_{v+n^{ballot}} + ns(x^{\text{year}}) +\delta_{j[i]} + \alpha_{k[i]}),

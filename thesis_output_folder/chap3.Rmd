@@ -189,7 +189,7 @@ Two things should be clear from figure 3.5. First, there is significant deviatio
 knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/county_migration_B.png")
 ```
    
-Here the structure of the data becomes clear: for each county, there are a series of almost vertically distributed points, which get closer to the $y=x$ line the closer the counts get to 2017. Through this series of tests, it became clear that using multiple years of data was necessary in order to conduct an accurate test of my hypotheses. My selection was later vindicated, when looking at comparisons between reported rates of turnout^[Turnout is calculated over all registered voters. and turnout calculated through my dataset for the 2014 midterm election (see fig. 3.7).
+Here the structure of the data becomes clear: for each county, there are a series of almost vertically distributed points, which get closer to the $y=x$ line the closer the counts get to 2017. Through this series of tests, it became clear that using multiple years of data was necessary in order to conduct an accurate test of my hypotheses. My selection was later vindicated, when looking at comparisons between reported rates of turnout^[Turnout is calculated over all registered voters.] and turnout calculated through my dataset for the 2014 midterm election (see fig. 3.7).
 
 ```{r comp turnout 2014, echo=FALSE, fig.cap="Comparison of reported and calculated turnout for 2014 midterms across county", out.width = '80%', fig.align='center'}
 knitr::include_graphics("/Users/tdounias/Desktop/Reed_Senior_Thesis/plots/Calc_vs_rep_turnout.png")

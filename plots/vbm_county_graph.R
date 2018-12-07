@@ -41,7 +41,7 @@ ggplot(graph_data, aes(x = year, y = pct_vbm)) +
   guides(col=FALSE) +
   ylim(c(0, 1)) +
   geom_rect(xmin =2010,xmax = 2016, ymin = .75, ymax =1, fill = 10, alpha = .01) +
-  annotate("text", x = 2013, y = .70, label = "Range of Trustworthy Data") +
+  annotate("text", x = 2013, y = .70, label = "Range of Data") +
   annotate("text", x = 2008, y = .1, col = "dark grey", label = "2008 Reform") +
   annotate("text", x = 2013, y = .1, col = "dark grey", label = "2013 Reform") +
   ggsave("vbm_county_graph.png", width = 5.00, height = 4.20)

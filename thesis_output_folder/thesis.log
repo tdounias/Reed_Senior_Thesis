@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  27 NOV 2018 19:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  6 DEC 2018 16:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -856,23 +856,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 610--616
 
  []
 
-[5] [6]
-Underfull \vbox (badness 1681) has occurred while \output is active []
+[5] [6] [7]
+LaTeX Font Info:    Try loading font information for TS1+lmr on input line 734.
 
- [7]
-LaTeX Font Info:    Try loading font information for TS1+lmr on input line 733.
-
-
-(/usr/local/texlive/2018/texmf-dist/tex/latex/lm/ts1lmr.fd
+ (/usr/local/texlive/2018/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [8] [9] [10]
-</Users/tdounias/Desktop/Reed_Senior_Thesis/maps/us_vbm_status.png, id=456, 150
+)
+[8] [9] [10]
+</Users/tdounias/Desktop/Reed_Senior_Thesis/maps/us_vbm_status.png, id=459, 150
 5.625pt x 1264.725pt>
 File: /Users/tdounias/Desktop/Reed_Senior_Thesis/maps/us_vbm_status.png Graphic
  file (type png)
 <use /Users/tdounias/Desktop/Reed_Senior_Thesis/maps/us_vbm_status.png>
 Package pdftex.def Info: /Users/tdounias/Desktop/Reed_Senior_Thesis/maps/us_vbm
-_status.png  used on input line 914.
+_status.png  used on input line 915.
 (pdftex.def)             Requested size: 433.62pt x 364.2328pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -884,39 +881,39 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 ]
 Chapter 2.
 [15] [16] [17]
-Underfull \hbox (badness 10000) in paragraph at lines 1266--1270
+Underfull \hbox (badness 10000) in paragraph at lines 1267--1271
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1270--1284
+Underfull \hbox (badness 10000) in paragraph at lines 1271--1285
 
  []
 
 [18] [19]
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 1366
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 1367
 .
  (/usr/local/texlive/2018/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [20]
-</Users/tdounias/Desktop/Reed_Senior_Thesis/plots/roc_example.png, id=514, 1505
+</Users/tdounias/Desktop/Reed_Senior_Thesis/plots/roc_example.png, id=517, 1505
 .625pt x 1264.725pt>
 File: /Users/tdounias/Desktop/Reed_Senior_Thesis/plots/roc_example.png Graphic 
 file (type png)
 <use /Users/tdounias/Desktop/Reed_Senior_Thesis/plots/roc_example.png>
 Package pdftex.def Info: /Users/tdounias/Desktop/Reed_Senior_Thesis/plots/roc_e
-xample.png  used on input line 1441.
+xample.png  used on input line 1442.
 (pdftex.def)             Requested size: 216.81pt x 182.1164pt.
 
 [21] [22 </Users/tdounias/Desktop/Reed_Senior_Thesis/plots/roc_example.png>]
 Chapter 3.
 </Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_white_county_map.png, id=5
-34, 1505.625pt x 1264.725pt>
+37, 1505.625pt x 1264.725pt>
 File: /Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_white_county_map.png 
 Graphic file (type png)
 <use /Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_white_county_map.png>
 Package pdftex.def Info: /Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_wh
-ite_county_map.png  used on input line 1511.
+ite_county_map.png  used on input line 1512.
 (pdftex.def)             Requested size: 346.89731pt x 291.38239pt.
 [23
 
@@ -924,37 +921,37 @@ ite_county_map.png  used on input line 1511.
 >] [25
 
 ]
-Overfull \hbox (5.25641pt too wide) in paragraph at lines 1761--1763
+Overfull \hbox (5.25641pt too wide) in paragraph at lines 1762--1764
 []|\T1/lmr/m/n/12 (-20) Arapahoe|  
  []
 
 
-Overfull \hbox (0.67747pt too wide) in paragraph at lines 1806--1808
+Overfull \hbox (0.67747pt too wide) in paragraph at lines 1807--1809
 []|\T1/lmr/m/n/12 (-20) Jefferson|  
  []
 
 
-Overfull \hbox (2.05568pt too wide) in paragraph at lines 1833--1835
+Overfull \hbox (2.05568pt too wide) in paragraph at lines 1834--1836
 []|\T1/lmr/m/n/12 (-20) Colorado|  
  []
 
 </Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_registered_county_map.png,
- id=551, 1505.625pt x 1264.725pt>
+ id=554, 1505.625pt x 1264.725pt>
 File: /Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_registered_county_map
 .png Graphic file (type png)
 <use /Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_registered_county_map.
 png>
 Package pdftex.def Info: /Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_re
-gistered_county_map.png  used on input line 1847.
+gistered_county_map.png  used on input line 1848.
 (pdftex.def)             Requested size: 346.89731pt x 291.38239pt.
 </Users/tdounias/Desktop/Reed_Senior_Thesis/maps/party_affiliation_county_map.p
-ng, id=552, 1505.625pt x 1264.725pt>
+ng, id=555, 1505.625pt x 1264.725pt>
 File: /Users/tdounias/Desktop/Reed_Senior_Thesis/maps/party_affiliation_county_
 map.png Graphic file (type png)
 <use /Users/tdounias/Desktop/Reed_Senior_Thesis/maps/party_affiliation_county_m
 ap.png>
 Package pdftex.def Info: /Users/tdounias/Desktop/Reed_Senior_Thesis/maps/party_
-affiliation_county_map.png  used on input line 1856.
+affiliation_county_map.png  used on input line 1857.
 (pdftex.def)             Requested size: 346.89731pt x 291.38239pt.
 [26] [27 </Users/tdounias/Desktop/Reed_Senior_Thesis/maps/pct_registered_county
 _map.png> </Users/tdounias/Desktop/Reed_Senior_Thesis/maps/party_affiliation_co
@@ -962,58 +959,62 @@ unty_map.png>] [28
 
 ] [29] [30] [31]
 </Users/tdounias/Desktop/Reed_Senior_Thesis/plots/colorado_bigeight_turnout_gra
-ph.png, id=590, 1505.625pt x 1264.725pt>
+ph.png, id=593, 1505.625pt x 1264.725pt>
 File: /Users/tdounias/Desktop/Reed_Senior_Thesis/plots/colorado_bigeight_turnou
 t_graph.png Graphic file (type png)
 <use /Users/tdounias/Desktop/Reed_Senior_Thesis/plots/colorado_bigeight_turnout
 _graph.png>
 Package pdftex.def Info: /Users/tdounias/Desktop/Reed_Senior_Thesis/plots/color
-ado_bigeight_turnout_graph.png  used on input line 2148.
+ado_bigeight_turnout_graph.png  used on input line 2149.
 (pdftex.def)             Requested size: 346.89731pt x 291.38239pt.
 </Users/tdounias/Desktop/Reed_Senior_Thesis/plots/county_migration_A.png, id=59
-1, 1505.625pt x 1264.725pt>
+4, 1505.625pt x 1264.725pt>
 File: /Users/tdounias/Desktop/Reed_Senior_Thesis/plots/county_migration_A.png G
 raphic file (type png)
 <use /Users/tdounias/Desktop/Reed_Senior_Thesis/plots/county_migration_A.png>
 Package pdftex.def Info: /Users/tdounias/Desktop/Reed_Senior_Thesis/plots/count
-y_migration_A.png  used on input line 2164.
+y_migration_A.png  used on input line 2165.
 (pdftex.def)             Requested size: 346.89731pt x 291.38239pt.
 </Users/tdounias/Desktop/Reed_Senior_Thesis/plots/county_migration_B.png, id=59
-2, 1505.625pt x 1264.725pt>
+5, 1505.625pt x 1264.725pt>
 File: /Users/tdounias/Desktop/Reed_Senior_Thesis/plots/county_migration_B.png G
 raphic file (type png)
 <use /Users/tdounias/Desktop/Reed_Senior_Thesis/plots/county_migration_B.png>
 Package pdftex.def Info: /Users/tdounias/Desktop/Reed_Senior_Thesis/plots/count
-y_migration_B.png  used on input line 2184.
+y_migration_B.png  used on input line 2185.
 (pdftex.def)             Requested size: 346.89731pt x 291.38239pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [32 </Users/tdounias/Desktop/Reed_Senior_Thesis/plots/colorado_bigeight_turnou
 t_graph.png>]
-</Users/tdounias/Desktop/Reed_Senior_Thesis/plots/Calc_vs_rep_turnout.png, id=5
-98, 1505.625pt x 1264.725pt>
+</Users/tdounias/Desktop/Reed_Senior_Thesis/plots/Calc_vs_rep_turnout.png, id=6
+02, 1505.625pt x 1264.725pt>
 File: /Users/tdounias/Desktop/Reed_Senior_Thesis/plots/Calc_vs_rep_turnout.png 
 Graphic file (type png)
 <use /Users/tdounias/Desktop/Reed_Senior_Thesis/plots/Calc_vs_rep_turnout.png>
 Package pdftex.def Info: /Users/tdounias/Desktop/Reed_Senior_Thesis/plots/Calc_
-vs_rep_turnout.png  used on input line 2203.
+vs_rep_turnout.png  used on input line 2204.
 (pdftex.def)             Requested size: 346.89731pt x 291.38239pt.
  [33 </Users/tdounias/Desktop/Reed_Senior_Thesis/plots/county_migration_A.png>]
  [34 </Users/tdounias/Desktop/Reed_Senior_Thesis/plots/county_migration_B.png>]
  [35 </Users/tdounias/Desktop/Reed_Senior_Thesis/plots/Calc_vs_rep_turnout.png>
-] [36] [37] [38] [39] [40
+]
+Underfull \vbox (badness 1681) has occurred while \output is active []
+
+ [36]
+[37] [38] [39] [40
 
 ]
 Chapter 4.
 [41]
-</Users/tdounias/Desktop/Reed_Senior_Thesis/plots/vbm_county_graph.png, id=644,
+</Users/tdounias/Desktop/Reed_Senior_Thesis/plots/vbm_county_graph.png, id=649,
  1505.625pt x 1264.725pt>
 File: /Users/tdounias/Desktop/Reed_Senior_Thesis/plots/vbm_county_graph.png Gra
 phic file (type png)
 <use /Users/tdounias/Desktop/Reed_Senior_Thesis/plots/vbm_county_graph.png>
 Package pdftex.def Info: /Users/tdounias/Desktop/Reed_Senior_Thesis/plots/vbm_c
-ounty_graph.png  used on input line 2497.
+ounty_graph.png  used on input line 2498.
 (pdftex.def)             Requested size: 346.89731pt x 291.38239pt.
  [42 </Users/tdounias/Desktop/Reed_Senior_Thesis/plots/vbm_county_graph.png>] [
 43]
@@ -1025,23 +1026,23 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.2733   \end{multline}
+l.2734   \end{multline}
                        ] [46] [47]
-Overfull \hbox (4.8067pt too wide) in paragraph at lines 3033--3035
+Overfull \hbox (4.8067pt too wide) in paragraph at lines 3035--3037
 []|\T1/lmr/m/n/12 (-20) typeCoordinated*VBM|  
  []
 
 [48]
-</Users/tdounias/Desktop/Reed_Senior_Thesis/plots/Spline_plot.pdf, id=698, 361.
+</Users/tdounias/Desktop/Reed_Senior_Thesis/plots/Spline_plot.pdf, id=703, 361.
 35pt x 303.1325pt>
 File: /Users/tdounias/Desktop/Reed_Senior_Thesis/plots/Spline_plot.pdf Graphic 
 file (type pdf)
 <use /Users/tdounias/Desktop/Reed_Senior_Thesis/plots/Spline_plot.pdf>
 Package pdftex.def Info: /Users/tdounias/Desktop/Reed_Senior_Thesis/plots/Splin
-e_plot.pdf  used on input line 3180.
+e_plot.pdf  used on input line 3182.
 (pdftex.def)             Requested size: 346.89731pt x 291.00851pt.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 3919) has occurred while \output is active []
 
  [49 </Users/tdounias/Desktop/Reed_Senior_Thesis/plots/Spline_plot.pdf>] [50] [
 51pdfTeX warning (ext4): destination with the same identifier (name{equation.4.
@@ -1049,174 +1050,174 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.3315   \[
+l.3317   \[
            \hat{\mathbb{P}}(y_i = 1) \sim \text{logit}^{-1}(\sum_{j = 1}^{n^...
 ]pdfTeX warning (ext4): destination with the same identifier (name{equation.4.4
 .1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3330   \begin{equation}
+l.3332   \begin{equation}
                           \tag{Model 3}pdfTeX warning (ext4): destination with 
 the same identifier (name{equation.4.4.1}) has been already used, duplicate ign
 ored
 <to be read again> 
                    \relax 
-l.3330   \begin{equation}
+l.3332   \begin{equation}
                           \tag{Model 3}pdfTeX warning (ext4): destination with 
 the same identifier (name{equation.4.4.1}) has been already used, duplicate ign
 ored
 <to be read again> 
                    \relax 
-l.3330   \begin{equation}
+l.3332   \begin{equation}
                           \tag{Model 3}pdfTeX warning (ext4): destination with 
 the same identifier (name{equation.4.4.1}) has been already used, duplicate ign
 ored
 <to be read again> 
                    \relax 
-l.3330   \begin{equation}
+l.3332   \begin{equation}
                           \tag{Model 3}pdfTeX warning (ext4): destination with 
 the same identifier (name{equation.4.4.1}) has been already used, duplicate ign
 ored
 <to be read again> 
                    \relax 
-l.3353   \begin{equation}
+l.3355   \begin{equation}
                           \tag{Model 4}pdfTeX warning (ext4): destination with 
 the same identifier (name{equation.4.4.1}) has been already used, duplicate ign
 ored
 <to be read again> 
                    \relax 
-l.3353   \begin{equation}
+l.3355   \begin{equation}
                           \tag{Model 4}pdfTeX warning (ext4): destination with 
 the same identifier (name{equation.4.4.1}) has been already used, duplicate ign
 ored
 <to be read again> 
                    \relax 
-l.3353   \begin{equation}
+l.3355   \begin{equation}
                           \tag{Model 4}pdfTeX warning (ext4): destination with 
 the same identifier (name{equation.4.4.1}) has been already used, duplicate ign
 ored
 <to be read again> 
                    \relax 
-l.3353   \begin{equation}
+l.3355   \begin{equation}
                           \tag{Model 4} [52]pdfTeX warning (ext4): destination 
 with the same identifier (name{equation.4.4.1}) has been already used, duplicat
 e ignored
 <to be read again> 
                    \relax 
-l.3380   \begin{equation}
+l.3382   \begin{equation}
                           \tag{Model 5}pdfTeX warning (ext4): destination with 
 the same identifier (name{equation.4.4.1}) has been already used, duplicate ign
 ored
 <to be read again> 
                    \relax 
-l.3380   \begin{equation}
+l.3382   \begin{equation}
                           \tag{Model 5}pdfTeX warning (ext4): destination with 
 the same identifier (name{equation.4.4.1}) has been already used, duplicate ign
 ored
 <to be read again> 
                    \relax 
-l.3380   \begin{equation}
+l.3382   \begin{equation}
                           \tag{Model 5}pdfTeX warning (ext4): destination with 
 the same identifier (name{equation.4.4.1}) has been already used, duplicate ign
 ored
 <to be read again> 
                    \relax 
-l.3380   \begin{equation}
+l.3382   \begin{equation}
                           \tag{Model 5}pdfTeX warning (ext4): destination with 
 the same identifier (name{equation.4.4.1}) has been already used, duplicate ign
 ored
 <to be read again> 
                    \relax 
-l.3415   \begin{equation}
+l.3417   \begin{equation}
                           \tag{Model 6}pdfTeX warning (ext4): destination with 
 the same identifier (name{equation.4.4.1}) has been already used, duplicate ign
 ored
 <to be read again> 
                    \relax 
-l.3415   \begin{equation}
+l.3417   \begin{equation}
                           \tag{Model 6}pdfTeX warning (ext4): destination with 
 the same identifier (name{equation.4.4.1}) has been already used, duplicate ign
 ored
 <to be read again> 
                    \relax 
-l.3415   \begin{equation}
+l.3417   \begin{equation}
                           \tag{Model 6}pdfTeX warning (ext4): destination with 
 the same identifier (name{equation.4.4.1}) has been already used, duplicate ign
 ored
 <to be read again> 
                    \relax 
-l.3415   \begin{equation}
+l.3417   \begin{equation}
                           \tag{Model 6} [53] [54]
-</Users/tdounias/Desktop/Reed_Senior_Thesis/plots/roc_curves_indiv.png, id=751,
+</Users/tdounias/Desktop/Reed_Senior_Thesis/plots/roc_curves_indiv.png, id=769,
  1505.625pt x 1264.725pt>
 File: /Users/tdounias/Desktop/Reed_Senior_Thesis/plots/roc_curves_indiv.png Gra
 phic file (type png)
 <use /Users/tdounias/Desktop/Reed_Senior_Thesis/plots/roc_curves_indiv.png>
 Package pdftex.def Info: /Users/tdounias/Desktop/Reed_Senior_Thesis/plots/roc_c
-urves_indiv.png  used on input line 3518.
+urves_indiv.png  used on input line 3520.
 (pdftex.def)             Requested size: 260.17464pt x 218.53197pt.
  [55 </Users/tdounias/Desktop/Reed_Senior_Thesis/plots/roc_curves_indiv.png>]
-Overfull \hbox (1.62433pt too wide) in alignment at lines 3566--3588
+Overfull \hbox (1.62433pt too wide) in alignment at lines 3568--3590
  [] [] [] [] [] [] [] [] 
  []
 
 
-Overfull \hbox (1.62433pt too wide) in alignment at lines 3588--3608
+Overfull \hbox (1.62433pt too wide) in alignment at lines 3590--3610
  [] [] [] [] [] [] [] [] 
  []
 
 
-Overfull \hbox (2.33276pt too wide) in paragraph at lines 3609--3611
+Overfull \hbox (2.33276pt too wide) in paragraph at lines 3611--3613
 []|\T1/lmr/m/n/12 (-20) (Intercept)|  
  []
 
 
-Overfull \hbox (3.4574pt too wide) in paragraph at lines 3643--3645
+Overfull \hbox (3.4574pt too wide) in paragraph at lines 3645--3647
 []|\T1/lmr/m/n/12 (-20) Pct_urban|  
  []
 
 
-Overfull \hbox (1.53755pt too wide) in paragraph at lines 3677--3679
+Overfull \hbox (1.53755pt too wide) in paragraph at lines 3679--3681
 []|\T1/lmr/m/n/12 (-20) Pct_white|  
  []
 
 
-Overfull \hbox (5.8585pt too wide) in paragraph at lines 3711--3713
+Overfull \hbox (5.8585pt too wide) in paragraph at lines 3713--3715
 []|\T1/lmr/m/n/12 (-20) genderMale|  
  []
 
 
-Overfull \hbox (4.42151pt too wide) in paragraph at lines 3745--3747
+Overfull \hbox (4.42151pt too wide) in paragraph at lines 3747--3749
 []|\T1/lmr/m/n/12 (-20) Republican|  
  []
 
 
-Overfull \hbox (3.33493pt too wide) in paragraph at lines 3878--3880
+Overfull \hbox (3.33493pt too wide) in paragraph at lines 3880--3882
  []|\T1/lmr/m/n/12 (-20) (285.774)| 
  []
 
 
-Overfull \hbox (9.13939pt too wide) in paragraph at lines 3915--3917
+Overfull \hbox (9.13939pt too wide) in paragraph at lines 3917--3919
 []|\T1/lmr/m/n/12 (-20) typeGeneral|  
  []
 
 
-Overfull \hbox (1.62433pt too wide) in alignment at lines 3608--3949
+Overfull \hbox (1.62433pt too wide) in alignment at lines 3610--3951
  [] [] [] [] [] [] [] [] 
  []
 
 
-Overfull \hbox (13.85551pt too wide) in paragraph at lines 3949--3951
+Overfull \hbox (13.85551pt too wide) in paragraph at lines 3951--3953
 []|\T1/lmr/m/n/12 (-20) typeMidterm|  
  []
 
 
-Overfull \hbox (11.45848pt too wide) in paragraph at lines 3983--3985
+Overfull \hbox (11.45848pt too wide) in paragraph at lines 3985--3987
 []|\T1/lmr/m/n/12 (-20) typePrimary|  
  []
 
 
-Overfull \hbox (1.62433pt too wide) in alignment at lines 3949--4089
+Overfull \hbox (1.62433pt too wide) in alignment at lines 3951--4091
  [] [] [] [] [] [] [] [] 
  []
 
@@ -1239,13 +1240,13 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Appendix A.
 [63]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 4340.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 4342.
  [64]
-Underfull \vbox (badness 10000) detected at line 4387
+Underfull \vbox (badness 10000) detected at line 4389
  []
 
 
-Underfull \vbox (badness 10000) detected at line 4387
+Underfull \vbox (badness 10000) detected at line 4389
  []
 
 [65] [66] [67] [68]
@@ -1255,7 +1256,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 4695--4698
+Underfull \hbox (badness 10000) in paragraph at lines 4697--4700
  \T1/lmtt/m/n/12 outlook / letting -[] people -[] vote -[] at -[] home -[] incr
 eases -[] voter -[] turnout -[] heres -[]
  []
@@ -1264,19 +1265,19 @@ eases -[] voter -[] turnout -[] heres -[]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [70]
-Underfull \hbox (badness 10000) in paragraph at lines 4740--4744
+Underfull \hbox (badness 10000) in paragraph at lines 4742--4746
  []$\T1/lmtt/m/n/12 https : / / www . americanprogress . org / issues / democra
 cy / reports / 2017 / 06 /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 4757--4761
+Underfull \hbox (badness 10000) in paragraph at lines 4759--4763
  \T1/lmtt/m/n/12 file = https % 3A % 2F % 2Fwww . dropbox . com % 2Fs % 2Fo63a0
 zi7j8plhgl % 2FOMV _ and _
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 4757--4761
+Underfull \hbox (badness 10000) in paragraph at lines 4759--4763
  \T1/lmtt/m/n/12 Turnout _ McGhee _ Gronke _ Romero _ Griffin _ July2017 . pdf 
 % 3Fdisable _ range %
  []
@@ -1288,13 +1289,13 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [72]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 4900.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 4902.
 
 [73]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 4900.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 4902.
  (./thesis.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 4900.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 4900.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 4902.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 4902.
 
 Package rerunfilecheck Info: File `thesis.out' has not changed.
 (rerunfilecheck)             Checksum: 1CCFFC8110A867EA3612A429155F74F5;3988.
@@ -1302,13 +1303,13 @@ Package rerunfilecheck Info: File `thesis.out' has not changed.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 4900.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 4902.
  ) 
 Here is how much of TeX's memory you used:
- 11220 strings out of 492649
- 175710 string characters out of 6129622
- 325943 words of memory out of 5000000
- 14342 multiletter control sequences out of 15000+600000
+ 11221 strings out of 492649
+ 175721 string characters out of 6129622
+ 325924 words of memory out of 5000000
+ 14341 multiletter control sequences out of 15000+600000
  89576 words of font info for 183 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  39i,15n,49p,499b,450s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1336,10 +1337,10 @@ xlive/2018/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></usr/local/texlive/2018
 /texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2018/texmf-dis
 t/fonts/type1/public/lm/lmtt12.pfb></usr/local/texlive/2018/texmf-dist/fonts/ty
 pe1/public/amsfonts/symbols/msbm10.pfb>
-Output written on thesis.pdf (87 pages, 1968539 bytes).
+Output written on thesis.pdf (87 pages, 1977888 bytes).
 PDF statistics:
- 1125 PDF objects out of 1200 (max. 8388607)
- 981 compressed objects within 10 object streams
- 303 named destinations out of 1000 (max. 500000)
+ 1143 PDF objects out of 1200 (max. 8388607)
+ 996 compressed objects within 10 object streams
+ 305 named destinations out of 1000 (max. 500000)
  16877 words of extra memory for PDF output out of 17280 (max. 10000000)
 
