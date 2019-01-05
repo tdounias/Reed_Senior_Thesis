@@ -35,10 +35,10 @@ registrants in Colorado from 2010 onward either did not vote at all, or voted by
 
 ![](plots/vbm_county_graph.png)
 
-### File Structure
+## File Structure
 
 I have attempted to make this analysis reproducible, though I am not able to
-share the data I worked with. This is mainly due to file size and privacy concerns. While the data are public, and can be requested from the Secretary of State of Colorado, I have chosen not to publicly display the adresses, phone numbers, names, and turnout decisions of more than three quarters of Coloradoans.
+share the data I worked with. This is mainly due to file size and privacy concerns. While the data are public, and can be requested from the Secretary of State of Colorado, I have chosen not to publicly display the addresses, phone numbers, names, and turnout decisions of more than three quarters of Coloradans.
 
 The repository is organized as follows:
 
@@ -51,12 +51,37 @@ The repository is organized as follows:
 - **tables**: R scripts used to output the tables in the final document.
 - **thesis_outut_folder**: all of the writing for the thesis document. It is written entirely in R Markdown, created from an R markdown thesis template, which can be found at https://github.com/Reedies/reedtemplates. The template was created by Chester Ismay.
 
-#### thesis_output_folder
+## Outline of Thesis
 
-Contains thsis template that actually builds full text
+**Chapter 1: State of the Literature**: The chapter starts with an examination of turnout: what it is, its use as a metric
+of participation, and how it is estimated. I then turn to presenting a comprehensive
+list of current theories on voter decision and participation; these offer conflicting
+descriptions as to what variables are important when trying to predict the turnout
+effects of elections policy. I provide an overview of current voting methods in the
+US, with a particular focus on mail voting. I make a series of predictions on what
+the expected effect of mail voting on turnout is, based on each of the aforementioned
+theories. Finally, the chapter ends on a presentation of past studies that have tried to
+statistically estimate this effect.
 
-#### riggd
+**Chapter 2: Hypotheses and Methods**: Based on the conclusions of past researchers and
+the frameworks they have presented, I move to outlining the hypotheses that motivate
+my own study. I conclude this chapter with a brief presentation of the statistical
+methods employed.
 
-R package with full documentation, used in creating this thesis
-#### README.md
+**Chapter 3: Case Selection and Data**: I introduce the source of the data: the State of Colorado. This
+chapter begins with a presentation on the demographics, politics, and electoral policy
+of the Centennial State, which transitions into a justification for the selection of
+Colorado as a case for my research. I then introduce the data itself, going through
+basic descriptions like unit of observation and variable specifications. I conclude by
+presenting some problems faced with the wrangling that was necessary to get the data
+into a usable form. These problems are not negligible, but are a key part of the work
+that is necessary to conduct elections science research with voter records.
 
+**Chapter 4: Model Specification and Results**: The goal of this chapter is to apply inferential statistical modeling to the data. This
+task can be divided into three steps: specifying the models mathematically, fitting the
+models, and interpreting the results.1 However, before jumping into this process, it is
+worth going into some key problems with the models produced. As a consequence of
+these issues, some of the models are not estimated to the standards of convergence
+that are commonly set.
+
+**Appendix A: MCMC Estimation Processes for Multilevel Models**: I introduce and apply Gibbs samplers for two of my county-level models. These produce estimates that are very similar to those from the `lmer` package.
