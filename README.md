@@ -35,27 +35,21 @@ registrants in Colorado from 2010 onward either did not vote at all, or voted by
 
 ![](plots/vbm_county_graph.png)
 
-## Turnout and Voting Methods in Colorado Elections
+### File Structure
 
-#### data_wrangling
+I have attempted to make this analysis reproducible, though I am not able to
+share the data I worked with. This is mainly due to file size and privacy concerns. While the data are public, and can be requested from the Secretary of State of Colorado, I have chosen not to publicly display the adresses, phone numbers, names, and turnout decisions of more than three quarters of Coloradoans.
 
-Contains R scripts related to wrangling the voter history and voter registration files
+The repository is organized as follows:
 
-#### plots
-
-Contains R scripts and pngs of all plots used in this thesis
-
-#### maps
-
-Contains R scripts and pngs of all maps used in this thesis
-
-#### thesis folder
-
-This is were all of the files related to your final thesis should live. I recommend that you start by adding a template to this directory - either the Markdown thesis template or the LaTeX thesis template.
-
-#### Data_and_results
-
-Currently contains rmds with initial data wrangling and diagnostics, as well as any data used in this thesis. Will be eventually changed to exclusivelly "data"
+- **data_and_results**: contains .rmd files with some data wrangling and diagnostics, and the data used in this thesis. The data is not included in this GitHub page.
+- **data_wrangling**: contains R scripts related to wrangling the voter history and voter registration files.
+- **maps**: contains R scripts and pngs of all maps used in this thesis.
+- **models**: model estimation. R scripts, .rmd files, and .pdf files that relate to running and evaluating models.
+- **plots**: contains R scripts and pngs of all plots used in this thesis.
+- **riggd**: the R package. This will continue to be updated even after the completion of the thesis.
+- **tables**: R scripts used to output the tables in the final document.
+- **thesis_outut_folder**: all of the writing for the thesis document. It is written entirely in R Markdown, created from an R markdown thesis template, which can be found at https://github.com/Reedies/reedtemplates. The template was created by Chester Ismay.
 
 #### thesis_output_folder
 
