@@ -1,4 +1,4 @@
-# Turnout and Mail Voting in Colorado or; How I learned to Stop Worrying and Love VOter Registration Files
+# Turnout and Mail Voting in Colorado or: How I learned to Stop Worrying and Love Voter Registration Files
 ### December 2018
 
 This repository contains my senior thesis, completed across the Spring/Fall semesters of my last year at Reed College. This thesis is an ad-hoc interdisciplinary project, between the departments of Mathematics and Political Science. [Andrew Bray](http://andrewpbray.github.io/) and [Paul Gronke](https://blogs.reed.edu/paul-gronke/) advised this thesis.
@@ -20,7 +20,8 @@ disagreeing both on the scale and the direction (positive or negative) that this
 has. This thesis aims at following this series of studies by examining Colorado voter
 registration files for recent elections (2010-2016). These files consist of a registration
 file with voter information and a history file with voter participation data in Colorado
-elections, and provide all information necessary for a comprehensive study of turnout.
+elections, and provide all information necessary for a comprehensive study of turnout. I obtained the data for my thesis with the help of [Judd Choate](https://www.sos.state.co.us/), Director of Elections of the State of Colorado, and [Andrew Menger](www.andrewmenger.com), Postdoctoral Fellow at the Weidenbaum Center on the Economy, Government, and Public Policy at Washington University.
+
 By describing, fitting, and interpreting multilevel general additive regression models of
 voter turnout based on these data, I show that there is a small positive effect of mail
 voting on turnout in national elections at the county level. This thesis also contributes
@@ -28,6 +29,11 @@ to the literature by presenting a description of modeling and data wrangling dif
 associated with voter registration files, and giving a series of potential solutions, as
 well as an extensive coding library to aid future research on the subject.
 
+One such issue, that I was not able to solve in the course of this project, was the limited variability exhibited in the data; the data are extensive (over 35 million observations at the individual level)
+but substantially lack variance in voting method. Put simply, the vast majority of
+registrants in Colorado from 2010 onward either did not vote at all, or voted by mail.
+
+![](plots/vbm_county_graph.png)
 
 ## Turnout and Voting Methods in Colorado Elections
 
