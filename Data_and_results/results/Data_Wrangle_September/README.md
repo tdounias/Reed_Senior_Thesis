@@ -4,9 +4,9 @@
 
 *vhist_full_and_county_reg_creation*: 
       
-      outputs two files, based on the following Paul directions:
+      outputs two files, based on the following adviser directions:
 
-      Getting the files tidied needs to be done carefully because you are juggling a lot of 3 gb files.
+      Getting the files tidied needs to be done carefully because you are juggling a lot of 3 GB files.
   
       I think what you initially will want to do is to create a file of voter registration IDs from the latest         (2016) voter registration file.
 
@@ -16,7 +16,7 @@
 
       And so on sequentially.  So your output file will consist of all registrants who have been on the files for       some of the 2012 - 2016 period.
 
-      Ok. Now go through the same exercise for voter histories.
+      OK. Now go through the same exercise for voter histories.
 
       For any record with a valid value for county2016, grab the vote histories.
 
@@ -27,7 +27,3 @@
 *Diagnostics*:
 
       Diagnostics for vhist and vrf for 2012-2016
-      
-*County movement graph*:
-
-      Graph that shows movement of population between counties/differences between files
