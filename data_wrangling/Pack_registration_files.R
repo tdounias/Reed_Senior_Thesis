@@ -1,3 +1,7 @@
+##
+## Creates and runs diagnostics on full voter registration file cross year
+##
+
 library(readr)
 library(tidyverse)
 library(lubridate)

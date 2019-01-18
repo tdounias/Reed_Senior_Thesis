@@ -43,7 +43,7 @@ share the data I worked with. This is mainly due to file size and privacy concer
 The repository is organized as follows:
 
 - **data_and_results**: contains .rmd files with some data wrangling and diagnostics, and the data used in this thesis. The data is not included in this GitHub page.
-- **data_wrangling**: contains R scripts related to wrangling the voter history and voter registration files.
+- **data_wrangling**: contains R scripts related to wrangling the voter history and voter registration files.Descriptions of purpose are included in each .R script.
 - **maps**: contains R scripts and pngs of all maps used in this thesis.
 - **models**: model estimation. R scripts, .rmd files, and .pdf files that relate to running and evaluating models.
 - **plots**: contains R scripts and pngs of all plots used in this thesis.

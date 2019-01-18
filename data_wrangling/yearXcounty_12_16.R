@@ -1,3 +1,7 @@
+##
+## Not used anymore. Outputs turnout per year per county.
+##
+
 library(readr)
 library(tidyverse)
 source("~/Desktop/Reed_Senior_Thesis/riggd/R/utils.R")

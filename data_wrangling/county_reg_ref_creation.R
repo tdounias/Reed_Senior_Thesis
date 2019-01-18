@@ -1,3 +1,8 @@
+##
+## Not used in thesis. Creates dataframe with each VOTER ID and their registration County for each year
+##
+
+
 library(tidyverse)
 library(lubridate)
 library(knitr)

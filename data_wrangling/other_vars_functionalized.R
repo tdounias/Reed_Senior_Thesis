@@ -1,3 +1,7 @@
+##
+## Attempt to generalize registration reference 
+##
+
 library(readr)
 library(tidyverse)
 library(lubridate)

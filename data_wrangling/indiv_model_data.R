@@ -1,3 +1,7 @@
+##
+## Function that creates full individual dataset
+##
+
 library(readr)
 library(tidyverse)
 library(lubridate)

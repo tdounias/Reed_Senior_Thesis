@@ -1,3 +1,7 @@
+##
+## Stratified sampler for individual-level model data.
+##
+
 library(tidyverse)
 library(lubridate)
 library(knitr)

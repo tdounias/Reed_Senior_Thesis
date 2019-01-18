@@ -1,6 +1,12 @@
+##
+##Creates a dataframe with urban population, population, and white population for Colorado by County##
+##
+
+
 library(tidyverse)
 library(lubridate)
 setwd("/Users/tdounias/Desktop/Reed_Senior_Thesis/Data_and_results")
+
 
 #Read in the data
 vrf <- read_csv("data/CO_2017_VRF_full.csv", 
@@ -23,7 +29,7 @@ pct_white <- pct_white %>%
   mutate(PCT_WHITE = WHITE/TOTAL_POP) %>%
   slice(-1)
 
-#Read in stats for uurban population
+#Read in stats for urban population
 pct_urban <- read_csv("data/Pop_Rurban.csv")
 
 pct_urban <- pct_urban %>%

@@ -1,3 +1,7 @@
+##
+## For each election by election date, outputs turnout rates per county.
+##
+
 library(readr)
 library(tidyverse)
 library(lubridate)

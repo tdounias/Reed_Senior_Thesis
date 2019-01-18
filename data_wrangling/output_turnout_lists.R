@@ -1,3 +1,7 @@
+##
+## Outputs list of turnout statistics per county per election date
+##
+
 library(tidyverse)
 library(lubridate)
 library(purrr)

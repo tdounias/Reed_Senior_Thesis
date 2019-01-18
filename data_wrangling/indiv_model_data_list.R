@@ -1,3 +1,7 @@
+##
+## Applies individual mode data function to each date. Creates a list with data for each election.
+##
+
 library(readr)
 library(tidyverse)
 library(lubridate)
