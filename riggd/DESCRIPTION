@@ -1,12 +1,12 @@
 Package: riggd
-Title: What the Package Does (One Line, Title Case)
+Title: Wrangling Colorado voter data
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
-           role = c("aut", "cre"),
-           email = "first.last@example.com")
-Description: What the package does (one paragraph).
+    person(given = "Theodore",
+           family = "Dounias",
+           email = "tntounias@gmail.com")
+Description: This package was created for my senior thesis at Reed College, in 2018. My thesis was advised by Profesors Andrew Bray and Paul Gronke.
+It includes several functions I found helpful while trying to wrangle Colorado voter registration files into a usable format for statistical modeling. 
 License: What license it uses
 Encoding: UTF-8
 LazyData: true
